@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  static const id = 'home_screen';
+class OutletDetailScreen extends StatelessWidget {
+  static const id = "outlet_detail_screen";
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
       body: Container(
         child: Center(
             child: Text(
-          "Home Screen",
+          "Outlet Detail Screen",
           style: TextStyle(color: Colors.white, fontSize: 40),
         )),
       ),
