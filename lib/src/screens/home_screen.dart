@@ -1,3 +1,4 @@
+import 'package:dr_app/src/components/buttons/base_button.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -7,11 +8,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Center(
-            child: Text(
-          "Home Screen",
-          style: TextStyle(color: Colors.white, fontSize: 40),
-        )),
+        child: Center(child: BaseButton('Home Screen')),
       ),
     );
   }
