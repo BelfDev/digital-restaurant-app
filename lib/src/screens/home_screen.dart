@@ -1,5 +1,5 @@
 //import 'package:dr_app/src/components/buttons/solid_button.dart';
-import 'package:dr_app/src/components/buttons/slide_button.dart';
+import 'package:dr_app/src/components/buttons/slider_button.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
