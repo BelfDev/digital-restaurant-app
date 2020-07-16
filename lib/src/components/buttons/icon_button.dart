@@ -1,3 +1,4 @@
+import 'package:dr_app/src/components/buttons/base_button.dart';
 import 'package:flutter/material.dart';
 
 class LUIconButton extends StatelessWidget {
@@ -16,7 +17,7 @@ class LUIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return LUBaseButton(
       width: 56,
       height: 56,
       child: RawMaterialButton(

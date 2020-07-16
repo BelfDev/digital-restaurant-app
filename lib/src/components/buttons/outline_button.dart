@@ -1,3 +1,4 @@
+import 'package:dr_app/src/components/buttons/base_button.dart';
 import 'package:flutter/material.dart';
 
 class LUOutlineButton extends StatelessWidget {
@@ -17,7 +18,7 @@ class LUOutlineButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return LUBaseButton(
       width: width,
       height: height,
       child: OutlineButton(

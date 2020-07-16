@@ -1,6 +1,7 @@
+import 'package:dr_app/src/components/buttons/base_button.dart';
 import 'package:flutter/material.dart';
 
-class SolidButton extends StatelessWidget {
+class LUSolidButton extends StatelessWidget {
   final double width;
   final double height;
 
@@ -8,7 +9,7 @@ class SolidButton extends StatelessWidget {
   final Color color;
   final Function onPressed;
 
-  SolidButton(
+  LUSolidButton(
       {this.width = 280.0,
       this.height = 56.0,
       this.title,
@@ -17,7 +18,7 @@ class SolidButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return LUBaseButton(
       width: width,
       height: height,
       child: RaisedButton(
