@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
       body: Container(
         child: Center(
             child: LUIconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: Icons.arrow_back,
           onPressed: () {},
         )),
       ),
