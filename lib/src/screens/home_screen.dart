@@ -1,4 +1,4 @@
-import 'package:dr_app/src/components/buttons/base_button.dart';
+import 'package:dr_app/src/components/buttons/solid_button.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,7 +8,12 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Center(child: BaseButton('Home Screen')),
+        child: Center(
+            child: SolidButton(
+          title: 'Hello World',
+          color: Color(0xFF4F5D75),
+          onPressed: () {},
+        )),
       ),
     );
   }
