@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 
-class BaseButton extends StatelessWidget {
-  final String title;
+/// A container for Lutick buttons composition.
+///
+///
+class LUBaseButton extends StatelessWidget {
+  final double width;
+  final double height;
+  final Widget child;
 
-  BaseButton(this.title);
+  LUBaseButton({
+    @required this.width,
+    @required this.height,
+    @required this.child,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      onPressed: () {},
-      child: Text(title),
+    return Container(
+      width: width,
+      height: height,
+      child: child,
     );
   }
 }
