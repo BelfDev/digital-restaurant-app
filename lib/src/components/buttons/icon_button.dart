@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class LUIconButton extends StatelessWidget {
   final IconData icon;
+  final double iconSize;
   final Function onPressed;
   final Color tint;
   final Color backgroundColor;
@@ -10,7 +11,8 @@ class LUIconButton extends StatelessWidget {
       {@required this.icon,
       @required this.onPressed,
       this.tint = Colors.white,
-      this.backgroundColor = const Color(0xFF4F5D75)});
+      this.backgroundColor = const Color(0xFF4F5D75),
+      this.iconSize = 24});
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +22,12 @@ class LUIconButton extends StatelessWidget {
       child: RawMaterialButton(
         onPressed: onPressed,
         fillColor: backgroundColor,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
         child: Icon(
           icon,
           color: tint,
+          size: iconSize,
         ),
       ),
     );
