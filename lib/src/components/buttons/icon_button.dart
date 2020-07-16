@@ -1,6 +1,10 @@
 import 'package:dr_app/src/components/buttons/base_button.dart';
 import 'package:flutter/material.dart';
 
+/// A customized Material Design "icon button"
+///
+/// Looks similar to [RaisedButton] but supports an icon asset.
+///
 class LUIconButton extends StatelessWidget {
   final IconData icon;
   final double iconSize;

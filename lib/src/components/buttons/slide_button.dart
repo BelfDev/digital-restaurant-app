@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:slider_button/slider_button.dart';
 
+/// A button which slides to the right to trigger an action
+///
+/// Use slider buttons for decisive actions such as "check-in" or "check-out".
+///
 class LUSliderButton extends StatelessWidget {
   final double width;
   final double height;
