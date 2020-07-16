@@ -1,5 +1,5 @@
 //import 'package:dr_app/src/components/buttons/solid_button.dart';
-import 'package:dr_app/src/components/buttons/icon_button.dart';
+import 'package:dr_app/src/components/buttons/outline_button.dart';
 import 'package:flutter/material.dart';
 
 //class HomeScreen extends StatelessWidget {
@@ -28,9 +28,9 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         child: Center(
-            child: LUIconButton(
-          icon: Icons.favorite_border,
+            child: LUOutlineButton(
           onPressed: () {},
+          title: 'Hello World',
         )),
       ),
     );
