@@ -1,4 +1,3 @@
-import 'package:dr_app/src/components/buttons/slider_button.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,14 +12,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Center(
-            child: LUSliderButton(
-          title: "check-in",
-          semanticTitle: 'check-in',
-          onSlided: () {
-            print('Slided!');
-          },
-        )),
+        child: Center(child: Text('Home Screen')),
       ),
     );
   }
