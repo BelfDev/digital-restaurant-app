@@ -1,0 +1,36 @@
+import 'package:dr_app/src/configs/routes.dart';
+import 'package:dr_app/src/navigation/screen_navigator_observer.dart';
+import 'package:dr_app/src/navigation/tab_data.dart';
+import 'package:flutter/material.dart';
+
+class NavigatorContainer extends StatefulWidget {
+  const NavigatorContainer({Key key, this.tabData, this.onNavigation})
+      : super(key: key);
+
+  final TabData tabData;
+  final VoidCallback onNavigation;
+
+  @override
+  _NavigatorContainerState createState() => _NavigatorContainerState();
+}
+
+class _NavigatorContainerState extends State<NavigatorContainer> {
+  @override
+  Widget build(BuildContext context) {
+    return Navigator(
+      observers: <NavigatorObserver>[
+        ViewNavigatorObserver(widget.onNavigation),
+      ],
+      onGenerateRoute: (settings) {
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) {
+            final rootId =
+                settings.name == '/' ? widget.tabData.rootId : settings.name;
+            return routes[rootId](context);
+          },
+        );
+      },
+    );
+  }
+}
