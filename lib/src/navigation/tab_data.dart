@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// A model representing the information from a Tab item.
 class TabData {
   final int index;
   final String rootId;

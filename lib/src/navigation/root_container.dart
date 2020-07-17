@@ -4,6 +4,8 @@ import 'package:dr_app/src/navigation/tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+/// This class represents the application UI shell. It initiates the [BottomNavigationBar]
+/// with a set of [BottomNavigationBarItem] and manages the navigation between tabs.
 class RootContainer extends StatefulWidget {
   @override
   _RootContainerState createState() => _RootContainerState();

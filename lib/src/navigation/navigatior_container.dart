@@ -3,6 +3,8 @@ import 'package:dr_app/src/navigation/screen_navigator_observer.dart';
 import 'package:dr_app/src/navigation/tab_data.dart';
 import 'package:flutter/material.dart';
 
+/// A top-level composition of [Navigator] that enables
+/// dedicated nested routing for each [BottomNavigationBarItem]
 class NavigatorContainer extends StatefulWidget {
   const NavigatorContainer({Key key, this.tabData, this.onNavigation})
       : super(key: key);
