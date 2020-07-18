@@ -1,6 +1,7 @@
-import 'package:dr_app/src/navigation/navigatior_container.dart';
-import 'package:dr_app/src/navigation/tab_data.dart';
-import 'package:dr_app/src/navigation/tabs.dart';
+import 'package:dr_app/components/bottom_app_bar.dart';
+import 'package:dr_app/navigation/navigatior_container.dart';
+import 'package:dr_app/navigation/tab_data.dart';
+import 'package:dr_app/navigation/tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -94,26 +95,31 @@ class _RootContainerState extends State<RootContainer>
             }).toList(),
           ),
         ),
-        bottomNavigationBar: ClipRect(
-          child: SizeTransition(
-            sizeFactor: _hide,
-            axisAlignment: -1.0,
-            child: BottomNavigationBar(
-              currentIndex: _currentIndex,
-              onTap: (int index) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-              items: tabs.map((TabData destination) {
-                return BottomNavigationBarItem(
-                    icon: Icon(destination.icon),
-                    backgroundColor: destination.color,
-                    title: Text(destination.title));
-              }).toList(),
-            ),
-          ),
+        extendBody: true,
+        bottomNavigationBar: LUBottomAppBar(
+          height: 64,
+          iconSize: 28,
+          selectedColor: const Color(0xFF4F5D75),
+          unselectedColor: const Color(0xFFCCCCCC),
+          tabs: tabs,
+          onTabSelected: (int index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              // Present cart screen
+            });
+          },
+          tooltip: 'Increment',
+          child: Icon(Icons.receipt),
+          backgroundColor: Color(0xFFEF8354),
+          elevation: 4.0,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
   }

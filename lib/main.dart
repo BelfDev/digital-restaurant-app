@@ -1,6 +1,7 @@
-import 'package:dr_app/src/configs/theme.dart';
-import 'package:dr_app/src/navigation/root_container.dart';
 import 'package:flutter/material.dart';
+
+import 'configs/theme.dart';
+import 'navigation/root_container.dart';
 
 void main() => runApp(MyApp());
 
