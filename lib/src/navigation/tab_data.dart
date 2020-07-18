@@ -6,7 +6,6 @@ class TabData {
   final String rootId;
   final String title;
   final IconData icon;
-  final MaterialColor color;
 
-  const TabData(this.index, this.rootId, this.title, this.icon, this.color);
+  const TabData(this.index, this.rootId, this.title, this.icon);
 }
