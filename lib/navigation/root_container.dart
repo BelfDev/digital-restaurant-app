@@ -1,7 +1,7 @@
-import 'package:dr_app/src/components/bottom_app_bar.dart';
-import 'package:dr_app/src/navigation/navigatior_container.dart';
-import 'package:dr_app/src/navigation/tab_data.dart';
-import 'package:dr_app/src/navigation/tabs.dart';
+import 'package:dr_app/components/bottom_app_bar.dart';
+import 'package:dr_app/navigation/navigatior_container.dart';
+import 'package:dr_app/navigation/tab_data.dart';
+import 'package:dr_app/navigation/tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 

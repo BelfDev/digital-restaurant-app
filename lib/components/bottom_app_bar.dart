@@ -1,4 +1,4 @@
-import 'package:dr_app/src/navigation/tab_data.dart';
+import 'package:dr_app/navigation/tab_data.dart';
 import 'package:flutter/material.dart';
 
 /// A custom [BottomAppBar] that emulates the appearance of a [BottomNavigationBar]

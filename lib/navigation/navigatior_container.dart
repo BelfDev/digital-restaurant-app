@@ -1,6 +1,6 @@
-import 'package:dr_app/src/configs/routes.dart';
-import 'package:dr_app/src/navigation/screen_navigator_observer.dart';
-import 'package:dr_app/src/navigation/tab_data.dart';
+import 'package:dr_app/configs/routes.dart';
+import 'package:dr_app/navigation/screen_navigator_observer.dart';
+import 'package:dr_app/navigation/tab_data.dart';
 import 'package:flutter/material.dart';
 
 /// A top-level composition of [Navigator] that enables

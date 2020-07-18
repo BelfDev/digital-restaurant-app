@@ -1,11 +1,11 @@
-import 'package:dr_app/src/screens/cart_screen.dart';
-import 'package:dr_app/src/screens/category_detail_screen.dart';
-import 'package:dr_app/src/screens/explore_screen.dart';
-import 'package:dr_app/src/screens/home_screen.dart';
-import 'package:dr_app/src/screens/more_screen.dart';
-import 'package:dr_app/src/screens/outlet_detail_screen.dart';
-import 'package:dr_app/src/screens/profile_screen.dart';
-import 'package:dr_app/src/screens/scanner_screen.dart';
+import 'package:dr_app/screens/cart_screen.dart';
+import 'package:dr_app/screens/category_detail_screen.dart';
+import 'package:dr_app/screens/explore_screen.dart';
+import 'package:dr_app/screens/home_screen.dart';
+import 'package:dr_app/screens/more_screen.dart';
+import 'package:dr_app/screens/outlet_detail_screen.dart';
+import 'package:dr_app/screens/profile_screen.dart';
+import 'package:dr_app/screens/scanner_screen.dart';
 import 'package:flutter/widgets.dart';
 
 final Map<String, WidgetBuilder> routes = {

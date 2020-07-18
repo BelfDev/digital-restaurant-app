@@ -1,8 +1,8 @@
-import 'package:dr_app/src/navigation/tab_data.dart';
-import 'package:dr_app/src/screens/explore_screen.dart';
-import 'package:dr_app/src/screens/home_screen.dart';
-import 'package:dr_app/src/screens/more_screen.dart';
-import 'package:dr_app/src/screens/profile_screen.dart';
+import 'package:dr_app/navigation/tab_data.dart';
+import 'package:dr_app/screens/explore_screen.dart';
+import 'package:dr_app/screens/home_screen.dart';
+import 'package:dr_app/screens/more_screen.dart';
+import 'package:dr_app/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 /// A list of TabData used for configuring the application's [BottomNavigationBar].
