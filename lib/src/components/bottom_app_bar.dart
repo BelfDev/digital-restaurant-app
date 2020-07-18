@@ -101,9 +101,8 @@ class _LUBottomAppBarState extends State<LUBottomAppBar> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 2),
                 Icon(tab.icon, color: color, size: widget.iconSize),
-                SizedBox(height: 4),
+                SizedBox(height: 2),
                 Text(
                   tab.title,
                   style: TextStyle(color: color),
