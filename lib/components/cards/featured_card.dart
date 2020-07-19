@@ -1,3 +1,4 @@
+import 'package:dr_app/components/cards/base_card.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
@@ -32,37 +33,30 @@ class LUFeaturedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return LUBaseCard(
       width: width,
       height: height,
-      child: Card(
-        elevation: 4,
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-          Radius.circular(borderRadius),
-        )),
-        child: Stack(
-          children: <Widget>[
-            Positioned.fill(
+      borderRadius: borderRadius,
+      child: Stack(
+        children: <Widget>[
+          Positioned.fill(
 //              child: Image.network(
 //                imageSrc,
 //                fit: BoxFit.fill,
 //              ),
-                child: Ink(
-              color: Colors.grey,
-            )),
-            Positioned.fill(child: _buildImageFilter()),
-            Positioned.fill(child: _buildCardContent()),
-            Positioned.fill(
-                child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: onPressed,
-              ),
-            ))
-          ],
-        ),
+              child: Ink(
+            color: Colors.grey,
+          )),
+          Positioned.fill(child: _buildImageFilter()),
+          Positioned.fill(child: _buildCardContent()),
+          Positioned.fill(
+              child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: onPressed,
+            ),
+          ))
+        ],
       ),
     );
   }
