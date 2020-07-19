@@ -1,3 +1,4 @@
+import 'package:dr_app/components/cards/featured_card.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,7 +13,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Center(child: Text('Home Screen')),
+        child: Center(
+            child: Center(
+                child: LUFeaturedCard(
+          imageSrc: 'https://placeimg.com/640/480/any',
+          onPressed: () {},
+        ))),
       ),
     );
   }
