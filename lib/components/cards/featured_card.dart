@@ -3,6 +3,8 @@ import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
+import '../gradient_filter.dart';
+
 class LUFeaturedCard extends StatelessWidget {
   final double width;
   final double height;
@@ -47,20 +49,11 @@ class LUFeaturedCard extends StatelessWidget {
             child: Ink(
           color: Colors.grey,
         )),
-        Positioned.fill(child: _buildImageFilter()),
+        Positioned.fill(child: LUGradientFilter(filterColors: filterColors)),
         Positioned.fill(child: _buildCardContent()),
       ],
     );
   }
-
-  Container _buildImageFilter() => Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: filterColors ??
-                    [Colors.transparent, Colors.black.withOpacity(0.8)])),
-      );
 
   Container _buildCardContent() => Container(
         margin: EdgeInsets.all(padding),
