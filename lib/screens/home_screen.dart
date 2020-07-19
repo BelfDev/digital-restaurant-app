@@ -17,7 +17,13 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Center(
                 child: LUFeaturedCard(
           imageSrc: 'https://placeimg.com/640/480/any',
-          onPressed: () {},
+          onPressed: () {
+            print('tapped');
+          },
+          title: 'Bar Soba',
+          subtitle: 'Asian Food',
+          priceRange: '\$\$',
+          rating: 4,
         ))),
       ),
     );

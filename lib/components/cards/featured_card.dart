@@ -6,9 +6,28 @@ class LUFeaturedCard extends StatelessWidget {
   final double height;
   final String imageSrc;
   final Function onPressed;
+  final double borderRadius;
+  final List<Color> filterColors;
+  final double padding;
+  final double rating;
+  final Color starColor;
+  final String title;
+  final String subtitle;
+  final String priceRange;
 
   const LUFeaturedCard(
-      {this.width = 184, this.height = 232, this.onPressed, this.imageSrc});
+      {this.width = 184,
+      this.height = 232,
+      this.onPressed,
+      this.imageSrc,
+      this.borderRadius = 12.0,
+      this.filterColors,
+      this.padding = 8.0,
+      this.rating,
+      this.starColor = Colors.yellow,
+      @required this.title,
+      this.subtitle,
+      this.priceRange});
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +39,19 @@ class LUFeaturedCard extends StatelessWidget {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
-          Radius.circular(12.0),
+          Radius.circular(borderRadius),
         )),
         child: Stack(
           children: <Widget>[
             Positioned.fill(
-              child: Image.network(
-                imageSrc,
-                fit: BoxFit.fill,
-              ),
-            ),
+//              child: Image.network(
+//                imageSrc,
+//                fit: BoxFit.fill,
+//              ),
+                child: Ink(
+              color: Colors.grey,
+            )),
+            Positioned.fill(child: _buildImageFilter()),
             Positioned.fill(child: _buildCardContent()),
             Positioned.fill(
                 child: Material(
@@ -44,42 +66,51 @@ class LUFeaturedCard extends StatelessWidget {
     );
   }
 
+  Container _buildImageFilter() => Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: filterColors ??
+                    [Colors.transparent, Colors.black.withOpacity(0.8)])),
+      );
+
   Container _buildCardContent() => Container(
-        margin: EdgeInsets.all(8.0),
+        margin: EdgeInsets.all(padding),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SmoothStarRating(
-                allowHalfRating: false,
+                allowHalfRating: true,
                 starCount: 5,
-                rating: 4,
+                rating: rating ?? 0,
                 size: 16.0,
                 isReadOnly: true,
-                color: Colors.yellow,
-                borderColor: Colors.yellow,
+                color: starColor,
+                borderColor: starColor,
                 spacing: 0.0),
-            Text('Bar Soba',
+            Text(title,
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: 24,
                     fontWeight: FontWeight.w600)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  'Asian Food',
+                  subtitle,
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
+                      fontSize: 22,
+                      fontWeight: FontWeight.w400),
                 ),
                 Text(
-                  '\$\$',
+                  priceRange,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
-                      fontWeight: FontWeight.w600),
+                      fontWeight: FontWeight.w400),
                 )
               ],
             )
