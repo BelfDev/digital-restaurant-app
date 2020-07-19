@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class LUFeaturedCard extends StatelessWidget {
   final double width;
@@ -29,22 +30,7 @@ class LUFeaturedCard extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
             ),
-            Positioned.fill(
-                child: Container(
-              margin: EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text('* * * * *'),
-                  Text('Bar Soba'),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[Text('Asian Food'), Text('\$\$')],
-                  )
-                ],
-              ),
-            )),
+            Positioned.fill(child: _buildCardContent()),
             Positioned.fill(
                 child: Material(
               color: Colors.transparent,
@@ -57,4 +43,47 @@ class LUFeaturedCard extends StatelessWidget {
       ),
     );
   }
+
+  Container _buildCardContent() => Container(
+        margin: EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SmoothStarRating(
+                allowHalfRating: false,
+                starCount: 5,
+                rating: 4,
+                size: 16.0,
+                isReadOnly: true,
+                color: Colors.yellow,
+                borderColor: Colors.yellow,
+                spacing: 0.0),
+            Text('Bar Soba',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  'Asian Food',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  '\$\$',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
+                )
+              ],
+            )
+          ],
+        ),
+      );
 }
