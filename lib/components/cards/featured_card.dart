@@ -1,3 +1,4 @@
+import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
@@ -90,27 +91,17 @@ class LUFeaturedCard extends StatelessWidget {
                 color: starColor,
                 borderColor: starColor,
                 spacing: 0.0),
-            Text(title,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600)),
+            Text(title, style: Styles.cardTitle),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
                   subtitle,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w400),
+                  style: Styles.cardSubtitle,
                 ),
                 Text(
                   priceRange,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400),
+                  style: Styles.cardPriceRange,
                 )
               ],
             )
