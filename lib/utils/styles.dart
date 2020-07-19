@@ -9,4 +9,7 @@ abstract class Styles {
 
   static const cardPriceRange =
       TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w400);
+
+  static const categoryCardTitle = TextStyle(
+      color: Colors.blueGrey, fontSize: 18, fontWeight: FontWeight.w400);
 }

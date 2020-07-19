@@ -33,7 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Center(child: LUCategoryCard(
+        child: Center(
+            child: LUCategoryCard(
+          title: 'Italian',
           onPressed: () {
             print('Pressed on Category Card');
           },

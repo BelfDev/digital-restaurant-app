@@ -6,6 +6,7 @@ class LUBaseCard extends StatelessWidget {
   final double height;
   final double borderRadius;
   final Function onPressed;
+  final AlignmentGeometry childrenAlignment;
 
   const LUBaseCard(
       {Key key,
@@ -13,7 +14,8 @@ class LUBaseCard extends StatelessWidget {
       this.width,
       this.height,
       this.borderRadius = 12.0,
-      this.onPressed})
+      this.onPressed,
+      this.childrenAlignment = AlignmentDirectional.topStart})
       : super(key: key);
 
   @override
@@ -29,6 +31,7 @@ class LUBaseCard extends StatelessWidget {
             Radius.circular(borderRadius),
           )),
           child: Stack(
+            alignment: childrenAlignment,
             children: <Widget>[
               ...children,
               Positioned.fill(
