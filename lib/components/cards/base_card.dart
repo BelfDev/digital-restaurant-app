@@ -4,6 +4,7 @@ class LUBaseCard extends StatelessWidget {
   final List<Widget> children;
   final double width;
   final double height;
+  final EdgeInsetsGeometry margin;
   final double borderRadius;
   final Function onPressed;
   final AlignmentGeometry childrenAlignment;
@@ -15,7 +16,8 @@ class LUBaseCard extends StatelessWidget {
       this.height,
       this.borderRadius = 12.0,
       this.onPressed,
-      this.childrenAlignment = AlignmentDirectional.topStart})
+      this.childrenAlignment = AlignmentDirectional.topStart,
+      this.margin = const EdgeInsets.all(4.0)})
       : super(key: key);
 
   @override
@@ -25,6 +27,7 @@ class LUBaseCard extends StatelessWidget {
         height: height,
         child: Card(
           elevation: 4,
+          margin: margin,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(

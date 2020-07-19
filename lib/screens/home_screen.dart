@@ -1,4 +1,4 @@
-import 'package:dr_app/components/cards/category_card.dart';
+import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -28,19 +28,28 @@ class HomeScreen extends StatefulWidget {
 //  }
 //}
 
+//class _HomeScreenState extends State<HomeScreen> {
+//  @override
+//  Widget build(BuildContext context) {
+//    return Scaffold(
+//      body: Container(
+//        child: Center(
+//            child: LUCategoryCard(
+//          title: 'Italian',
+//          onPressed: () {
+//            print('Pressed on Category Card');
+//          },
+//        )),
+//      ),
+//    );
+//  }
+//}
+
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(
-            child: LUCategoryCard(
-          title: 'Italian',
-          onPressed: () {
-            print('Pressed on Category Card');
-          },
-        )),
-      ),
+      body: Container(child: Center(child: LUOutletCard())),
     );
   }
 }
