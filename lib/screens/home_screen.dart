@@ -16,7 +16,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Color(0xFFFAFAFA),
       body: ListView(
-        children: <Widget>[_buildTopBar(), _buildHeader()],
+        children: <Widget>[
+          _buildTopBar(),
+          Stack(
+            children: <Widget>[_buildHeader(), _buildContent()],
+          )
+        ],
       ),
     );
   }
@@ -43,20 +48,43 @@ class _HomeScreenState extends State<HomeScreen> {
       );
 
   Widget _buildHeader() => Container(
-      margin: EdgeInsets.only(top: 32),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(40), topRight: Radius.circular(40)),
-        color: Colors.yellow,
-      ),
-      child: _buildContent());
+        height: 200,
+        width: double.infinity,
+        margin: EdgeInsets.only(top: 32),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+          color: Colors.yellow,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                      color: Colors.orange,
+                      borderRadius: BorderRadius.circular(20))),
+              Text(
+                'Time to get\nsome food',
+                style: TextStyle(
+                    color: Colors.blueGrey,
+                    fontSize: 32,
+                    fontWeight: FontWeight.w600),
+              ),
+            ],
+          ),
+        ),
+      );
 
   Widget _buildContent() => Container(
         height: 1000,
         margin: EdgeInsets.only(top: 200),
         decoration: BoxDecoration(
-//              color: Color(0xFFFAFAFA),
-          color: Colors.blueGrey,
+          color: Color(0xFFFAFAFA),
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40), topRight: Radius.circular(40)),
         ),
