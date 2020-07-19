@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
 class LUBaseCard extends StatelessWidget {
-  final Widget child;
+  final List<Widget> children;
   final double width;
   final double height;
   final double borderRadius;
+  final Function onPressed;
 
   const LUBaseCard(
       {Key key,
-      @required this.child,
+      @required this.children,
       this.width,
       this.height,
-      this.borderRadius})
+      this.borderRadius = 12.0,
+      this.onPressed})
       : super(key: key);
 
   @override
@@ -26,7 +28,18 @@ class LUBaseCard extends StatelessWidget {
               borderRadius: BorderRadius.all(
             Radius.circular(borderRadius),
           )),
-          child: child,
+          child: Stack(
+            children: <Widget>[
+              ...children,
+              Positioned.fill(
+                  child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: onPressed,
+                ),
+              ))
+            ],
+          ),
         ));
   }
 }

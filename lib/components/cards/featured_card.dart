@@ -37,27 +37,19 @@ class LUFeaturedCard extends StatelessWidget {
       width: width,
       height: height,
       borderRadius: borderRadius,
-      child: Stack(
-        children: <Widget>[
-          Positioned.fill(
+      onPressed: onPressed,
+      children: <Widget>[
+        Positioned.fill(
 //              child: Image.network(
 //                imageSrc,
 //                fit: BoxFit.fill,
 //              ),
-              child: Ink(
-            color: Colors.grey,
-          )),
-          Positioned.fill(child: _buildImageFilter()),
-          Positioned.fill(child: _buildCardContent()),
-          Positioned.fill(
-              child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: onPressed,
-            ),
-          ))
-        ],
-      ),
+            child: Ink(
+          color: Colors.grey,
+        )),
+        Positioned.fill(child: _buildImageFilter()),
+        Positioned.fill(child: _buildCardContent()),
+      ],
     );
   }
 
