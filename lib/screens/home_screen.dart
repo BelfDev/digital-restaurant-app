@@ -1,4 +1,5 @@
 import 'package:dr_app/components/buttons/icon_button.dart';
+import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:flutter/material.dart';
 
@@ -93,22 +94,33 @@ class _HomeScreenState extends State<HomeScreen> {
       );
 
   Widget _buildContent() => Container(
-        margin: EdgeInsets.only(top: 200),
-        decoration: BoxDecoration(
-          color: Color(0xFFFAFAFA),
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(40), topRight: Radius.circular(40)),
-        ),
-        child: Column(
-            children: dummyCards
-                .map((title) => Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: LUOutletCard(
-                        rating: 4,
-                        title: title,
-                        priceRange: '\$\$',
-                      ),
-                    ))
-                .toList()),
-      );
+      margin: EdgeInsets.only(top: 200),
+      decoration: BoxDecoration(
+        color: Color(0xFFFAFAFA),
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 24),
+        child: Column(children: <Widget>[
+          LUSolidButton(
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(horizontal: 32),
+              color: Color(0xFF4F5D75),
+              title: "Find a Restaurant",
+              onPressed: () {}),
+          ..._getCards(),
+        ]),
+      ));
+
+  List<Widget> _getCards() => dummyCards
+      .map((title) => Padding(
+            padding: const EdgeInsets.only(top: 16),
+            child: LUOutletCard(
+              rating: 4,
+              title: title,
+              priceRange: '\$\$',
+            ),
+          ))
+      .toList();
 }

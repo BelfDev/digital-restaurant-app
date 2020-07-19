@@ -7,11 +7,13 @@ class LUBaseButton extends StatelessWidget {
   final double width;
   final double height;
   final Widget child;
+  final EdgeInsetsGeometry margin;
 
   LUBaseButton({
     @required this.width,
     @required this.height,
     @required this.child,
+    this.margin,
   });
 
   @override
@@ -20,6 +22,7 @@ class LUBaseButton extends StatelessWidget {
       width: width,
       height: height,
       child: child,
+      margin: margin,
     );
   }
 }
