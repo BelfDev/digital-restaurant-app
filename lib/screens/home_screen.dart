@@ -1,4 +1,5 @@
 import 'package:dr_app/components/buttons/icon_button.dart';
+import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,7 +10,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final dummyCards = [1, 2, 3, 4, 5];
+  final dummyCards = [
+    'Restaurant 1',
+    'Restaurant 2',
+    'Restaurant 3',
+    'Restaurant 4',
+    'Restaurant 5',
+    'Restaurant 6',
+    'Restaurant 7',
+    'Restaurant 8',
+    'Restaurant 9',
+    'Restaurant 10'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -81,12 +93,22 @@ class _HomeScreenState extends State<HomeScreen> {
       );
 
   Widget _buildContent() => Container(
-        height: 1000,
         margin: EdgeInsets.only(top: 200),
         decoration: BoxDecoration(
           color: Color(0xFFFAFAFA),
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40), topRight: Radius.circular(40)),
         ),
+        child: Column(
+            children: dummyCards
+                .map((title) => Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: LUOutletCard(
+                        rating: 4,
+                        title: title,
+                        priceRange: '\$\$',
+                      ),
+                    ))
+                .toList()),
       );
 }

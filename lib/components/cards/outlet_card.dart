@@ -28,7 +28,7 @@ class LUOutletCard extends StatelessWidget {
       this.rating,
       this.starColor = Colors.yellow,
       @required this.title,
-      this.priceRange})
+      @required this.priceRange})
       : super(key: key);
 
   @override
