@@ -8,6 +8,7 @@ class LUCategoryCard extends StatelessWidget {
   final Function onPressed;
   final String imageSrc;
   final String title;
+  final EdgeInsetsGeometry margin;
 
   const LUCategoryCard(
       {Key key,
@@ -15,7 +16,8 @@ class LUCategoryCard extends StatelessWidget {
       this.height = 120,
       this.onPressed,
       this.imageSrc,
-      this.title})
+      this.title,
+      this.margin})
       : super(key: key);
 
   @override
@@ -23,6 +25,7 @@ class LUCategoryCard extends StatelessWidget {
     return LUBaseCard(
       width: width,
       height: height,
+      margin: margin,
       onPressed: onPressed,
       childrenAlignment: Alignment.center,
       children: <Widget>[
