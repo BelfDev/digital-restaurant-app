@@ -19,19 +19,20 @@ class LUFeaturedCard extends StatelessWidget {
   final String subtitle;
   final String priceRange;
 
-  const LUFeaturedCard(
-      {this.width = 184,
-      this.height = 232,
-      this.onPressed,
-      this.imageSrc,
-      this.borderRadius = 12.0,
-      this.filterColors,
-      this.padding = 8.0,
-      this.rating,
-      this.starColor = Colors.yellow,
-      @required this.title,
-      this.subtitle,
-      this.priceRange});
+  const LUFeaturedCard({
+    @required this.title,
+    @required this.subtitle,
+    @required this.priceRange,
+    this.width = 184,
+    this.height = 232,
+    this.onPressed,
+    this.imageSrc,
+    this.borderRadius = 12.0,
+    this.filterColors,
+    this.padding = 8.0,
+    this.rating,
+    this.starColor = Colors.yellow,
+  });
 
   @override
   Widget build(BuildContext context) {

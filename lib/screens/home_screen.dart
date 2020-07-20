@@ -1,6 +1,7 @@
 import 'package:dr_app/components/buttons/icon_button.dart';
 import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/category_card.dart';
+import 'package:dr_app/components/cards/featured_card.dart';
 import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:dr_app/components/carousel.dart';
 import 'package:flutter/material.dart';
@@ -111,7 +112,67 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Color(0xFF4F5D75),
               title: "Find a Restaurant",
               onPressed: () {}),
-          _buildFeaturedCarousel(),
+          _buildSection('Feature section', 300, <Widget>[
+            LUFeaturedCard(
+              title: 'italian',
+              subtitle: 'nicee',
+              onPressed: () {},
+              rating: 4,
+              priceRange: '\$\$',
+            ),
+            LUFeaturedCard(
+              title: 'italian',
+              subtitle: 'nicee',
+              onPressed: () {},
+              rating: 4,
+              priceRange: '\$\$',
+            ),
+            LUFeaturedCard(
+              title: 'italian',
+              subtitle: 'nicee',
+              onPressed: () {},
+              rating: 4,
+              priceRange: '\$\$',
+            ),
+            LUFeaturedCard(
+              title: 'italian',
+              subtitle: 'nicee',
+              onPressed: () {},
+              rating: 4,
+              priceRange: '\$\$',
+            ),
+            LUFeaturedCard(
+              title: 'italian',
+              subtitle: 'nicee',
+              onPressed: () {},
+              rating: 4,
+              priceRange: '\$\$',
+            ),
+            LUFeaturedCard(
+              title: 'italian',
+              subtitle: 'nicee',
+              onPressed: () {},
+              rating: 4,
+              priceRange: '\$\$',
+            ),
+          ]),
+          _buildSection('Category Section', 200, <Widget>[
+            LUCategoryCard(
+              title: 'italian',
+            ),
+            LUCategoryCard(
+              title: 'Brazilian',
+            ),
+            LUCategoryCard(
+              title: 'Brazilian',
+            ),
+            LUCategoryCard(
+              title: 'Brazilian',
+            ),
+            LUCategoryCard(
+              title: 'Brazilian',
+            ),
+          ]),
           ..._getCards(),
         ]),
       ));
@@ -128,25 +189,20 @@ class _HomeScreenState extends State<HomeScreen> {
           ))
       .toList();
 
-  Widget _buildFeaturedCarousel() => LUCarousel(
-        height: 200,
-        padding: EdgeInsets.only(left: 16, right: 16, top: 24),
+  Widget _buildSection(String name, double height, List<Widget> items) =>
+      Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          LUCategoryCard(
-            title: 'italian',
+          Padding(
+            padding: const EdgeInsets.only(left: 16, top: 24),
+            child: Text('My Section Title'),
           ),
-          LUCategoryCard(
-            title: 'Brazilian',
-          ),
-          LUCategoryCard(
-            title: 'Brazilian',
-          ),
-          LUCategoryCard(
-            title: 'Brazilian',
-          ),
-          LUCategoryCard(
-            title: 'Brazilian',
-          ),
+          LUCarousel(
+              height: height,
+              padding: EdgeInsets.only(left: 16, right: 16, top: 24),
+              children: items)
         ],
       );
 }
