@@ -2,6 +2,7 @@ import 'package:dr_app/components/buttons/icon_button.dart';
 import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/category_card.dart';
 import 'package:dr_app/components/cards/outlet_card.dart';
+import 'package:dr_app/components/carousel.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -127,28 +128,25 @@ class _HomeScreenState extends State<HomeScreen> {
           ))
       .toList();
 
-  Widget _buildFeaturedCarousel() => Container(
+  Widget _buildFeaturedCarousel() => LUCarousel(
         height: 200,
-        child: ListView(
-          padding: EdgeInsets.only(left: 16, right: 16, top: 24),
-          scrollDirection: Axis.horizontal,
-          children: <Widget>[
-            LUCategoryCard(
-              title: 'italian',
-            ),
-            LUCategoryCard(
-              title: 'Brazilian',
-            ),
-            LUCategoryCard(
-              title: 'Brazilian',
-            ),
-            LUCategoryCard(
-              title: 'Brazilian',
-            ),
-            LUCategoryCard(
-              title: 'Brazilian',
-            ),
-          ],
-        ),
+        padding: EdgeInsets.only(left: 16, right: 16, top: 24),
+        children: <Widget>[
+          LUCategoryCard(
+            title: 'italian',
+          ),
+          LUCategoryCard(
+            title: 'Brazilian',
+          ),
+          LUCategoryCard(
+            title: 'Brazilian',
+          ),
+          LUCategoryCard(
+            title: 'Brazilian',
+          ),
+          LUCategoryCard(
+            title: 'Brazilian',
+          ),
+        ],
       );
 }
