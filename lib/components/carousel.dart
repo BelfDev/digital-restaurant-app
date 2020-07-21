@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class LUCarousel extends StatelessWidget {
   final double width;
   final double height;
+  final double space;
   final List<Widget> children;
   final EdgeInsetsGeometry padding;
 
@@ -11,7 +12,8 @@ class LUCarousel extends StatelessWidget {
       this.width,
       @required this.height,
       this.padding = const EdgeInsets.only(left: 16, right: 16, top: 24),
-      @required this.children})
+      @required this.children,
+      this.space = 8.0})
       : super(key: key);
 
   @override
@@ -19,10 +21,18 @@ class LUCarousel extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      child: ListView(
+      child: ListView.separated(
         padding: padding,
         scrollDirection: Axis.horizontal,
-        children: children,
+        itemCount: children.length,
+        separatorBuilder: (BuildContext context, int index) => VerticalDivider(
+          width: space,
+          thickness: 0,
+          color: Colors.transparent,
+        ),
+        itemBuilder: (context, index) {
+          return children[index];
+        },
       ),
     );
   }

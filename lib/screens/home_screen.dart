@@ -146,22 +146,17 @@ class _HomeScreenState extends State<HomeScreen> {
               priceRange: '\$\$',
             ),
           ]),
-          _buildSection('Category Section', 200, <Widget>[
+          _buildSection('Category Section', 160, <Widget>[
             LUCategoryCard(
-              title: 'italian',
+              title: 'Italian',
+              imageSrc: 'https://picsum.photos/102',
             ),
             LUCategoryCard(
-              title: 'Brazilian',
-            ),
+                title: 'Brazilian', imageSrc: 'https://picsum.photos/108'),
             LUCategoryCard(
-              title: 'Brazilian',
-            ),
+                title: 'Japanese', imageSrc: 'https://picsum.photos/110'),
             LUCategoryCard(
-              title: 'Brazilian',
-            ),
-            LUCategoryCard(
-              title: 'Brazilian',
-            ),
+                title: 'Greek', imageSrc: 'https://picsum.photos/222'),
           ]),
           ..._getCards(),
         ]),
@@ -180,19 +175,20 @@ class _HomeScreenState extends State<HomeScreen> {
       .toList();
 
   Widget _buildSection(String name, double height, List<Widget> items) =>
-      Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 16, top: 24),
-            child: Text('My Section Title'),
-          ),
-          LUCarousel(
-              height: height,
-              padding: EdgeInsets.only(left: 16, right: 16, top: 24),
-              children: items)
-        ],
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text('My Section Title'),
+            LUCarousel(
+                height: height,
+                padding:
+                    EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+                children: items)
+          ],
+        ),
       );
 }
