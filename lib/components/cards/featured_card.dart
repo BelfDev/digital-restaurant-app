@@ -43,12 +43,10 @@ class LUFeaturedCard extends StatelessWidget {
       onPressed: onPressed,
       children: <Widget>[
         Positioned.fill(
-//              child: Image.network(
-//                imageSrc,
-//                fit: BoxFit.fill,
-//              ),
-            child: Ink(
-          color: Colors.grey,
+            child: FadeInImage.assetNetwork(
+          placeholder: 'res/images/restaurant-placeholder.png',
+          image: imageSrc,
+          fit: BoxFit.fill,
         )),
         Positioned.fill(child: LUGradientFilter(filterColors: filterColors)),
         Positioned.fill(child: _buildCardContent()),

@@ -114,6 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () {}),
           _buildSection('Feature section', 300, <Widget>[
             LUFeaturedCard(
+              imageSrc: 'https://picsum.photos/200',
               title: 'italian',
               subtitle: 'nicee',
               onPressed: () {},
@@ -121,6 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
               priceRange: '\$\$',
             ),
             LUFeaturedCard(
+              imageSrc: 'https://picsum.photos/0',
               title: 'italian',
               subtitle: 'nicee',
               onPressed: () {},
@@ -128,6 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
               priceRange: '\$\$',
             ),
             LUFeaturedCard(
+              imageSrc: 'https://picsum.photos/1000',
               title: 'italian',
               subtitle: 'nicee',
               onPressed: () {},
@@ -135,20 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
               priceRange: '\$\$',
             ),
             LUFeaturedCard(
-              title: 'italian',
-              subtitle: 'nicee',
-              onPressed: () {},
-              rating: 4,
-              priceRange: '\$\$',
-            ),
-            LUFeaturedCard(
-              title: 'italian',
-              subtitle: 'nicee',
-              onPressed: () {},
-              rating: 4,
-              priceRange: '\$\$',
-            ),
-            LUFeaturedCard(
+              imageSrc: 'https://picsum.photos/1001',
               title: 'italian',
               subtitle: 'nicee',
               onPressed: () {},
