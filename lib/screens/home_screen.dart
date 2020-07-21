@@ -115,8 +115,8 @@ class _HomeScreenState extends State<HomeScreen> {
           _buildSection('Feature section', 300, <Widget>[
             LUFeaturedCard(
               imageSrc: 'https://picsum.photos/200',
-              title: 'italian',
-              subtitle: 'nicee',
+              title: 'Bar Soba',
+              subtitle: 'Asian Fusion',
               onPressed: () {},
               rating: 4,
               priceRange: '\$\$',

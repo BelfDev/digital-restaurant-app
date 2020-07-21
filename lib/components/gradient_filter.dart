@@ -19,7 +19,7 @@ class LUGradientFilter extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: filterColors ??
-                  [Colors.transparent, Colors.black.withOpacity(0.8)])),
+                  [Colors.transparent, Colors.black.withOpacity(0.6)])),
     );
   }
 }
