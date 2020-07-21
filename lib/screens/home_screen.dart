@@ -103,64 +103,63 @@ class _HomeScreenState extends State<HomeScreen> {
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(40), topRight: Radius.circular(40)),
       ),
-      child: Padding(
-        padding: const EdgeInsets.only(top: 24),
-        child: Column(children: <Widget>[
-          LUSolidButton(
+      child: Column(children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(top: 16, bottom: 24),
+          child: LUSolidButton(
               width: double.infinity,
               margin: EdgeInsets.symmetric(horizontal: 32),
               color: Color(0xFF4F5D75),
               title: "Find a Restaurant",
               onPressed: () {}),
-          _buildSection('Feature section', 300, <Widget>[
-            LUFeaturedCard(
-              imageSrc: 'https://picsum.photos/200',
-              title: 'Bar Soba',
-              subtitle: 'Asian Fusion',
-              onPressed: () {},
-              rating: 4,
-              priceRange: '\$\$',
-            ),
-            LUFeaturedCard(
-              imageSrc: 'https://picsum.photos/0',
-              title: 'italian',
-              subtitle: 'nicee',
-              onPressed: () {},
-              rating: 4,
-              priceRange: '\$\$',
-            ),
-            LUFeaturedCard(
-              imageSrc: 'https://picsum.photos/1000',
-              title: 'italian',
-              subtitle: 'nicee',
-              onPressed: () {},
-              rating: 4,
-              priceRange: '\$\$',
-            ),
-            LUFeaturedCard(
-              imageSrc: 'https://picsum.photos/1001',
-              title: 'italian',
-              subtitle: 'nicee',
-              onPressed: () {},
-              rating: 4,
-              priceRange: '\$\$',
-            ),
-          ]),
-          _buildSection('Category Section', 160, <Widget>[
-            LUCategoryCard(
-              title: 'Italian',
-              imageSrc: 'https://picsum.photos/102',
-            ),
-            LUCategoryCard(
-                title: 'Brazilian', imageSrc: 'https://picsum.photos/108'),
-            LUCategoryCard(
-                title: 'Japanese', imageSrc: 'https://picsum.photos/110'),
-            LUCategoryCard(
-                title: 'Greek', imageSrc: 'https://picsum.photos/222'),
-          ]),
-          ..._getCards(),
+        ),
+        _buildSection("Chef's choice - Glasgow", 300, <Widget>[
+          LUFeaturedCard(
+            imageSrc: 'https://picsum.photos/200',
+            title: 'Bar Soba',
+            subtitle: 'Asian Fusion',
+            onPressed: () {},
+            rating: 4,
+            priceRange: '\$\$',
+          ),
+          LUFeaturedCard(
+            imageSrc: 'https://picsum.photos/0',
+            title: 'italian',
+            subtitle: 'nicee',
+            onPressed: () {},
+            rating: 4,
+            priceRange: '\$\$',
+          ),
+          LUFeaturedCard(
+            imageSrc: 'https://picsum.photos/1000',
+            title: 'italian',
+            subtitle: 'nicee',
+            onPressed: () {},
+            rating: 4,
+            priceRange: '\$\$',
+          ),
+          LUFeaturedCard(
+            imageSrc: 'https://picsum.photos/1001',
+            title: 'italian',
+            subtitle: 'nicee',
+            onPressed: () {},
+            rating: 4,
+            priceRange: '\$\$',
+          ),
         ]),
-      ));
+        _buildSection('Cuisines', 160, <Widget>[
+          LUCategoryCard(
+            title: 'Italian',
+            imageSrc: 'https://picsum.photos/102',
+          ),
+          LUCategoryCard(
+              title: 'Brazilian', imageSrc: 'https://picsum.photos/108'),
+          LUCategoryCard(
+              title: 'Japanese', imageSrc: 'https://picsum.photos/110'),
+          LUCategoryCard(title: 'Greek', imageSrc: 'https://picsum.photos/222'),
+        ]),
+        ..._getCards(),
+      ]));
 
   List<Widget> _getCards() => dummyCards
       .map((title) => Padding(
@@ -174,15 +173,21 @@ class _HomeScreenState extends State<HomeScreen> {
           ))
       .toList();
 
-  Widget _buildSection(String name, double height, List<Widget> items) =>
+  Widget _buildSection(String title, double height, List<Widget> items) =>
       Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        padding: const EdgeInsets.only(top: 16.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('My Section Title'),
+            Padding(
+              padding: const EdgeInsets.only(left: 18),
+              child: Text(
+                title,
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+              ),
+            ),
             LUCarousel(
                 height: height,
                 padding:
