@@ -78,12 +78,12 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                      color: Colors.orange,
-                      borderRadius: BorderRadius.circular(20))),
+              Image.asset(
+                'res/images/home-chef.png',
+                height: 100,
+                width: 100,
+                fit: BoxFit.cover,
+              ),
               Text(
                 'Time to get\nsome food',
                 style: TextStyle(
