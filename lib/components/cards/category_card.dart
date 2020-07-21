@@ -12,7 +12,7 @@ class LUCategoryCard extends StatelessWidget {
 
   const LUCategoryCard(
       {Key key,
-      this.width = 120,
+      this.width = 136,
       this.height = 120,
       this.onPressed,
       this.imageSrc,
@@ -38,17 +38,14 @@ class LUCategoryCard extends StatelessWidget {
               style: Styles.categoryCardTitle,
             ),
             ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-//              child: Image.network(
-//                imageSrc,
-//                fit: BoxFit.fill,
-//              ),
-              child: Container(
-                width: width / 2,
-                height: width / 2,
-                color: Colors.blue,
-              ),
-            )
+                borderRadius: BorderRadius.circular(10.0),
+                child: FadeInImage.assetNetwork(
+                  width: width / 1.5,
+                  height: height / 1.5,
+                  placeholder: 'res/images/restaurant-placeholder.png',
+                  image: imageSrc,
+                  fit: BoxFit.fill,
+                )),
           ],
         )
       ],
