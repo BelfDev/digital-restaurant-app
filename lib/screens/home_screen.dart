@@ -18,6 +18,110 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: <Widget>[
+        _buildTopBar(),
+        Stack(
+          children: <Widget>[_Header(), _HomeContent()],
+        )
+      ],
+    );
+  }
+
+  Widget _buildTopBar() => Padding(
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Image.asset(
+              'res/images/logo.png',
+              width: 227,
+              height: 46,
+              fit: BoxFit.cover,
+            ),
+            LUIconButton(
+              icon: MaterialCommunityIcons.qrcode_scan,
+              iconSize: 32,
+              onPressed: () {
+                print('Pressed On Scanner');
+              },
+            )
+          ],
+        ),
+      );
+}
+
+class _Header extends StatelessWidget {
+  const _Header({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 200,
+      width: double.infinity,
+      margin: EdgeInsets.only(top: 24),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+        color: LUColors.yellow,
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+        child: Stack(
+          children: <Widget>[
+            Positioned.fill(
+                child:
+                    Image.asset('res/images/header-bg.png', fit: BoxFit.fill)),
+            Positioned.fill(
+              bottom: 32,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Image.asset(
+                    'res/images/home-chef.png',
+                    height: 128,
+                    width: 120,
+                    fit: BoxFit.cover,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 64),
+                    child: RichText(
+                      text: TextSpan(children: <TextSpan>[
+                        TextSpan(
+                            text: 'Time to get\nsome ',
+                            style: TextStyle(
+                                color: LUColors.navyBlue,
+                                fontSize: 28,
+                                height: 0.5,
+                                fontFamily: 'Lora')),
+                        TextSpan(
+                            text: 'food',
+                            style: TextStyle(
+                                color: LUColors.navyBlue,
+                                fontSize: 36,
+                                fontFamily: 'Lora',
+                                fontWeight: FontWeight.w700))
+                      ]),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _HomeContent extends StatelessWidget {
   List<Widget> _getCategoryCards() => dummyCuisines
       .map((cuisine) => LUCategoryCard(
             title: cuisine.name,
@@ -49,164 +153,101 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        _buildTopBar(),
-        Stack(
-          children: <Widget>[_buildHeader(), _buildContent()],
-        )
-      ],
+    return Container(
+        margin: EdgeInsets.only(top: 192),
+        decoration: BoxDecoration(
+          color: Color(0xFFFAFAFA),
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+        ),
+        child: Column(children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 16, bottom: 16),
+            child: LUSolidButton(
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(horizontal: 32),
+                color: LUColors.navyBlue,
+                title: "Find a Restaurant",
+                onPressed: () {}),
+          ),
+          _HorizontalHomeSection(
+              title: "Chef's choice - Glasgow",
+              height: 280,
+              items: _getFeaturedCards()),
+          _HorizontalHomeSection(
+            title: 'Cuisines',
+            height: 160,
+            items: _getCategoryCards(),
+          ),
+          _VerticalHomeSection(
+              title: 'Nearby Restaurants', items: _getOutletCards())
+        ]));
+  }
+}
+
+class _HorizontalHomeSection extends StatelessWidget {
+  final double height;
+  final String title;
+  final List<Widget> items;
+
+  const _HorizontalHomeSection({Key key, this.height, this.title, this.items})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(left: 18),
+            child: Text(
+              title,
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+            ),
+          ),
+          LUCarousel(
+              height: height,
+              padding: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+              items: items)
+        ],
+      ),
     );
   }
+}
 
-  Widget _buildTopBar() => Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(
-              'res/images/logo.png',
-              width: 227,
-              height: 46,
-              fit: BoxFit.cover,
-            ),
-            LUIconButton(
-              icon: MaterialCommunityIcons.qrcode_scan,
-              iconSize: 32,
-              onPressed: () {
-                print('Pressed On Scanner');
-              },
-            )
-          ],
-        ),
-      );
+class _VerticalHomeSection extends StatelessWidget {
+  final String title;
+  final List<Widget> items;
 
-  Widget _buildHeader() => Container(
-        height: 200,
-        width: double.infinity,
-        margin: EdgeInsets.only(top: 24),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(40), topRight: Radius.circular(40)),
-          color: LUColors.yellow,
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(40), topRight: Radius.circular(40)),
-          child: Stack(
-            children: <Widget>[
-              Positioned.fill(
-                  child: Image.asset('res/images/header-bg.png',
-                      fit: BoxFit.fill)),
-              Positioned.fill(
-                bottom: 32,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Image.asset(
-                      'res/images/home-chef.png',
-                      height: 128,
-                      width: 120,
-                      fit: BoxFit.cover,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 64),
-                      child: RichText(
-                        text: TextSpan(children: <TextSpan>[
-                          TextSpan(
-                              text: 'Time to get\nsome ',
-                              style: TextStyle(
-                                  color: LUColors.navyBlue,
-                                  fontSize: 28,
-                                  height: 0.5,
-                                  fontFamily: 'Lora')),
-                          TextSpan(
-                              text: 'food',
-                              style: TextStyle(
-                                  color: LUColors.navyBlue,
-                                  fontSize: 36,
-                                  fontFamily: 'Lora',
-                                  fontWeight: FontWeight.w700))
-                        ]),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
+  const _VerticalHomeSection({Key key, this.title, this.items})
+      : super(key: key);
 
-  Widget _buildContent() => Container(
-      margin: EdgeInsets.only(top: 192),
-      decoration: BoxDecoration(
-        color: Color(0xFFFAFAFA),
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(40), topRight: Radius.circular(40)),
-      ),
-      child: Column(children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 16, bottom: 16),
-          child: LUSolidButton(
-              width: double.infinity,
-              margin: EdgeInsets.symmetric(horizontal: 32),
-              color: LUColors.navyBlue,
-              title: "Find a Restaurant",
-              onPressed: () {}),
-        ),
-        _buildHorizontalSection(
-            "Chef's choice - Glasgow", 280, _getFeaturedCards()),
-        _buildHorizontalSection('Cuisines', 160, _getCategoryCards()),
-        _buildVerticalSection('Nearby Restaurants', _getOutletCards()),
-      ]));
-
-  Widget _buildHorizontalSection(
-          String title, double height, List<Widget> items) =>
-      Padding(
-        padding: const EdgeInsets.only(top: 16.0),
-        child: Column(
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16.0),
+      child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(left: 18),
+              padding: const EdgeInsets.only(left: 18, bottom: 12),
               child: Text(
                 title,
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
               ),
             ),
-            LUCarousel(
-                height: height,
-                padding:
-                    EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
-                items: items)
-          ],
-        ),
-      );
-
-  Widget _buildVerticalSection(String title, List<Widget> items) => Padding(
-        padding: const EdgeInsets.only(top: 16.0),
-        child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(left: 18, bottom: 12),
-                child: Text(
-                  title,
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-                ),
-              ),
-              LUList(
-                nested: true,
-                space: 10,
-                items: _getOutletCards(),
-              )
-            ]),
-      );
+            LUList(
+              nested: true,
+              space: 10,
+              items: items,
+            )
+          ]),
+    );
+  }
 }
