@@ -66,7 +66,7 @@ class LUOutletCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             LUStarRating(
-              rating: 4.0,
+              rating: rating ?? 0,
               margin: EdgeInsets.only(bottom: 2),
             ),
             Row(

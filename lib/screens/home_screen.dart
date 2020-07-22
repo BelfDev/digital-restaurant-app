@@ -18,18 +18,44 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Widget> _getCategoryCards() => dummyCuisines
+      .map((cuisine) => LUCategoryCard(
+            title: cuisine.name,
+            imageSrc: cuisine.imgSrc,
+            onPressed: () {},
+          ))
+      .toList();
+
+  List<Widget> _getFeaturedCards() => dummyFeaturedOutlets
+      .map((outlet) => LUFeaturedCard(
+            imageSrc: outlet.imgSrc,
+            title: outlet.name,
+            subtitle: outlet.category,
+            onPressed: () {},
+            rating: outlet.rating,
+            priceRange: outlet.priceRange,
+          ))
+      .toList();
+
+  List<Widget> _getOutletCards() => dummyOutlets
+      .map((outlet) => LUOutletCard(
+            imageSrc: outlet.imgSrc,
+            rating: outlet.rating,
+            title: outlet.name,
+            priceRange: outlet.priceRange,
+            onPressed: () {},
+          ))
+      .toList();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFFAFAFA),
-      body: ListView(
-        children: <Widget>[
-          _buildTopBar(),
-          Stack(
-            children: <Widget>[_buildHeader(), _buildContent()],
-          )
-        ],
-      ),
+    return ListView(
+      children: <Widget>[
+        _buildTopBar(),
+        Stack(
+          children: <Widget>[_buildHeader(), _buildContent()],
+        )
+      ],
     );
   }
 
@@ -131,63 +157,11 @@ class _HomeScreenState extends State<HomeScreen> {
               title: "Find a Restaurant",
               onPressed: () {}),
         ),
-        _buildHorizontalSection("Chef's choice - Glasgow", 280, <Widget>[
-          LUFeaturedCard(
-            imageSrc: 'https://picsum.photos/200',
-            title: 'Bar Soba',
-            subtitle: 'Asian Fusion',
-            onPressed: () {},
-            rating: 4,
-            priceRange: '\$\$',
-          ),
-          LUFeaturedCard(
-            imageSrc: 'https://picsum.photos/0',
-            title: 'italian',
-            subtitle: 'nicee',
-            onPressed: () {},
-            rating: 4,
-            priceRange: '\$\$',
-          ),
-          LUFeaturedCard(
-            imageSrc: 'https://picsum.photos/1000',
-            title: 'italian',
-            subtitle: 'nicee',
-            onPressed: () {},
-            rating: 4,
-            priceRange: '\$\$',
-          ),
-          LUFeaturedCard(
-            imageSrc: 'https://picsum.photos/1001',
-            title: 'italian',
-            subtitle: 'nicee',
-            onPressed: () {},
-            rating: 4,
-            priceRange: '\$\$',
-          ),
-        ]),
-        _buildHorizontalSection('Cuisines', 160, <Widget>[
-          LUCategoryCard(
-            title: 'Italian',
-            imageSrc: 'https://picsum.photos/102',
-          ),
-          LUCategoryCard(
-              title: 'Brazilian', imageSrc: 'https://picsum.photos/108'),
-          LUCategoryCard(
-              title: 'Japanese', imageSrc: 'https://picsum.photos/110'),
-          LUCategoryCard(title: 'Greek', imageSrc: 'https://picsum.photos/222'),
-        ]),
-        _buildVerticalSection('Nearby Restaurants', _getCards()),
+        _buildHorizontalSection(
+            "Chef's choice - Glasgow", 280, _getFeaturedCards()),
+        _buildHorizontalSection('Cuisines', 160, _getCategoryCards()),
+        _buildVerticalSection('Nearby Restaurants', _getOutletCards()),
       ]));
-
-  List<Widget> _getCards() => dummyCards
-      .map((title) => LUOutletCard(
-            imageSrc: 'https://picsum.photos/200/300',
-            rating: 4,
-            title: title,
-            priceRange: '\$\$',
-            onPressed: () {},
-          ))
-      .toList();
 
   Widget _buildHorizontalSection(
           String title, double height, List<Widget> items) =>
@@ -231,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
               LUList(
                 nested: true,
                 space: 10,
-                items: _getCards(),
+                items: _getOutletCards(),
               )
             ]),
       );

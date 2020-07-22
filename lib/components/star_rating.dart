@@ -24,7 +24,7 @@ class LUStarRating extends StatelessWidget {
       child: SmoothStarRating(
           filledIconData: FontAwesome.star,
           defaultIconData: FontAwesome.star_o,
-          halfFilledIconData: FontAwesome.star_half,
+          halfFilledIconData: FontAwesome.star_half_full,
           allowHalfRating: true,
           starCount: 5,
           rating: rating ?? 0,
