@@ -2,6 +2,7 @@ import 'package:dr_app/components/bottom_app_bar.dart';
 import 'package:dr_app/navigation/navigatior_container.dart';
 import 'package:dr_app/navigation/tab_data.dart';
 import 'package:dr_app/navigation/tabs.dart';
+import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -64,8 +65,8 @@ class _RootContainerState extends State<RootContainer>
     return NotificationListener<ScrollNotification>(
       onNotification: _handleScrollNotification,
       child: Scaffold(
+        backgroundColor: LUColors.smoothWhite,
         body: SafeArea(
-          top: false,
           child: Stack(
             fit: StackFit.expand,
             children: tabs.map((TabData tabData) {
