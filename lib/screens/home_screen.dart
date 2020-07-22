@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildTopBar() => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildHeader() => Container(
         height: 200,
         width: double.infinity,
-        margin: EdgeInsets.only(top: 32),
+        margin: EdgeInsets.only(top: 24),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40), topRight: Radius.circular(40)),
@@ -125,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
       );
 
   Widget _buildContent() => Container(
-      margin: EdgeInsets.only(top: 200),
+      margin: EdgeInsets.only(top: 192),
       decoration: BoxDecoration(
         color: Color(0xFFFAFAFA),
         borderRadius: BorderRadius.only(
