@@ -48,9 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Le Serveur',
-              style: TextStyle(color: Colors.black, fontSize: 40),
+            Image.asset(
+              'res/images/logo.png',
+              width: 227,
+              height: 46,
+              fit: BoxFit.cover,
             ),
             LUIconButton(
               icon: Icons.center_focus_strong,
