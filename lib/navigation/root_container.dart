@@ -116,7 +116,7 @@ class _RootContainerState extends State<RootContainer>
               // Present cart screen
             });
           },
-          tooltip: 'Increment',
+          tooltip: 'Tab',
           child: Icon(Icons.receipt),
           backgroundColor: Color(0xFFEF8354),
           elevation: 4.0,

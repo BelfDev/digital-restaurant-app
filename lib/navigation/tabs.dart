@@ -9,6 +9,6 @@ import 'package:flutter/material.dart';
 const List<TabData> tabs = <TabData>[
   TabData(0, HomeScreen.id, 'Home', Icons.restaurant),
   TabData(1, ExploreScreen.id, 'Explore', Icons.explore),
-  TabData(2, ProfileScreen.id, 'Profile', Icons.person_pin),
+  TabData(2, ProfileScreen.id, 'Profile', Icons.account_circle),
   TabData(3, MoreScreen.id, 'More', Icons.more_horiz),
 ];
