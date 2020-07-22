@@ -12,5 +12,5 @@ abstract class Styles {
       color: LUColors.smoothWhite, fontSize: 18, fontWeight: FontWeight.w400);
 
   static const categoryCardTitle = TextStyle(
-      color: LUColors.navyBlue, fontSize: 16, fontWeight: FontWeight.w200);
+      color: LUColors.darkBlue, fontSize: 16, fontWeight: FontWeight.w200);
 }

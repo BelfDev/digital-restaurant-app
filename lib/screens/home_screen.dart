@@ -4,6 +4,7 @@ import 'package:dr_app/components/cards/category_card.dart';
 import 'package:dr_app/components/cards/featured_card.dart';
 import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:dr_app/components/carousel.dart';
+import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -86,13 +87,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: 100,
                 fit: BoxFit.cover,
               ),
-              Text(
-                'Time to get\nsome food',
-                style: TextStyle(
-                    color: Colors.blueGrey,
-                    fontSize: 32,
-                    fontWeight: FontWeight.w600),
-              ),
+              RichText(
+                text: TextSpan(children: <TextSpan>[
+                  TextSpan(
+                      text: 'Time to get\nsome ',
+                      style: TextStyle(
+                          color: LUColors.navyBlue,
+                          fontSize: 32,
+                          fontFamily: 'Lora',
+                          fontWeight: FontWeight.w400)),
+                  TextSpan(
+                      text: 'food',
+                      style: TextStyle(
+                          color: LUColors.navyBlue,
+                          fontSize: 32,
+                          fontFamily: 'Lora',
+                          fontWeight: FontWeight.w700))
+                ]),
+              )
             ],
           ),
         ),
@@ -111,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: LUSolidButton(
               width: double.infinity,
               margin: EdgeInsets.symmetric(horizontal: 32),
-              color: Color(0xFF4F5D75),
+              color: LUColors.navyBlue,
               title: "Find a Restaurant",
               onPressed: () {}),
         ),
