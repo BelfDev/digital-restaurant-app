@@ -142,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: "Find a Restaurant",
               onPressed: () {}),
         ),
-        _buildSection("Chef's choice - Glasgow", 280, <Widget>[
+        _buildHorizontalSection("Chef's choice - Glasgow", 280, <Widget>[
           LUFeaturedCard(
             imageSrc: 'https://picsum.photos/200',
             title: 'Bar Soba',
@@ -176,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
             priceRange: '\$\$',
           ),
         ]),
-        _buildSection('Cuisines', 160, <Widget>[
+        _buildHorizontalSection('Cuisines', 160, <Widget>[
           LUCategoryCard(
             title: 'Italian',
             imageSrc: 'https://picsum.photos/102',
@@ -187,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: 'Japanese', imageSrc: 'https://picsum.photos/110'),
           LUCategoryCard(title: 'Greek', imageSrc: 'https://picsum.photos/222'),
         ]),
-        ..._getCards(),
+        _buildVerticalSection('Nearby Restaurants', _getCards()),
       ]));
 
   List<Widget> _getCards() => dummyCards
@@ -202,7 +202,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ))
       .toList();
 
-  Widget _buildSection(String title, double height, List<Widget> items) =>
+  Widget _buildHorizontalSection(
+          String title, double height, List<Widget> items) =>
       Padding(
         padding: const EdgeInsets.only(top: 16.0),
         child: Column(
@@ -224,5 +225,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: items)
           ],
         ),
+      );
+
+  Widget _buildVerticalSection(String title, List<Widget> items) => Padding(
+        padding: const EdgeInsets.only(top: 16.0),
+        child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 18),
+                child: Text(
+                  title,
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                ),
+              ),
+              ...items,
+            ]),
       );
 }
