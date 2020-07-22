@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// A horizontal scroll view based on the material [ListView]
 class LUCarousel extends StatelessWidget {
   final double width;
   final double height;

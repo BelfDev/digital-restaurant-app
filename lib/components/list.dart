@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Customised material [ListView] to hold Lutick components such as [LUOutletCard]s
 class LUList extends StatelessWidget {
   final double space;
   final List<Widget> items;

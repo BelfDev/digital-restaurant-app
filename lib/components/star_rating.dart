@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
+/// Customised [SmoothStarRating] to convey the overall acceptance
+/// of outlets or dishes by customers.
 class LUStarRating extends StatelessWidget {
   final double rating;
   final Color starColor;

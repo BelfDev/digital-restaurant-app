@@ -1,6 +1,7 @@
 import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 
+/// An abstract class holding the most commonly reused component styles.
 abstract class Styles {
   static const cardTitle = TextStyle(
       color: LUColors.smoothWhite, fontSize: 24, fontWeight: FontWeight.w600);

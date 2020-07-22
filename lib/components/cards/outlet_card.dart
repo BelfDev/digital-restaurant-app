@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import '../gradient_filter.dart';
 import 'base_card.dart';
 
+/// A material [Card] used to display information about an [Outlet].
+///
 class LUOutletCard extends StatelessWidget {
   static const _imageBorderRadius = 8.0;
 

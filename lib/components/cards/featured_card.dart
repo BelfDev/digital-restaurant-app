@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 
 import '../gradient_filter.dart';
 
+/// A material [Card] used to display information featured [Outlet]s or dishes.
+///
 class LUFeaturedCard extends StatelessWidget {
   final double width;
   final double height;

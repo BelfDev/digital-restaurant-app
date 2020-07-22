@@ -2,6 +2,8 @@ import 'package:dr_app/components/cards/base_card.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
+/// A material [Card] used to display information about a cuisine category.
+///
 class LUCategoryCard extends StatelessWidget {
   final double width;
   final double height;

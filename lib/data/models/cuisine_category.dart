@@ -1,3 +1,4 @@
+/// A model class representing a cuisine category.
 class CuisineCategory {
   final String name;
   final String imgSrc;

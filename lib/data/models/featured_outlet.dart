@@ -1,3 +1,4 @@
+/// A model class representing a featured outlet.
 class FeaturedOutlet {
   final String name;
   final String imgSrc;
