@@ -75,35 +75,50 @@ class _HomeScreenState extends State<HomeScreen> {
               topLeft: Radius.circular(40), topRight: Radius.circular(40)),
           color: LUColors.yellow,
         ),
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+          child: Stack(
             children: <Widget>[
-              Image.asset(
-                'res/images/home-chef.png',
-                height: 100,
-                width: 100,
-                fit: BoxFit.cover,
+              Positioned.fill(
+                  child: Image.asset('res/images/header-bg.png',
+                      fit: BoxFit.fill)),
+              Positioned.fill(
+                bottom: 32,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Image.asset(
+                      'res/images/home-chef.png',
+                      height: 128,
+                      width: 120,
+                      fit: BoxFit.cover,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 64),
+                      child: RichText(
+                        text: TextSpan(children: <TextSpan>[
+                          TextSpan(
+                              text: 'Time to get\nsome ',
+                              style: TextStyle(
+                                  color: LUColors.navyBlue,
+                                  fontSize: 28,
+                                  height: 0.5,
+                                  fontFamily: 'Lora')),
+                          TextSpan(
+                              text: 'food',
+                              style: TextStyle(
+                                  color: LUColors.navyBlue,
+                                  fontSize: 36,
+                                  fontFamily: 'Lora',
+                                  fontWeight: FontWeight.w700))
+                        ]),
+                      ),
+                    )
+                  ],
+                ),
               ),
-              RichText(
-                text: TextSpan(children: <TextSpan>[
-                  TextSpan(
-                      text: 'Time to get\nsome ',
-                      style: TextStyle(
-                          color: LUColors.navyBlue,
-                          fontSize: 28,
-                          fontFamily: 'Lora')),
-                  TextSpan(
-                      text: 'food',
-                      style: TextStyle(
-                          color: LUColors.navyBlue,
-                          fontSize: 36,
-                          fontFamily: 'Lora',
-                          fontWeight: FontWeight.w700))
-                ]),
-              )
             ],
           ),
         ),
