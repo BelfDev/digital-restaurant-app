@@ -71,7 +71,6 @@ flutter:
     - family: Lora
       fonts:
         - asset: res/fonts/Lora-Regular.ttf
-          weight: 400
         - asset: res/fonts/Lora-Italic.ttf
           style: italic
         - asset: res/fonts/Lora-Bold.ttf

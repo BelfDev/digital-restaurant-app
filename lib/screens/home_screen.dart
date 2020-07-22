@@ -93,14 +93,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       text: 'Time to get\nsome ',
                       style: TextStyle(
                           color: LUColors.navyBlue,
-                          fontSize: 32,
-                          fontFamily: 'Lora',
-                          fontWeight: FontWeight.w400)),
+                          fontSize: 28,
+                          fontFamily: 'Lora')),
                   TextSpan(
                       text: 'food',
                       style: TextStyle(
                           color: LUColors.navyBlue,
-                          fontSize: 32,
+                          fontSize: 36,
                           fontFamily: 'Lora',
                           fontWeight: FontWeight.w700))
                 ]),
