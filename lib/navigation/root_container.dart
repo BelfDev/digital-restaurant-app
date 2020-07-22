@@ -66,7 +66,9 @@ class _RootContainerState extends State<RootContainer>
       onNotification: _handleScrollNotification,
       child: Scaffold(
         backgroundColor: LUColors.smoothWhite,
+        extendBody: true,
         body: SafeArea(
+          bottom: false,
           child: Stack(
             fit: StackFit.expand,
             children: tabs.map((TabData tabData) {
@@ -96,7 +98,6 @@ class _RootContainerState extends State<RootContainer>
             }).toList(),
           ),
         ),
-        extendBody: true,
         bottomNavigationBar: LUBottomAppBar(
           height: 64,
           iconSize: 28,
