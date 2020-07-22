@@ -10,6 +10,17 @@ import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
+abstract class _HomeStyles {
+  static const topBarPadding =
+      const EdgeInsets.only(left: 16, right: 16, top: 8);
+  static const double headerHeight = 200;
+  static const backgroundBorderRadius = const BorderRadius.only(
+      topLeft: Radius.circular(40), topRight: Radius.circular(40));
+  static const double featuredSectionHeight = 280;
+  static const double cuisineSectionHeight = 160;
+  static const sectionSpacing = const EdgeInsets.only(top: 16.0);
+}
+
 class HomeScreen extends StatefulWidget {
   static const id = 'home_screen';
 
@@ -31,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildTopBar() => Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
+        padding: _HomeStyles.topBarPadding,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -62,17 +73,15 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: _HomeStyles.headerHeight,
       width: double.infinity,
       margin: EdgeInsets.only(top: 24),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+        borderRadius: _HomeStyles.backgroundBorderRadius,
         color: LUColors.yellow,
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+        borderRadius: _HomeStyles.backgroundBorderRadius,
         child: Stack(
           children: <Widget>[
             Positioned.fill(
@@ -156,9 +165,8 @@ class _HomeContent extends StatelessWidget {
     return Container(
         margin: EdgeInsets.only(top: 192),
         decoration: BoxDecoration(
-          color: Color(0xFFFAFAFA),
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+          color: LUColors.smoothWhite,
+          borderRadius: _HomeStyles.backgroundBorderRadius,
         ),
         child: Column(children: <Widget>[
           Padding(
@@ -172,11 +180,11 @@ class _HomeContent extends StatelessWidget {
           ),
           _HorizontalHomeSection(
               title: "Chef's choice - Glasgow",
-              height: 280,
+              height: _HomeStyles.featuredSectionHeight,
               items: _getFeaturedCards()),
           _HorizontalHomeSection(
             title: 'Cuisines',
-            height: 160,
+            height: _HomeStyles.cuisineSectionHeight,
             items: _getCategoryCards(),
           ),
           _VerticalHomeSection(
@@ -196,7 +204,7 @@ class _HorizontalHomeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 16.0),
+      padding: _HomeStyles.sectionSpacing,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -229,7 +237,7 @@ class _VerticalHomeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 16.0),
+      padding: _HomeStyles.sectionSpacing,
       child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
