@@ -6,6 +6,7 @@ import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:dr_app/components/carousel.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:line_awesome_icons/line_awesome_icons.dart';
 
 class HomeScreen extends StatefulWidget {
   static const id = 'home_screen';
@@ -56,8 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
               fit: BoxFit.cover,
             ),
             LUIconButton(
-              icon: Icons.center_focus_strong,
-              iconSize: 32,
+              icon: LineAwesomeIcons.qrcode,
+              padding: EdgeInsets.only(bottom: 4),
+              iconSize: 34,
               onPressed: () {
                 print('Pressed On Scanner');
               },
