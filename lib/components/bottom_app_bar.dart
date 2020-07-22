@@ -21,7 +21,7 @@ class LUBottomAppBar extends StatefulWidget {
       this.centerItemText,
       this.height = 56.0,
       this.iconSize = 24.0,
-      this.backgroundColor,
+      this.backgroundColor = Colors.white,
       this.unselectedColor,
       this.selectedColor,
       this.notchedShape,
@@ -51,7 +51,7 @@ class _LUBottomAppBarState extends State<LUBottomAppBar> {
     items.insert(items.length >> 1, _buildMiddleTabItem());
 
     return BottomAppBar(
-      color: Colors.white,
+      color: widget.backgroundColor,
       shape: CircularNotchedRectangle(),
       notchMargin: widget.notchMargin,
       elevation: widget.elevation,

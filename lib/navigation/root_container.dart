@@ -2,6 +2,7 @@ import 'package:dr_app/components/bottom_app_bar.dart';
 import 'package:dr_app/navigation/navigatior_container.dart';
 import 'package:dr_app/navigation/tab_data.dart';
 import 'package:dr_app/navigation/tabs.dart';
+import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -64,8 +65,10 @@ class _RootContainerState extends State<RootContainer>
     return NotificationListener<ScrollNotification>(
       onNotification: _handleScrollNotification,
       child: Scaffold(
+        backgroundColor: LUColors.smoothWhite,
+        extendBody: true,
         body: SafeArea(
-          top: false,
+          bottom: false,
           child: Stack(
             fit: StackFit.expand,
             children: tabs.map((TabData tabData) {
@@ -95,10 +98,10 @@ class _RootContainerState extends State<RootContainer>
             }).toList(),
           ),
         ),
-        extendBody: true,
         bottomNavigationBar: LUBottomAppBar(
           height: 64,
           iconSize: 28,
+          backgroundColor: Colors.white,
           selectedColor: const Color(0xFF4F5D75),
           unselectedColor: const Color(0xFFCCCCCC),
           tabs: tabs,
@@ -114,7 +117,7 @@ class _RootContainerState extends State<RootContainer>
               // Present cart screen
             });
           },
-          tooltip: 'Increment',
+          tooltip: 'Tab',
           child: Icon(Icons.receipt),
           backgroundColor: Color(0xFFEF8354),
           elevation: 4.0,

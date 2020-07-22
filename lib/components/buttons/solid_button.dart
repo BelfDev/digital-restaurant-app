@@ -14,6 +14,7 @@ import 'base_button.dart';
 class LUSolidButton extends StatelessWidget {
   final double width;
   final double height;
+  final EdgeInsetsGeometry margin;
 
   final String title;
   final Color color;
@@ -24,13 +25,15 @@ class LUSolidButton extends StatelessWidget {
       this.height = 56.0,
       this.title,
       this.onPressed,
-      this.color = const Color(0xFFEF8354)});
+      this.color = const Color(0xFFEF8354),
+      this.margin});
 
   @override
   Widget build(BuildContext context) {
     return LUBaseButton(
       width: width,
       height: height,
+      margin: margin,
       child: RaisedButton(
         onPressed: onPressed,
         color: color,
