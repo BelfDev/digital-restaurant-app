@@ -17,6 +17,7 @@ class LUOutletCard extends StatelessWidget {
   final Color starColor;
   final String title;
   final String priceRange;
+  final String imageSrc;
 
   const LUOutletCard(
       {Key key,
@@ -28,7 +29,8 @@ class LUOutletCard extends StatelessWidget {
       this.rating,
       this.starColor = Colors.yellow,
       @required this.title,
-      @required this.priceRange})
+      @required this.priceRange,
+      this.imageSrc})
       : super(key: key);
 
   @override
@@ -40,11 +42,15 @@ class LUOutletCard extends StatelessWidget {
       borderRadius: 12.0,
       onPressed: onPressed,
       children: <Widget>[
-        Ink(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(_imageBorderRadius),
-              color: Colors.blueGrey),
-        ),
+        Positioned.fill(
+            child: ClipRRect(
+          borderRadius: BorderRadius.circular(_imageBorderRadius),
+          child: FadeInImage.assetNetwork(
+            placeholder: 'res/images/restaurant-placeholder.png',
+            image: imageSrc,
+            fit: BoxFit.cover,
+          ),
+        )),
         LUGradientFilter(
             filterColors: filterColors,
             borderRadius: BorderRadius.circular(_imageBorderRadius)),
@@ -59,7 +65,10 @@ class LUOutletCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            LUStarRating(rating: 4.0),
+            LUStarRating(
+              rating: 4.0,
+              margin: EdgeInsets.only(bottom: 2),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[

@@ -194,6 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
       .map((title) => Padding(
             padding: const EdgeInsets.only(top: 16),
             child: LUOutletCard(
+              imageSrc: 'https://picsum.photos/200/300',
               rating: 4,
               title: title,
               priceRange: '\$\$',
