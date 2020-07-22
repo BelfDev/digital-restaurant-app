@@ -21,6 +21,11 @@ abstract class _HomeStyles {
   static const sectionSpacing = const EdgeInsets.only(top: 16.0);
 }
 
+/// The Home screen of the App. This screen has two main states: unchecked
+/// and checked-in. In the first state, the user can find restaurants via
+/// recommendations displayed on horizontal carousels or a list of nearby
+/// restaurants at the bottom. In the checked-in state, the Home screen adapts
+/// itself to display options from the selected restaurant's menu.
 class HomeScreen extends StatefulWidget {
   static const id = 'home_screen';
 
