@@ -5,6 +5,7 @@ import 'package:dr_app/components/cards/featured_card.dart';
 import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:dr_app/components/carousel.dart';
 import 'package:dr_app/components/list.dart';
+import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -17,19 +18,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final dummyCards = [
-    'Restaurant 1',
-    'Restaurant 2',
-    'Restaurant 3',
-    'Restaurant 4',
-    'Restaurant 5',
-    'Restaurant 6',
-    'Restaurant 7',
-    'Restaurant 8',
-    'Restaurant 9',
-    'Restaurant 10'
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -225,61 +213,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       );
-
-//  Widget _buildVerticalSection(String title, List<Widget> items) => Padding(
-//        padding: const EdgeInsets.only(top: 16.0),
-//        child: Column(
-//            mainAxisSize: MainAxisSize.min,
-//            mainAxisAlignment: MainAxisAlignment.center,
-//            crossAxisAlignment: CrossAxisAlignment.start,
-//            children: <Widget>[
-//              Padding(
-//                padding: const EdgeInsets.only(left: 18),
-//                child: Text(
-//                  title,
-//                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-//                ),
-//              ),
-//              ...items,
-//            ]),
-//      );
-
-//  Widget _buildVerticalSection(String title, List<Widget> items) => Padding(
-//        padding: const EdgeInsets.only(top: 16.0),
-//        child: Column(
-//            mainAxisSize: MainAxisSize.min,
-//            mainAxisAlignment: MainAxisAlignment.center,
-//            crossAxisAlignment: CrossAxisAlignment.start,
-//            children: <Widget>[
-//              Padding(
-//                padding: const EdgeInsets.only(left: 18),
-//                child: Text(
-//                  title,
-//                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-//                ),
-//              ),
-//              ListView.separated(
-//                physics: ClampingScrollPhysics(),
-//                shrinkWrap: true,
-//                scrollDirection: Axis.vertical,
-//                itemCount: dummyCards.length,
-//                separatorBuilder: (BuildContext context, int index) => Divider(
-//                  height: 16.0,
-//                  thickness: 0,
-//                  color: Colors.transparent,
-//                ),
-//                itemBuilder: (context, index) {
-//                  return LUOutletCard(
-//                    imageSrc: 'https://picsum.photos/200/300',
-//                    rating: 4,
-//                    title: dummyCards[index],
-//                    priceRange: '\$\$',
-//                    onPressed: () {},
-//                  );
-//                },
-//              ),
-//            ]),
-//      );
 
   Widget _buildVerticalSection(String title, List<Widget> items) => Padding(
         padding: const EdgeInsets.only(top: 16.0),
