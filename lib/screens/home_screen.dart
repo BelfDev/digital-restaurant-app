@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40), topRight: Radius.circular(40)),
-          color: Colors.yellow,
+          color: LUColors.yellow,
         ),
         child: Padding(
           padding: const EdgeInsets.only(bottom: 20),
@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       child: Column(children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(top: 16, bottom: 24),
+          padding: const EdgeInsets.only(top: 16, bottom: 16),
           child: LUSolidButton(
               width: double.infinity,
               margin: EdgeInsets.symmetric(horizontal: 32),
@@ -126,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: "Find a Restaurant",
               onPressed: () {}),
         ),
-        _buildSection("Chef's choice - Glasgow", 300, <Widget>[
+        _buildSection("Chef's choice - Glasgow", 280, <Widget>[
           LUFeaturedCard(
             imageSrc: 'https://picsum.photos/200',
             title: 'Bar Soba',

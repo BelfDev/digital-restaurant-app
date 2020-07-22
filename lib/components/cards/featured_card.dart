@@ -23,7 +23,7 @@ class LUFeaturedCard extends StatelessWidget {
     @required this.title,
     @required this.subtitle,
     @required this.priceRange,
-    this.width = 208,
+    this.width = 202,
     this.height = 232,
     this.onPressed,
     this.imageSrc,
