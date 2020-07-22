@@ -23,7 +23,7 @@ class LUCarousel extends StatelessWidget {
       height: height,
       child: ListView.separated(
         padding: padding,
-        shrinkWrap: true, //just set this property
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemCount: children.length,
         separatorBuilder: (BuildContext context, int index) => VerticalDivider(
