@@ -4,6 +4,7 @@ import 'package:dr_app/components/cards/category_card.dart';
 import 'package:dr_app/components/cards/featured_card.dart';
 import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:dr_app/components/carousel.dart';
+import 'package:dr_app/components/list.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -191,15 +192,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ]));
 
   List<Widget> _getCards() => dummyCards
-      .map((title) => Padding(
-            padding: const EdgeInsets.only(top: 16),
-            child: LUOutletCard(
-              imageSrc: 'https://picsum.photos/200/300',
-              rating: 4,
-              title: title,
-              priceRange: '\$\$',
-              onPressed: () {},
-            ),
+      .map((title) => LUOutletCard(
+            imageSrc: 'https://picsum.photos/200/300',
+            rating: 4,
+            title: title,
+            priceRange: '\$\$',
+            onPressed: () {},
           ))
       .toList();
 
@@ -223,10 +221,65 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: height,
                 padding:
                     EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
-                children: items)
+                items: items)
           ],
         ),
       );
+
+//  Widget _buildVerticalSection(String title, List<Widget> items) => Padding(
+//        padding: const EdgeInsets.only(top: 16.0),
+//        child: Column(
+//            mainAxisSize: MainAxisSize.min,
+//            mainAxisAlignment: MainAxisAlignment.center,
+//            crossAxisAlignment: CrossAxisAlignment.start,
+//            children: <Widget>[
+//              Padding(
+//                padding: const EdgeInsets.only(left: 18),
+//                child: Text(
+//                  title,
+//                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+//                ),
+//              ),
+//              ...items,
+//            ]),
+//      );
+
+//  Widget _buildVerticalSection(String title, List<Widget> items) => Padding(
+//        padding: const EdgeInsets.only(top: 16.0),
+//        child: Column(
+//            mainAxisSize: MainAxisSize.min,
+//            mainAxisAlignment: MainAxisAlignment.center,
+//            crossAxisAlignment: CrossAxisAlignment.start,
+//            children: <Widget>[
+//              Padding(
+//                padding: const EdgeInsets.only(left: 18),
+//                child: Text(
+//                  title,
+//                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+//                ),
+//              ),
+//              ListView.separated(
+//                physics: ClampingScrollPhysics(),
+//                shrinkWrap: true,
+//                scrollDirection: Axis.vertical,
+//                itemCount: dummyCards.length,
+//                separatorBuilder: (BuildContext context, int index) => Divider(
+//                  height: 16.0,
+//                  thickness: 0,
+//                  color: Colors.transparent,
+//                ),
+//                itemBuilder: (context, index) {
+//                  return LUOutletCard(
+//                    imageSrc: 'https://picsum.photos/200/300',
+//                    rating: 4,
+//                    title: dummyCards[index],
+//                    priceRange: '\$\$',
+//                    onPressed: () {},
+//                  );
+//                },
+//              ),
+//            ]),
+//      );
 
   Widget _buildVerticalSection(String title, List<Widget> items) => Padding(
         padding: const EdgeInsets.only(top: 16.0),
@@ -236,13 +289,17 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(left: 18),
+                padding: const EdgeInsets.only(left: 18, bottom: 12),
                 child: Text(
                   title,
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
                 ),
               ),
-              ...items,
+              LUList(
+                nested: true,
+                space: 10,
+                items: _getCards(),
+              )
             ]),
       );
 }
