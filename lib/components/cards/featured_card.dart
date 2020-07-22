@@ -1,8 +1,7 @@
 import 'package:dr_app/components/cards/base_card.dart';
+import 'package:dr_app/components/star_rating.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 import '../gradient_filter.dart';
 
@@ -61,19 +60,7 @@ class LUFeaturedCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SmoothStarRating(
-                filledIconData: FontAwesome.star,
-                defaultIconData: FontAwesome.star_o,
-                halfFilledIconData: FontAwesome.star_half,
-                allowHalfRating: true,
-                starCount: 5,
-                rating: rating ?? 0,
-                size: 16.0,
-                isReadOnly: true,
-                color: starColor,
-                borderColor: starColor,
-                spacing: 2.0),
-            Text(title, style: Styles.cardTitle),
+            LUStarRating(rating: rating ?? 0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
