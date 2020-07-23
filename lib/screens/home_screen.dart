@@ -6,6 +6,7 @@ import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:dr_app/components/carousel.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
+import 'package:dr_app/screens/scanner_screen.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -36,14 +37,21 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        _buildTopBar(),
-        Stack(
-          children: <Widget>[_Header(), _HomeContent()],
-        )
-      ],
+    return SafeArea(
+      bottom: false,
+      child: ListView(
+        children: <Widget>[
+          _buildTopBar(),
+          Stack(
+            children: <Widget>[_Header(), _HomeContent()],
+          )
+        ],
+      ),
     );
+  }
+
+  void _onTopBarButtonPressed() {
+    Navigator.of(context).pushNamed(ScannerScreen.id);
   }
 
   Widget _buildTopBar() => Padding(
@@ -61,9 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
             LUIconButton(
               icon: MaterialCommunityIcons.qrcode_scan,
               iconSize: 32,
-              onPressed: () {
-                print('Pressed On Scanner');
-              },
+              onPressed: _onTopBarButtonPressed,
             )
           ],
         ),

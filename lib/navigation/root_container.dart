@@ -26,10 +26,10 @@ class _RootContainerState extends State<RootContainer>
         final UserScrollNotification userScroll = notification;
         switch (userScroll.direction) {
           case ScrollDirection.forward:
-            _hide.forward();
+//            _hide.forward();
             break;
           case ScrollDirection.reverse:
-            _hide.reverse();
+//            _hide.reverse();
             break;
           case ScrollDirection.idle:
             break;
@@ -67,62 +67,66 @@ class _RootContainerState extends State<RootContainer>
       child: Scaffold(
         backgroundColor: LUColors.smoothWhite,
         extendBody: true,
-        body: SafeArea(
-          bottom: false,
-          child: Stack(
-            fit: StackFit.expand,
-            children: tabs.map((TabData tabData) {
-              final Widget view = FadeTransition(
-                opacity: _faders[tabData.index]
-                    .drive(CurveTween(curve: Curves.fastOutSlowIn)),
-                child: KeyedSubtree(
-                  key: _destinationKeys[tabData.index],
-                  child: NavigatorContainer(
-                    tabData: tabData,
-                    onNavigation: () {
-                      _hide.forward();
-                    },
-                  ),
+        body: Stack(
+          fit: StackFit.expand,
+          children: tabs.map((TabData tabData) {
+            final Widget view = FadeTransition(
+              opacity: _faders[tabData.index]
+                  .drive(CurveTween(curve: Curves.fastOutSlowIn)),
+              child: KeyedSubtree(
+                key: _destinationKeys[tabData.index],
+                child: NavigatorContainer(
+                  tabData: tabData,
+                  onNavigation: () {
+//                    _hide.forward();
+                  },
                 ),
-              );
-              if (tabData.index == _currentIndex) {
-                _faders[tabData.index].forward();
-                return view;
-              } else {
-                _faders[tabData.index].reverse();
-                if (_faders[tabData.index].isAnimating) {
-                  return IgnorePointer(child: view);
-                }
-                return Offstage(child: view);
+              ),
+            );
+            if (tabData.index == _currentIndex) {
+              _faders[tabData.index].forward();
+              return view;
+            } else {
+              _faders[tabData.index].reverse();
+              if (_faders[tabData.index].isAnimating) {
+                return IgnorePointer(child: view);
               }
-            }).toList(),
+              return Offstage(child: view);
+            }
+          }).toList(),
+        ),
+        bottomNavigationBar: SizeTransition(
+          sizeFactor: _hide,
+          axisAlignment: -1.0,
+          child: LUBottomAppBar(
+            height: 64,
+            iconSize: 28,
+            backgroundColor: Colors.white,
+            selectedColor: LUColors.navyBlue,
+            unselectedColor: const Color(0xFFCCCCCC),
+            tabs: tabs,
+            onTabSelected: (int index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
           ),
         ),
-        bottomNavigationBar: LUBottomAppBar(
-          height: 64,
-          iconSize: 28,
-          backgroundColor: Colors.white,
-          selectedColor: const Color(0xFF4F5D75),
-          unselectedColor: const Color(0xFFCCCCCC),
-          tabs: tabs,
-          onTabSelected: (int index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              // Present cart screen
-            });
-          },
-          tooltip: 'Tab',
-          child: Icon(Icons.receipt),
-          backgroundColor: Color(0xFFEF8354),
-          elevation: 4.0,
-        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Visibility(
+          visible: true,
+          child: FloatingActionButton(
+            onPressed: () {
+              setState(() {
+                // Present cart screen
+              });
+            },
+            tooltip: 'Tab',
+            child: Icon(Icons.receipt),
+            backgroundColor: Color(0xFFEF8354),
+            elevation: 4.0,
+          ),
+        ),
       ),
     );
   }

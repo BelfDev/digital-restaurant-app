@@ -18,3 +18,5 @@ final Map<String, WidgetBuilder> routes = {
   OutletDetailScreen.id: (context) => OutletDetailScreen(),
   CategoryDetailScreen.id: (context) => CategoryDetailScreen(),
 };
+
+final Set<String> fullScreenRoutes = {ScannerScreen.id};

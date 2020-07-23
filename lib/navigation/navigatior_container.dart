@@ -26,6 +26,7 @@ class _NavigatorContainerState extends State<NavigatorContainer> {
       onGenerateRoute: (settings) {
         return MaterialPageRoute(
           settings: settings,
+          fullscreenDialog: fullScreenRoutes.contains(settings.name),
           builder: (context) {
             final rootId =
                 settings.name == '/' ? widget.tabData.rootId : settings.name;
