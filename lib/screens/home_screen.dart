@@ -37,13 +37,16 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        _buildTopBar(),
-        Stack(
-          children: <Widget>[_Header(), _HomeContent()],
-        )
-      ],
+    return SafeArea(
+      bottom: false,
+      child: ListView(
+        children: <Widget>[
+          _buildTopBar(),
+          Stack(
+            children: <Widget>[_Header(), _HomeContent()],
+          )
+        ],
+      ),
     );
   }
 

@@ -67,36 +67,33 @@ class _RootContainerState extends State<RootContainer>
       child: Scaffold(
         backgroundColor: LUColors.smoothWhite,
         extendBody: true,
-        body: SafeArea(
-          bottom: false,
-          child: Stack(
-            fit: StackFit.expand,
-            children: tabs.map((TabData tabData) {
-              final Widget view = FadeTransition(
-                opacity: _faders[tabData.index]
-                    .drive(CurveTween(curve: Curves.fastOutSlowIn)),
-                child: KeyedSubtree(
-                  key: _destinationKeys[tabData.index],
-                  child: NavigatorContainer(
-                    tabData: tabData,
-                    onNavigation: () {
-                      _hide.forward();
-                    },
-                  ),
+        body: Stack(
+          fit: StackFit.expand,
+          children: tabs.map((TabData tabData) {
+            final Widget view = FadeTransition(
+              opacity: _faders[tabData.index]
+                  .drive(CurveTween(curve: Curves.fastOutSlowIn)),
+              child: KeyedSubtree(
+                key: _destinationKeys[tabData.index],
+                child: NavigatorContainer(
+                  tabData: tabData,
+                  onNavigation: () {
+                    _hide.forward();
+                  },
                 ),
-              );
-              if (tabData.index == _currentIndex) {
-                _faders[tabData.index].forward();
-                return view;
-              } else {
-                _faders[tabData.index].reverse();
-                if (_faders[tabData.index].isAnimating) {
-                  return IgnorePointer(child: view);
-                }
-                return Offstage(child: view);
+              ),
+            );
+            if (tabData.index == _currentIndex) {
+              _faders[tabData.index].forward();
+              return view;
+            } else {
+              _faders[tabData.index].reverse();
+              if (_faders[tabData.index].isAnimating) {
+                return IgnorePointer(child: view);
               }
-            }).toList(),
-          ),
+              return Offstage(child: view);
+            }
+          }).toList(),
         ),
         bottomNavigationBar: LUBottomAppBar(
           height: 64,

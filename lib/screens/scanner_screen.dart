@@ -17,7 +17,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey,
+      color: Colors.black,
       child: Stack(
         children: <Widget>[
           QRView(
@@ -28,17 +28,19 @@ class _ScannerScreenState extends State<ScannerScreen> {
                 borderLength: 40,
                 borderWidth: 12,
                 cutOutSize: 240,
-                cutOutBottomOffset: 140),
+                cutOutBottomOffset: 100),
             onQRViewCreated: _onQRViewCreated,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0, left: 16.0),
-            child: LUIconButton(
-                icon: Icons.close,
-                backgroundColor: LUColors.smoothWhite,
-                iconSize: 32,
-                tint: LUColors.navyBlue,
-                onPressed: () => Navigator.of(context).pop()),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0, left: 16.0),
+              child: LUIconButton(
+                  icon: Icons.close,
+                  backgroundColor: LUColors.smoothWhite,
+                  iconSize: 32,
+                  tint: LUColors.navyBlue,
+                  onPressed: () => Navigator.of(context).pop()),
+            ),
           ),
         ],
       ),
