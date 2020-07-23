@@ -33,7 +33,10 @@ dependencies:
   smooth_star_rating: 1.1.1
 
   # Custom Capabilities
-  qr_flutter: ^3.2.0
+  qr_code_scanner:
+    git:
+      url: https://github.com/BelfDev/qr_code_scanner.git
+      ref: master
 
 dev_dependencies:
   flutter_test:
