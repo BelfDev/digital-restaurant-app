@@ -26,10 +26,10 @@ class _RootContainerState extends State<RootContainer>
         final UserScrollNotification userScroll = notification;
         switch (userScroll.direction) {
           case ScrollDirection.forward:
-            _hide.forward();
+//            _hide.forward();
             break;
           case ScrollDirection.reverse:
-            _hide.reverse();
+//            _hide.reverse();
             break;
           case ScrollDirection.idle:
             break;
@@ -78,7 +78,7 @@ class _RootContainerState extends State<RootContainer>
                 child: NavigatorContainer(
                   tabData: tabData,
                   onNavigation: () {
-                    _hide.forward();
+//                    _hide.forward();
                   },
                 ),
               ),
@@ -95,31 +95,38 @@ class _RootContainerState extends State<RootContainer>
             }
           }).toList(),
         ),
-        bottomNavigationBar: LUBottomAppBar(
-          height: 64,
-          iconSize: 28,
-          backgroundColor: Colors.white,
-          selectedColor: LUColors.navyBlue,
-          unselectedColor: const Color(0xFFCCCCCC),
-          tabs: tabs,
-          onTabSelected: (int index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              // Present cart screen
-            });
-          },
-          tooltip: 'Tab',
-          child: Icon(Icons.receipt),
-          backgroundColor: Color(0xFFEF8354),
-          elevation: 4.0,
+        bottomNavigationBar: SizeTransition(
+          sizeFactor: _hide,
+          axisAlignment: -1.0,
+          child: LUBottomAppBar(
+            height: 64,
+            iconSize: 28,
+            backgroundColor: Colors.white,
+            selectedColor: LUColors.navyBlue,
+            unselectedColor: const Color(0xFFCCCCCC),
+            tabs: tabs,
+            onTabSelected: (int index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+          ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Visibility(
+          visible: true,
+          child: FloatingActionButton(
+            onPressed: () {
+              setState(() {
+                // Present cart screen
+              });
+            },
+            tooltip: 'Tab',
+            child: Icon(Icons.receipt),
+            backgroundColor: Color(0xFFEF8354),
+            elevation: 4.0,
+          ),
+        ),
       ),
     );
   }
