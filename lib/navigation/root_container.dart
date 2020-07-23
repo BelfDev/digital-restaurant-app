@@ -102,7 +102,7 @@ class _RootContainerState extends State<RootContainer>
           height: 64,
           iconSize: 28,
           backgroundColor: Colors.white,
-          selectedColor: const Color(0xFF4F5D75),
+          selectedColor: LUColors.navyBlue,
           unselectedColor: const Color(0xFFCCCCCC),
           tabs: tabs,
           onTabSelected: (int index) {
