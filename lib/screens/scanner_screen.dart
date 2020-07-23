@@ -5,14 +5,8 @@ class ScannerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Center(
-            child: Text(
-          "Scanner Screen",
-          style: TextStyle(color: Colors.white, fontSize: 40),
-        )),
-      ),
+    return Container(
+      child: Center(child: Text('Scanner Screen')),
     );
   }
 }
