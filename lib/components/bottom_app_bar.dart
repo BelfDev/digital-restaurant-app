@@ -1,3 +1,4 @@
+import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/navigation/tab_data.dart';
 import 'package:flutter/material.dart';
 
@@ -20,13 +21,13 @@ class LUBottomAppBar extends StatefulWidget {
       {@required this.tabs,
       this.centerItemText,
       this.height = 56.0,
-      this.iconSize = 24.0,
-      this.backgroundColor = Colors.white,
+      this.iconSize,
+      this.backgroundColor,
       this.unselectedColor,
       this.selectedColor,
       this.notchedShape,
       this.onTabSelected,
-      this.elevation = 24.0,
+      this.elevation,
       this.notchMargin = 8.0});
 
   @override
@@ -51,10 +52,12 @@ class _LUBottomAppBarState extends State<LUBottomAppBar> {
     items.insert(items.length >> 1, _buildMiddleTabItem());
 
     return BottomAppBar(
-      color: widget.backgroundColor,
-      shape: CircularNotchedRectangle(),
+      color:
+          widget.backgroundColor ?? LUTheme.of(context).bottomAppBarTheme.color,
+      shape: LUTheme.of(context).bottomAppBarTheme.shape,
       notchMargin: widget.notchMargin,
-      elevation: widget.elevation,
+      elevation:
+          widget.elevation ?? LUTheme.of(context).bottomAppBarTheme.elevation,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -71,7 +74,7 @@ class _LUBottomAppBarState extends State<LUBottomAppBar> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: widget.iconSize),
+            SizedBox(height: widget.iconSize ?? LUTheme.bottomBarIconSize),
             Text(
               widget.centerItemText ?? '',
               style: TextStyle(color: widget.unselectedColor),
@@ -87,8 +90,8 @@ class _LUBottomAppBarState extends State<LUBottomAppBar> {
     ValueChanged<int> onPressed,
   }) {
     Color color = _selectedIndex == tab.index
-        ? widget.selectedColor
-        : widget.unselectedColor;
+        ? (widget.selectedColor ?? LUTheme.of(context).primaryColor)
+        : (widget.unselectedColor ?? LUTheme.of(context).unselectedWidgetColor);
     return Expanded(
       child: SizedBox(
         height: widget.height,
@@ -101,7 +104,9 @@ class _LUBottomAppBarState extends State<LUBottomAppBar> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Icon(tab.icon, color: color, size: widget.iconSize),
+                Icon(tab.icon,
+                    color: color,
+                    size: widget.iconSize ?? LUTheme.bottomBarIconSize),
                 SizedBox(height: 2),
                 Text(
                   tab.title,
