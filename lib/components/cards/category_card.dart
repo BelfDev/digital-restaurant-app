@@ -1,5 +1,5 @@
 import 'package:dr_app/components/cards/base_card.dart';
-import 'package:dr_app/utils/styles.dart';
+import 'package:dr_app/configs/theme.dart';
 import 'package:flutter/material.dart';
 
 /// A material [Card] used to display information about a cuisine category.
@@ -37,10 +37,11 @@ class LUCategoryCard extends StatelessWidget {
           children: <Widget>[
             Text(
               title,
-              style: Styles.categoryCardTitle,
+              style: LUTheme.of(context).textTheme.bodyText2,
             ),
             ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius:
+                    BorderRadius.circular(LUTheme.cardBorderRadius - 2),
                 child: FadeInImage.assetNetwork(
                   width: width / 1.5,
                   height: height / 1.5,

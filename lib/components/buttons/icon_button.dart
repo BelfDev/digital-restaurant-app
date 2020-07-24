@@ -1,3 +1,4 @@
+import 'package:dr_app/configs/theme.dart';
 import 'package:flutter/material.dart';
 
 import 'base_button.dart';
@@ -17,9 +18,9 @@ class LUIconButton extends StatelessWidget {
   LUIconButton(
       {@required this.icon,
       @required this.onPressed,
-      this.tint = Colors.white,
-      this.backgroundColor = const Color(0xFF4F5D75),
-      this.iconSize = 24,
+      this.tint,
+      this.backgroundColor,
+      this.iconSize,
       this.padding});
 
   @override
@@ -29,18 +30,17 @@ class LUIconButton extends StatelessWidget {
       height: 56,
       child: RawMaterialButton(
           onPressed: onPressed,
-          fillColor: backgroundColor,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+          fillColor: backgroundColor ?? LUTheme.of(context).primaryColor,
+          shape: LUTheme.of(context).buttonTheme.shape,
           child: padding != null
-              ? Padding(padding: padding, child: _buildIcon())
-              : _buildIcon()),
+              ? Padding(padding: padding, child: _buildIcon(context))
+              : _buildIcon(context)),
     );
   }
 
-  _buildIcon() => Icon(
+  _buildIcon(context) => Icon(
         icon,
-        color: tint,
-        size: iconSize,
+        color: tint ?? LUTheme.of(context).primaryIconTheme.color,
+        size: iconSize ?? LUTheme.of(context).primaryIconTheme.size,
       );
 }

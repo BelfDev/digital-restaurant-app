@@ -33,7 +33,7 @@ class LUStarRating extends StatelessWidget {
           size: 16.0,
           isReadOnly: true,
           color: starColor,
-          borderColor: starColor,
+          borderColor: borderColor,
           spacing: 2.0),
     );
   }

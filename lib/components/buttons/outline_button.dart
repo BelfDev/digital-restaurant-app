@@ -1,3 +1,4 @@
+import 'package:dr_app/configs/theme.dart';
 import 'package:flutter/material.dart';
 
 import 'base_button.dart';
@@ -22,10 +23,11 @@ class LUOutlineButton extends StatelessWidget {
       this.height = 56.0,
       this.title,
       this.onPressed,
-      this.borderColor = const Color(0xFF4F5D75)});
+      this.borderColor});
 
   @override
   Widget build(BuildContext context) {
+    final borderColor = this.borderColor ?? LUTheme.of(context).primaryColor;
     return LUBaseButton(
       width: width,
       height: height,
@@ -34,11 +36,12 @@ class LUOutlineButton extends StatelessWidget {
         textColor: borderColor,
         highlightedBorderColor: borderColor,
         borderSide: BorderSide(width: 2, color: borderColor),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
         child: Text(
           title.toUpperCase(),
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+          style: LUTheme.of(context)
+              .textTheme
+              .button
+              .copyWith(color: LUTheme.of(context).primaryColor),
         ),
       ),
     );

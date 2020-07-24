@@ -1,5 +1,6 @@
 import 'package:dr_app/components/bottom_app_bar.dart';
-import 'package:dr_app/navigation/navigatior_container.dart';
+import 'package:dr_app/configs/theme.dart';
+import 'package:dr_app/navigation/navigator_container.dart';
 import 'package:dr_app/navigation/tab_data.dart';
 import 'package:dr_app/navigation/tabs.dart';
 import 'package:dr_app/utils/colors.dart';
@@ -26,10 +27,10 @@ class _RootContainerState extends State<RootContainer>
         final UserScrollNotification userScroll = notification;
         switch (userScroll.direction) {
           case ScrollDirection.forward:
-//            _hide.forward();
+            _hide.forward();
             break;
           case ScrollDirection.reverse:
-//            _hide.reverse();
+            _hide.reverse();
             break;
           case ScrollDirection.idle:
             break;
@@ -78,7 +79,7 @@ class _RootContainerState extends State<RootContainer>
                 child: NavigatorContainer(
                   tabData: tabData,
                   onNavigation: () {
-//                    _hide.forward();
+                    _hide.forward();
                   },
                 ),
               ),
@@ -101,9 +102,6 @@ class _RootContainerState extends State<RootContainer>
           child: LUBottomAppBar(
             height: 64,
             iconSize: 28,
-            backgroundColor: Colors.white,
-            selectedColor: LUColors.navyBlue,
-            unselectedColor: const Color(0xFFCCCCCC),
             tabs: tabs,
             onTabSelected: (int index) {
               setState(() {
@@ -122,9 +120,10 @@ class _RootContainerState extends State<RootContainer>
               });
             },
             tooltip: 'Tab',
-            child: Icon(Icons.receipt),
-            backgroundColor: Color(0xFFEF8354),
-            elevation: 4.0,
+            child: Icon(
+              Icons.receipt,
+              color: LUTheme.of(context).primaryIconTheme.color,
+            ),
           ),
         ),
       ),
