@@ -3,9 +3,10 @@ import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class LUTheme {
-  static const double buttonBorderRadius = 12;
-  static const double primaryIconSize = 32;
-  static const double bottomBarIconSize = 24;
+  static const double buttonBorderRadius = 12.0;
+  static const double primaryIconSize = 32.0;
+  static const double bottomBarIconSize = 24.0;
+  static const double cardBorderRadius = 12.0;
 
   static ThemeData of(context) {
     final baseTheme = Theme.of(context);
@@ -31,6 +32,12 @@ class LUTheme {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(buttonBorderRadius)),
         ),
+        cardTheme: baseTheme.cardTheme.copyWith(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+              Radius.circular(cardBorderRadius),
+            )),
+            elevation: 4.0),
         textTheme: baseTheme.textTheme.copyWith(
             headline2: Styles.sloganTitleEmphasis,
             headline3: Styles.sloganTitle,

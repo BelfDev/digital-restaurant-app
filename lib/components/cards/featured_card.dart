@@ -1,5 +1,6 @@
 import 'package:dr_app/components/cards/base_card.dart';
 import 'package:dr_app/components/star_rating.dart';
+import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +30,7 @@ class LUFeaturedCard extends StatelessWidget {
     this.height = 232,
     this.onPressed,
     this.imageSrc,
-    this.borderRadius = 12.0,
+    this.borderRadius,
     this.filterColors,
     this.padding = 8.0,
     this.rating,
@@ -41,7 +42,7 @@ class LUFeaturedCard extends StatelessWidget {
     return LUBaseCard(
       width: width,
       height: height,
-      borderRadius: borderRadius,
+      borderRadius: borderRadius ?? LUTheme.cardBorderRadius,
       onPressed: onPressed,
       children: <Widget>[
         Positioned.fill(

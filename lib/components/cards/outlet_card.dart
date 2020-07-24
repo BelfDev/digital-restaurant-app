@@ -1,4 +1,5 @@
 import 'package:dr_app/components/star_rating.dart';
+import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +9,6 @@ import 'base_card.dart';
 /// A material [Card] used to display information about an [Outlet].
 ///
 class LUOutletCard extends StatelessWidget {
-  static const _imageBorderRadius = 8.0;
-
   final double width;
   final double height;
   final Function onPressed;
@@ -41,12 +40,12 @@ class LUOutletCard extends StatelessWidget {
       height: height,
       margin: margin,
       padding: EdgeInsets.all(8.0),
-      borderRadius: 12.0,
+      borderRadius: LUTheme.cardBorderRadius,
       onPressed: onPressed,
       children: <Widget>[
         Positioned.fill(
             child: ClipRRect(
-          borderRadius: BorderRadius.circular(_imageBorderRadius),
+          borderRadius: BorderRadius.circular(LUTheme.cardBorderRadius - 4),
           child: FadeInImage.assetNetwork(
             placeholder: 'res/images/restaurant-placeholder.png',
             image: imageSrc,
@@ -55,7 +54,7 @@ class LUOutletCard extends StatelessWidget {
         )),
         LUGradientFilter(
             filterColors: filterColors,
-            borderRadius: BorderRadius.circular(_imageBorderRadius)),
+            borderRadius: BorderRadius.circular(LUTheme.cardBorderRadius - 4)),
         _buildCardContent()
       ],
     );

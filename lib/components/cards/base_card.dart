@@ -1,3 +1,4 @@
+import 'package:dr_app/configs/theme.dart';
 import 'package:flutter/material.dart';
 
 /// Customized [Card] card used for Lutick card composition
@@ -30,13 +31,10 @@ class LUBaseCard extends StatelessWidget {
         width: width,
         height: height,
         child: Card(
-          elevation: 4,
+          elevation: LUTheme.of(context).cardTheme.elevation,
           margin: margin,
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-            Radius.circular(borderRadius),
-          )),
+          shape: LUTheme.of(context).cardTheme.shape,
           child: Padding(
             padding: padding,
             child: Stack(

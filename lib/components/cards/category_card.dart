@@ -1,4 +1,5 @@
 import 'package:dr_app/components/cards/base_card.dart';
+import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +41,8 @@ class LUCategoryCard extends StatelessWidget {
               style: Styles.categoryCardTitle,
             ),
             ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius:
+                    BorderRadius.circular(LUTheme.cardBorderRadius - 2),
                 child: FadeInImage.assetNetwork(
                   width: width / 1.5,
                   height: height / 1.5,
