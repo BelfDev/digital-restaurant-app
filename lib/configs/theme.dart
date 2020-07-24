@@ -1,4 +1,5 @@
 import 'package:dr_app/utils/colors.dart';
+import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class LUTheme {
@@ -29,6 +30,10 @@ class LUTheme {
           buttonColor: LUColors.orange,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(buttonBorderRadius)),
-        ));
+        ),
+        textTheme: baseTheme.textTheme.copyWith(
+            headline2: Styles.sloganTitleEmphasis,
+            headline3: Styles.sloganTitle,
+            button: Styles.button));
   }
 }

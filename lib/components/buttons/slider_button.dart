@@ -41,8 +41,7 @@ class LUSliderButton extends StatelessWidget {
       action: onSlided,
       label: Text(
         title?.toUpperCase(),
-        style: TextStyle(
-            fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600),
+        style: LUTheme.of(context).textTheme.button,
       ),
       baseColor: labelColor,
       highlightedColor: shimmerColor,

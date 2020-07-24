@@ -1,3 +1,4 @@
+import 'package:dr_app/configs/theme.dart';
 import 'package:flutter/material.dart';
 
 import 'base_button.dart';
@@ -31,18 +32,15 @@ class LUSolidButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LUBaseButton(
-      width: width,
-      height: height,
-      margin: margin,
-      child: RaisedButton(
-        onPressed: onPressed,
-        color: color,
-        child: Text(
-          title.toUpperCase(),
-          style: TextStyle(
-              fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600),
-        ),
-      ),
-    );
+        width: width,
+        height: height,
+        margin: margin,
+        child: RaisedButton(
+            onPressed: onPressed,
+            color: color,
+            child: Text(
+              title.toUpperCase(),
+              style: LUTheme.of(context).textTheme.button,
+            )));
   }
 }

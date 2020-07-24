@@ -14,4 +14,17 @@ abstract class Styles {
 
   static const categoryCardTitle = TextStyle(
       color: LUColors.darkBlue, fontSize: 16, fontWeight: FontWeight.w200);
+
+  static const sloganTitle = TextStyle(
+      color: LUColors.navyBlue, fontSize: 28, height: 0.5, fontFamily: 'Lora');
+
+  static const sloganTitleEmphasis = TextStyle(
+      color: LUColors.navyBlue,
+      fontSize: 36,
+      height: 1.0,
+      fontFamily: 'Lora',
+      fontWeight: FontWeight.w700);
+
+  static const button =
+      TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600);
 }

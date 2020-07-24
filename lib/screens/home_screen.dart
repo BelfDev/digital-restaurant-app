@@ -5,6 +5,7 @@ import 'package:dr_app/components/cards/featured_card.dart';
 import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:dr_app/components/carousel.dart';
 import 'package:dr_app/components/list.dart';
+import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
 import 'package:dr_app/utils/colors.dart';
@@ -116,18 +117,10 @@ class _Header extends StatelessWidget {
                       text: TextSpan(children: <TextSpan>[
                         TextSpan(
                             text: 'Time to get\nsome ',
-                            style: TextStyle(
-                                color: LUColors.navyBlue,
-                                fontSize: 28,
-                                height: 0.5,
-                                fontFamily: 'Lora')),
+                            style: LUTheme.of(context).textTheme.headline3),
                         TextSpan(
                             text: 'food',
-                            style: TextStyle(
-                                color: LUColors.navyBlue,
-                                fontSize: 36,
-                                fontFamily: 'Lora',
-                                fontWeight: FontWeight.w700))
+                            style: LUTheme.of(context).textTheme.headline2)
                       ]),
                     ),
                   )

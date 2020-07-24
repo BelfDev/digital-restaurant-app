@@ -38,7 +38,10 @@ class LUOutlineButton extends StatelessWidget {
         borderSide: BorderSide(width: 2, color: borderColor),
         child: Text(
           title.toUpperCase(),
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+          style: LUTheme.of(context)
+              .textTheme
+              .button
+              .copyWith(color: LUTheme.of(context).primaryColor),
         ),
       ),
     );
