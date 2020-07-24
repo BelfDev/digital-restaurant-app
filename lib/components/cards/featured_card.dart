@@ -16,7 +16,6 @@ class LUFeaturedCard extends StatelessWidget {
   final List<Color> filterColors;
   final double padding;
   final double rating;
-  final Color starColor;
   final String title;
   final String subtitle;
   final String priceRange;
@@ -33,7 +32,6 @@ class LUFeaturedCard extends StatelessWidget {
     this.filterColors,
     this.padding = 8.0,
     this.rating,
-    this.starColor = Colors.yellow,
   });
 
   @override

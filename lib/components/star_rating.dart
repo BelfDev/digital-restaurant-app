@@ -1,3 +1,4 @@
+import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -21,6 +22,7 @@ class LUStarRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = starColor ?? LUTheme.of(context).highlightColor;
     return Padding(
       padding: margin ?? EdgeInsets.zero,
       child: SmoothStarRating(
@@ -32,8 +34,8 @@ class LUStarRating extends StatelessWidget {
           rating: rating ?? 0,
           size: 16.0,
           isReadOnly: true,
-          color: starColor,
-          borderColor: starColor,
+          color: color,
+          borderColor: color,
           spacing: 2.0),
     );
   }
