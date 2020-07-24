@@ -59,7 +59,8 @@ class LUFeaturedCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            LUStarRating(rating: rating ?? 0),
+            LUStarRating(
+                rating: rating ?? 0, margin: EdgeInsets.only(bottom: 2)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[

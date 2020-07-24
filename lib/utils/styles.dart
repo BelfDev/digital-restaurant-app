@@ -30,4 +30,7 @@ abstract class Styles {
   ///  Button Styles
   static const button =
       TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600);
+
+  /// Text Styles
+  static const section = TextStyle(fontSize: 17, fontWeight: FontWeight.w600);
 }

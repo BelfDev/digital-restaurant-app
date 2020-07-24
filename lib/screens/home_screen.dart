@@ -9,6 +9,7 @@ import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
 import 'package:dr_app/utils/colors.dart';
+import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
@@ -217,7 +218,7 @@ class _HorizontalHomeSection extends StatelessWidget {
             padding: const EdgeInsets.only(left: 18),
             child: Text(
               title,
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+              style: Styles.section,
             ),
           ),
           LUCarousel(
@@ -250,7 +251,7 @@ class _VerticalHomeSection extends StatelessWidget {
               padding: const EdgeInsets.only(left: 18, bottom: 12),
               child: Text(
                 title,
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                style: Styles.section,
               ),
             ),
             LUList(
