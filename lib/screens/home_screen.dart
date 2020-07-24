@@ -185,7 +185,6 @@ class _HomeContent extends StatelessWidget {
             child: LUSolidButton(
                 width: double.infinity,
                 margin: EdgeInsets.symmetric(horizontal: 32),
-                color: LUColors.navyBlue,
                 title: "Find a Restaurant",
                 onPressed: () {}),
           ),

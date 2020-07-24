@@ -25,7 +25,7 @@ class LUSolidButton extends StatelessWidget {
       this.height = 56.0,
       this.title,
       this.onPressed,
-      this.color = const Color(0xFFEF8354),
+      this.color,
       this.margin});
 
   @override

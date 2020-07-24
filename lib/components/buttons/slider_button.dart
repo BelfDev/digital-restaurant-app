@@ -1,3 +1,5 @@
+import 'package:dr_app/configs/theme.dart';
+import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:slider_button/slider_button.dart';
 
@@ -9,7 +11,6 @@ class LUSliderButton extends StatelessWidget {
   final double width;
   final double height;
   final String title;
-  final Color color;
   final Function onSlided;
 
   final Color trackColor;
@@ -22,12 +23,11 @@ class LUSliderButton extends StatelessWidget {
     this.width = 280.0,
     this.height = 72.0,
     this.title,
-    this.color,
     @required this.onSlided,
-    this.trackColor = const Color(0xFFE3E3E3),
-    this.labelColor = const Color(0xCC969696),
-    this.shimmerColor = const Color(0xFFFAFAFA),
-    this.buttonColor = const Color(0xFFEF8354),
+    this.trackColor = LUColors.smoothGray,
+    this.labelColor = LUColors.gray,
+    this.shimmerColor = LUColors.smoothWhite,
+    this.buttonColor,
     this.semanticTitle,
   });
 
@@ -46,7 +46,7 @@ class LUSliderButton extends StatelessWidget {
       ),
       baseColor: labelColor,
       highlightedColor: shimmerColor,
-      buttonColor: buttonColor,
+      buttonColor: buttonColor ?? LUTheme.of(context).buttonColor,
       vibrationFlag: false,
       icon: Center(
           child: Icon(
