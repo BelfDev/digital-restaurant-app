@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: getAppTheme(),
+      theme: LUTheme.of(context),
       home: RootContainer(),
     );
   }
