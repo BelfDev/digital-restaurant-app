@@ -9,7 +9,6 @@ class LUBaseCard extends StatelessWidget {
   final double height;
   final EdgeInsetsGeometry margin;
   final EdgeInsetsGeometry padding;
-  final double borderRadius;
   final Function onPressed;
   final AlignmentGeometry childrenAlignment;
 
@@ -18,7 +17,6 @@ class LUBaseCard extends StatelessWidget {
       @required this.children,
       this.width,
       this.height,
-      this.borderRadius = 12.0,
       this.onPressed,
       this.childrenAlignment = AlignmentDirectional.topStart,
       this.margin = const EdgeInsets.all(4.0),

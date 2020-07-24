@@ -1,6 +1,5 @@
 import 'package:dr_app/components/star_rating.dart';
 import 'package:dr_app/configs/theme.dart';
-import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 import '../gradient_filter.dart';
@@ -40,7 +39,6 @@ class LUOutletCard extends StatelessWidget {
       height: height,
       margin: margin,
       padding: EdgeInsets.all(8.0),
-      borderRadius: LUTheme.cardBorderRadius,
       onPressed: onPressed,
       children: <Widget>[
         Positioned.fill(
@@ -55,12 +53,12 @@ class LUOutletCard extends StatelessWidget {
         LUGradientFilter(
             filterColors: filterColors,
             borderRadius: BorderRadius.circular(LUTheme.cardBorderRadius - 4)),
-        _buildCardContent()
+        _buildCardContent(context)
       ],
     );
   }
 
-  Container _buildCardContent() => Container(
+  Container _buildCardContent(context) => Container(
         margin: EdgeInsets.all(8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -73,10 +71,10 @@ class LUOutletCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(title, style: Styles.cardTitle),
+                Text(title, style: LUTheme.of(context).textTheme.headline5),
                 Text(
                   priceRange,
-                  style: Styles.cardPriceRange,
+                  style: LUTheme.of(context).textTheme.bodyText1,
                 )
               ],
             )

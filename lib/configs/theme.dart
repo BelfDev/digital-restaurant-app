@@ -39,8 +39,13 @@ class LUTheme {
             )),
             elevation: 4.0),
         textTheme: baseTheme.textTheme.copyWith(
-            headline2: Styles.sloganTitleEmphasis,
-            headline3: Styles.sloganTitle,
-            button: Styles.button));
+          headline2: Styles.sloganTitleEmphasis,
+          headline3: Styles.sloganTitle,
+          button: Styles.button,
+          headline5: Styles.cardTitle,
+          headline6: Styles.cardSubtitle,
+          bodyText1: Styles.cardPriceRange,
+          bodyText2: Styles.categoryCardTitle,
+        ));
   }
 }
