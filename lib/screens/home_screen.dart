@@ -13,6 +13,8 @@ import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
+import 'cuisine_screen.dart';
+
 abstract class _HomeStyles {
   static const topBarPadding =
       const EdgeInsets.only(left: 16, right: 16, top: 8);
@@ -37,6 +39,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void _onTopBarButtonPressed() {
+    Navigator.of(context).pushNamed(ScannerScreen.id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -50,10 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
-  }
-
-  void _onTopBarButtonPressed() {
-    Navigator.of(context).pushNamed(ScannerScreen.id);
   }
 
   Widget _buildTopBar() => Padding(
@@ -136,11 +138,13 @@ class _Header extends StatelessWidget {
 }
 
 class _HomeContent extends StatelessWidget {
-  List<Widget> _getCategoryCards() => dummyCuisines
+  List<Widget> _getCategoryCards(context) => dummyCuisines
       .map((cuisine) => LUCategoryCard(
             title: cuisine.name,
             imageSrc: cuisine.imgSrc,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(CuisineScreen.id);
+            },
           ))
       .toList();
 
@@ -189,7 +193,7 @@ class _HomeContent extends StatelessWidget {
           _HorizontalHomeSection(
             title: 'Cuisines',
             height: _HomeStyles.cuisineSectionHeight,
-            items: _getCategoryCards(),
+            items: _getCategoryCards(context),
           ),
           _VerticalHomeSection(
               title: 'Nearby Restaurants', items: _getOutletCards())
