@@ -13,7 +13,6 @@ class LUTheme {
     return baseTheme.copyWith(
         primaryColor: LUColors.navyBlue,
         accentColor: LUColors.orange,
-        highlightColor: LUColors.yellow,
         unselectedWidgetColor: LUColors.smoothGray,
         bottomAppBarTheme: BottomAppBarTheme(
             color: Colors.white,
