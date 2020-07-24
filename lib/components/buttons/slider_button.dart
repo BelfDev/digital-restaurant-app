@@ -51,8 +51,8 @@ class LUSliderButton extends StatelessWidget {
       icon: Center(
           child: Icon(
         Icons.store,
-        color: Colors.white,
-        size: 32,
+        color: LUTheme.of(context).primaryIconTheme.color,
+        size: LUTheme.of(context).primaryIconTheme.size,
         semanticLabel: semanticTitle,
       )),
       dismissible: false,

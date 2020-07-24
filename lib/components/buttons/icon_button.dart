@@ -18,9 +18,9 @@ class LUIconButton extends StatelessWidget {
   LUIconButton(
       {@required this.icon,
       @required this.onPressed,
-      this.tint = Colors.white,
+      this.tint,
       this.backgroundColor,
-      this.iconSize = 24,
+      this.iconSize,
       this.padding});
 
   @override
@@ -33,14 +33,14 @@ class LUIconButton extends StatelessWidget {
           fillColor: backgroundColor ?? LUTheme.of(context).primaryColor,
           shape: LUTheme.of(context).buttonTheme.shape,
           child: padding != null
-              ? Padding(padding: padding, child: _buildIcon())
-              : _buildIcon()),
+              ? Padding(padding: padding, child: _buildIcon(context))
+              : _buildIcon(context)),
     );
   }
 
-  _buildIcon() => Icon(
+  _buildIcon(context) => Icon(
         icon,
-        color: tint,
-        size: iconSize,
+        color: tint ?? LUTheme.of(context).primaryIconTheme.color,
+        size: iconSize ?? LUTheme.of(context).primaryIconTheme.size,
       );
 }
