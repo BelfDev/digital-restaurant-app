@@ -1,4 +1,8 @@
 import 'package:dr_app/components/buttons/icon_button.dart';
+import 'package:dr_app/components/cards/outlet_card.dart';
+import 'package:dr_app/components/list.dart';
+import 'package:dr_app/configs/theme.dart';
+import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/screen_arguments.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +11,8 @@ abstract class _CuisineScreenStyles {
   static const topBarPadding =
       const EdgeInsets.only(left: 16, right: 16, top: 8);
   static const double headerHeight = 200;
+  static const backgroundBorderRadius = const BorderRadius.only(
+      topLeft: Radius.circular(40), topRight: Radius.circular(40));
 }
 
 class CuisineScreen extends StatefulWidget {
@@ -21,6 +27,16 @@ class _CuisineScreenState extends State<CuisineScreen> {
     Navigator.of(context).pop();
   }
 
+  List<Widget> _getOutletCards() => dummyOutlets
+      .map((outlet) => LUOutletCard(
+            imageSrc: outlet.imgSrc,
+            rating: outlet.rating,
+            title: outlet.name,
+            priceRange: outlet.priceRange,
+            onPressed: () {},
+          ))
+      .toList();
+
   @override
   Widget build(BuildContext context) {
     final ScreenArguments args = ModalRoute.of(context).settings.arguments;
@@ -28,7 +44,12 @@ class _CuisineScreenState extends State<CuisineScreen> {
       padding: EdgeInsets.zero,
       physics: ClampingScrollPhysics(),
       children: <Widget>[
-        _buildHeader(args),
+        Stack(
+          children: <Widget>[
+            _buildHeader(args),
+            _buildContent(),
+          ],
+        )
       ],
     );
   }
@@ -63,5 +84,22 @@ class _CuisineScreenState extends State<CuisineScreen> {
                 ),
               ],
             )),
+      );
+
+  Widget _buildContent() => Padding(
+        padding:
+            const EdgeInsets.only(top: _CuisineScreenStyles.headerHeight - 40),
+        child: Container(
+          decoration: BoxDecoration(
+            color: LUTheme.of(context).backgroundColor,
+            borderRadius: _CuisineScreenStyles.backgroundBorderRadius,
+          ),
+          child: LUList(
+            padding: EdgeInsets.only(top: 100),
+            nested: true,
+            space: 10,
+            items: _getOutletCards(),
+          ),
+        ),
       );
 }
