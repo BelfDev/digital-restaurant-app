@@ -1,4 +1,5 @@
 import 'package:dr_app/components/bottom_app_bar.dart';
+import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/navigation/navigator_container.dart';
 import 'package:dr_app/navigation/tab_data.dart';
 import 'package:dr_app/navigation/tabs.dart';
@@ -119,9 +120,10 @@ class _RootContainerState extends State<RootContainer>
               });
             },
             tooltip: 'Tab',
-            child: Icon(Icons.receipt),
-            backgroundColor: Color(0xFFEF8354),
-            elevation: 4.0,
+            child: Icon(
+              Icons.receipt,
+              color: LUTheme.of(context).primaryIconTheme.color,
+            ),
           ),
         ),
       ),

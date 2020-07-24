@@ -21,6 +21,10 @@ class LUTheme {
         buttonColor: LUColors.orange,
         primaryIconTheme:
             IconThemeData(color: LUColors.smoothWhite, size: primaryIconSize),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: LUColors.orange,
+          elevation: 4.0,
+        ),
         buttonTheme: baseTheme.buttonTheme.copyWith(
           buttonColor: LUColors.orange,
           shape: RoundedRectangleBorder(
