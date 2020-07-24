@@ -43,7 +43,7 @@ class LUFeaturedCard extends StatelessWidget {
       children: <Widget>[
         Positioned.fill(
             child: FadeInImage.assetNetwork(
-          placeholder: 'res/images/restaurant-placeholder.png',
+          placeholder: 'res/images/vertical-placeholder.png',
           image: imageSrc,
           fit: BoxFit.fill,
         )),

@@ -7,6 +7,7 @@ import 'package:dr_app/components/carousel.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
+import 'package:dr_app/data/models/screen_arguments.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/styles.dart';
@@ -143,7 +144,8 @@ class _HomeContent extends StatelessWidget {
             title: cuisine.name,
             imageSrc: cuisine.imgSrc,
             onPressed: () {
-              Navigator.of(context).pushNamed(CuisineScreen.id);
+              Navigator.of(context).pushNamed(CuisineScreen.id,
+                  arguments: ScreenArguments(coverImgSrc: cuisine.imgSrc));
             },
           ))
       .toList();

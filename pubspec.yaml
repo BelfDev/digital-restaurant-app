@@ -55,7 +55,7 @@ flutter:
 
   # Assets
   assets:
-    - res/images/restaurant-placeholder.png
+    - res/images/vertical-placeholder.png
     - res/images/home-chef.png
     - res/images/logo.png
     - res/images/header-bg.png

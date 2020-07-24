@@ -45,7 +45,7 @@ class LUCategoryCard extends StatelessWidget {
                 child: FadeInImage.assetNetwork(
                   width: width / 1.5,
                   height: height / 1.5,
-                  placeholder: 'res/images/restaurant-placeholder.png',
+                  placeholder: 'res/images/vertical-placeholder.png',
                   image: imageSrc,
                   fit: BoxFit.fill,
                 )),
