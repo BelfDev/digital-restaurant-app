@@ -36,7 +36,7 @@ class LUSliderButton extends StatelessWidget {
     return SliderButton(
       width: width,
       height: height,
-      radius: 12,
+      radius: LUTheme.buttonBorderRadius,
       backgroundColor: trackColor,
       action: onSlided,
       label: Text(

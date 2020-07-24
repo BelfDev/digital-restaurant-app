@@ -37,7 +37,6 @@ class LUSolidButton extends StatelessWidget {
       child: RaisedButton(
         onPressed: onPressed,
         color: color,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Text(
           title.toUpperCase(),
           style: TextStyle(

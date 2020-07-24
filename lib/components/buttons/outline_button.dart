@@ -36,8 +36,6 @@ class LUOutlineButton extends StatelessWidget {
         textColor: borderColor,
         highlightedBorderColor: borderColor,
         borderSide: BorderSide(width: 2, color: borderColor),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
         child: Text(
           title.toUpperCase(),
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),

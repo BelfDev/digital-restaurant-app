@@ -31,8 +31,7 @@ class LUIconButton extends StatelessWidget {
       child: RawMaterialButton(
           onPressed: onPressed,
           fillColor: backgroundColor ?? LUTheme.of(context).primaryColor,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+          shape: LUTheme.of(context).buttonTheme.shape,
           child: padding != null
               ? Padding(padding: padding, child: _buildIcon())
               : _buildIcon()),
