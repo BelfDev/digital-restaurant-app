@@ -5,12 +5,13 @@ import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/screen_arguments.dart';
 import 'package:dr_app/utils/colors.dart';
+import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 abstract class _CuisineScreenStyles {
   static const topBarPadding =
       const EdgeInsets.only(left: 16, right: 16, top: 8);
-  static const double headerHeight = 200;
+  static const double headerHeight = 240;
   static const backgroundBorderRadius = const BorderRadius.only(
       topLeft: Radius.circular(40), topRight: Radius.circular(40));
 }
@@ -90,15 +91,33 @@ class _CuisineScreenState extends State<CuisineScreen> {
         padding:
             const EdgeInsets.only(top: _CuisineScreenStyles.headerHeight - 40),
         child: Container(
+          padding: EdgeInsets.only(top: 16),
           decoration: BoxDecoration(
             color: LUTheme.of(context).backgroundColor,
             borderRadius: _CuisineScreenStyles.backgroundBorderRadius,
           ),
-          child: LUList(
-            padding: EdgeInsets.only(top: 100),
-            nested: true,
-            space: 10,
-            items: _getOutletCards(),
+          child: Column(
+            children: <Widget>[
+              Text(
+                'Menu',
+                style: LUTheme.of(context).textTheme.headline5.copyWith(
+                    color: LUTheme.of(context).primaryColor,
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Text(
+                'Glasgow',
+                style: Styles.location,
+              ),
+              LUList(
+                padding: EdgeInsets.only(top: 24),
+                nested: true,
+                space: 10,
+                items: _getOutletCards(),
+              ),
+            ],
           ),
         ),
       );
