@@ -24,13 +24,12 @@ class _CuisineScreenState extends State<CuisineScreen> {
   @override
   Widget build(BuildContext context) {
     final ScreenArguments args = ModalRoute.of(context).settings.arguments;
-    return SafeArea(
-      bottom: false,
-      child: ListView(
-        children: <Widget>[
-          _buildHeader(args),
-        ],
-      ),
+    return ListView(
+      padding: EdgeInsets.zero,
+      physics: ClampingScrollPhysics(),
+      children: <Widget>[
+        _buildHeader(args),
+      ],
     );
   }
 
@@ -50,31 +49,19 @@ class _CuisineScreenState extends State<CuisineScreen> {
         ),
       );
 
-  Widget _buildTopBar() => Padding(
-      padding: _CuisineScreenStyles.topBarPadding,
-      child: Row(
-        children: <Widget>[
-          LUIconButton(
-            icon: Icons.arrow_back_ios,
-            onPressed: _onBackButtonPressed,
-            tint: LUColors.navyBlue,
-            backgroundColor: LUColors.smoothWhite,
-          ),
-        ],
-      ));
+  Widget _buildTopBar() => SafeArea(
+        bottom: false,
+        child: Padding(
+            padding: _CuisineScreenStyles.topBarPadding,
+            child: Row(
+              children: <Widget>[
+                LUIconButton(
+                  icon: Icons.arrow_back_ios,
+                  onPressed: _onBackButtonPressed,
+                  tint: LUColors.navyBlue,
+                  backgroundColor: LUColors.smoothWhite,
+                ),
+              ],
+            )),
+      );
 }
-
-//class _CuisineScreenState extends State<CuisineScreen> {
-//  void _onBackButtonPressed(context) {
-//    Navigator.of(context).pop();
-//  }
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return SafeArea(
-//        bottom: false,
-//        child: Container(
-//          color: Colors.blue,
-//        ));
-//  }
-//}

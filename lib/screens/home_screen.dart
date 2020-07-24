@@ -49,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       bottom: false,
       child: ListView(
+        physics: ClampingScrollPhysics(),
         children: <Widget>[
           _buildTopBar(),
           Stack(
