@@ -96,7 +96,11 @@ class _ProductScreenState extends State<ProductScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    LUCounter(),
+                    LUCounter(
+                      onUpdate: (amount) {
+                        print(amount);
+                      },
+                    ),
                     Text(
                       '£ 8.50',
                       style: LUTheme.of(context)
