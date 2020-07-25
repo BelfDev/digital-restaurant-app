@@ -5,6 +5,7 @@ import 'package:dr_app/components/cards/featured_card.dart';
 import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:dr_app/components/carousel.dart';
 import 'package:dr_app/components/list.dart';
+import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/screen_arguments.dart';
@@ -61,25 +62,20 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildTopBar() => Padding(
-        padding: _HomeStyles.topBarPadding,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(
-              'res/images/logo.png',
-              width: 227,
-              height: 46,
-              fit: BoxFit.cover,
-            ),
-            LUIconButton(
-              icon: MaterialCommunityIcons.qrcode_scan,
-              iconSize: 32,
-              onPressed: _onTopBarButtonPressed,
-            )
-          ],
-        ),
+  Widget _buildTopBar() => LUTopBar(
+        children: <Widget>[
+          Image.asset(
+            Images.appLogo,
+            width: 227,
+            height: 46,
+            fit: BoxFit.cover,
+          ),
+          LUIconButton(
+            icon: MaterialCommunityIcons.qrcode_scan,
+            iconSize: 32,
+            onPressed: _onTopBarButtonPressed,
+          )
+        ],
       );
 }
 

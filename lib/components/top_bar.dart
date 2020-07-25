@@ -9,14 +9,17 @@ class LUTopBar extends StatelessWidget {
   final IconData icon;
   final Color tint;
   final Function onNavigationButtonPressed;
+  final List<Widget> children;
 
   const LUTopBar(
       {Key key,
       this.padding = const EdgeInsets.only(left: 16, right: 16, top: 8),
       this.icon = Icons.arrow_back_ios,
       this.tint = LUColors.navyBlue,
-      @required this.onNavigationButtonPressed})
-      : super(key: key);
+      this.onNavigationButtonPressed,
+      this.children})
+      : assert(children == null || onNavigationButtonPressed == null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,15 +28,17 @@ class LUTopBar extends StatelessWidget {
       child: Padding(
           padding: padding,
           child: Row(
-            children: <Widget>[
-              LUIconButton(
-                icon: icon,
-                onPressed: onNavigationButtonPressed,
-                tint: tint,
-                backgroundColor: LUColors.smoothWhite,
-              ),
-            ],
-          )),
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: children ??
+                  <Widget>[
+                    LUIconButton(
+                      icon: icon,
+                      onPressed: onNavigationButtonPressed,
+                      tint: tint,
+                      backgroundColor: LUColors.smoothWhite,
+                    ),
+                  ])),
     );
   }
 }
