@@ -11,9 +11,9 @@ import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
+/// The Cuisine screen displays a list of cards representing
+/// outlets which belong to the selected cuisine category.
 abstract class _CuisineScreenStyles {
-  static const topBarPadding =
-      const EdgeInsets.only(left: 16, right: 16, top: 8);
   static const double headerHeight = 240;
 }
 

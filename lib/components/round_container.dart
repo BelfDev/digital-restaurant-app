@@ -2,6 +2,7 @@ import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
+/// A custom material [Container] with rounded top borders.
 class RoundContainer extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry margin;

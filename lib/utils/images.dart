@@ -1,3 +1,4 @@
+/// A convenience abstract class encapsulating image asset names.
 abstract class Images {
   static const horizontalPlaceholder = 'res/images/horizontal-placeholder.png';
   static const verticalPlaceholder = 'res/images/vertical-placeholder.png';

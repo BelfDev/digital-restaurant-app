@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'buttons/icon_button.dart';
 
+/// A top bar containing a set of titles and navigation buttons.
 class LUTopBar extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final IconData icon;

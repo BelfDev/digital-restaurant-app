@@ -3,6 +3,9 @@ import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
+/// The Scanner screen provides a way for users to scan QR Codes
+/// and check-in brick-and-mortar outlets. In sequence, the
+/// Home screen will adapt to display content specific to the scanned outlet.
 class ScannerScreen extends StatefulWidget {
   static const id = "scanner_screen";
   @override

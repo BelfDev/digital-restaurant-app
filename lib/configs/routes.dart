@@ -9,6 +9,7 @@ import 'package:dr_app/screens/profile_screen.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
 import 'package:flutter/widgets.dart';
 
+/// A map of the named routes used for navigation.
 final Map<String, WidgetBuilder> routes = {
   HomeScreen.id: (context) => HomeScreen(),
   ExploreScreen.id: (context) => ExploreScreen(),
