@@ -2,6 +2,7 @@ import 'package:dr_app/components/cards/category_card.dart';
 import 'package:dr_app/components/carousel.dart';
 import 'package:dr_app/components/section.dart';
 import 'package:dr_app/components/top_bar.dart';
+import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/screen_arguments.dart';
 import 'package:dr_app/utils/images.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 
 class ProductScreen extends StatefulWidget {
   static const id = 'product_screen';
+
   @override
   _ProductScreenState createState() => _ProductScreenState();
 }
@@ -57,16 +59,33 @@ class _ProductScreenState extends State<ProductScreen> {
       );
 
   Widget _buildContent(ScreenArguments args) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Chicken Noodles'),
-          Text('£ 8.50 each'),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text('Counter'),
-              Text('£ 8.50'),
-            ],
+          Padding(
+            padding: Styles.sectionContentPadding.copyWith(top: 24, bottom: 32),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Chicken Noodles',
+                  style: LUTheme.of(context).textTheme.headline1,
+                  textAlign: TextAlign.left,
+                ),
+                Text('£ 8.50 each', style: Styles.productSubtitle),
+                SizedBox(
+                  height: 24,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text('Counter'),
+                    Text('£ 8.50'),
+                  ],
+                ),
+              ],
+            ),
           ),
           LUSection(
             title: 'Dish Description',

@@ -45,6 +45,9 @@ abstract class Styles {
       color: LUColors.darkBlue, fontSize: 17, fontWeight: FontWeight.w200);
   static const descriptionText =
       TextStyle(color: LUColors.darkBlue, fontSize: 14);
+  static const productTitle = TextStyle(
+      color: LUColors.darkBlue, fontSize: 32, fontWeight: FontWeight.bold);
+  static const productSubtitle = TextStyle(color: LUColors.gray, fontSize: 17);
 
   /// Container Styles
   static const double roundContainerHeight = 240;
