@@ -1,6 +1,7 @@
 import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/category_card.dart';
 import 'package:dr_app/components/carousel.dart';
+import 'package:dr_app/components/counter.dart';
 import 'package:dr_app/components/section.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
@@ -95,8 +96,14 @@ class _ProductScreenState extends State<ProductScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text('Counter'),
-                    Text('£ 8.50'),
+                    LUCounter(),
+                    Text(
+                      '£ 8.50',
+                      style: LUTheme.of(context)
+                          .textTheme
+                          .headline1
+                          .copyWith(fontWeight: FontWeight.w400),
+                    ),
                   ],
                 ),
               ],
