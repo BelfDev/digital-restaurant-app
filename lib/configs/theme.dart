@@ -2,6 +2,8 @@ import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
+/// This class encapsulates the ThemeData used to style
+/// all the App components consistently.
 class LUTheme {
   static const double buttonBorderRadius = 12.0;
   static const double primaryIconSize = 32.0;

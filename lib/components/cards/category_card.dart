@@ -1,5 +1,6 @@
 import 'package:dr_app/components/cards/base_card.dart';
 import 'package:dr_app/configs/theme.dart';
+import 'package:dr_app/utils/images.dart';
 import 'package:flutter/material.dart';
 
 /// A material [Card] used to display information about a cuisine category.
@@ -45,7 +46,7 @@ class LUCategoryCard extends StatelessWidget {
                 child: FadeInImage.assetNetwork(
                   width: width / 1.5,
                   height: height / 1.5,
-                  placeholder: 'res/images/restaurant-placeholder.png',
+                  placeholder: Images.verticalPlaceholder,
                   image: imageSrc,
                   fit: BoxFit.fill,
                 )),

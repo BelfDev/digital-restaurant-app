@@ -1,6 +1,7 @@
 import 'package:dr_app/components/cards/base_card.dart';
 import 'package:dr_app/components/star_rating.dart';
 import 'package:dr_app/configs/theme.dart';
+import 'package:dr_app/utils/images.dart';
 import 'package:flutter/material.dart';
 
 import '../gradient_filter.dart';
@@ -43,7 +44,7 @@ class LUFeaturedCard extends StatelessWidget {
       children: <Widget>[
         Positioned.fill(
             child: FadeInImage.assetNetwork(
-          placeholder: 'res/images/restaurant-placeholder.png',
+          placeholder: Images.verticalPlaceholder,
           image: imageSrc,
           fit: BoxFit.fill,
         )),

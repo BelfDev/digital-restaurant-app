@@ -5,13 +5,18 @@ import 'package:dr_app/components/cards/featured_card.dart';
 import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:dr_app/components/carousel.dart';
 import 'package:dr_app/components/list.dart';
+import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
+import 'package:dr_app/data/models/screen_arguments.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
 import 'package:dr_app/utils/colors.dart';
+import 'package:dr_app/utils/images.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+
+import 'cuisine_screen.dart';
 
 abstract class _HomeStyles {
   static const topBarPadding =
@@ -37,11 +42,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void _onTopBarButtonPressed() {
+    Navigator.of(context).pushNamed(ScannerScreen.id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       bottom: false,
       child: ListView(
+        physics: ClampingScrollPhysics(),
         children: <Widget>[
           _buildTopBar(),
           Stack(
@@ -52,29 +62,20 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _onTopBarButtonPressed() {
-    Navigator.of(context).pushNamed(ScannerScreen.id);
-  }
-
-  Widget _buildTopBar() => Padding(
-        padding: _HomeStyles.topBarPadding,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(
-              'res/images/logo.png',
-              width: 227,
-              height: 46,
-              fit: BoxFit.cover,
-            ),
-            LUIconButton(
-              icon: MaterialCommunityIcons.qrcode_scan,
-              iconSize: 32,
-              onPressed: _onTopBarButtonPressed,
-            )
-          ],
-        ),
+  Widget _buildTopBar() => LUTopBar(
+        children: <Widget>[
+          Image.asset(
+            Images.appLogo,
+            width: 227,
+            height: 46,
+            fit: BoxFit.cover,
+          ),
+          LUIconButton(
+            icon: MaterialCommunityIcons.qrcode_scan,
+            iconSize: 32,
+            onPressed: _onTopBarButtonPressed,
+          )
+        ],
       );
 }
 
@@ -99,7 +100,7 @@ class _Header extends StatelessWidget {
           children: <Widget>[
             Positioned.fill(
                 child:
-                    Image.asset('res/images/header-bg.png', fit: BoxFit.fill)),
+                    Image.asset(Images.homeHeaderBackground, fit: BoxFit.fill)),
             Positioned.fill(
               bottom: 32,
               child: Row(
@@ -107,7 +108,7 @@ class _Header extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Image.asset(
-                    'res/images/home-chef.png',
+                    Images.homeChef,
                     height: 128,
                     width: 120,
                     fit: BoxFit.cover,
@@ -136,11 +137,15 @@ class _Header extends StatelessWidget {
 }
 
 class _HomeContent extends StatelessWidget {
-  List<Widget> _getCategoryCards() => dummyCuisines
+  List<Widget> _getCategoryCards(context) => dummyCuisines
       .map((cuisine) => LUCategoryCard(
             title: cuisine.name,
             imageSrc: cuisine.imgSrc,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(CuisineScreen.id,
+                  arguments: ScreenArguments(
+                      title: cuisine.name, coverImgSrc: cuisine.imgSrc));
+            },
           ))
       .toList();
 
@@ -189,7 +194,7 @@ class _HomeContent extends StatelessWidget {
           _HorizontalHomeSection(
             title: 'Cuisines',
             height: _HomeStyles.cuisineSectionHeight,
-            items: _getCategoryCards(),
+            items: _getCategoryCards(context),
           ),
           _VerticalHomeSection(
               title: 'Nearby Restaurants', items: _getOutletCards())
