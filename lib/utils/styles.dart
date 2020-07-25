@@ -39,10 +39,12 @@ abstract class Styles {
       TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600);
 
   /// Text Styles
-  static const section = TextStyle(
+  static const sectionText = TextStyle(
       color: LUColors.darkBlue, fontSize: 17, fontWeight: FontWeight.w600);
-  static const location = TextStyle(
+  static const locationText = TextStyle(
       color: LUColors.darkBlue, fontSize: 17, fontWeight: FontWeight.w200);
+  static const descriptionText =
+      TextStyle(color: LUColors.darkBlue, fontSize: 14);
 
   /// Container Styles
   static const double roundContainerHeight = 240;
@@ -50,7 +52,7 @@ abstract class Styles {
       topLeft: Radius.circular(40), topRight: Radius.circular(40));
 
   /// List Styles
-  static const carouselPadding =
+  static const sectionContentPadding =
       const EdgeInsets.only(left: 16, right: 16, bottom: 8);
   static const double categoryCarouselHeight = 160;
 }

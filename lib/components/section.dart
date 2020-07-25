@@ -30,7 +30,7 @@ class LUSection extends StatelessWidget {
             padding: titlePadding,
             child: Text(
               title,
-              style: Styles.section,
+              style: Styles.sectionText,
             ),
           ),
           child,

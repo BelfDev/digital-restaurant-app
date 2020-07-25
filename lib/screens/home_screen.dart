@@ -193,13 +193,13 @@ class _HomeContent extends StatelessWidget {
               title: "Chef's choice - Glasgow",
               child: LUCarousel(
                   height: _HomeStyles.featuredSectionHeight,
-                  padding: Styles.carouselPadding,
+                  padding: Styles.sectionContentPadding,
                   items: _getFeaturedCards(context))),
           LUSection(
               title: 'Cuisines',
               child: LUCarousel(
                   height: Styles.categoryCarouselHeight,
-                  padding: Styles.carouselPadding,
+                  padding: Styles.sectionContentPadding,
                   items: _getCategoryCards(context))),
           LUSection(
             title: 'Nearby Restaurants',
