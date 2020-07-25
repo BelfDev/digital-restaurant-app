@@ -10,6 +10,7 @@ import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/screen_arguments.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
 import 'package:dr_app/utils/colors.dart';
+import 'package:dr_app/utils/images.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -103,7 +104,7 @@ class _Header extends StatelessWidget {
           children: <Widget>[
             Positioned.fill(
                 child:
-                    Image.asset('res/images/header-bg.png', fit: BoxFit.fill)),
+                    Image.asset(Images.homeHeaderBackground, fit: BoxFit.fill)),
             Positioned.fill(
               bottom: 32,
               child: Row(
@@ -111,7 +112,7 @@ class _Header extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Image.asset(
-                    'res/images/home-chef.png',
+                    Images.homeChef,
                     height: 128,
                     width: 120,
                     fit: BoxFit.cover,

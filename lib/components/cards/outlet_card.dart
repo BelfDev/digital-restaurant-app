@@ -1,5 +1,6 @@
 import 'package:dr_app/components/star_rating.dart';
 import 'package:dr_app/configs/theme.dart';
+import 'package:dr_app/utils/images.dart';
 import 'package:flutter/material.dart';
 
 import '../gradient_filter.dart';
@@ -45,7 +46,7 @@ class LUOutletCard extends StatelessWidget {
             child: ClipRRect(
           borderRadius: BorderRadius.circular(LUTheme.cardBorderRadius - 4),
           child: FadeInImage.assetNetwork(
-            placeholder: 'res/images/vertical-placeholder.png',
+            placeholder: Images.verticalPlaceholder,
             image: imageSrc,
             fit: BoxFit.cover,
           ),
