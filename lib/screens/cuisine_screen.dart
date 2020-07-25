@@ -5,8 +5,10 @@ import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/screen_arguments.dart';
 import 'package:dr_app/utils/colors.dart';
+import 'package:dr_app/utils/images.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 abstract class _CuisineScreenStyles {
   static const topBarPadding =
@@ -48,7 +50,7 @@ class _CuisineScreenState extends State<CuisineScreen> {
         Stack(
           children: <Widget>[
             _buildHeader(args),
-            _buildContent(),
+            _buildContent(args),
           ],
         )
       ],
@@ -61,7 +63,7 @@ class _CuisineScreenState extends State<CuisineScreen> {
           children: <Widget>[
             Positioned.fill(
               child: FadeInImage.assetNetwork(
-                placeholder: 'res/images/horizontal-placeholder.png',
+                placeholder: Images.horizontalPlaceholder,
                 image: args.coverImgSrc,
                 fit: BoxFit.cover,
               ),
@@ -87,7 +89,7 @@ class _CuisineScreenState extends State<CuisineScreen> {
             )),
       );
 
-  Widget _buildContent() => Padding(
+  Widget _buildContent(ScreenArguments args) => Padding(
         padding:
             const EdgeInsets.only(top: _CuisineScreenStyles.headerHeight - 40),
         child: Container(
@@ -98,18 +100,45 @@ class _CuisineScreenState extends State<CuisineScreen> {
           ),
           child: Column(
             children: <Widget>[
-              Text(
-                'Menu',
-                style: LUTheme.of(context).textTheme.headline5.copyWith(
-                    color: LUTheme.of(context).primaryColor,
-                    fontWeight: FontWeight.bold),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Ionicons.ios_reorder,
+                    size: 28,
+                    color: LUTheme.of(context).unselectedWidgetColor,
+                  ),
+                  Text(
+                    args.title,
+                    style: LUTheme.of(context).textTheme.headline5.copyWith(
+                        color: LUTheme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Icon(Ionicons.ios_reorder,
+                      size: 28,
+                      color: LUTheme.of(context).unselectedWidgetColor),
+                ],
               ),
               SizedBox(
                 height: 16,
               ),
-              Text(
-                'Glasgow',
-                style: Styles.location,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Icon(
+                    Ionicons.ios_pin,
+                    size: 20,
+                    color: LUColors.darkBlue,
+                  ),
+                  Text(
+                    'Glasgow',
+                    style: Styles.location,
+                  ),
+                  SizedBox(
+                    width: 8,
+                  )
+                ],
               ),
               LUList(
                 padding: EdgeInsets.only(top: 24),

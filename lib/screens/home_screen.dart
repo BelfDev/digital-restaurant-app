@@ -147,7 +147,8 @@ class _HomeContent extends StatelessWidget {
             imageSrc: cuisine.imgSrc,
             onPressed: () {
               Navigator.of(context).pushNamed(CuisineScreen.id,
-                  arguments: ScreenArguments(coverImgSrc: cuisine.imgSrc));
+                  arguments: ScreenArguments(
+                      title: cuisine.name, coverImgSrc: cuisine.imgSrc));
             },
           ))
       .toList();
