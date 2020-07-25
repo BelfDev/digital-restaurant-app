@@ -1,3 +1,4 @@
+import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/category_card.dart';
 import 'package:dr_app/components/carousel.dart';
 import 'package:dr_app/components/section.dart';
@@ -31,11 +32,25 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     final ScreenArguments args = ModalRoute.of(context).settings.arguments;
-    return ListView(
-      padding: EdgeInsets.zero,
+    return Stack(
       children: <Widget>[
-        _buildHeader(args),
-        _buildContent(args),
+        ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            _buildHeader(args),
+            _buildContent(args),
+          ],
+        ),
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: 40.0,
+          child: LUSolidButton(
+            title: 'ADD TO BASKET',
+            margin: EdgeInsets.symmetric(horizontal: 16),
+            onPressed: () {},
+          ),
+        )
       ],
     );
   }
