@@ -48,4 +48,9 @@ abstract class Styles {
   static const double roundContainerHeight = 240;
   static const roundContainerRadius = const BorderRadius.only(
       topLeft: Radius.circular(40), topRight: Radius.circular(40));
+
+  /// List Styles
+  static const carouselPadding =
+      const EdgeInsets.only(left: 16, right: 16, bottom: 8);
+  static const double categoryCarouselHeight = 160;
 }

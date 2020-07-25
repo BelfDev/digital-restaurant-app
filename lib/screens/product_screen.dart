@@ -1,12 +1,12 @@
+import 'package:dr_app/components/cards/category_card.dart';
+import 'package:dr_app/components/carousel.dart';
 import 'package:dr_app/components/section.dart';
 import 'package:dr_app/components/top_bar.dart';
+import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/screen_arguments.dart';
 import 'package:dr_app/utils/images.dart';
+import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
-
-class _ProductScreenStyles {
-  static const sectionPadding = const EdgeInsets.symmetric(horizontal: 16.0);
-}
 
 class ProductScreen extends StatefulWidget {
   static const id = 'product_screen';
@@ -18,6 +18,13 @@ class _ProductScreenState extends State<ProductScreen> {
   void _onBackButtonPressed() {
     Navigator.of(context).pop();
   }
+
+  List<Widget> _getCategoryCards(context) => dummyCuisines
+      .map((cuisine) => LUCategoryCard(
+            title: cuisine.name,
+            imageSrc: cuisine.imgSrc,
+          ))
+      .toList();
 
   @override
   Widget build(BuildContext context) {
@@ -49,26 +56,29 @@ class _ProductScreenState extends State<ProductScreen> {
         ),
       );
 
-  Widget _buildContent(ScreenArguments args) => Padding(
-        padding: _ProductScreenStyles.sectionPadding,
-        child: Column(
-          children: <Widget>[
-            Text('Chicken Noodles'),
-            Text('£ 8.50 each'),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text('Counter'),
-                Text('£ 8.50'),
-              ],
-            ),
-            LUSection(
-              title: 'Dish Description',
-              child: Text(
-                  'ASIAN GREENS WITH FRIED TOFU IN A CHILLI, GARLIC, SOY & BASIL SAUCE, SERVED WITH EGG NOODLES CASHEW NUTS & FRESH CHILLI.'),
-            )
-          ],
-        ),
+  Widget _buildContent(ScreenArguments args) => Column(
+        children: <Widget>[
+          Text('Chicken Noodles'),
+          Text('£ 8.50 each'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text('Counter'),
+              Text('£ 8.50'),
+            ],
+          ),
+          LUSection(
+            title: 'Dish Description',
+            child: Text(
+                'ASIAN GREENS WITH FRIED TOFU IN A CHILLI, GARLIC, SOY & BASIL SAUCE, SERVED WITH EGG NOODLES CASHEW NUTS & FRESH CHILLI.'),
+          ),
+          LUSection(
+              title: 'Ingredients',
+              child: LUCarousel(
+                  height: Styles.categoryCarouselHeight,
+                  padding: Styles.carouselPadding,
+                  items: _getCategoryCards(context))),
+        ],
       );
 }

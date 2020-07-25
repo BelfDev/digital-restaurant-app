@@ -14,6 +14,7 @@ import 'package:dr_app/screens/product_screen.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
+import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
@@ -24,10 +25,6 @@ abstract class _HomeStyles {
   static const backgroundBorderRadius = const BorderRadius.only(
       topLeft: Radius.circular(40), topRight: Radius.circular(40));
   static const double featuredSectionHeight = 280;
-  static const double cuisineSectionHeight = 160;
-  static const sectionSpacing = const EdgeInsets.only(top: 16.0);
-  static const carouselPadding =
-      const EdgeInsets.only(left: 16, right: 16, bottom: 8);
 }
 
 /// The Home screen of the App. This screen has two main states: unchecked
@@ -194,17 +191,15 @@ class _HomeContent extends StatelessWidget {
           ),
           LUSection(
               title: "Chef's choice - Glasgow",
-              margin: _HomeStyles.sectionSpacing,
               child: LUCarousel(
                   height: _HomeStyles.featuredSectionHeight,
-                  padding: _HomeStyles.carouselPadding,
+                  padding: Styles.carouselPadding,
                   items: _getFeaturedCards(context))),
           LUSection(
               title: 'Cuisines',
-              margin: _HomeStyles.sectionSpacing,
               child: LUCarousel(
-                  height: _HomeStyles.cuisineSectionHeight,
-                  padding: _HomeStyles.carouselPadding,
+                  height: Styles.categoryCarouselHeight,
+                  padding: Styles.carouselPadding,
                   items: _getCategoryCards(context))),
           LUSection(
             title: 'Nearby Restaurants',
