@@ -1,4 +1,4 @@
-import 'package:dr_app/components/buttons/icon_button.dart';
+import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -31,17 +31,10 @@ class _ScannerScreenState extends State<ScannerScreen> {
                 cutOutBottomOffset: 100),
             onQRViewCreated: _onQRViewCreated,
           ),
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8.0, left: 16.0),
-              child: LUIconButton(
-                  icon: Icons.close,
-                  backgroundColor: LUColors.smoothWhite,
-                  iconSize: 32,
-                  tint: LUColors.navyBlue,
-                  onPressed: () => Navigator.of(context).pop()),
-            ),
-          ),
+          LUTopBar(
+            icon: Icons.close,
+            onNavigationButtonPressed: () => Navigator.of(context).pop(),
+          )
         ],
       ),
     );
