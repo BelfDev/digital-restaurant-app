@@ -43,4 +43,9 @@ abstract class Styles {
       color: LUColors.darkBlue, fontSize: 17, fontWeight: FontWeight.w600);
   static const location = TextStyle(
       color: LUColors.darkBlue, fontSize: 17, fontWeight: FontWeight.w200);
+
+  /// Container Styles
+  static const double roundContainerHeight = 240;
+  static const roundContainerRadius = const BorderRadius.only(
+      topLeft: Radius.circular(40), topRight: Radius.circular(40));
 }
