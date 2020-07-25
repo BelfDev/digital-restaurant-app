@@ -5,6 +5,7 @@ import 'package:dr_app/components/cards/featured_card.dart';
 import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:dr_app/components/carousel.dart';
 import 'package:dr_app/components/list.dart';
+import 'package:dr_app/components/section.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
@@ -13,21 +14,20 @@ import 'package:dr_app/screens/product_screen.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
-import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 import 'cuisine_screen.dart';
 
 abstract class _HomeStyles {
-  static const topBarPadding =
-      const EdgeInsets.only(left: 16, right: 16, top: 8);
   static const double headerHeight = 200;
   static const backgroundBorderRadius = const BorderRadius.only(
       topLeft: Radius.circular(40), topRight: Radius.circular(40));
   static const double featuredSectionHeight = 280;
   static const double cuisineSectionHeight = 160;
   static const sectionSpacing = const EdgeInsets.only(top: 16.0);
+  static const carouselPadding =
+      const EdgeInsets.only(left: 16, right: 16, bottom: 8);
 }
 
 /// The Home screen of the App. This screen has two main states: unchecked
@@ -192,84 +192,28 @@ class _HomeContent extends StatelessWidget {
                 title: "Find a Restaurant",
                 onPressed: () {}),
           ),
-          _HorizontalHomeSection(
+          LUSection(
               title: "Chef's choice - Glasgow",
-              height: _HomeStyles.featuredSectionHeight,
-              items: _getFeaturedCards(context)),
-          _HorizontalHomeSection(
-            title: 'Cuisines',
-            height: _HomeStyles.cuisineSectionHeight,
-            items: _getCategoryCards(context),
-          ),
-          _VerticalHomeSection(
-              title: 'Nearby Restaurants', items: _getOutletCards())
-        ]));
-  }
-}
-
-class _HorizontalHomeSection extends StatelessWidget {
-  final double height;
-  final String title;
-  final List<Widget> items;
-
-  const _HorizontalHomeSection({Key key, this.height, this.title, this.items})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: _HomeStyles.sectionSpacing,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 18),
-            child: Text(
-              title,
-              style: Styles.section,
-            ),
-          ),
-          LUCarousel(
-              height: height,
-              padding: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
-              items: items)
-        ],
-      ),
-    );
-  }
-}
-
-class _VerticalHomeSection extends StatelessWidget {
-  final String title;
-  final List<Widget> items;
-
-  const _VerticalHomeSection({Key key, this.title, this.items})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: _HomeStyles.sectionSpacing,
-      child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 18, bottom: 12),
-              child: Text(
-                title,
-                style: Styles.section,
-              ),
-            ),
-            LUList(
+              margin: _HomeStyles.sectionSpacing,
+              child: LUCarousel(
+                  height: _HomeStyles.featuredSectionHeight,
+                  padding: _HomeStyles.carouselPadding,
+                  items: _getFeaturedCards(context))),
+          LUSection(
+              title: 'Cuisines',
+              margin: _HomeStyles.sectionSpacing,
+              child: LUCarousel(
+                  height: _HomeStyles.cuisineSectionHeight,
+                  padding: _HomeStyles.carouselPadding,
+                  items: _getCategoryCards(context))),
+          LUSection(
+            title: 'Nearby Restaurants',
+            child: LUList(
               nested: true,
               space: 10,
-              items: items,
-            )
-          ]),
-    );
+              items: _getOutletCards(),
+            ),
+          ),
+        ]));
   }
 }
