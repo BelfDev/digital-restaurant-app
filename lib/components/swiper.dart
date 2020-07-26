@@ -1,4 +1,5 @@
 import 'package:dr_app/configs/theme.dart';
+import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
@@ -15,10 +16,16 @@ class LUSwiper extends StatelessWidget {
   Widget build(BuildContext context) {
     return Swiper(
       itemBuilder: (BuildContext context, int index) {
-        return FadeInImage.assetNetwork(
-          placeholder: Images.horizontalPlaceholder,
-          image: images[index],
-          fit: BoxFit.cover,
+        return Container(
+          color: LUColors.smoothGray,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 6),
+            child: FadeInImage.assetNetwork(
+              placeholder: Images.horizontalPlaceholder,
+              image: images[index],
+              fit: BoxFit.cover,
+            ),
+          ),
         );
       },
       indicatorLayout: PageIndicatorLayout.SCALE,
