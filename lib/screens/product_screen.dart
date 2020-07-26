@@ -88,6 +88,9 @@ class _ProductScreenState extends State<ProductScreen> {
                   style: LUTheme.of(context).textTheme.headline1,
                   textAlign: TextAlign.left,
                 ),
+                SizedBox(
+                  height: 2,
+                ),
                 Text('£ 8.50 each', style: Styles.productSubtitle),
                 SizedBox(
                   height: 24,
