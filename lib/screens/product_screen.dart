@@ -3,11 +3,11 @@ import 'package:dr_app/components/cards/category_card.dart';
 import 'package:dr_app/components/carousel.dart';
 import 'package:dr_app/components/counter.dart';
 import 'package:dr_app/components/section.dart';
+import 'package:dr_app/components/swiper.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/screen_arguments.dart';
-import 'package:dr_app/utils/images.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -60,13 +60,14 @@ class _ProductScreenState extends State<ProductScreen> {
         height: 400,
         child: Stack(
           children: <Widget>[
-            Positioned.fill(
-              child: FadeInImage.assetNetwork(
-                placeholder: Images.horizontalPlaceholder,
-                image: args.coverImgSrc,
-                fit: BoxFit.cover,
-              ),
-            ),
+//            Positioned.fill(
+//              child: FadeInImage.assetNetwork(
+//                placeholder: Images.horizontalPlaceholder,
+//                image: args.coverImgSrc,
+//                fit: BoxFit.cover,
+//              ),
+//            ),
+            LUSwiper(),
             LUTopBar(
               onNavigationButtonPressed: _onBackButtonPressed,
             ),
