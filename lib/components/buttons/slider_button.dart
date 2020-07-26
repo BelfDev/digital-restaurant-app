@@ -18,44 +18,49 @@ class LUSliderButton extends StatelessWidget {
   final Color shimmerColor;
   final Color buttonColor;
   final String semanticTitle;
+  final EdgeInsetsGeometry margin;
 
   LUSliderButton({
     this.width = 280.0,
     this.height = 72.0,
-    this.title,
+    @required this.title,
     @required this.onSlided,
     this.trackColor = LUColors.smoothGray,
     this.labelColor = LUColors.gray,
     this.shimmerColor = LUColors.smoothWhite,
     this.buttonColor,
     this.semanticTitle,
+    this.margin,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SliderButton(
-      width: width,
-      height: height,
-      radius: LUTheme.buttonBorderRadius,
-      backgroundColor: trackColor,
-      action: onSlided,
-      label: Text(
-        title?.toUpperCase(),
-        style: LUTheme.of(context).textTheme.button,
+    return Padding(
+      padding: margin ?? EdgeInsets.zero,
+      child: SliderButton(
+        width: width,
+        height: height,
+        radius: LUTheme.buttonBorderRadius,
+        backgroundColor: trackColor,
+        action: onSlided,
+        label: Text(
+          title?.toUpperCase(),
+          style: LUTheme.of(context).textTheme.button,
+        ),
+        baseColor: labelColor,
+        highlightedColor: shimmerColor,
+        buttonColor: buttonColor ?? LUTheme.of(context).buttonColor,
+        vibrationFlag: false,
+        icon: Center(
+            child: Icon(
+          Icons.store,
+          color: LUTheme.of(context).primaryIconTheme.color,
+          size: LUTheme.of(context).primaryIconTheme.size,
+          semanticLabel: semanticTitle,
+        )),
+        dismissible: false,
+        buttonSize: 56,
       ),
-      baseColor: labelColor,
-      highlightedColor: shimmerColor,
-      buttonColor: buttonColor ?? LUTheme.of(context).buttonColor,
-      vibrationFlag: false,
-      icon: Center(
-          child: Icon(
-        Icons.store,
-        color: LUTheme.of(context).primaryIconTheme.color,
-        size: LUTheme.of(context).primaryIconTheme.size,
-        semanticLabel: semanticTitle,
-      )),
-      dismissible: false,
-      buttonSize: 56,
     );
   }
 }

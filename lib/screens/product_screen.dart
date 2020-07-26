@@ -53,7 +53,7 @@ class _ProductScreenState extends State<ProductScreen> {
             bottom: 40.0,
             child: LUSolidButton(
               title: 'ADD TO BASKET',
-              margin: EdgeInsets.symmetric(horizontal: 16),
+              margin: Styles.fixedButtonMargin,
               onPressed: () {},
             ),
           )
