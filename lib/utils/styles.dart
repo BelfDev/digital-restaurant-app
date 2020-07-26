@@ -51,6 +51,8 @@ abstract class Styles {
   static const productSubtitle = TextStyle(color: LUColors.gray, fontSize: 17);
   static const outletSubtitle = TextStyle(
       color: LUColors.darkBlue, fontSize: 28, fontWeight: FontWeight.w200);
+  static const chipText = TextStyle(
+      fontSize: 13, fontWeight: FontWeight.w600, color: LUColors.smoothWhite);
 
   /// Container Styles
   static const double roundContainerHeight = 240;
@@ -61,4 +63,5 @@ abstract class Styles {
   static const sectionContentPadding =
       const EdgeInsets.only(left: 16, right: 16, bottom: 8);
   static const double categoryCarouselHeight = 160;
+  static const double chipCarouselHeight = 56;
 }

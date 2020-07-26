@@ -1,4 +1,5 @@
 import 'package:dr_app/components/buttons/slider_button.dart';
+import 'package:dr_app/components/chip_carousel.dart';
 import 'package:dr_app/components/star_rating.dart';
 import 'package:dr_app/components/swiper.dart';
 import 'package:dr_app/components/top_bar.dart';
@@ -95,9 +96,17 @@ class _OutletScreenState extends State<OutletScreen> {
                     ),
                   ],
                 ),
+//                LUChip('noodles', outlined: false),
+//                MyThreeOptions()
               ],
             ),
           ),
+          LUChipCarousel(
+            items: dummyChipItems,
+            onSelected: (value) {
+              print(value);
+            },
+          )
         ],
       );
 }
