@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
+/// A custom [Swiper] that allows the user to slide through images.
 class LUSwiper extends StatelessWidget {
   final List<String> imgSrcList;
 
