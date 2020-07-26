@@ -16,7 +16,6 @@ class _LUCounterState extends State<LUCounter> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150,
       height: 40,
       decoration: BoxDecoration(
           color: LUColors.smoothGray,
@@ -32,12 +31,19 @@ class _LUCounterState extends State<LUCounter> {
             }
           }),
           _buildDivider(),
-          Text(
-            _counter.toString(),
-            style: TextStyle(
-                fontSize: 22,
-                color: LUColors.darkBlue,
-                fontWeight: FontWeight.bold),
+          SizedBox(
+            width: 50,
+            height: 40,
+            child: Center(
+              child: Text(
+                _counter.toString(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 22,
+                    color: LUColors.darkBlue,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
           _buildDivider(),
           _buildCounterButton(Icons.add, () {
@@ -52,11 +58,15 @@ class _LUCounterState extends State<LUCounter> {
   Widget _buildCounterButton(IconData icon, Function onPressed) => Material(
         color: Colors.transparent,
         child: InkWell(
-          borderRadius: BorderRadius.all(Radius.circular(40.0)),
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
           onTap: onPressed,
-          child: Icon(
-            icon,
-            color: LUColors.darkBlue,
+          child: SizedBox(
+            width: 50,
+            height: 40,
+            child: Icon(
+              icon,
+              color: LUColors.darkBlue,
+            ),
           ),
         ),
       );
