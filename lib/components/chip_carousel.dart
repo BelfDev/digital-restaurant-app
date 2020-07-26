@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'carousel.dart';
 
+/// A horizontal customized [ListView] containing selectable chip items.
 class LUChipCarousel extends StatefulWidget {
   final EdgeInsetsGeometry padding;
   final ValueChanged<int> onSelected;
