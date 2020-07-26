@@ -5,13 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-const List<String> images = [
-  'https://picsum.photos/200/400',
-  'https://picsum.photos/200/500',
-  'https://picsum.photos/200/200'
-];
-
 class LUSwiper extends StatelessWidget {
+  final List<String> imgSrcList;
+
+  const LUSwiper({Key key, this.imgSrcList}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Swiper(
@@ -22,7 +20,7 @@ class LUSwiper extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 6),
             child: FadeInImage.assetNetwork(
               placeholder: Images.horizontalPlaceholder,
-              image: images[index],
+              image: imgSrcList[index],
               fit: BoxFit.cover,
             ),
           ),
@@ -30,7 +28,7 @@ class LUSwiper extends StatelessWidget {
       },
       indicatorLayout: PageIndicatorLayout.SCALE,
       autoplay: false,
-      itemCount: images.length,
+      itemCount: imgSrcList.length,
       outer: true,
       pagination: SwiperPagination(
           margin: EdgeInsets.only(top: 16),

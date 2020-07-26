@@ -60,14 +60,7 @@ class _ProductScreenState extends State<ProductScreen> {
         height: 400,
         child: Stack(
           children: <Widget>[
-//            Positioned.fill(
-//              child: FadeInImage.assetNetwork(
-//                placeholder: Images.horizontalPlaceholder,
-//                image: args.coverImgSrc,
-//                fit: BoxFit.cover,
-//              ),
-//            ),
-            LUSwiper(),
+            LUSwiper(imgSrcList: dummySwiperImages),
             LUTopBar(
               onNavigationButtonPressed: _onBackButtonPressed,
             ),
@@ -75,64 +68,68 @@ class _ProductScreenState extends State<ProductScreen> {
         ),
       );
 
-  Widget _buildContent(ScreenArguments args) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: Styles.sectionContentPadding.copyWith(top: 24, bottom: 32),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Chicken Noodles',
-                  style: LUTheme.of(context).textTheme.headline1,
-                  textAlign: TextAlign.left,
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Text('£ 8.50 each', style: Styles.productSubtitle),
-                SizedBox(
-                  height: 24,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    LUCounter(
-                      onUpdate: (amount) {
-                        print(amount);
-                      },
-                    ),
-                    Text(
-                      '£ 8.50',
-                      style: LUTheme.of(context)
-                          .textTheme
-                          .headline1
-                          .copyWith(fontWeight: FontWeight.w400),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          LUSection(
-            title: 'Dish Description',
-            child: Padding(
-              padding: Styles.sectionContentPadding,
-              child: Text(
-                'ASIAN GREENS WITH FRIED TOFU IN A CHILLI, GARLIC, SOY & BASIL SAUCE, SERVED WITH EGG NOODLES CASHEW NUTS & FRESH CHILLI.',
-                style: Styles.descriptionText,
+  Widget _buildContent(ScreenArguments args) => Container(
+        color: LUTheme.of(context).backgroundColor,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding:
+                  Styles.sectionContentPadding.copyWith(top: 24, bottom: 32),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Chicken Noodles',
+                    style: LUTheme.of(context).textTheme.headline1,
+                    textAlign: TextAlign.left,
+                  ),
+                  SizedBox(
+                    height: 2,
+                  ),
+                  Text('£ 8.50 each', style: Styles.productSubtitle),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      LUCounter(
+                        onUpdate: (amount) {
+                          print(amount);
+                        },
+                      ),
+                      Text(
+                        '£ 8.50',
+                        style: LUTheme.of(context)
+                            .textTheme
+                            .headline1
+                            .copyWith(fontWeight: FontWeight.w400),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-          ),
-          LUSection(
-              title: 'Ingredients',
-              child: LUCarousel(
-                  height: Styles.categoryCarouselHeight,
-                  padding: Styles.sectionContentPadding,
-                  items: _getCategoryCards(context))),
-        ],
+            LUSection(
+              title: 'Dish Description',
+              child: Padding(
+                padding: Styles.sectionContentPadding,
+                child: Text(
+                  'ASIAN GREENS WITH FRIED TOFU IN A CHILLI, GARLIC, SOY & BASIL SAUCE, SERVED WITH EGG NOODLES CASHEW NUTS & FRESH CHILLI.',
+                  style: Styles.descriptionText,
+                ),
+              ),
+            ),
+            LUSection(
+                title: 'Ingredients',
+                child: LUCarousel(
+                    height: Styles.categoryCarouselHeight,
+                    padding: Styles.sectionContentPadding,
+                    items: _getCategoryCards(context))),
+          ],
+        ),
       );
 }

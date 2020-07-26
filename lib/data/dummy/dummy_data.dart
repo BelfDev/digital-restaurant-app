@@ -41,3 +41,9 @@ const dummyFeaturedOutlets = [
   FeaturedOutlet(
       'Bar Soba', 'Asian Fusion', 4, '\$\$', 'https://picsum.photos/1004')
 ];
+
+const List<String> dummySwiperImages = [
+  'https://picsum.photos/200/400',
+  'https://picsum.photos/200/500',
+  'https://picsum.photos/200/200'
+];
