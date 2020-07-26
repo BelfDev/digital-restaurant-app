@@ -41,12 +41,21 @@ class LUTheme {
             )),
             elevation: 4.0),
         textTheme: baseTheme.textTheme.copyWith(
+          // fontSize: 32
+          headline1: Styles.productTitle,
+          // fontSize: 36
           headline2: Styles.sloganTitleEmphasis,
+          // fontSize: 28
           headline3: Styles.sloganTitle,
+          // fontSize: 18
           button: Styles.button,
+          // fontSize: 24
           headline5: Styles.cardTitle,
+          // fontSize: 22
           headline6: Styles.cardSubtitle,
+          // fontSize: 18
           bodyText1: Styles.cardPriceRange,
+          // fontSize: 16
           bodyText2: Styles.categoryCardTitle,
         ));
   }

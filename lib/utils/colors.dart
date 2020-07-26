@@ -7,6 +7,6 @@ abstract class LUColors {
   static const smoothWhite = Color(0xFFFAFAFA);
   static const darkBlue = Color(0xFF2D3142);
   static const navyBlue = Color(0xFF4F5D75);
-  static const gray = Color(0xCC969696);
+  static const gray = Color(0xFF969696);
   static const smoothGray = Color(0xFFE3E3E3);
 }

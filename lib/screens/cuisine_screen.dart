@@ -109,7 +109,7 @@ class _CuisineScreenState extends State<CuisineScreen> {
                 ),
                 Text(
                   'Glasgow',
-                  style: Styles.location,
+                  style: Styles.locationText,
                 ),
                 SizedBox(
                   width: 8,
