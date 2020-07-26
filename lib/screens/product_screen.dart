@@ -11,6 +11,9 @@ import 'package:dr_app/data/models/screen_arguments.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
+/// The Product Screen displays information about a given product.
+/// The user can choose the desired quantity and add the product
+/// to the cart.
 class ProductScreen extends StatefulWidget {
   static const id = 'product_screen';
 
