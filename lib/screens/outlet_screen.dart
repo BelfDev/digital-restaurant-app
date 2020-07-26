@@ -1,5 +1,7 @@
 import 'package:dr_app/components/buttons/slider_button.dart';
+import 'package:dr_app/components/cards/dish_card.dart';
 import 'package:dr_app/components/chip_carousel.dart';
+import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/star_rating.dart';
 import 'package:dr_app/components/swiper.dart';
 import 'package:dr_app/components/top_bar.dart';
@@ -19,6 +21,22 @@ class OutletScreen extends StatefulWidget {
 
 class _OutletScreenState extends State<OutletScreen> {
   void _onBackButtonPressed() => Navigator.of(context).pop();
+
+//  List<Widget> _getOutletCards() => dummyOutlets
+//      .map((outlet) => LUOutletCard(
+//            imageSrc: outlet.imgSrc,
+//            rating: outlet.rating,
+//            title: outlet.name,
+//            priceRange: outlet.priceRange,
+//            onPressed: () {},
+//          ))
+//      .toList();
+
+  List<Widget> _getOutletCards() => dummyOutlets
+      .map((outlet) => LUDishCard(
+            imageSrc: outlet.imgSrc,
+          ))
+      .toList();
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +83,7 @@ class _OutletScreenState extends State<OutletScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: Styles.sectionContentPadding.copyWith(top: 24, bottom: 32),
+            padding: Styles.sectionContentPadding.copyWith(top: 24, bottom: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -96,8 +114,6 @@ class _OutletScreenState extends State<OutletScreen> {
                     ),
                   ],
                 ),
-//                LUChip('noodles', outlined: false),
-//                MyThreeOptions()
               ],
             ),
           ),
@@ -106,7 +122,13 @@ class _OutletScreenState extends State<OutletScreen> {
             onSelected: (value) {
               print(value);
             },
-          )
+          ),
+          LUList(
+            padding: EdgeInsets.only(top: 16),
+            nested: true,
+            space: 10,
+            items: _getOutletCards(),
+          ),
         ],
       );
 }

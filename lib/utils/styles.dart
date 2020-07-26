@@ -33,6 +33,15 @@ abstract class Styles {
   static const categoryCardTitle = TextStyle(
       color: LUColors.darkBlue, fontSize: 16, fontWeight: FontWeight.w200);
 
+  static const dishCardDescription = TextStyle(
+      color: LUColors.darkBlue, fontSize: 12, fontWeight: FontWeight.w400);
+
+  static const dishCardPriceTag = TextStyle(
+      color: LUColors.darkBlue, fontSize: 18, fontWeight: FontWeight.w400);
+
+  static const dishCardPreparation = TextStyle(
+      color: LUColors.smoothGray, fontSize: 14, fontWeight: FontWeight.w400);
+
   ///  Button Styles
   // button
   static const button =
