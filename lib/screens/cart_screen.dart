@@ -1,3 +1,4 @@
+import 'package:dr_app/components/bottom_sliver.dart';
 import 'package:dr_app/components/cards/dish_card.dart';
 import 'package:dr_app/components/compact_header.dart';
 import 'package:dr_app/components/list.dart';
@@ -50,19 +51,33 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
-      child: ListView(
-        padding: EdgeInsets.zero,
-        physics: ClampingScrollPhysics(),
+      child: Stack(
         children: <Widget>[
-          Stack(
+          ListView(
+            padding: EdgeInsets.zero,
+            physics: ClampingScrollPhysics(),
             children: <Widget>[
-              LUCompactHeader(
-                  imgSrc: widget.coverImgSrc,
-                  icon: Icons.close,
-                  onTopButtonPressed: onBackButtonPressed),
-              buildCartContent()
+              Stack(
+                children: <Widget>[
+                  LUCompactHeader(
+                      imgSrc: widget.coverImgSrc,
+                      icon: Icons.close,
+                      onTopButtonPressed: onBackButtonPressed),
+                  buildCartContent(),
+                ],
+              )
             ],
-          )
+          ),
+          Align(
+              alignment: Alignment.bottomCenter,
+              child: LUBottomSliver(
+                buttonTitle: 'order',
+                subtotal: 30,
+                buttonType: BottomSliverButton.SOLID,
+                onButtonPressed: () {
+                  print('Cart button pressed');
+                },
+              ))
         ],
       ),
     );
