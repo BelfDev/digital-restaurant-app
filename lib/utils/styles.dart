@@ -63,6 +63,8 @@ abstract class Styles {
       color: LUColors.darkBlue, fontSize: 28, fontWeight: FontWeight.w200);
   static const chipText = TextStyle(
       fontSize: 13, fontWeight: FontWeight.w600, color: LUColors.smoothWhite);
+  static const segmentControlText = TextStyle(
+      fontSize: 14, color: LUColors.darkBlue, fontWeight: FontWeight.w600);
 
   /// Container Styles
   static const double roundContainerHeight = 240;

@@ -3,6 +3,8 @@ import 'package:dr_app/components/compact_header.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/round_container.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
+import 'package:dr_app/utils/styles.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatefulWidget {
@@ -17,6 +19,19 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  final Map<int, Widget> segmentTabs = const <int, Widget>{
+    0: Text(
+      "Active Tab",
+      style: Styles.segmentControlText,
+    ),
+    1: Text(
+      "Order Summary",
+      style: Styles.segmentControlText,
+    )
+  };
+
+  int segmentedControlGroupValue = 0;
+
   void onBackButtonPressed() {
     Navigator.of(context).pop();
   }
@@ -33,20 +48,23 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.zero,
-      physics: ClampingScrollPhysics(),
-      children: <Widget>[
-        Stack(
-          children: <Widget>[
-            LUCompactHeader(
-                imgSrc: widget.coverImgSrc,
-                icon: Icons.close,
-                onTopButtonPressed: onBackButtonPressed),
-            buildCartContent()
-          ],
-        )
-      ],
+    return Material(
+      color: Colors.transparent,
+      child: ListView(
+        padding: EdgeInsets.zero,
+        physics: ClampingScrollPhysics(),
+        children: <Widget>[
+          Stack(
+            children: <Widget>[
+              LUCompactHeader(
+                  imgSrc: widget.coverImgSrc,
+                  icon: Icons.close,
+                  onTopButtonPressed: onBackButtonPressed),
+              buildCartContent()
+            ],
+          )
+        ],
+      ),
     );
   }
 
@@ -54,6 +72,14 @@ class _CartScreenState extends State<CartScreen> {
     return RoundContainer(
       child: Column(
         children: <Widget>[
+          CupertinoSlidingSegmentedControl(
+              groupValue: segmentedControlGroupValue,
+              children: segmentTabs,
+              onValueChanged: (i) {
+                setState(() {
+                  segmentedControlGroupValue = i;
+                });
+              }),
           LUList(
             padding: EdgeInsets.only(top: 24),
             nested: true,
