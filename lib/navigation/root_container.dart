@@ -122,7 +122,8 @@ class _RootContainerState extends State<RootContainer>
                 MaterialPageRoute(
                     fullscreenDialog: true,
                     builder: (context) => CartScreen(
-                          coverImgSrc: 'https://picsum.photos/id/237/200/300',
+                          coverImgSrc:
+                              'https://picsum.photos/seed/picsum/200/300',
                         )),
               );
             },

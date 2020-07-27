@@ -10,13 +10,21 @@ class LUDishCard extends StatelessWidget {
   final double height;
   final EdgeInsetsGeometry margin;
   final String imageSrc;
+  final String title;
+  final String description;
+  final String priceTag;
+  final String preparationTime;
 
   const LUDishCard(
       {Key key,
       this.width,
       this.height = 128,
       this.margin = const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-      this.imageSrc})
+      this.imageSrc,
+      this.title,
+      this.description,
+      this.priceTag,
+      this.preparationTime})
       : super(key: key);
 
   @override
@@ -27,6 +35,7 @@ class LUDishCard extends StatelessWidget {
       margin: margin,
       children: <Widget>[
         Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
               flex: 1,
@@ -52,7 +61,7 @@ class LUDishCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Pad Thai Noodles',
+                      title,
                       style: LUTheme.of(context)
                           .textTheme
                           .headline5
@@ -61,7 +70,7 @@ class LUDishCard extends StatelessWidget {
                     SizedBox(height: 4),
                     Expanded(
                       child: Text(
-                        'Classic Thai Street Food Dish With Rice Noodles & Roasted Peanuts',
+                        description,
                         style: Styles.dishCardDescription,
                       ),
                     ),
@@ -78,13 +87,13 @@ class LUDishCard extends StatelessWidget {
                               width: 4,
                             ),
                             Text(
-                              '12 min',
+                              preparationTime,
                               style: Styles.dishCardPreparation,
                             )
                           ],
                         ),
                         Text(
-                          '£ 8.50',
+                          priceTag,
                           style: Styles.dishCardPriceTag,
                         )
                       ],
