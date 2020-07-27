@@ -52,15 +52,16 @@ class _OutletScreenState extends State<OutletScreen> {
               buildContent(args),
             ],
           ),
-          Positioned(
-              left: 0,
-              right: 0,
-              bottom: 40.0,
-              child: LUSliderButton(
-                margin: Styles.fixedButtonMargin,
-                title: 'Check-in',
-                onSlided: () {},
-              ))
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: LUSliderButton(
+              margin: Styles.fixedButtonMargin,
+              title: 'Check-in',
+              onSlided: () {
+                print('ON SLIDED');
+              },
+            ),
+          )
         ],
       ),
     );

@@ -46,7 +46,8 @@ abstract class Styles {
   // button
   static const button =
       TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600);
-  static const fixedButtonMargin = EdgeInsets.symmetric(horizontal: 32.0);
+  static const fixedButtonMargin =
+      EdgeInsets.only(left: 32, right: 32, bottom: 40);
 
   /// Text Styles
   static const sectionText = TextStyle(

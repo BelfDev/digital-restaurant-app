@@ -47,10 +47,8 @@ class _ProductScreenState extends State<ProductScreen> {
               _buildContent(args),
             ],
           ),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 40.0,
+          Align(
+            alignment: Alignment.bottomCenter,
             child: LUSolidButton(
               title: 'ADD TO BASKET',
               margin: Styles.fixedButtonMargin,

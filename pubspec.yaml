@@ -33,6 +33,7 @@ dependencies:
   smooth_star_rating: 1.1.1
   flutter_swiper: ^1.1.6
   flutter_page_indicator: ^0.0.3
+  slide_to_confirm: ^0.0.6
 
   # Custom Capabilities
   qr_code_scanner:
