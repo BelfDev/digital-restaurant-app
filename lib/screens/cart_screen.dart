@@ -38,18 +38,6 @@ class _CartScreenState extends State<CartScreen> {
     Navigator.of(context).pop();
   }
 
-//  List<Widget> getDishCards() => dummyDishes
-//      .map((dish) =>
-//      LUDishCard(
-//            imageSrc: dish.imgSrc,
-//            title: dish.title,
-//            description: dish.description,
-//            priceTag: dish.priceTag,
-//            preparationTime: dish.preparationTime,
-//          )
-//  )
-//      .toList();
-
   List<Widget> getDishCards() => dummyDishes
       .map((dish) => Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -64,9 +52,14 @@ class _CartScreenState extends State<CartScreen> {
                     description: dish.description,
                     priceTag: dish.priceTag,
                     preparationTime: dish.preparationTime,
+                    quantity: 10,
                   ),
                 ),
-                LUCounter(vertical: true, onUpdate: () {}),
+                LUCounter(
+                    vertical: true,
+                    onUpdate: (quantity) {
+                      print(quantity);
+                    }),
               ],
             ),
           ))

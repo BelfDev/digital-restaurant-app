@@ -13,6 +13,7 @@ class LUDishCard extends StatelessWidget {
   final String title;
   final String description;
   final String priceTag;
+  final int quantity;
   final String preparationTime;
 
   const LUDishCard(
@@ -24,6 +25,7 @@ class LUDishCard extends StatelessWidget {
       this.title,
       this.description,
       this.priceTag,
+      this.quantity,
       this.preparationTime})
       : super(key: key);
 
@@ -92,10 +94,7 @@ class LUDishCard extends StatelessWidget {
                             )
                           ],
                         ),
-                        Text(
-                          priceTag,
-                          style: Styles.dishCardPriceTag,
-                        )
+                        buildPriceTag(context)
                       ],
                     )
                   ],
@@ -106,5 +105,28 @@ class LUDishCard extends StatelessWidget {
         )
       ],
     );
+  }
+
+  Widget buildPriceTag(context) {
+    return quantity != null
+        ? Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              Text("${quantity}x",
+                  style: Styles.dishCardPreparation
+                      .copyWith(color: LUTheme.of(context).accentColor)),
+              SizedBox(
+                width: 4,
+              ),
+              Text(
+                priceTag,
+                style: Styles.dishCardPriceTag,
+              )
+            ],
+          )
+        : Text(
+            priceTag,
+            style: Styles.dishCardPriceTag,
+          );
   }
 }
