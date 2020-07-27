@@ -30,7 +30,7 @@ class LUDishCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LUBaseCard(
-      width: width,
+      width: 100,
       height: height,
       margin: margin,
       children: <Widget>[
@@ -52,7 +52,7 @@ class LUDishCard extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 3,
               child: Padding(
                 padding:
                     const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 8.0),

@@ -1,6 +1,7 @@
 import 'package:dr_app/components/bottom_sliver.dart';
 import 'package:dr_app/components/cards/dish_card.dart';
 import 'package:dr_app/components/compact_header.dart';
+import 'package:dr_app/components/counter.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/round_container.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
@@ -37,13 +38,37 @@ class _CartScreenState extends State<CartScreen> {
     Navigator.of(context).pop();
   }
 
+//  List<Widget> getDishCards() => dummyDishes
+//      .map((dish) =>
+//      LUDishCard(
+//            imageSrc: dish.imgSrc,
+//            title: dish.title,
+//            description: dish.description,
+//            priceTag: dish.priceTag,
+//            preparationTime: dish.preparationTime,
+//          )
+//  )
+//      .toList();
+
   List<Widget> getDishCards() => dummyDishes
-      .map((dish) => LUDishCard(
-            imageSrc: dish.imgSrc,
-            title: dish.title,
-            description: dish.description,
-            priceTag: dish.priceTag,
-            preparationTime: dish.preparationTime,
+      .map((dish) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Expanded(
+                  child: LUDishCard(
+                    margin: EdgeInsets.only(right: 8.0),
+                    imageSrc: dish.imgSrc,
+                    title: dish.title,
+                    description: dish.description,
+                    priceTag: dish.priceTag,
+                    preparationTime: dish.preparationTime,
+                  ),
+                ),
+                LUCounter(vertical: true, onUpdate: () {}),
+              ],
+            ),
           ))
       .toList();
 
@@ -96,7 +121,7 @@ class _CartScreenState extends State<CartScreen> {
                 });
               }),
           LUList(
-            padding: EdgeInsets.only(top: 24),
+            padding: EdgeInsets.only(top: 24, bottom: 56),
             nested: true,
             space: 10,
             items: getDishCards(),
