@@ -87,7 +87,9 @@ class _CartScreenState extends State<CartScreen> {
               child: LUBottomSliver(
                 buttonTitle: 'order',
                 subtotal: 30,
-                buttonType: BottomSliverButton.SOLID,
+                buttonType: segmentedControlGroupValue == 0
+                    ? BottomSliverButton.SOLID
+                    : BottomSliverButton.SLIDER,
                 onButtonPressed: () {
                   print('Cart button pressed');
                 },
