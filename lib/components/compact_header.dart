@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 class LUCompactHeader extends StatelessWidget {
   final String imgSrc;
   final VoidCallback onTopButtonPressed;
+  final IconData icon;
 
-  const LUCompactHeader({Key key, this.imgSrc, this.onTopButtonPressed})
+  const LUCompactHeader(
+      {Key key, this.imgSrc, this.onTopButtonPressed, this.icon})
       : super(key: key);
 
   @override
@@ -24,6 +26,7 @@ class LUCompactHeader extends StatelessWidget {
             ),
           ),
           LUTopBar(
+            icon: icon,
             onNavigationButtonPressed: onTopButtonPressed,
           ),
         ],

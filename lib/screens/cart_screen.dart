@@ -27,6 +27,7 @@ class _CartScreenState extends State<CartScreen> {
           children: <Widget>[
             LUCompactHeader(
                 imgSrc: widget.coverImgSrc,
+                icon: Icons.close,
                 onTopButtonPressed: onBackButtonPressed),
           ],
         )
