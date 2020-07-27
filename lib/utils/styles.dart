@@ -69,6 +69,7 @@ abstract class Styles {
   static const roundContainerRadius = const BorderRadius.only(
       topLeft: Radius.circular(40), topRight: Radius.circular(40));
   static const double paginatedHeaderHeight = 400;
+  static const double compactHeaderHeight = 240;
 
   /// List Styles
   static const sectionContentPadding =

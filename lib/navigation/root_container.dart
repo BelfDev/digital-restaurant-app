@@ -120,7 +120,10 @@ class _RootContainerState extends State<RootContainer>
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    fullscreenDialog: true, builder: (context) => CartScreen()),
+                    fullscreenDialog: true,
+                    builder: (context) => CartScreen(
+                          coverImgSrc: 'https://picsum.photos/id/237/200/300',
+                        )),
               );
             },
             tooltip: 'Tab',
