@@ -63,7 +63,7 @@ class _ProductScreenState extends State<ProductScreen> {
   }
 
   Widget _buildHeader(ScreenArguments args) => Container(
-        height: 400,
+        height: Styles.paginatedHeaderHeight,
         child: Stack(
           children: <Widget>[
             LUSwiper(imgSrcList: dummySwiperImages),

@@ -67,7 +67,7 @@ class _OutletScreenState extends State<OutletScreen> {
   }
 
   Widget buildHeader(ScreenArguments args) => Container(
-        height: 400,
+        height: Styles.paginatedHeaderHeight,
         child: Stack(
           children: <Widget>[
             LUSwiper(imgSrcList: dummySwiperImages),
