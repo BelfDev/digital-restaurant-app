@@ -55,11 +55,7 @@ class _CartScreenState extends State<CartScreen> {
                     quantity: 10,
                   ),
                 ),
-                LUCounter(
-                    vertical: true,
-                    onUpdate: (quantity) {
-                      print(quantity);
-                    }),
+                buildCounter()
               ],
             ),
           ))
@@ -122,5 +118,17 @@ class _CartScreenState extends State<CartScreen> {
         ],
       ),
     );
+  }
+
+  Widget buildCounter() {
+    if (segmentedControlGroupValue == 0) {
+      return LUCounter(
+          vertical: true,
+          onUpdate: (quantity) {
+            print(quantity);
+          });
+    } else {
+      return Container();
+    }
   }
 }
