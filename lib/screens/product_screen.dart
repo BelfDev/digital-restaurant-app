@@ -47,13 +47,11 @@ class _ProductScreenState extends State<ProductScreen> {
               _buildContent(args),
             ],
           ),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 40.0,
+          Align(
+            alignment: Alignment.bottomCenter,
             child: LUSolidButton(
               title: 'ADD TO BASKET',
-              margin: EdgeInsets.symmetric(horizontal: 16),
+              margin: Styles.fixedButtonMargin,
               onPressed: () {},
             ),
           )
@@ -63,7 +61,7 @@ class _ProductScreenState extends State<ProductScreen> {
   }
 
   Widget _buildHeader(ScreenArguments args) => Container(
-        height: 400,
+        height: Styles.paginatedHeaderHeight,
         child: Stack(
           children: <Widget>[
             LUSwiper(imgSrcList: dummySwiperImages),

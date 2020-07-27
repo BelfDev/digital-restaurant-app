@@ -28,9 +28,11 @@ class LUSwiper extends StatelessWidget {
         );
       },
       indicatorLayout: PageIndicatorLayout.SCALE,
+      loop: false,
       autoplay: false,
       itemCount: imgSrcList.length,
       outer: true,
+      index: 0,
       pagination: SwiperPagination(
           margin: EdgeInsets.only(top: 16),
           builder: DotSwiperPaginationBuilder(

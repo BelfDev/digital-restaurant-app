@@ -1,3 +1,4 @@
+import 'package:dr_app/data/models/chip_item.dart';
 import 'package:dr_app/data/models/cuisine_category.dart';
 import 'package:dr_app/data/models/featured_outlet.dart';
 import 'package:dr_app/data/models/outlet.dart';
@@ -46,4 +47,13 @@ const List<String> dummySwiperImages = [
   'https://picsum.photos/200/400',
   'https://picsum.photos/200/500',
   'https://picsum.photos/200/200'
+];
+
+const List<ChipItem> dummyChipItems = [
+  ChipItem(text: 'Noodles', value: 0),
+  ChipItem(text: 'Curry', value: 1),
+  ChipItem(text: 'Burger', value: 2),
+  ChipItem(text: 'Sides', value: 3),
+  ChipItem(text: 'Pizza', value: 4),
+  ChipItem(text: 'Pasta', value: 5),
 ];

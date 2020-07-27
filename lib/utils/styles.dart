@@ -33,10 +33,21 @@ abstract class Styles {
   static const categoryCardTitle = TextStyle(
       color: LUColors.darkBlue, fontSize: 16, fontWeight: FontWeight.w200);
 
+  static const dishCardDescription = TextStyle(
+      color: LUColors.darkBlue, fontSize: 12, fontWeight: FontWeight.w400);
+
+  static const dishCardPriceTag = TextStyle(
+      color: LUColors.darkBlue, fontSize: 18, fontWeight: FontWeight.w400);
+
+  static const dishCardPreparation = TextStyle(
+      color: LUColors.smoothGray, fontSize: 14, fontWeight: FontWeight.w400);
+
   ///  Button Styles
   // button
   static const button =
       TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600);
+  static const fixedButtonMargin =
+      EdgeInsets.only(left: 32, right: 32, bottom: 40);
 
   /// Text Styles
   static const sectionText = TextStyle(
@@ -48,14 +59,20 @@ abstract class Styles {
   static const productTitle = TextStyle(
       color: LUColors.darkBlue, fontSize: 32, fontWeight: FontWeight.bold);
   static const productSubtitle = TextStyle(color: LUColors.gray, fontSize: 17);
+  static const outletSubtitle = TextStyle(
+      color: LUColors.darkBlue, fontSize: 28, fontWeight: FontWeight.w200);
+  static const chipText = TextStyle(
+      fontSize: 13, fontWeight: FontWeight.w600, color: LUColors.smoothWhite);
 
   /// Container Styles
   static const double roundContainerHeight = 240;
   static const roundContainerRadius = const BorderRadius.only(
       topLeft: Radius.circular(40), topRight: Radius.circular(40));
+  static const double paginatedHeaderHeight = 400;
 
   /// List Styles
   static const sectionContentPadding =
       const EdgeInsets.only(left: 16, right: 16, bottom: 8);
   static const double categoryCarouselHeight = 160;
+  static const double chipCarouselHeight = 56;
 }

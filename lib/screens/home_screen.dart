@@ -10,7 +10,7 @@ import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/screen_arguments.dart';
-import 'package:dr_app/screens/product_screen.dart';
+import 'package:dr_app/screens/outlet_screen.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
@@ -153,7 +153,7 @@ class _HomeContent extends StatelessWidget {
             title: outlet.name,
             subtitle: outlet.category,
             onPressed: () {
-              Navigator.of(context).pushNamed(ProductScreen.id,
+              Navigator.of(context).pushNamed(OutletScreen.id,
                   arguments: ScreenArguments(
                       title: outlet.name, coverImgSrc: outlet.imgSrc));
             },

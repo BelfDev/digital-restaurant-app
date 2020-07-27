@@ -5,6 +5,7 @@ import 'package:dr_app/screens/explore_screen.dart';
 import 'package:dr_app/screens/home_screen.dart';
 import 'package:dr_app/screens/more_screen.dart';
 import 'package:dr_app/screens/outlet_detail_screen.dart';
+import 'package:dr_app/screens/outlet_screen.dart';
 import 'package:dr_app/screens/product_screen.dart';
 import 'package:dr_app/screens/profile_screen.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
@@ -21,7 +22,8 @@ final Map<String, WidgetBuilder> routes = {
   OutletDetailScreen.id: (context) => OutletDetailScreen(),
   CategoryDetailScreen.id: (context) => CategoryDetailScreen(),
   CuisineScreen.id: (context) => CuisineScreen(),
-  ProductScreen.id: (context) => ProductScreen()
+  ProductScreen.id: (context) => ProductScreen(),
+  OutletScreen.id: (context) => OutletScreen(),
 };
 
 final Set<String> fullScreenRoutes = {ScannerScreen.id};
