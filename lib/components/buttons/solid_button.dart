@@ -22,7 +22,8 @@ class LUSolidButton extends StatelessWidget {
   final Function onPressed;
 
   LUSolidButton(
-      {this.width = 280.0,
+      {Key key,
+      this.width = 280.0,
       this.height = 56.0,
       this.title,
       this.onPressed,

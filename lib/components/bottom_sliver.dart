@@ -2,6 +2,7 @@ import 'package:dr_app/components/buttons/slider_button.dart';
 import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/styles.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 enum BottomSliverButton { SOLID, SLIDER }
@@ -63,20 +64,19 @@ class LUBottomSliver extends StatelessWidget {
         ));
   }
 
-  Widget buildButton() {
-    switch (buttonType) {
-      case BottomSliverButton.SLIDER:
-        return LUSliderButton(
-          width: double.infinity,
-          title: buttonTitle,
-          onSlided: onButtonPressed,
-        );
-      case BottomSliverButton.SOLID:
-        return LUSolidButton(
-          width: double.infinity,
-          title: buttonTitle,
-          onPressed: onButtonPressed,
-        );
-    }
-  }
+  Widget buildButton() => AnimatedSwitcher(
+      duration: const Duration(milliseconds: 240),
+      child: buttonType == BottomSliverButton.SLIDER
+          ? LUSliderButton(
+              key: ValueKey<BottomSliverButton>(buttonType),
+              width: double.infinity,
+              title: buttonTitle,
+              onSlided: onButtonPressed,
+            )
+          : LUSolidButton(
+              key: ValueKey<BottomSliverButton>(buttonType),
+              width: double.infinity,
+              title: buttonTitle,
+              onPressed: onButtonPressed,
+            ));
 }

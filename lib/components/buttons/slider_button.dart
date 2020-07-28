@@ -20,6 +20,7 @@ class LUSliderButton extends StatelessWidget {
   final EdgeInsetsGeometry margin;
 
   LUSliderButton({
+    Key key,
     this.width = 288.0,
     this.height = 72.0,
     @required this.title,
