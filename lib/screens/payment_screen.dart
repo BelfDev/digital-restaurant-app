@@ -14,6 +14,14 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
+  double tipIncluded;
+
+  @override
+  void initState() {
+    super.initState();
+    tipIncluded = 0.0;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,13 +41,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 child: LUTipToolbar(
                   margin: EdgeInsets.symmetric(horizontal: 16.0),
                   tipOptions: [
-                    Tip('😢', 0),
-                    Tip('10%', 0),
-                    Tip('15%', 0),
-                    Tip('20%', 0),
+                    Tip('😢', 0.0),
+                    Tip('10%', 0.10),
+                    Tip('15%', 0.15),
+                    Tip('20%', 0.20),
                   ],
                   onPressed: (tip) {
                     print(tip.displayText);
+                    setState(() {
+                      tipIncluded = tip.value;
+                    });
                   },
                 ),
               )
@@ -49,6 +60,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             alignment: Alignment.bottomCenter,
             child: LUBottomSliver(
               buttonTitle: 'pay',
+              tip: tipIncluded,
               onButtonPressed: () => Navigator.of(context).pop(),
             ),
           ),
