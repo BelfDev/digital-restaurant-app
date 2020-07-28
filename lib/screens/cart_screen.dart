@@ -8,6 +8,7 @@ import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/round_container.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
+import 'package:dr_app/screens/payment_screen.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -171,7 +172,12 @@ class _CartScreenState extends State<CartScreen> {
                 title: 'Pay with credit card',
                 uppercase: false,
                 color: LUTheme.of(context).primaryColor,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PaymentScreen()),
+                  );
+                },
               ),
             ],
           );
