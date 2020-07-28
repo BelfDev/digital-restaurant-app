@@ -1,10 +1,18 @@
-import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
+/// The contents of a [BottomSheet]. This widget is displayed
+/// over a screen to request for user input.
 class LUBottomSheetContainer extends StatelessWidget {
+  final String title;
+  final List<Widget> children;
+
+  const LUBottomSheetContainer(
+      {Key key, @required this.title, @required this.children})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -24,31 +32,16 @@ class LUBottomSheetContainer extends StatelessWidget {
                       bottom: BorderSide(width: 1, color: LUColors.gray))),
               child: Center(
                 child: Text(
-                  'Choose payment',
+                  title,
                   style: Styles.bottomSheetTitle,
                 ),
               ),
             ),
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  LUSolidButton(
-                    title: 'Pay with Pay',
-                    uppercase: false,
-                    color: Colors.black,
-                    onPressed: () {},
-                  ),
-                  LUSolidButton(
-                    margin: EdgeInsets.symmetric(vertical: 16.0),
-                    title: 'Pay with credit card',
-                    uppercase: false,
-                    color: LUTheme.of(context).primaryColor,
-                    onPressed: () {},
-                  ),
-                ],
-              ),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: children),
             )
           ],
         ),

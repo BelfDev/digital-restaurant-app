@@ -1,5 +1,6 @@
 import 'package:dr_app/components/bottom_sheet_container.dart';
 import 'package:dr_app/components/bottom_sliver.dart';
+import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/dish_card.dart';
 import 'package:dr_app/components/compact_header.dart';
 import 'package:dr_app/components/counter.dart';
@@ -156,7 +157,24 @@ class _CartScreenState extends State<CartScreen> {
                 topRight: Radius.circular(LUTheme.bottomSheetRadius),
                 topLeft: Radius.circular(LUTheme.bottomSheetRadius))),
         builder: (ctx) {
-          return LUBottomSheetContainer();
+          return LUBottomSheetContainer(
+            title: 'Choose payment method',
+            children: <Widget>[
+              LUSolidButton(
+                title: 'Pay with Pay',
+                uppercase: false,
+                color: Colors.black,
+                onPressed: () {},
+              ),
+              LUSolidButton(
+                margin: EdgeInsets.symmetric(vertical: 16.0),
+                title: 'Pay with credit card',
+                uppercase: false,
+                color: LUTheme.of(context).primaryColor,
+                onPressed: () {},
+              ),
+            ],
+          );
         });
   }
 }
