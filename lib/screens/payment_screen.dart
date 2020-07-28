@@ -1,4 +1,5 @@
 import 'package:dr_app/components/bottom_sliver.dart';
+import 'package:dr_app/components/section.dart';
 import 'package:dr_app/components/tip_toolbar.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
@@ -26,10 +27,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 tint: LUTheme.of(context).backgroundColor,
                 onNavigationButtonPressed: () => Navigator.of(context).pop(),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              LUSection(
+                title: 'Tip the service',
+                margin: EdgeInsets.only(top: 32.0),
                 child: LUTipToolbar(
-                  margin: EdgeInsets.only(top: 8.0),
+                  margin: EdgeInsets.symmetric(horizontal: 16.0),
                   tipOptions: [
                     Tip('😢', 0),
                     Tip('10%', 0),
