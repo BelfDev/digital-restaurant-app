@@ -19,6 +19,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             title: 'Payment',
             buttonBackgroundColor: LUTheme.of(context).primaryColor,
             tint: LUTheme.of(context).backgroundColor,
+            onNavigationButtonPressed: () => Navigator.of(context).pop(),
           ),
           Container(
             color: Colors.red,
