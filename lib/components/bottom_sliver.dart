@@ -69,13 +69,11 @@ class LUBottomSliver extends StatelessWidget {
       child: buttonType == BottomSliverButton.SLIDER
           ? LUSliderButton(
               key: ValueKey<BottomSliverButton>(buttonType),
-              width: double.infinity,
               title: buttonTitle,
               onSlided: onButtonPressed,
             )
           : LUSolidButton(
               key: ValueKey<BottomSliverButton>(buttonType),
-              width: double.infinity,
               title: buttonTitle,
               onPressed: onButtonPressed,
             ));
