@@ -49,6 +49,7 @@ class _CartScreenState extends State<CartScreen> {
                     margin: (segmentedControlGroupValue == 0)
                         ? EdgeInsets.only(right: 8.0)
                         : EdgeInsets.zero,
+                    shrink: segmentedControlGroupValue == 0,
                     imageSrc: dish.imgSrc,
                     title: dish.title,
                     description: dish.description,

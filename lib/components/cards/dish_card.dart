@@ -15,6 +15,7 @@ class LUDishCard extends StatelessWidget {
   final String priceTag;
   final int quantity;
   final String preparationTime;
+  final bool shrink;
 
   const LUDishCard(
       {Key key,
@@ -26,7 +27,8 @@ class LUDishCard extends StatelessWidget {
       this.description,
       this.priceTag,
       this.quantity,
-      this.preparationTime})
+      this.preparationTime,
+      this.shrink = false})
       : super(key: key);
 
   @override
@@ -54,7 +56,7 @@ class LUDishCard extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 3,
+              flex: shrink ? 3 : 2,
               child: Padding(
                 padding:
                     const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 8.0),
