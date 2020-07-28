@@ -46,7 +46,9 @@ class _CartScreenState extends State<CartScreen> {
               children: <Widget>[
                 Expanded(
                   child: LUDishCard(
-                    margin: EdgeInsets.only(right: 8.0),
+                    margin: (segmentedControlGroupValue == 0)
+                        ? EdgeInsets.only(right: 8.0)
+                        : EdgeInsets.zero,
                     imageSrc: dish.imgSrc,
                     title: dish.title,
                     description: dish.description,
