@@ -42,6 +42,9 @@ abstract class Styles {
   static const dishCardPreparation = TextStyle(
       color: LUColors.smoothGray, fontSize: 14, fontWeight: FontWeight.w400);
 
+  static const dishStatusText = TextStyle(
+      fontSize: 12, color: LUColors.darkBlue, fontWeight: FontWeight.w600);
+
   ///  Button Styles
   // button
   static const button =

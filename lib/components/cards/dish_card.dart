@@ -1,4 +1,5 @@
 import 'package:dr_app/components/cards/base_card.dart';
+import 'package:dr_app/components/status_label.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
@@ -16,6 +17,7 @@ class LUDishCard extends StatelessWidget {
   final int quantity;
   final String preparationTime;
   final bool shrink;
+  final bool showStatus;
 
   const LUDishCard(
       {Key key,
@@ -28,7 +30,8 @@ class LUDishCard extends StatelessWidget {
       this.priceTag,
       this.quantity,
       this.preparationTime,
-      this.shrink = false})
+      this.shrink = false,
+      this.showStatus = false})
       : super(key: key);
 
   @override
@@ -46,13 +49,23 @@ class LUDishCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                  child: FadeInImage.assetNetwork(
-                    placeholder: Images.verticalPlaceholder,
-                    image: imageSrc,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    child: Stack(
+                      children: <Widget>[
+                        FadeInImage.assetNetwork(
+                          height: double.infinity,
+                          placeholder: Images.verticalPlaceholder,
+                          image: imageSrc,
+                          fit: BoxFit.cover,
+                        ),
+                        showStatus
+                            ? Align(
+                                alignment: Alignment.bottomCenter,
+                                child: LUStatusLabel(text: 'preparing'),
+                              )
+                            : Container()
+                      ],
+                    )),
               ),
             ),
             Expanded(

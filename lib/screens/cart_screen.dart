@@ -50,6 +50,7 @@ class _CartScreenState extends State<CartScreen> {
                         ? EdgeInsets.only(right: 8.0)
                         : EdgeInsets.zero,
                     shrink: segmentedControlGroupValue == 0,
+                    showStatus: segmentedControlGroupValue != 0,
                     imageSrc: dish.imgSrc,
                     title: dish.title,
                     description: dish.description,
@@ -88,12 +89,16 @@ class _CartScreenState extends State<CartScreen> {
           Align(
               alignment: Alignment.bottomCenter,
               child: LUBottomSliver(
-                buttonTitle: 'order',
+                buttonTitle:
+                    segmentedControlGroupValue == 0 ? 'order' : 'check-out',
                 subtotal: 30,
                 buttonType: segmentedControlGroupValue == 0
                     ? BottomSliverButton.SOLID
                     : BottomSliverButton.SLIDER,
                 onButtonPressed: () {
+                  setState(() {
+                    segmentedControlGroupValue = 1;
+                  });
                   print('Cart button pressed');
                 },
               ))
