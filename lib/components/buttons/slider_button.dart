@@ -22,7 +22,7 @@ class LUSliderButton extends StatelessWidget {
   LUSliderButton({
     Key key,
     this.width = 288.0,
-    this.height = 72.0,
+    this.height = 56.0,
     @required this.title,
     @required this.onSlided,
     this.trackColor = LUColors.smoothGray,
