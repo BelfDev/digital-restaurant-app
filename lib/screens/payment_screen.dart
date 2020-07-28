@@ -2,6 +2,7 @@ import 'package:dr_app/components/bottom_sliver.dart';
 import 'package:dr_app/components/tip_toolbar.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
+import 'package:dr_app/data/models/tip.dart';
 import 'package:flutter/material.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -29,7 +30,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: LUTipToolbar(
                   margin: EdgeInsets.only(top: 8.0),
-                  tipOptions: ['😢', '10%', '15%', '20%'],
+                  tipOptions: [
+                    Tip('😢', 0),
+                    Tip('10%', 0),
+                    Tip('15%', 0),
+                    Tip('20%', 0),
+                  ],
+                  onPressed: (tip) {
+                    print(tip.displayText);
+                  },
                 ),
               )
             ],
