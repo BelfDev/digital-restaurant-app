@@ -1,9 +1,11 @@
+import 'package:dr_app/components/bottom_sheet_container.dart';
 import 'package:dr_app/components/bottom_sliver.dart';
 import 'package:dr_app/components/cards/dish_card.dart';
 import 'package:dr_app/components/compact_header.dart';
 import 'package:dr_app/components/counter.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/round_container.dart';
+import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,6 +23,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final Map<int, Widget> segmentTabs = const <int, Widget>{
     0: Text(
       "Active Tab",
@@ -67,9 +70,9 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Stack(
+    return Scaffold(
+      key: scaffoldKey,
+      body: Stack(
         children: <Widget>[
           ListView(
             padding: EdgeInsets.zero,
@@ -96,10 +99,13 @@ class _CartScreenState extends State<CartScreen> {
                     ? BottomSliverButton.SOLID
                     : BottomSliverButton.SLIDER,
                 onButtonPressed: () {
-                  setState(() {
-                    segmentedControlGroupValue = 1;
-                  });
-                  print('Cart button pressed');
+                  if (segmentedControlGroupValue == 0) {
+                    setState(() {
+                      segmentedControlGroupValue = 1;
+                    });
+                  } else {
+                    activateBottomSheet(context);
+                  }
                 },
               ))
         ],
@@ -140,5 +146,17 @@ class _CartScreenState extends State<CartScreen> {
     } else {
       return Container();
     }
+  }
+
+  void activateBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(LUTheme.bottomSheetRadius),
+                topLeft: Radius.circular(LUTheme.bottomSheetRadius))),
+        builder: (ctx) {
+          return LUBottomSheetContainer();
+        });
   }
 }

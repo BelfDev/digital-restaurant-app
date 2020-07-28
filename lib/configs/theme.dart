@@ -9,6 +9,7 @@ class LUTheme {
   static const double primaryIconSize = 32.0;
   static const double bottomBarIconSize = 24.0;
   static const double cardBorderRadius = 12.0;
+  static const double bottomSheetRadius = 12.0;
 
   static ThemeData of(context) {
     final baseTheme = Theme.of(context);
@@ -17,7 +18,7 @@ class LUTheme {
         accentColor: LUColors.orange,
         unselectedWidgetColor: LUColors.smoothGray,
         bottomAppBarTheme: BottomAppBarTheme(
-            color: Colors.white,
+            color: LUColors.white,
             shape: CircularNotchedRectangle(),
             elevation: 24.0),
         backgroundColor: LUColors.smoothWhite,

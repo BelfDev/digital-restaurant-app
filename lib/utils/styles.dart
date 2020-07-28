@@ -68,6 +68,8 @@ abstract class Styles {
       fontSize: 13, fontWeight: FontWeight.w600, color: LUColors.smoothWhite);
   static const segmentControlText = TextStyle(
       fontSize: 14, color: LUColors.darkBlue, fontWeight: FontWeight.w600);
+  static const bottomSheetTitle = TextStyle(
+      fontSize: 20, fontWeight: FontWeight.w600, color: LUColors.darkBlue);
 
   /// Container Styles
   static const double roundContainerHeight = 240;
