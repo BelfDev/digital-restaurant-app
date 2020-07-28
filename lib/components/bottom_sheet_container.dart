@@ -1,3 +1,4 @@
+import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/styles.dart';
@@ -11,7 +12,7 @@ class LUBottomSheetContainer extends StatelessWidget {
           topLeft: Radius.circular(LUTheme.bottomSheetRadius),
           topRight: Radius.circular(LUTheme.bottomSheetRadius)),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.4,
+        height: MediaQuery.of(context).size.height * 0.3,
         color: LUColors.white,
         child: Column(
           children: <Widget>[
@@ -28,6 +29,27 @@ class LUBottomSheetContainer extends StatelessWidget {
                 ),
               ),
             ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  LUSolidButton(
+                    title: 'Pay with Pay',
+                    uppercase: false,
+                    color: Colors.black,
+                    onPressed: () {},
+                  ),
+                  LUSolidButton(
+                    margin: EdgeInsets.symmetric(vertical: 16.0),
+                    title: 'Pay with credit card',
+                    uppercase: false,
+                    color: LUTheme.of(context).primaryColor,
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
