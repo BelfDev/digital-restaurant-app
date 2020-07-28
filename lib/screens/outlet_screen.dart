@@ -22,19 +22,13 @@ class OutletScreen extends StatefulWidget {
 class _OutletScreenState extends State<OutletScreen> {
   void _onBackButtonPressed() => Navigator.of(context).pop();
 
-//  List<Widget> _getOutletCards() => dummyOutlets
-//      .map((outlet) => LUOutletCard(
-//            imageSrc: outlet.imgSrc,
-//            rating: outlet.rating,
-//            title: outlet.name,
-//            priceRange: outlet.priceRange,
-//            onPressed: () {},
-//          ))
-//      .toList();
-
-  List<Widget> _getOutletCards() => dummyOutlets
-      .map((outlet) => LUDishCard(
-            imageSrc: outlet.imgSrc,
+  List<Widget> _getOutletCards() => dummyDishes
+      .map((dish) => LUDishCard(
+            imageSrc: dish.imgSrc,
+            title: dish.title,
+            description: dish.description,
+            priceTag: dish.priceTag,
+            preparationTime: dish.preparationTime,
           ))
       .toList();
 
