@@ -19,15 +19,18 @@ class LUSolidButton extends StatelessWidget {
 
   final String title;
   final Color color;
-  final Function onPressed;
+  final VoidCallback onPressed;
+  final bool uppercase;
 
   LUSolidButton(
-      {this.width = 280.0,
+      {Key key,
+      this.width = 280.0,
       this.height = 56.0,
       this.title,
       this.onPressed,
       this.color,
-      this.margin});
+      this.margin,
+      this.uppercase = true});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,7 @@ class LUSolidButton extends StatelessWidget {
             onPressed: onPressed,
             color: color,
             child: Text(
-              title.toUpperCase(),
+              uppercase ? title.toUpperCase() : title,
               style: LUTheme.of(context).textTheme.button,
             )));
   }

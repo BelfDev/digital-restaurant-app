@@ -1,5 +1,6 @@
 import 'package:dr_app/data/models/chip_item.dart';
 import 'package:dr_app/data/models/cuisine_category.dart';
+import 'package:dr_app/data/models/dish.dart';
 import 'package:dr_app/data/models/featured_outlet.dart';
 import 'package:dr_app/data/models/outlet.dart';
 
@@ -56,4 +57,70 @@ const List<ChipItem> dummyChipItems = [
   ChipItem(text: 'Sides', value: 3),
   ChipItem(text: 'Pizza', value: 4),
   ChipItem(text: 'Pasta', value: 5),
+];
+
+const List<Dish> dummyDishes = [
+  Dish(
+      imgSrc: 'https://picsum.photos/400/300?random=1',
+      title: 'Pad Thai Noodles',
+      description:
+          'Classic Thai Street Food Dish With Rice Noodles & Roasted Peanuts',
+      preparationTime: '12 min',
+      priceTag: '£ 8.50'),
+  Dish(
+      imgSrc: 'https://picsum.photos/400/300?random=2',
+      title: 'Pad Thai Noodles',
+      description:
+          'Classic Thai Street Food Dish With Rice Noodles & Roasted Peanuts',
+      preparationTime: '12 min',
+      priceTag: '£ 8.50'),
+  Dish(
+      imgSrc: 'https://picsum.photos/400/300?random=3',
+      title: 'Pad Thai Noodles',
+      description:
+          'Classic Thai Street Food Dish With Rice Noodles & Roasted Peanuts',
+      preparationTime: '12 min',
+      priceTag: '£ 8.50'),
+  Dish(
+      imgSrc: 'https://picsum.photos/400/300?random=4',
+      title: 'Pad Thai Noodles',
+      description:
+          'Classic Thai Street Food Dish With Rice Noodles & Roasted Peanuts',
+      preparationTime: '12 min',
+      priceTag: '£ 8.50'),
+  Dish(
+      imgSrc: 'https://picsum.photos/400/300?random=5',
+      title: 'Pad Thai Noodles',
+      description:
+          'Classic Thai Street Food Dish With Rice Noodles & Roasted Peanuts',
+      preparationTime: '12 min',
+      priceTag: '£ 8.50'),
+  Dish(
+      imgSrc: 'https://picsum.photos/400/300?random=1',
+      title: 'Pad Thai Noodles',
+      description:
+          'Classic Thai Street Food Dish With Rice Noodles & Roasted Peanuts',
+      preparationTime: '12 min',
+      priceTag: '£ 8.50'),
+  Dish(
+      imgSrc: 'https://picsum.photos/400/300?random=6',
+      title: 'Pad Thai Noodles',
+      description:
+          'Classic Thai Street Food Dish With Rice Noodles & Roasted Peanuts',
+      preparationTime: '12 min',
+      priceTag: '£ 8.50'),
+  Dish(
+      imgSrc: 'https://picsum.photos/400/300?random=7',
+      title: 'Pad Thai Noodles',
+      description:
+          'Classic Thai Street Food Dish With Rice Noodles & Roasted Peanuts',
+      preparationTime: '12 min',
+      priceTag: '£ 8.50'),
+  Dish(
+      imgSrc: 'https://picsum.photos/400/300?random=8',
+      title: 'Pad Thai Noodles',
+      description:
+          'Classic Thai Street Food Dish With Rice Noodles & Roasted Peanuts',
+      preparationTime: '12 min',
+      priceTag: '£ 8.50'),
 ];

@@ -3,6 +3,7 @@ import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/navigation/navigator_container.dart';
 import 'package:dr_app/navigation/tab_data.dart';
 import 'package:dr_app/navigation/tabs.dart';
+import 'package:dr_app/screens/cart_screen.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -115,9 +116,16 @@ class _RootContainerState extends State<RootContainer>
           visible: true,
           child: FloatingActionButton(
             onPressed: () {
-              setState(() {
-                // Present cart screen
-              });
+              // TODO: Enhance navigation
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    fullscreenDialog: true,
+                    builder: (context) => CartScreen(
+                          coverImgSrc:
+                              'https://picsum.photos/seed/picsum/200/300',
+                        )),
+              );
             },
             tooltip: 'Tab',
             child: Icon(

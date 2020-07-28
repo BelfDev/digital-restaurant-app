@@ -42,6 +42,9 @@ abstract class Styles {
   static const dishCardPreparation = TextStyle(
       color: LUColors.smoothGray, fontSize: 14, fontWeight: FontWeight.w400);
 
+  static const dishStatusText = TextStyle(
+      fontSize: 12, color: LUColors.darkBlue, fontWeight: FontWeight.w600);
+
   ///  Button Styles
   // button
   static const button =
@@ -63,12 +66,17 @@ abstract class Styles {
       color: LUColors.darkBlue, fontSize: 28, fontWeight: FontWeight.w200);
   static const chipText = TextStyle(
       fontSize: 13, fontWeight: FontWeight.w600, color: LUColors.smoothWhite);
+  static const segmentControlText = TextStyle(
+      fontSize: 14, color: LUColors.darkBlue, fontWeight: FontWeight.w600);
+  static const bottomSheetTitle = TextStyle(
+      fontSize: 20, fontWeight: FontWeight.w600, color: LUColors.darkBlue);
 
   /// Container Styles
   static const double roundContainerHeight = 240;
   static const roundContainerRadius = const BorderRadius.only(
       topLeft: Radius.circular(40), topRight: Radius.circular(40));
   static const double paginatedHeaderHeight = 400;
+  static const double compactHeaderHeight = 240;
 
   /// List Styles
   static const sectionContentPadding =
