@@ -70,6 +70,8 @@ abstract class Styles {
       fontSize: 14, color: LUColors.darkBlue, fontWeight: FontWeight.w600);
   static const bottomSheetTitle = TextStyle(
       fontSize: 20, fontWeight: FontWeight.w600, color: LUColors.darkBlue);
+  static const topBarTitle =
+      TextStyle(fontSize: 28, fontWeight: FontWeight.bold);
 
   /// Container Styles
   static const double roundContainerHeight = 240;
