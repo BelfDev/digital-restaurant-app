@@ -1,4 +1,5 @@
 import 'package:dr_app/components/bottom_sliver.dart';
+import 'package:dr_app/components/tip_toolbar.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +25,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 tint: LUTheme.of(context).backgroundColor,
                 onNavigationButtonPressed: () => Navigator.of(context).pop(),
               ),
-              Container(
-                color: Colors.red,
-                height: 400,
-              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: LUTipToolbar(
+                  margin: EdgeInsets.only(top: 8.0),
+                  tipOptions: ['😢', '10%', '15%', '20%'],
+                ),
+              )
             ],
           ),
           Align(
