@@ -1,8 +1,10 @@
+import 'package:credit_card_slider/credit_card_slider.dart';
 import 'package:dr_app/components/bottom_sliver.dart';
 import 'package:dr_app/components/section.dart';
 import 'package:dr_app/components/tip_toolbar.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
+import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/tip.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +16,21 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
+//  @override
+//  Widget build(BuildContext context) {
+//    return Scaffold(
+//      body: Center(
+//        child: CreditCardSlider(
+//          dummyCreditCards,
+//          initialCard: 2,
+//          onCardClicked: (index) {
+//            print('Clicked at index: $index');
+//          },
+//        ),
+//      ),
+//    );
+//  }
+
   double tipIncluded;
 
   @override
@@ -53,7 +70,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     });
                   },
                 ),
-              )
+              ),
+              SizedBox(
+                height: 600,
+                child: Center(
+                  child: CreditCardSlider(
+                    dummyCreditCards,
+                    initialCard: 2,
+                    onCardClicked: (index) {
+                      print('Clicked at index: $index');
+                    },
+                  ),
+                ),
+              ),
             ],
           ),
           Align(
