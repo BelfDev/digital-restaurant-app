@@ -1,8 +1,8 @@
 import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:dr_app/components/compact_header.dart';
+import 'package:dr_app/components/decorated_title.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/round_container.dart';
-import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/screen_arguments.dart';
 import 'package:dr_app/utils/colors.dart';
@@ -57,23 +57,8 @@ class _CuisineScreenState extends State<CuisineScreen> {
   Widget _buildContent(ScreenArguments args) => RoundContainer(
         child: Column(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(
-                  Ionicons.ios_reorder,
-                  size: 28,
-                  color: LUTheme.of(context).unselectedWidgetColor,
-                ),
-                Text(
-                  args.title,
-                  style: LUTheme.of(context).textTheme.headline5.copyWith(
-                      color: LUTheme.of(context).primaryColor,
-                      fontWeight: FontWeight.bold),
-                ),
-                Icon(Ionicons.ios_reorder,
-                    size: 28, color: LUTheme.of(context).unselectedWidgetColor),
-              ],
+            LUDecoratedTitle(
+              title: args.title,
             ),
             SizedBox(
               height: 16,

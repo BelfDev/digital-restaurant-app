@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:dr_app/components/blur_filter.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -15,21 +16,14 @@ class LUStatusLabel extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 2.0, right: 2.0, bottom: 2.0),
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-          child: Container(
-            height: 24.0,
-            decoration:
-                new BoxDecoration(color: Colors.grey.shade200.withOpacity(0.5)),
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          child: LUBlurFilter(
             child: Center(
                 child: Text(
               text.toUpperCase(),
               style: Styles.dishStatusText,
             )),
-          ),
-        ),
-      ),
+          )),
     );
   }
 }

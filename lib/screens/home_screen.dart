@@ -1,16 +1,23 @@
+import 'dart:ui';
+
+import 'package:dr_app/components/blur_filter.dart';
 import 'package:dr_app/components/buttons/icon_button.dart';
 import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/category_card.dart';
+import 'package:dr_app/components/cards/dish_card.dart';
 import 'package:dr_app/components/cards/featured_card.dart';
 import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:dr_app/components/carousel.dart';
+import 'package:dr_app/components/chip_carousel.dart';
+import 'package:dr_app/components/decorated_title.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/section.dart';
+import 'package:dr_app/components/star_rating.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
+import 'package:dr_app/data/models/outlet.dart';
 import 'package:dr_app/data/models/screen_arguments.dart';
-import 'package:dr_app/screens/outlet_screen.dart';
 import 'package:dr_app/screens/product_screen.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
 import 'package:dr_app/utils/colors.dart';
@@ -28,6 +35,8 @@ abstract class _HomeStyles {
   static const double featuredSectionHeight = 280;
 }
 
+enum _HomeMode { unchecked, checked }
+
 /// The Home screen of the App. This screen has two main states: unchecked
 /// and checked-in. In the first state, the user can find restaurants via
 /// recommendations displayed on horizontal carousels or a list of nearby
@@ -41,6 +50,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  _HomeMode mode;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    mode = _HomeMode.unchecked;
+  }
+
   void _onTopBarButtonPressed() {
     Navigator.of(context).pushNamed(ScannerScreen.id);
   }
@@ -54,7 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
         children: <Widget>[
           _buildTopBar(),
           Stack(
-            children: <Widget>[_Header(), _HomeContent()],
+            children: <Widget>[
+              _Header(mode: mode, outlet: dummyOutlets[0]),
+              _HomeContent(mode: mode)
+            ],
           )
         ],
       ),
@@ -63,11 +84,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildTopBar() => LUTopBar(
         children: <Widget>[
-          Image.asset(
-            Images.appLogo,
-            width: 227,
-            height: 46,
-            fit: BoxFit.cover,
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                mode = mode == _HomeMode.checked
+                    ? _HomeMode.unchecked
+                    : _HomeMode.checked;
+              });
+            },
+            child: Image.asset(
+              Images.appLogo,
+              width: 227,
+              height: 46,
+              fit: BoxFit.cover,
+            ),
           ),
           LUIconButton(
             icon: MaterialCommunityIcons.qrcode_scan,
@@ -79,9 +109,15 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class _Header extends StatelessWidget {
+  final _HomeMode mode;
+  final Outlet outlet;
+
   const _Header({
     Key key,
-  }) : super(key: key);
+    @required this.mode,
+    this.outlet,
+  })  : assert(mode != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -92,50 +128,107 @@ class _Header extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: _HomeStyles.backgroundBorderRadius,
         color: LUColors.yellow,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 4,
+            blurRadius: 12,
+            offset: Offset(0, 4), // changes position of shadow
+          )
+        ],
       ),
       child: ClipRRect(
-        borderRadius: _HomeStyles.backgroundBorderRadius,
-        child: Stack(
-          children: <Widget>[
-            Positioned.fill(
-                child:
-                    Image.asset(Images.homeHeaderBackground, fit: BoxFit.fill)),
-            Positioned.fill(
-              bottom: 32,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Image.asset(
-                    Images.homeChef,
-                    height: 128,
-                    width: 120,
-                    fit: BoxFit.cover,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 64),
-                    child: RichText(
-                      text: TextSpan(children: <TextSpan>[
-                        TextSpan(
-                            text: 'Time to get\nsome ',
-                            style: LUTheme.of(context).textTheme.headline3),
-                        TextSpan(
-                            text: 'food',
-                            style: LUTheme.of(context).textTheme.headline2)
-                      ]),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+          borderRadius: _HomeStyles.backgroundBorderRadius,
+          child: mode == _HomeMode.checked
+              ? buildCheckedHeader(context)
+              : buildUncheckedHeader(context)),
     );
   }
+
+  Widget buildCheckedHeader(BuildContext context) => Stack(
+        children: <Widget>[
+          Positioned.fill(
+              child: FadeInImage.assetNetwork(
+            placeholder: Images.verticalPlaceholder,
+            image: outlet.imgSrc,
+            fit: BoxFit.cover,
+          )),
+          Positioned.fill(
+              child: LUBlurFilter(
+            blurIntensity: 3.0,
+            color: Colors.grey.shade600,
+          )),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(outlet.name, style: Styles.homeCheckedHeaderTitle),
+              Text(outlet.category, style: Styles.homeCheckedHeaderSubtitle),
+              SizedBox(
+                height: 8,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  LUStarRating(
+                    rating: 4,
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(outlet.priceRange, style: Styles.cardPriceRange)
+                ],
+              )
+            ],
+          )
+        ],
+      );
+
+  Widget buildUncheckedHeader(BuildContext context) => Stack(
+        children: <Widget>[
+          Positioned.fill(
+              child:
+                  Image.asset(Images.homeHeaderBackground, fit: BoxFit.fill)),
+          Positioned.fill(
+            bottom: 32,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Image.asset(
+                  Images.homeChef,
+                  height: 128,
+                  width: 120,
+                  fit: BoxFit.cover,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 64),
+                  child: RichText(
+                    text: TextSpan(children: <TextSpan>[
+                      TextSpan(
+                          text: 'Time to get\nsome ',
+                          style: LUTheme.of(context).textTheme.headline3),
+                      TextSpan(
+                          text: 'food',
+                          style: LUTheme.of(context).textTheme.headline2)
+                    ]),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      );
 }
 
 class _HomeContent extends StatelessWidget {
+  final _HomeMode mode;
+  final Outlet outlet;
+
+  const _HomeContent({Key key, @required this.mode, this.outlet})
+      : super(key: key);
+
   List<Widget> _getCategoryCards(context) => dummyCuisines
       .map((cuisine) => LUCategoryCard(
             title: cuisine.name,
@@ -148,18 +241,16 @@ class _HomeContent extends StatelessWidget {
           ))
       .toList();
 
-  List<Widget> _getFeaturedCards(context) => dummyFeaturedOutlets
-      .map((outlet) => LUFeaturedCard(
-            imageSrc: outlet.imgSrc,
-            title: outlet.name,
-            subtitle: outlet.category,
+  List<Widget> _getFeaturedCards(context) => dummyDishes
+      .map((dish) => LUFeaturedCard(
+            imageSrc: dish.imgSrc,
+            title: dish.title,
             onPressed: () {
-              Navigator.of(context).pushNamed(OutletScreen.id,
+              Navigator.of(context).pushNamed(ProductScreen.id,
                   arguments: ScreenArguments(
-                      title: outlet.name, coverImgSrc: outlet.imgSrc));
+                      title: dish.title, coverImgSrc: dish.imgSrc));
             },
-            rating: outlet.rating,
-            priceRange: outlet.priceRange,
+            price: dish.priceTag,
           ))
       .toList();
 
@@ -177,6 +268,16 @@ class _HomeContent extends StatelessWidget {
           ))
       .toList();
 
+  List<Widget> _getDishCards() => dummyDishes
+      .map((dish) => LUDishCard(
+            imageSrc: dish.imgSrc,
+            title: dish.title,
+            description: dish.description,
+            priceTag: dish.priceTag,
+            preparationTime: dish.preparationTime,
+          ))
+      .toList();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -185,35 +286,69 @@ class _HomeContent extends StatelessWidget {
           color: LUColors.smoothWhite,
           borderRadius: _HomeStyles.backgroundBorderRadius,
         ),
-        child: Column(children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 16, bottom: 16),
-            child: LUSolidButton(
-                width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: 32),
-                title: "Find a Restaurant",
-                onPressed: () {}),
-          ),
-          LUSection(
-              title: "Chef's choice - Glasgow",
-              child: LUCarousel(
-                  height: _HomeStyles.featuredSectionHeight,
-                  padding: Styles.sectionContentPadding,
-                  items: _getFeaturedCards(context))),
-          LUSection(
-              title: 'Cuisines',
-              child: LUCarousel(
-                  height: Styles.categoryCarouselHeight,
-                  padding: Styles.sectionContentPadding,
-                  items: _getCategoryCards(context))),
-          LUSection(
-            title: 'Nearby Restaurants',
-            child: LUList(
-              nested: true,
-              space: 10,
-              items: _getOutletCards(context),
-            ),
-          ),
-        ]));
+        child: mode == _HomeMode.checked
+            ? buildCheckedContent(context)
+            : buildUncheckedContent(context));
   }
+
+  Widget buildUncheckedContent(BuildContext context) =>
+      Column(children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(top: 16, bottom: 16),
+          child: LUSolidButton(
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(horizontal: 32),
+              title: "Find a Restaurant",
+              onPressed: () {}),
+        ),
+        LUSection(
+            title: "Chef's choice - Glasgow",
+            child: LUCarousel(
+                height: _HomeStyles.featuredSectionHeight,
+                padding: Styles.sectionContentPadding,
+                items: _getFeaturedCards(context))),
+        LUSection(
+            title: 'Cuisines',
+            child: LUCarousel(
+                height: Styles.categoryCarouselHeight,
+                padding: Styles.sectionContentPadding,
+                items: _getCategoryCards(context))),
+        LUSection(
+          title: 'Nearby Restaurants',
+          child: LUList(
+            nested: true,
+            space: 10,
+            items: _getOutletCards(context),
+          ),
+        ),
+      ]);
+
+  Widget buildCheckedContent(BuildContext context) => Column(children: <Widget>[
+        Padding(
+            padding: const EdgeInsets.only(top: 16, bottom: 16),
+            child: LUDecoratedTitle(
+              title: 'Menu',
+            )),
+        LUSection(
+            title: "Popular",
+            child: LUCarousel(
+                height: _HomeStyles.featuredSectionHeight,
+                padding: Styles.sectionContentPadding,
+                items: _getFeaturedCards(context))),
+        LUSection(
+          title: 'Categories',
+          child: LUChipCarousel(
+            items: dummyChipItems,
+            onSelected: (value) {
+              print(value);
+            },
+          ),
+        ),
+        LUList(
+          padding: EdgeInsets.only(top: 16),
+          nested: true,
+          space: 10,
+          items: _getDishCards(),
+        ),
+      ]);
 }

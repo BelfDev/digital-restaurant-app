@@ -76,6 +76,29 @@ abstract class Styles {
       fontSize: 22, fontWeight: FontWeight.w400, color: LUColors.darkBlue);
   static const tipIncludedText = TextStyle(
       fontSize: 14, fontWeight: FontWeight.w400, color: LUColors.darkBlue);
+  static const homeCheckedHeaderTitle = TextStyle(
+      fontSize: 36,
+      fontWeight: FontWeight.bold,
+      color: LUColors.smoothWhite,
+      shadows: <Shadow>[
+        Shadow(
+          offset: Offset(0.0, 2.0),
+          blurRadius: 2.0,
+          color: Colors.grey,
+        )
+      ]);
+
+  static const homeCheckedHeaderSubtitle = TextStyle(
+      fontSize: 28,
+      fontWeight: FontWeight.w200,
+      color: LUColors.smoothWhite,
+      shadows: <Shadow>[
+        Shadow(
+          offset: Offset(0.0, 2.0),
+          blurRadius: 4.0,
+          color: Colors.grey,
+        )
+      ]);
 
   /// Container Styles
   static const double roundContainerHeight = 240;

@@ -22,7 +22,7 @@ class OutletScreen extends StatefulWidget {
 class _OutletScreenState extends State<OutletScreen> {
   void _onBackButtonPressed() => Navigator.of(context).pop();
 
-  List<Widget> _getOutletCards() => dummyDishes
+  List<Widget> _getDishCards() => dummyDishes
       .map((dish) => LUDishCard(
             imageSrc: dish.imgSrc,
             title: dish.title,
@@ -122,7 +122,7 @@ class _OutletScreenState extends State<OutletScreen> {
             padding: EdgeInsets.only(top: 16),
             nested: true,
             space: 10,
-            items: _getOutletCards(),
+            items: _getDishCards(),
           ),
         ],
       );
