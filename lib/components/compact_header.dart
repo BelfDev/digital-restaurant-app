@@ -1,4 +1,5 @@
 import 'package:dr_app/components/top_bar.dart';
+import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/images.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class LUCompactHeader extends StatelessWidget {
           ),
           LUTopBar(
             icon: icon,
+            tint: LUTheme.of(context).primaryColor,
             onNavigationButtonPressed: onTopButtonPressed,
           ),
         ],

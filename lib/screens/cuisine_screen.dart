@@ -45,6 +45,7 @@ class _CuisineScreenState extends State<CuisineScreen> {
           children: <Widget>[
             LUCompactHeader(
                 imgSrc: args.coverImgSrc,
+                icon: Icons.arrow_back_ios,
                 onTopButtonPressed: _onBackButtonPressed),
             _buildContent(args),
           ],
