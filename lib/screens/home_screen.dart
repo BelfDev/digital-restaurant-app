@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:dr_app/components/blur_filter.dart';
 import 'package:dr_app/components/buttons/icon_button.dart';
 import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/category_card.dart';
@@ -27,6 +30,8 @@ abstract class _HomeStyles {
       topLeft: Radius.circular(40), topRight: Radius.circular(40));
   static const double featuredSectionHeight = 280;
 }
+
+enum _HomeMode { unchecked, checked }
 
 /// The Home screen of the App. This screen has two main states: unchecked
 /// and checked-in. In the first state, the user can find restaurants via
@@ -79,8 +84,11 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class _Header extends StatelessWidget {
+  final _HomeMode mode;
+
   const _Header({
     Key key,
+    this.mode,
   }) : super(key: key);
 
   @override
@@ -92,47 +100,71 @@ class _Header extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: _HomeStyles.backgroundBorderRadius,
         color: LUColors.yellow,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 4,
+            blurRadius: 12,
+            offset: Offset(0, 4), // changes position of shadow
+          )
+        ],
       ),
       child: ClipRRect(
-        borderRadius: _HomeStyles.backgroundBorderRadius,
-        child: Stack(
-          children: <Widget>[
-            Positioned.fill(
-                child:
-                    Image.asset(Images.homeHeaderBackground, fit: BoxFit.fill)),
-            Positioned.fill(
-              bottom: 32,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Image.asset(
-                    Images.homeChef,
-                    height: 128,
-                    width: 120,
-                    fit: BoxFit.cover,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 64),
-                    child: RichText(
-                      text: TextSpan(children: <TextSpan>[
-                        TextSpan(
-                            text: 'Time to get\nsome ',
-                            style: LUTheme.of(context).textTheme.headline3),
-                        TextSpan(
-                            text: 'food',
-                            style: LUTheme.of(context).textTheme.headline2)
-                      ]),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+          borderRadius: _HomeStyles.backgroundBorderRadius,
+          child: buildCheckedHeader(context)),
     );
   }
+
+  Widget buildCheckedHeader(BuildContext context) => Stack(
+        children: <Widget>[
+          Positioned.fill(
+              child: FadeInImage.assetNetwork(
+            placeholder: Images.verticalPlaceholder,
+            image: 'https://picsum.photos/400/300?random=1',
+            fit: BoxFit.cover,
+          )),
+          Positioned.fill(
+              child: LUBlurFilter(
+            blurIntensity: 3.0,
+          )),
+        ],
+      );
+
+  Widget buildUncheckedHeader(BuildContext context) => Stack(
+        children: <Widget>[
+          Positioned.fill(
+              child:
+                  Image.asset(Images.homeHeaderBackground, fit: BoxFit.fill)),
+          Positioned.fill(
+            bottom: 32,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Image.asset(
+                  Images.homeChef,
+                  height: 128,
+                  width: 120,
+                  fit: BoxFit.cover,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 64),
+                  child: RichText(
+                    text: TextSpan(children: <TextSpan>[
+                      TextSpan(
+                          text: 'Time to get\nsome ',
+                          style: LUTheme.of(context).textTheme.headline3),
+                      TextSpan(
+                          text: 'food',
+                          style: LUTheme.of(context).textTheme.headline2)
+                    ]),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      );
 }
 
 class _HomeContent extends StatelessWidget {
