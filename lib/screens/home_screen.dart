@@ -7,6 +7,7 @@ import 'package:dr_app/components/cards/category_card.dart';
 import 'package:dr_app/components/cards/featured_card.dart';
 import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:dr_app/components/carousel.dart';
+import 'package:dr_app/components/decorated_title.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/section.dart';
 import 'package:dr_app/components/star_rating.dart';
@@ -63,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Stack(
             children: <Widget>[
               _Header(mode: _HomeMode.checked, outlet: dummyOutlets[0]),
-              _HomeContent()
+              _HomeContent(mode: _HomeMode.checked)
             ],
           )
         ],
@@ -204,6 +205,12 @@ class _Header extends StatelessWidget {
 }
 
 class _HomeContent extends StatelessWidget {
+  final _HomeMode mode;
+  final Outlet outlet;
+
+  const _HomeContent({Key key, @required this.mode, this.outlet})
+      : super(key: key);
+
   List<Widget> _getCategoryCards(context) => dummyCuisines
       .map((cuisine) => LUCategoryCard(
             title: cuisine.name,
@@ -253,35 +260,68 @@ class _HomeContent extends StatelessWidget {
           color: LUColors.smoothWhite,
           borderRadius: _HomeStyles.backgroundBorderRadius,
         ),
-        child: Column(children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 16, bottom: 16),
-            child: LUSolidButton(
-                width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: 32),
-                title: "Find a Restaurant",
-                onPressed: () {}),
-          ),
-          LUSection(
-              title: "Chef's choice - Glasgow",
-              child: LUCarousel(
-                  height: _HomeStyles.featuredSectionHeight,
-                  padding: Styles.sectionContentPadding,
-                  items: _getFeaturedCards(context))),
-          LUSection(
-              title: 'Cuisines',
-              child: LUCarousel(
-                  height: Styles.categoryCarouselHeight,
-                  padding: Styles.sectionContentPadding,
-                  items: _getCategoryCards(context))),
-          LUSection(
-            title: 'Nearby Restaurants',
-            child: LUList(
-              nested: true,
-              space: 10,
-              items: _getOutletCards(context),
-            ),
-          ),
-        ]));
+        child: mode == _HomeMode.checked
+            ? buildCheckedContent(context)
+            : buildUncheckedContent(context));
   }
+
+  Widget buildUncheckedContent(BuildContext context) =>
+      Column(children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(top: 16, bottom: 16),
+          child: LUSolidButton(
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(horizontal: 32),
+              title: "Find a Restaurant",
+              onPressed: () {}),
+        ),
+        LUSection(
+            title: "Chef's choice - Glasgow",
+            child: LUCarousel(
+                height: _HomeStyles.featuredSectionHeight,
+                padding: Styles.sectionContentPadding,
+                items: _getFeaturedCards(context))),
+        LUSection(
+            title: 'Cuisines',
+            child: LUCarousel(
+                height: Styles.categoryCarouselHeight,
+                padding: Styles.sectionContentPadding,
+                items: _getCategoryCards(context))),
+        LUSection(
+          title: 'Nearby Restaurants',
+          child: LUList(
+            nested: true,
+            space: 10,
+            items: _getOutletCards(context),
+          ),
+        ),
+      ]);
+
+  Widget buildCheckedContent(BuildContext context) => Column(children: <Widget>[
+        Padding(
+            padding: const EdgeInsets.only(top: 16, bottom: 16),
+            child: LUDecoratedTitle(
+              title: 'Menu',
+            )),
+        LUSection(
+            title: "Chef's choice - Glasgow",
+            child: LUCarousel(
+                height: _HomeStyles.featuredSectionHeight,
+                padding: Styles.sectionContentPadding,
+                items: _getFeaturedCards(context))),
+        LUSection(
+            title: 'Cuisines',
+            child: LUCarousel(
+                height: Styles.categoryCarouselHeight,
+                padding: Styles.sectionContentPadding,
+                items: _getCategoryCards(context))),
+        LUSection(
+          title: 'Nearby Restaurants',
+          child: LUList(
+            nested: true,
+            space: 10,
+            items: _getOutletCards(context),
+          ),
+        ),
+      ]);
 }
