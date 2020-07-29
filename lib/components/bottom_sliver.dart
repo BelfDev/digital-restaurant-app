@@ -12,7 +12,7 @@ enum BottomSliverButton { SOLID, SLIDER }
 /// of type [LUSliderButton] or [LUSolidButton].
 class LUBottomSliver extends StatelessWidget {
   final double subtotal;
-  final String tip;
+  final double tip;
   final String buttonTitle;
   final VoidCallback onButtonPressed;
   final BottomSliverButton buttonType;
@@ -48,6 +48,7 @@ class LUBottomSliver extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
+              tip != null ? buildTip() : Container(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -77,4 +78,19 @@ class LUBottomSliver extends StatelessWidget {
               title: buttonTitle,
               onPressed: onButtonPressed,
             ));
+
+  Widget buildTip() {
+    final double tipIncludedDisplay = tip * 100;
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Text(
+          'Tip Included',
+          style: Styles.tipIncludedText,
+        ),
+        Text("$tipIncludedDisplay%", style: Styles.tipIncludedText)
+      ],
+    );
+  }
 }

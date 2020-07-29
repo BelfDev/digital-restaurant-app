@@ -1,4 +1,5 @@
-import 'package:dr_app/utils/colors.dart';
+import 'package:dr_app/configs/theme.dart';
+import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 import 'buttons/icon_button.dart';
@@ -8,6 +9,8 @@ class LUTopBar extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final IconData icon;
   final Color tint;
+  final String title;
+  final Color buttonBackgroundColor;
   final Function onNavigationButtonPressed;
   final List<Widget> children;
 
@@ -15,9 +18,11 @@ class LUTopBar extends StatelessWidget {
       {Key key,
       this.padding = const EdgeInsets.only(left: 16, right: 16, top: 8),
       this.icon = Icons.arrow_back_ios,
-      this.tint = LUColors.navyBlue,
+      this.tint,
       this.onNavigationButtonPressed,
-      this.children})
+      this.children,
+      this.buttonBackgroundColor,
+      this.title})
       : assert(children == null || onNavigationButtonPressed == null),
         super(key: key);
 
@@ -28,16 +33,29 @@ class LUTopBar extends StatelessWidget {
       child: Padding(
           padding: padding,
           child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: title != null
+                  ? MainAxisAlignment.start
+                  : MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: children ??
                   <Widget>[
                     LUIconButton(
                       icon: icon,
                       onPressed: onNavigationButtonPressed,
-                      tint: tint,
-                      backgroundColor: LUColors.smoothWhite,
+                      tint: tint ?? LUTheme.of(context).primaryColor,
+                      backgroundColor: buttonBackgroundColor ??
+                          LUTheme.of(context).backgroundColor,
                     ),
+                    title != null
+                        ? Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Text(
+                              title,
+                              style: Styles.topBarTitle.copyWith(
+                                  color: LUTheme.of(context).primaryColor),
+                            ),
+                          )
+                        : SizedBox()
                   ])),
     );
   }
