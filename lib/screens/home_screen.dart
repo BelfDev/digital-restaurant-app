@@ -16,7 +16,6 @@ import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/outlet.dart';
 import 'package:dr_app/data/models/screen_arguments.dart';
-import 'package:dr_app/screens/outlet_screen.dart';
 import 'package:dr_app/screens/product_screen.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
 import 'package:dr_app/utils/colors.dart';
@@ -223,18 +222,16 @@ class _HomeContent extends StatelessWidget {
           ))
       .toList();
 
-  List<Widget> _getFeaturedCards(context) => dummyFeaturedOutlets
-      .map((outlet) => LUFeaturedCard(
-            imageSrc: outlet.imgSrc,
-            title: outlet.name,
-            subtitle: outlet.category,
+  List<Widget> _getFeaturedCards(context) => dummyDishes
+      .map((dish) => LUFeaturedCard(
+            imageSrc: dish.imgSrc,
+            title: dish.title,
             onPressed: () {
-              Navigator.of(context).pushNamed(OutletScreen.id,
+              Navigator.of(context).pushNamed(ProductScreen.id,
                   arguments: ScreenArguments(
-                      title: outlet.name, coverImgSrc: outlet.imgSrc));
+                      title: dish.title, coverImgSrc: dish.imgSrc));
             },
-            rating: outlet.rating,
-            priceRange: outlet.priceRange,
+            price: dish.priceTag,
           ))
       .toList();
 
@@ -304,7 +301,7 @@ class _HomeContent extends StatelessWidget {
               title: 'Menu',
             )),
         LUSection(
-            title: "Chef's choice - Glasgow",
+            title: "Popular",
             child: LUCarousel(
                 height: _HomeStyles.featuredSectionHeight,
                 padding: Styles.sectionContentPadding,

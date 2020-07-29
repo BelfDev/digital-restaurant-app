@@ -18,12 +18,11 @@ class LUFeaturedCard extends StatelessWidget {
   final double padding;
   final double rating;
   final String title;
-  final String subtitle;
   final String priceRange;
+  final String price;
 
   const LUFeaturedCard({
     @required this.title,
-    @required this.subtitle,
     @required this.priceRange,
     this.width = 202,
     this.height = 232,
@@ -33,6 +32,7 @@ class LUFeaturedCard extends StatelessWidget {
     this.filterColors,
     this.padding = 8.0,
     this.rating,
+    this.price,
   });
 
   @override
@@ -60,17 +60,27 @@ class LUFeaturedCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            LUStarRating(
-                rating: rating ?? 0, margin: EdgeInsets.only(bottom: 2)),
+            price != null
+                ? SizedBox()
+                : LUStarRating(
+                    rating: rating ?? 0, margin: EdgeInsets.only(bottom: 2)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
-                Text(
-                  subtitle,
-                  style: LUTheme.of(context).textTheme.headline6,
+                Expanded(
+                  child: Text(
+                    title,
+                    style: price != null
+                        ? LUTheme.of(context).textTheme.headline5
+                        : LUTheme.of(context).textTheme.headline6,
+                  ),
+                ),
+                SizedBox(
+                  width: 4,
                 ),
                 Text(
-                  priceRange,
+                  price ?? priceRange,
                   style: LUTheme.of(context).textTheme.bodyText1,
                 )
               ],
