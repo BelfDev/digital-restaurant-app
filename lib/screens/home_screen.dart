@@ -9,9 +9,11 @@ import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:dr_app/components/carousel.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/section.dart';
+import 'package:dr_app/components/star_rating.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
+import 'package:dr_app/data/models/outlet.dart';
 import 'package:dr_app/data/models/screen_arguments.dart';
 import 'package:dr_app/screens/outlet_screen.dart';
 import 'package:dr_app/screens/product_screen.dart';
@@ -59,7 +61,10 @@ class _HomeScreenState extends State<HomeScreen> {
         children: <Widget>[
           _buildTopBar(),
           Stack(
-            children: <Widget>[_Header(), _HomeContent()],
+            children: <Widget>[
+              _Header(mode: _HomeMode.checked, outlet: dummyOutlets[0]),
+              _HomeContent()
+            ],
           )
         ],
       ),
@@ -85,11 +90,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class _Header extends StatelessWidget {
   final _HomeMode mode;
+  final Outlet outlet;
 
   const _Header({
     Key key,
-    this.mode,
-  }) : super(key: key);
+    @required this.mode,
+    this.outlet,
+  })  : assert(mode != null),
+        assert(mode == _HomeMode.checked && outlet != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +120,9 @@ class _Header extends StatelessWidget {
       ),
       child: ClipRRect(
           borderRadius: _HomeStyles.backgroundBorderRadius,
-          child: buildCheckedHeader(context)),
+          child: mode == _HomeMode.checked
+              ? buildCheckedHeader(context)
+              : buildUncheckedHeader(context)),
     );
   }
 
@@ -120,13 +131,38 @@ class _Header extends StatelessWidget {
           Positioned.fill(
               child: FadeInImage.assetNetwork(
             placeholder: Images.verticalPlaceholder,
-            image: 'https://picsum.photos/400/300?random=1',
+            image: outlet.imgSrc,
             fit: BoxFit.cover,
           )),
           Positioned.fill(
               child: LUBlurFilter(
             blurIntensity: 3.0,
+            color: Colors.grey.shade600,
           )),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(outlet.name, style: Styles.homeCheckedHeaderTitle),
+              Text(outlet.category, style: Styles.homeCheckedHeaderSubtitle),
+              SizedBox(
+                height: 8,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  LUStarRating(
+                    rating: 4,
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(outlet.priceRange, style: Styles.cardPriceRange)
+                ],
+              )
+            ],
+          )
         ],
       );
 

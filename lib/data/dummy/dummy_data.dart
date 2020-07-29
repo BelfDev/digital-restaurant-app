@@ -24,12 +24,18 @@ const dummyCards = [
 ];
 
 const dummyOutlets = [
-  Outlet('Bar Soba', 'https://picsum.photos/200/300', 3, '\$\$'),
-  Outlet('Sputini', 'https://picsum.photos/200/400', 3, '\$\$'),
-  Outlet('Qdoba', 'https://picsum.photos/200/500', 2, '\$\$'),
-  Outlet('McDonalds', 'https://picsum.photos/200/303', 3, '\$\$'),
-  Outlet('Fogo de chão', 'https://picsum.photos/200/440', 3.5, '\$\$\$'),
-  Outlet('BB King Steak House', 'https://picsum.photos/200/298', 5, '\$\$\$'),
+  Outlet('Bar Soba', 'https://picsum.photos/400/300?random=1', 3, '\$\$',
+      'Asian Fusion Cuisine'),
+  Outlet('Sputini', 'https://picsum.photos/200/400', 3, '\$\$',
+      'Asian Fusion Cuisine'),
+  Outlet('Qdoba', 'https://picsum.photos/200/500', 2, '\$\$',
+      'Asian Fusion Cuisine'),
+  Outlet('McDonalds', 'https://picsum.photos/200/303', 3, '\$\$',
+      'Asian Fusion Cuisine'),
+  Outlet('Fogo de chão', 'https://picsum.photos/200/440', 3.5, '\$\$\$',
+      'Asian Fusion Cuisine'),
+  Outlet('BB King Steak House', 'https://picsum.photos/200/298', 5, '\$\$\$',
+      'Asian Fusion Cuisine'),
 ];
 
 const dummyCuisines = [
