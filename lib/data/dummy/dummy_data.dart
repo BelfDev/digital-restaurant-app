@@ -131,39 +131,6 @@ const List<Dish> dummyDishes = [
       priceTag: '£ 8.50'),
 ];
 
-//final List<CreditCard> dummyCreditCards = [
-//  CreditCard(
-//    cardBackground: GradientCardBackground(LinearGradient(
-//      begin: Alignment.centerLeft,
-//      end: Alignment.centerRight,
-//      colors: [Color(0xFF4AA3F2), Color(0xFFAF92FB)],
-//      stops: [0.3, 0.95],
-//    )),
-//    cardNetworkType: CardNetworkType.visaBasic,
-//    cardHolderName: 'The boring developer',
-//  ),
-//  CreditCard(
-//    cardBackground: GradientCardBackground(LinearGradient(
-//      begin: Alignment.centerLeft,
-//      end: Alignment.centerRight,
-//      colors: [Color(0xFF4AA002), Color(0xFFAF92FB)],
-//      stops: [0.3, 0.95],
-//    )),
-//    cardNetworkType: CardNetworkType.visaBasic,
-//    cardHolderName: 'The boring developer',
-//  ),
-//  CreditCard(
-//    cardBackground: GradientCardBackground(LinearGradient(
-//      begin: Alignment.centerLeft,
-//      end: Alignment.centerRight,
-//      colors: [Color(0xFF4DDCC2), Color(0xFFAF92FB)],
-//      stops: [0.3, 0.95],
-//    )),
-//    cardNetworkType: CardNetworkType.visaBasic,
-//    cardHolderName: 'The boring developer',
-//  )
-//];
-
 var dummyCreditCards = [
   CreditCard(
     cardBackground: SolidColorCardBackground(Colors.black.withOpacity(0.6)),

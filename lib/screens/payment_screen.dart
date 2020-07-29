@@ -8,6 +8,9 @@ import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/tip.dart';
 import 'package:flutter/material.dart';
 
+/// The Payment screen is the last step of the check-out flow.
+/// Here the user is able to select which card he/she wants to
+/// use for payment as well as the desired tip amount.
 class PaymentScreen extends StatefulWidget {
   static const id = 'payment_screen';
 
@@ -16,21 +19,6 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-//  @override
-//  Widget build(BuildContext context) {
-//    return Scaffold(
-//      body: Center(
-//        child: CreditCardSlider(
-//          dummyCreditCards,
-//          initialCard: 2,
-//          onCardClicked: (index) {
-//            print('Clicked at index: $index');
-//          },
-//        ),
-//      ),
-//    );
-//  }
-
   double tipIncluded;
 
   @override
@@ -44,6 +32,23 @@ class _PaymentScreenState extends State<PaymentScreen> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
+          SafeArea(
+            bottom: false,
+            child: CreditCardSlider(
+              dummyCreditCards,
+              initialCard: 0,
+              repeatCards: RepeatCards.bothDirection,
+              percentOfUpperCard: 0.8,
+              onCardClicked: (index) {
+                print('Clicked at index: $index');
+              },
+            ),
+          ),
+          SafeArea(
+            child: Container(
+                height: MediaQuery.of(context).size.height * 0.20,
+                color: LUTheme.of(context).backgroundColor),
+          ),
           Column(
             children: <Widget>[
               LUTopBar(
@@ -69,18 +74,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       tipIncluded = tip.value;
                     });
                   },
-                ),
-              ),
-              SizedBox(
-                height: 600,
-                child: Center(
-                  child: CreditCardSlider(
-                    dummyCreditCards,
-                    initialCard: 2,
-                    onCardClicked: (index) {
-                      print('Clicked at index: $index');
-                    },
-                  ),
                 ),
               ),
             ],
