@@ -11,6 +11,7 @@ import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/screen_arguments.dart';
 import 'package:dr_app/screens/outlet_screen.dart';
+import 'package:dr_app/screens/product_screen.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
@@ -162,13 +163,17 @@ class _HomeContent extends StatelessWidget {
           ))
       .toList();
 
-  List<Widget> _getOutletCards() => dummyOutlets
+  List<Widget> _getOutletCards(context) => dummyOutlets
       .map((outlet) => LUOutletCard(
             imageSrc: outlet.imgSrc,
             rating: outlet.rating,
             title: outlet.name,
             priceRange: outlet.priceRange,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(ProductScreen.id,
+                  arguments: ScreenArguments(
+                      title: outlet.name, coverImgSrc: outlet.imgSrc));
+            },
           ))
       .toList();
 
@@ -206,7 +211,7 @@ class _HomeContent extends StatelessWidget {
             child: LUList(
               nested: true,
               space: 10,
-              items: _getOutletCards(),
+              items: _getOutletCards(context),
             ),
           ),
         ]));
