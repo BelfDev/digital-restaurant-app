@@ -205,10 +205,4 @@ var dummyCreditCards = [
       validThruYear: 2021,
     ),
   ),
-  CreditCard(
-    cardNetworkType: CardNetworkType.rupay,
-    cardHolderName: 'THE BORING DEVELOPER',
-    cardNumber: '2434 2434 **** ****',
-    company: CardCompany.sbi,
-  ),
 ];
