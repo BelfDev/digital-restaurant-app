@@ -55,7 +55,7 @@ class LUTopBar extends StatelessWidget {
                                   color: LUTheme.of(context).primaryColor),
                             ),
                           )
-                        : Container()
+                        : SizedBox()
                   ])),
     );
   }
