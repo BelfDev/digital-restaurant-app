@@ -4,9 +4,11 @@ import 'package:dr_app/components/blur_filter.dart';
 import 'package:dr_app/components/buttons/icon_button.dart';
 import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/category_card.dart';
+import 'package:dr_app/components/cards/dish_card.dart';
 import 'package:dr_app/components/cards/featured_card.dart';
 import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:dr_app/components/carousel.dart';
+import 'package:dr_app/components/chip_carousel.dart';
 import 'package:dr_app/components/decorated_title.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/section.dart';
@@ -48,6 +50,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  _HomeMode mode;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    mode = _HomeMode.unchecked;
+  }
+
   void _onTopBarButtonPressed() {
     Navigator.of(context).pushNamed(ScannerScreen.id);
   }
@@ -62,8 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
           _buildTopBar(),
           Stack(
             children: <Widget>[
-              _Header(mode: _HomeMode.checked, outlet: dummyOutlets[0]),
-              _HomeContent(mode: _HomeMode.checked)
+              _Header(mode: mode, outlet: dummyOutlets[0]),
+              _HomeContent(mode: mode)
             ],
           )
         ],
@@ -73,11 +84,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildTopBar() => LUTopBar(
         children: <Widget>[
-          Image.asset(
-            Images.appLogo,
-            width: 227,
-            height: 46,
-            fit: BoxFit.cover,
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                mode = mode == _HomeMode.checked
+                    ? _HomeMode.unchecked
+                    : _HomeMode.checked;
+              });
+            },
+            child: Image.asset(
+              Images.appLogo,
+              width: 227,
+              height: 46,
+              fit: BoxFit.cover,
+            ),
           ),
           LUIconButton(
             icon: MaterialCommunityIcons.qrcode_scan,
@@ -97,7 +117,6 @@ class _Header extends StatelessWidget {
     @required this.mode,
     this.outlet,
   })  : assert(mode != null),
-        assert(mode == _HomeMode.checked && outlet != null),
         super(key: key);
 
   @override
@@ -249,6 +268,16 @@ class _HomeContent extends StatelessWidget {
           ))
       .toList();
 
+  List<Widget> _getDishCards() => dummyDishes
+      .map((dish) => LUDishCard(
+            imageSrc: dish.imgSrc,
+            title: dish.title,
+            description: dish.description,
+            priceTag: dish.priceTag,
+            preparationTime: dish.preparationTime,
+          ))
+      .toList();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -307,18 +336,19 @@ class _HomeContent extends StatelessWidget {
                 padding: Styles.sectionContentPadding,
                 items: _getFeaturedCards(context))),
         LUSection(
-            title: 'Cuisines',
-            child: LUCarousel(
-                height: Styles.categoryCarouselHeight,
-                padding: Styles.sectionContentPadding,
-                items: _getCategoryCards(context))),
-        LUSection(
-          title: 'Nearby Restaurants',
-          child: LUList(
-            nested: true,
-            space: 10,
-            items: _getOutletCards(context),
+          title: 'Categories',
+          child: LUChipCarousel(
+            items: dummyChipItems,
+            onSelected: (value) {
+              print(value);
+            },
           ),
+        ),
+        LUList(
+          padding: EdgeInsets.only(top: 16),
+          nested: true,
+          space: 10,
+          items: _getDishCards(),
         ),
       ]);
 }
