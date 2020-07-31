@@ -1,3 +1,5 @@
+import 'package:dr_app/components/cards/option_card.dart';
+import 'package:dr_app/components/list.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
@@ -8,18 +10,23 @@ class ProfileScreen extends StatelessWidget {
   static const id = 'profile_screen';
 
   static const double profilePictureSize = 160;
+  static const double headerHeightFactor = 0.35;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: LUTheme.of(context).backgroundColor,
       child: Column(
-        children: <Widget>[buildProfileHeader(context)],
+        children: <Widget>[
+          buildProfileHeader(context),
+          buildProfileContent(context)
+        ],
       ),
     );
   }
 
   Widget buildProfileHeader(BuildContext context) => Container(
-        height: MediaQuery.of(context).size.height * 0.35 + 32,
+        height: MediaQuery.of(context).size.height * headerHeightFactor + 32,
         child: Stack(
           children: <Widget>[
             Container(
@@ -124,6 +131,19 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             )
+          ],
+        ),
+      );
+
+  Widget buildProfileContent(BuildContext context) => Container(
+        height: MediaQuery.of(context).size.height * (1 - headerHeightFactor),
+        color: Colors.blue,
+        child: LUList(
+          space: 16,
+          items: <Widget>[
+            LUOptionCard(),
+            LUOptionCard(),
+            LUOptionCard(),
           ],
         ),
       );
