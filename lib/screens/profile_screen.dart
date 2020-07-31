@@ -7,6 +7,9 @@ import 'package:dr_app/utils/images.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
+/// The profile screen displays personalized options to the authenticated user.
+/// Here the user can navigate to the payment methods,favorite restaurants, and
+/// last visited restaurants.
 class ProfileScreen extends StatelessWidget {
   static const id = 'profile_screen';
 
