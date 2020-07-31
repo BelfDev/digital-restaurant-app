@@ -83,8 +83,7 @@ class ProfileScreen extends StatelessWidget {
                               color: Colors.white,
                               borderRadius: BorderRadius.all(
                                   Radius.circular(LUTheme.cardBorderRadius))),
-                          child: Positioned.fill(
-                              child: ClipRRect(
+                          child: ClipRRect(
                             borderRadius: BorderRadius.circular(
                                 LUTheme.cardBorderRadius - 4),
                             child: FadeInImage.assetNetwork(
@@ -92,24 +91,31 @@ class ProfileScreen extends StatelessWidget {
                               image: 'https://picsum.photos/400/300?random=2',
                               fit: BoxFit.cover,
                             ),
-                          )),
+                          ),
                         ),
-                        SizedBox(width: 16),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 40, top: 32),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                'Amanda \n\nBaggins',
-                                style: Styles.sloganTitle,
-                              ),
-                              Text(
-                                'Edit Profile',
-                                style: Styles.profileButtonText,
-                              )
-                            ],
+                          padding: const EdgeInsets.only(bottom: 24, top: 24),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  'Amanda \n\nBaggins',
+                                  style: Styles.sloganTitle,
+                                ),
+                                FlatButton(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 0.0, horizontal: 4.0),
+                                  onPressed: () {},
+                                  child: Text(
+                                    'Edit Profile',
+                                    style: Styles.profileButtonText,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         )
                       ],
