@@ -1,3 +1,4 @@
+import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/option_card.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/configs/theme.dart';
@@ -19,7 +20,7 @@ class ProfileScreen extends StatelessWidget {
       child: Column(
         children: <Widget>[
           buildProfileHeader(context),
-          buildProfileContent(context)
+          buildProfileContent(context),
         ],
       ),
     );
@@ -137,22 +138,34 @@ class ProfileScreen extends StatelessWidget {
 
   Widget buildProfileContent(BuildContext context) => Expanded(
         child: Container(
-          child: LUList(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
-            space: 16,
-            items: <Widget>[
-              LUOptionCard(
-                leadingIcon: Icons.credit_card,
-                title: 'Payment method',
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              LUList(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
+                space: 16,
+                nested: true,
+                items: <Widget>[
+                  LUOptionCard(
+                    leadingIcon: Icons.credit_card,
+                    title: 'Payment method',
+                  ),
+                  LUOptionCard(
+                    leadingIcon: Icons.favorite_border,
+                    title: 'Favorite restaurants',
+                  ),
+                  LUOptionCard(
+                    leadingIcon: Icons.history,
+                    title: 'Visited restaurants',
+                  ),
+                ],
               ),
-              LUOptionCard(
-                leadingIcon: Icons.favorite_border,
-                title: 'Favorite restaurants',
-              ),
-              LUOptionCard(
-                leadingIcon: Icons.history,
-                title: 'Visited restaurants',
-              ),
+              LUSolidButton(
+                onPressed: () {},
+                title: 'logout',
+              )
             ],
           ),
         ),
