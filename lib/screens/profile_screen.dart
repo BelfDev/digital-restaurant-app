@@ -135,16 +135,26 @@ class ProfileScreen extends StatelessWidget {
         ),
       );
 
-  Widget buildProfileContent(BuildContext context) => Container(
-        height: MediaQuery.of(context).size.height * (1 - headerHeightFactor),
-        color: Colors.blue,
-        child: LUList(
-          space: 16,
-          items: <Widget>[
-            LUOptionCard(),
-            LUOptionCard(),
-            LUOptionCard(),
-          ],
+  Widget buildProfileContent(BuildContext context) => Expanded(
+        child: Container(
+          child: LUList(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
+            space: 16,
+            items: <Widget>[
+              LUOptionCard(
+                leadingIcon: Icons.credit_card,
+                title: 'Payment method',
+              ),
+              LUOptionCard(
+                leadingIcon: Icons.favorite_border,
+                title: 'Favorite restaurants',
+              ),
+              LUOptionCard(
+                leadingIcon: Icons.history,
+                title: 'Visited restaurants',
+              ),
+            ],
+          ),
         ),
       );
 }

@@ -103,6 +103,8 @@ abstract class Styles {
       color: LUColors.darkBlue, fontSize: 28, fontWeight: FontWeight.bold);
   static const profileButtonText = TextStyle(
       color: LUColors.darkYellow, fontSize: 17, fontWeight: FontWeight.w400);
+  static const optionTitleText =
+      TextStyle(fontSize: 17, fontWeight: FontWeight.w600);
 
   /// Container Styles
   static const roundBackgroundRadius = Radius.circular(40.0);
