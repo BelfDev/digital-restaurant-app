@@ -22,7 +22,7 @@ class RoundContainer extends StatelessWidget {
             padding: padding,
             decoration: BoxDecoration(
               color: LUTheme.of(context).backgroundColor,
-              borderRadius: Styles.roundContainerRadius,
+              borderRadius: Styles.roundContainerBorderRadius,
             ),
             child: child));
   }

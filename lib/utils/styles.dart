@@ -101,9 +101,10 @@ abstract class Styles {
       ]);
 
   /// Container Styles
+  static const roundBackgroundRadius = Radius.circular(40.0);
   static const double roundContainerHeight = 240;
-  static const roundContainerRadius = const BorderRadius.only(
-      topLeft: Radius.circular(40), topRight: Radius.circular(40));
+  static const roundContainerBorderRadius = const BorderRadius.only(
+      topLeft: roundBackgroundRadius, topRight: roundBackgroundRadius);
   static const double paginatedHeaderHeight = 400;
   static const double compactHeaderHeight = 240;
 
