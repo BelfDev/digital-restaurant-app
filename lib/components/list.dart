@@ -12,7 +12,7 @@ class LUList extends StatelessWidget {
       @required this.items,
       this.space = 8.0,
       this.padding,
-      this.nested})
+      this.nested = false})
       : super(key: key);
 
   @override
@@ -20,7 +20,7 @@ class LUList extends StatelessWidget {
     return ListView.separated(
         physics: nested ? ClampingScrollPhysics() : BouncingScrollPhysics(),
         padding: padding ?? EdgeInsets.zero,
-        shrinkWrap: nested ?? false,
+        shrinkWrap: nested,
         scrollDirection: Axis.vertical,
         itemCount: items.length,
         separatorBuilder: (BuildContext context, int index) => Divider(

@@ -99,11 +99,18 @@ abstract class Styles {
           color: Colors.grey,
         )
       ]);
+  static const profileTitle = TextStyle(
+      color: LUColors.darkBlue, fontSize: 28, fontWeight: FontWeight.bold);
+  static const profileButtonText = TextStyle(
+      color: LUColors.darkYellow, fontSize: 17, fontWeight: FontWeight.w400);
+  static const optionTitleText =
+      TextStyle(fontSize: 17, fontWeight: FontWeight.w600);
 
   /// Container Styles
+  static const roundBackgroundRadius = Radius.circular(40.0);
   static const double roundContainerHeight = 240;
-  static const roundContainerRadius = const BorderRadius.only(
-      topLeft: Radius.circular(40), topRight: Radius.circular(40));
+  static const roundContainerBorderRadius = const BorderRadius.only(
+      topLeft: roundBackgroundRadius, topRight: roundBackgroundRadius);
   static const double paginatedHeaderHeight = 400;
   static const double compactHeaderHeight = 240;
 
