@@ -12,6 +12,7 @@ class LUBaseCard extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final Function onPressed;
   final AlignmentGeometry childrenAlignment;
+  final ShapeBorder shape;
 
   const LUBaseCard(
       {Key key,
@@ -22,7 +23,8 @@ class LUBaseCard extends StatelessWidget {
       this.childrenAlignment = AlignmentDirectional.topStart,
       this.margin = const EdgeInsets.all(4.0),
       this.padding = const EdgeInsets.all(0.0),
-      this.child})
+      this.child,
+      this.shape})
       : assert(child == null || children == null),
         super(key: key);
 
@@ -35,7 +37,7 @@ class LUBaseCard extends StatelessWidget {
           elevation: LUTheme.of(context).cardTheme.elevation,
           margin: margin,
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          shape: LUTheme.of(context).cardTheme.shape,
+          shape: shape ?? LUTheme.of(context).cardTheme.shape,
           child: child ??
               Padding(
                 padding: padding,

@@ -25,7 +25,7 @@ class LUTileOptionCard extends StatelessWidget {
     this.onPressed,
     this.subtitle,
     this.trailingChildren,
-    this.selected,
+    this.selected = false,
   }) : super(key: key);
 
   @override
@@ -33,6 +33,13 @@ class LUTileOptionCard extends StatelessWidget {
     return LUBaseCard(
       width: width,
       height: height,
+      shape: selected
+          ? new RoundedRectangleBorder(
+              side: new BorderSide(
+                  color: LUTheme.of(context).accentColor, width: 2.0),
+              borderRadius:
+                  BorderRadius.all(Radius.circular(LUTheme.cardBorderRadius)))
+          : null,
       child: ListTile(
         onTap: onPressed,
         dense: subtitle != null,
