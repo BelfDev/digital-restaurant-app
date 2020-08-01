@@ -27,8 +27,8 @@ class LUTileButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LUBaseButton(
-      width: 48,
-      height: 56,
+      width: 40,
+      height: 48,
       margin: margin,
       child: RawMaterialButton(
         onPressed: onPressed,

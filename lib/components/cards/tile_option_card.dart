@@ -32,7 +32,6 @@ class LUTileOptionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return LUBaseCard(
       width: width,
-      height: 72,
       shape: selected
           ? new RoundedRectangleBorder(
               side: new BorderSide(
@@ -40,37 +39,39 @@ class LUTileOptionCard extends StatelessWidget {
               borderRadius:
                   BorderRadius.all(Radius.circular(LUTheme.cardBorderRadius)))
           : null,
-      child: ListTile(
-        onTap: onPressed,
-        dense: subtitle != null,
-        selected: true,
-        leading: Icon(
-          leadingIcon,
-          size: 32,
-          color: LUTheme.of(context).primaryColor,
+      child: Center(
+        child: ListTile(
+          onTap: onPressed,
+          dense: subtitle != null,
+          selected: true,
+          leading: Icon(
+            leadingIcon,
+            size: 32,
+            color: LUTheme.of(context).primaryColor,
+          ),
+          title: Text(
+            title,
+            style: Styles.optionTitleText
+                .copyWith(color: LUTheme.of(context).primaryColor),
+          ),
+          subtitle: subtitle != null
+              ? Text(
+                  subtitle,
+                  style: Styles.optionSubtitleText,
+                )
+              : null,
+          trailing: trailingChildren != null
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: trailingChildren,
+                )
+              : Icon(
+                  Icons.arrow_forward_ios,
+                  size: 18,
+                  color: LUTheme.of(context).primaryColor,
+                ),
         ),
-        title: Text(
-          title,
-          style: Styles.optionTitleText
-              .copyWith(color: LUTheme.of(context).primaryColor),
-        ),
-        subtitle: subtitle != null
-            ? Text(
-                subtitle,
-                style: Styles.optionSubtitleText,
-              )
-            : null,
-        trailing: trailingChildren != null
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: trailingChildren,
-              )
-            : Icon(
-                Icons.arrow_forward_ios,
-                size: 18,
-                color: LUTheme.of(context).primaryColor,
-              ),
       ),
     );
   }
