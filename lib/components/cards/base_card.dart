@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 ///
 class LUBaseCard extends StatelessWidget {
   final List<Widget> children;
+  final Widget child;
   final double width;
   final double height;
   final EdgeInsetsGeometry margin;
@@ -14,14 +15,16 @@ class LUBaseCard extends StatelessWidget {
 
   const LUBaseCard(
       {Key key,
-      @required this.children,
+      this.children,
       this.width,
       this.height,
       this.onPressed,
       this.childrenAlignment = AlignmentDirectional.topStart,
       this.margin = const EdgeInsets.all(4.0),
-      this.padding = const EdgeInsets.all(0.0)})
-      : super(key: key);
+      this.padding = const EdgeInsets.all(0.0),
+      this.child})
+      : assert(child == null || children == null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,22 +36,23 @@ class LUBaseCard extends StatelessWidget {
           margin: margin,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           shape: LUTheme.of(context).cardTheme.shape,
-          child: Padding(
-            padding: padding,
-            child: Stack(
-              alignment: childrenAlignment,
-              children: <Widget>[
-                ...children,
-                Positioned.fill(
-                    child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: onPressed,
-                  ),
-                ))
-              ],
-            ),
-          ),
+          child: child ??
+              Padding(
+                padding: padding,
+                child: Stack(
+                  alignment: childrenAlignment,
+                  children: <Widget>[
+                    ...children,
+                    Positioned.fill(
+                        child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: onPressed,
+                      ),
+                    ))
+                  ],
+                ),
+              ),
         ));
   }
 }

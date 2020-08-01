@@ -25,18 +25,17 @@ class LUTileButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LUBaseButton(
-      width: width,
-      height: height,
+      width: 48,
+      height: 56,
       margin: margin,
       child: RawMaterialButton(
         onPressed: onPressed,
-        elevation: 2.0,
         child: Icon(
           icon,
           size: 24.0,
           color: tint ?? LUTheme.of(context).primaryColor,
         ),
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(12.0),
         shape: CircleBorder(),
       ),
     );

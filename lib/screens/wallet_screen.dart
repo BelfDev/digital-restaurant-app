@@ -1,5 +1,6 @@
 import 'package:dr_app/components/buttons/solid_button.dart';
-import 'package:dr_app/components/cards/option_card.dart';
+import 'package:dr_app/components/buttons/tile_button.dart';
+import 'package:dr_app/components/cards/tile_option_card.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/section.dart';
 import 'package:dr_app/components/top_bar.dart';
@@ -36,54 +37,30 @@ class WalletScreen extends StatelessWidget {
             child: LUList(
               nested: true,
               items: <Widget>[
-                LUOptionCard(
+                LUTileOptionCard(
                   leadingIcon: FontAwesome5Brands.cc_visa,
                   title: 'Visa • 4444',
                   subtitle: 'Selected',
-//              onPressed: () {},
-//              trailingChildren: <Widget>[
-//                RaisedButton(
-//                  onPressed: () {
-//                    print('Button Test');
-//                  },
-//                  child: Text('Test'),
-//                ),
-//                Padding(
-//                  padding: const EdgeInsets.all(8.0),
-//                  child: InkWell(
-//                    onTap: () {
-//                      print('Nice');
-//                    },
-//                    child: Icon(
-//                      FontAwesome5Solid.edit,
-//                      color: LUTheme.of(context).primaryColor,
-//                    ),
-//                  ),
-//                ),
-//                Padding(
-//                  padding: const EdgeInsets.all(8.0),
-//                  child: Icon(
-//                    FontAwesome5Solid.trash,
-//                    color: LUTheme.of(context).primaryColor,
-//                  ),
-//                ),
-////                LUTileButton(
-////                  icon: FontAwesome5Solid.edit,
-////                  onPressed: () {
-////                    print('edit');
-////                  },
-////                ),
-////                LUTileButton(
-////                  icon: FontAwesome5Solid.trash,
-////                  onPressed: () {
-////                    print('trash');
-////                  },
-////                ),
-//              ],
+                  trailingChildren: <Widget>[
+                    LUTileButton(
+                      icon: FontAwesome5Solid.edit,
+                      onPressed: () {
+                        print('edit');
+                      },
+                    ),
+                    LUTileButton(
+                      icon: FontAwesome5Solid.trash,
+                      onPressed: () {
+                        print('trash');
+                      },
+                    ),
+                  ],
                 ),
-                LUOptionCard(
-                    leadingIcon: FontAwesome5Brands.cc_mastercard,
-                    title: 'Master • 6666')
+                LUTileOptionCard(
+                  leadingIcon: FontAwesome5Brands.cc_mastercard,
+                  title: 'Master • 6666',
+                  onPressed: () {},
+                )
               ],
             ),
           ),

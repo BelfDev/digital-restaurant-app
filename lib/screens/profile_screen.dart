@@ -1,5 +1,5 @@
 import 'package:dr_app/components/buttons/solid_button.dart';
-import 'package:dr_app/components/cards/option_card.dart';
+import 'package:dr_app/components/cards/tile_option_card.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/screens/wallet_screen.dart';
@@ -151,17 +151,17 @@ class ProfileScreen extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
                 nested: true,
                 items: <Widget>[
-                  LUOptionCard(
+                  LUTileOptionCard(
                     leadingIcon: Icons.credit_card,
                     title: 'Wallet',
                     onPressed: () =>
                         Navigator.of(context).pushNamed(WalletScreen.id),
                   ),
-                  LUOptionCard(
+                  LUTileOptionCard(
                     leadingIcon: Icons.favorite_border,
                     title: 'Favorite restaurants',
                   ),
-                  LUOptionCard(
+                  LUTileOptionCard(
                     leadingIcon: Icons.history,
                     title: 'Visited restaurants',
                   ),
