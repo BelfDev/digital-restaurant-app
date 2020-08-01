@@ -32,7 +32,7 @@ class LUTileOptionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return LUBaseCard(
       width: width,
-      height: height,
+      height: 72,
       shape: selected
           ? new RoundedRectangleBorder(
               side: new BorderSide(
