@@ -19,6 +19,7 @@ class WalletScreen extends StatelessWidget {
         children: <Widget>[
           LUTopBar(
             title: 'Wallet',
+            onNavigationButtonPressed: () => Navigator.of(context).pop(),
             tint: LUTheme.of(context).backgroundColor,
             buttonBackgroundColor: LUTheme.of(context).primaryColor,
           ),
