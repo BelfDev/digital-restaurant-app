@@ -1,3 +1,4 @@
+import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/option_card.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/section.dart';
@@ -26,17 +27,19 @@ class WalletScreen extends StatelessWidget {
     );
   }
 
-  Widget buildWallerContent(BuildContext context) => LUSection(
-        margin: const EdgeInsets.only(top: 32.0, left: 16.0, right: 16.0),
-        titlePadding: const EdgeInsets.only(left: 4.0, bottom: 16.0),
-        title: 'Credit Cards',
-        child: LUList(
-          nested: true,
-          items: <Widget>[
-            LUOptionCard(
-              leadingIcon: FontAwesome5Brands.cc_visa,
-              title: 'Visa • 4444',
-              subtitle: 'Selected',
+  Widget buildWallerContent(BuildContext context) => Column(
+        children: <Widget>[
+          LUSection(
+            margin: const EdgeInsets.only(top: 32.0, left: 16.0, right: 16.0),
+            titlePadding: const EdgeInsets.only(left: 4.0, bottom: 16.0),
+            title: 'Credit Cards',
+            child: LUList(
+              nested: true,
+              items: <Widget>[
+                LUOptionCard(
+                  leadingIcon: FontAwesome5Brands.cc_visa,
+                  title: 'Visa • 4444',
+                  subtitle: 'Selected',
 //              onPressed: () {},
 //              trailingChildren: <Widget>[
 //                RaisedButton(
@@ -77,11 +80,20 @@ class WalletScreen extends StatelessWidget {
 ////                  },
 ////                ),
 //              ],
+                ),
+                LUOptionCard(
+                    leadingIcon: FontAwesome5Brands.cc_mastercard,
+                    title: 'Master • 6666')
+              ],
             ),
-            LUOptionCard(
-                leadingIcon: FontAwesome5Brands.cc_mastercard,
-                title: 'Master • 6666')
-          ],
-        ),
+          ),
+          LUSolidButton(
+            margin: const EdgeInsets.only(top: 28),
+            title: 'Add new card',
+            onPressed: () {
+              print('Add new card');
+            },
+          )
+        ],
       );
 }
