@@ -8,6 +8,7 @@ import 'package:dr_app/data/models/cuisine_category.dart';
 import 'package:dr_app/data/models/dish.dart';
 import 'package:dr_app/data/models/featured_outlet.dart';
 import 'package:dr_app/data/models/outlet.dart';
+import 'package:dr_app/data/models/wallet_option.dart';
 import 'package:flutter/material.dart';
 
 const dummyCards = [
@@ -178,4 +179,9 @@ var dummyCreditCards = [
       validThruYear: 2021,
     ),
   ),
+];
+
+const dummyWalletOptions = [
+  WalletOption('credit-card', 'Visa • 4444'),
+  WalletOption('credit-card', 'Master • 6666'),
 ];
