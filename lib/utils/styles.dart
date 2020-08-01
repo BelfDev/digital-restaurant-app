@@ -105,6 +105,8 @@ abstract class Styles {
       color: LUColors.darkYellow, fontSize: 17, fontWeight: FontWeight.w400);
   static const optionTitleText =
       TextStyle(fontSize: 17, fontWeight: FontWeight.w600);
+  static const optionSubtitleText = TextStyle(
+      fontSize: 12, fontWeight: FontWeight.w600, color: LUColors.gray);
 
   /// Container Styles
   static const roundBackgroundRadius = Radius.circular(40.0);

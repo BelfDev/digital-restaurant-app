@@ -4,6 +4,7 @@ import 'package:dr_app/components/section.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 class WalletScreen extends StatelessWidget {
   static const id = 'wallet_screen';
@@ -32,7 +33,14 @@ class WalletScreen extends StatelessWidget {
         child: LUList(
           nested: true,
           items: <Widget>[
-            LUOptionCard(leadingIcon: Icons.credit_card, title: 'Card 1')
+            LUOptionCard(
+              leadingIcon: FontAwesome5Brands.cc_visa,
+              title: 'Visa • 4444',
+              subtitle: 'Selected',
+            ),
+            LUOptionCard(
+                leadingIcon: FontAwesome5Brands.cc_mastercard,
+                title: 'Master • 6666')
           ],
         ),
       );

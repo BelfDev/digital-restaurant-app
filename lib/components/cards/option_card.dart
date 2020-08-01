@@ -8,13 +8,15 @@ import 'package:flutter/material.dart';
 class LUOptionCard extends StatelessWidget {
   final IconData leadingIcon;
   final String title;
+  final String subtitle;
   final VoidCallback onPressed;
 
   const LUOptionCard(
       {Key key,
       @required this.leadingIcon,
       @required this.title,
-      this.onPressed})
+      this.onPressed,
+      this.subtitle})
       : super(key: key);
 
   @override
@@ -23,6 +25,7 @@ class LUOptionCard extends StatelessWidget {
       onPressed: onPressed,
       children: <Widget>[
         ListTile(
+          dense: subtitle != null,
           leading: Icon(
             leadingIcon,
             size: 32,
@@ -33,6 +36,12 @@ class LUOptionCard extends StatelessWidget {
             style: Styles.optionTitleText
                 .copyWith(color: LUTheme.of(context).primaryColor),
           ),
+          subtitle: subtitle != null
+              ? Text(
+                  subtitle,
+                  style: Styles.optionSubtitleText,
+                )
+              : null,
           trailing: Icon(
             Icons.arrow_forward_ios,
             size: 18,

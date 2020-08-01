@@ -149,7 +149,6 @@ class ProfileScreen extends StatelessWidget {
               LUList(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-                space: 8,
                 nested: true,
                 items: <Widget>[
                   LUOptionCard(
