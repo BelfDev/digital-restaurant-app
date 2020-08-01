@@ -8,15 +8,19 @@ import 'package:flutter/material.dart';
 class LUOptionCard extends StatelessWidget {
   final IconData leadingIcon;
   final String title;
+  final VoidCallback onPressed;
 
   const LUOptionCard(
-      {Key key, @required this.leadingIcon, @required this.title})
+      {Key key,
+      @required this.leadingIcon,
+      @required this.title,
+      this.onPressed})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return LUBaseCard(
-      onPressed: () {},
+      onPressed: onPressed,
       children: <Widget>[
         ListTile(
           leading: Icon(
