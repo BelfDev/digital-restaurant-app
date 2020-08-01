@@ -20,13 +20,13 @@ class WalletScreen extends StatelessWidget {
             tint: LUTheme.of(context).backgroundColor,
             buttonBackgroundColor: LUTheme.of(context).primaryColor,
           ),
-          buildWallerContent()
+          buildWallerContent(context)
         ],
       ),
     );
   }
 
-  Widget buildWallerContent() => LUSection(
+  Widget buildWallerContent(BuildContext context) => LUSection(
         margin: const EdgeInsets.only(top: 32.0, left: 16.0, right: 16.0),
         titlePadding: const EdgeInsets.only(left: 4.0, bottom: 16.0),
         title: 'Credit Cards',
@@ -37,6 +37,46 @@ class WalletScreen extends StatelessWidget {
               leadingIcon: FontAwesome5Brands.cc_visa,
               title: 'Visa • 4444',
               subtitle: 'Selected',
+//              onPressed: () {},
+//              trailingChildren: <Widget>[
+//                RaisedButton(
+//                  onPressed: () {
+//                    print('Button Test');
+//                  },
+//                  child: Text('Test'),
+//                ),
+//                Padding(
+//                  padding: const EdgeInsets.all(8.0),
+//                  child: InkWell(
+//                    onTap: () {
+//                      print('Nice');
+//                    },
+//                    child: Icon(
+//                      FontAwesome5Solid.edit,
+//                      color: LUTheme.of(context).primaryColor,
+//                    ),
+//                  ),
+//                ),
+//                Padding(
+//                  padding: const EdgeInsets.all(8.0),
+//                  child: Icon(
+//                    FontAwesome5Solid.trash,
+//                    color: LUTheme.of(context).primaryColor,
+//                  ),
+//                ),
+////                LUTileButton(
+////                  icon: FontAwesome5Solid.edit,
+////                  onPressed: () {
+////                    print('edit');
+////                  },
+////                ),
+////                LUTileButton(
+////                  icon: FontAwesome5Solid.trash,
+////                  onPressed: () {
+////                    print('trash');
+////                  },
+////                ),
+//              ],
             ),
             LUOptionCard(
                 leadingIcon: FontAwesome5Brands.cc_mastercard,

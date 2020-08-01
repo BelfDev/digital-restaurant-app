@@ -2,7 +2,9 @@ import 'package:dr_app/components/buttons/icon_button.dart';
 import 'package:dr_app/components/buttons/outline_button.dart';
 import 'package:dr_app/components/buttons/slider_button.dart';
 import 'package:dr_app/components/buttons/solid_button.dart';
+import 'package:dr_app/components/buttons/tile_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 class ExploreScreen extends StatelessWidget {
   static const id = 'explore_screen';
@@ -37,6 +39,10 @@ class ExploreScreen extends StatelessWidget {
         ),
         LUIconButton(
           icon: Icons.account_circle,
+          onPressed: () {},
+        ),
+        LUTileButton(
+          icon: FontAwesome5Solid.edit,
           onPressed: () {},
         ),
       ],

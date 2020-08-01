@@ -10,13 +10,15 @@ class LUOptionCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final VoidCallback onPressed;
+  final List<Widget> trailingChildren;
 
   const LUOptionCard(
       {Key key,
       @required this.leadingIcon,
       @required this.title,
       this.onPressed,
-      this.subtitle})
+      this.subtitle,
+      this.trailingChildren})
       : super(key: key);
 
   @override
@@ -42,11 +44,17 @@ class LUOptionCard extends StatelessWidget {
                   style: Styles.optionSubtitleText,
                 )
               : null,
-          trailing: Icon(
-            Icons.arrow_forward_ios,
-            size: 18,
-            color: LUTheme.of(context).primaryColor,
-          ),
+          trailing: trailingChildren != null
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: trailingChildren,
+                )
+              : Icon(
+                  Icons.arrow_forward_ios,
+                  size: 18,
+                  color: LUTheme.of(context).primaryColor,
+                ),
         ),
       ],
     );
