@@ -8,6 +8,7 @@ import 'package:dr_app/screens/outlet_screen.dart';
 import 'package:dr_app/screens/product_screen.dart';
 import 'package:dr_app/screens/profile_screen.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
+import 'package:dr_app/screens/wallet_screen.dart';
 import 'package:flutter/widgets.dart';
 
 /// A map of the named routes used for navigation.
@@ -22,6 +23,7 @@ final Map<String, WidgetBuilder> routes = {
   CuisineScreen.id: (context) => CuisineScreen(),
   ProductScreen.id: (context) => ProductScreen(),
   OutletScreen.id: (context) => OutletScreen(),
+  WalletScreen.id: (context) => WalletScreen()
 };
 
 final Set<String> fullScreenRoutes = {ScannerScreen.id};

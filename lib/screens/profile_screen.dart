@@ -2,6 +2,7 @@ import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/option_card.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/configs/theme.dart';
+import 'package:dr_app/screens/wallet_screen.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
 import 'package:dr_app/utils/styles.dart';
@@ -153,7 +154,9 @@ class ProfileScreen extends StatelessWidget {
                 items: <Widget>[
                   LUOptionCard(
                     leadingIcon: Icons.credit_card,
-                    title: 'Payment method',
+                    title: 'Wallet',
+                    onPressed: () =>
+                        Navigator.of(context).pushNamed(WalletScreen.id),
                   ),
                   LUOptionCard(
                     leadingIcon: Icons.favorite_border,
