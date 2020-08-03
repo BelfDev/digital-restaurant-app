@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 
 import 'outlet_screen.dart';
 
+/// The LastVisitedScreen displays a list of all outlets
+/// which the user has ever checked-in.
 class LastVisitedScreen extends StatelessWidget {
   static const id = 'last_visited_screen';
 
