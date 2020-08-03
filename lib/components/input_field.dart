@@ -27,6 +27,7 @@ class LUInputField extends StatelessWidget {
             ),
           ),
           TextFormField(
+            autofocus: true,
             keyboardType: TextInputType.number,
             style: Styles.formInputText,
             decoration: InputDecoration(
