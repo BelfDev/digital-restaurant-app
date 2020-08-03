@@ -3,6 +3,7 @@ import 'package:dr_app/components/cards/tile_option_card.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/screens/favorites_screen.dart';
+import 'package:dr_app/screens/last_visited_screen.dart';
 import 'package:dr_app/screens/wallet_screen.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
@@ -167,6 +168,8 @@ class ProfileScreen extends StatelessWidget {
                   LUTileOptionCard(
                     leadingIcon: Icons.history,
                     title: 'Visited restaurants',
+                    onPressed: () =>
+                        Navigator.of(context).pushNamed(LastVisitedScreen.id),
                   ),
                 ],
               ),
