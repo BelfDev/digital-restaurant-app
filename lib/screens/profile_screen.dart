@@ -2,6 +2,7 @@ import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/tile_option_card.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/configs/theme.dart';
+import 'package:dr_app/screens/favorites_screen.dart';
 import 'package:dr_app/screens/wallet_screen.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
@@ -160,6 +161,8 @@ class ProfileScreen extends StatelessWidget {
                   LUTileOptionCard(
                     leadingIcon: Icons.favorite_border,
                     title: 'Favorite restaurants',
+                    onPressed: () =>
+                        Navigator.of(context).pushNamed(FavoritesScreen.id),
                   ),
                   LUTileOptionCard(
                     leadingIcon: Icons.history,
