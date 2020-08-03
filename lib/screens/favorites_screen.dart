@@ -29,9 +29,9 @@ class FavoritesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        color: LUTheme.of(context).backgroundColor,
+    return Container(
+      color: LUTheme.of(context).backgroundColor,
+      child: SafeArea(
         child: ListView(
           padding: EdgeInsets.zero,
           physics: ClampingScrollPhysics(),
