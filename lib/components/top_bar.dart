@@ -13,6 +13,7 @@ class LUTopBar extends StatelessWidget {
   final Color buttonBackgroundColor;
   final Function onNavigationButtonPressed;
   final List<Widget> children;
+  final LUIconButton trailingButton;
 
   const LUTopBar(
       {Key key,
@@ -22,7 +23,8 @@ class LUTopBar extends StatelessWidget {
       this.onNavigationButtonPressed,
       this.children,
       this.buttonBackgroundColor,
-      this.title})
+      this.title,
+      this.trailingButton})
       : assert(children == null || onNavigationButtonPressed == null),
         super(key: key);
 
@@ -55,7 +57,9 @@ class LUTopBar extends StatelessWidget {
                                   color: LUTheme.of(context).primaryColor),
                             ),
                           )
-                        : SizedBox()
+                        : SizedBox(),
+                    Spacer(),
+                    trailingButton ?? SizedBox()
                   ])),
     );
   }
