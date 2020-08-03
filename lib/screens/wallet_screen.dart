@@ -7,6 +7,7 @@ import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/wallet_option.dart';
+import 'package:dr_app/screens/add_credit_card_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
@@ -88,7 +89,7 @@ class _WalletScreenState extends State<WalletScreen> {
           margin: const EdgeInsets.only(top: 28),
           title: 'Add new card',
           onPressed: () {
-            print('Add new card');
+            Navigator.of(context).pushNamed(AddCreditCardScreen.id);
           },
         )
       ],
