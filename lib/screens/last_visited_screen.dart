@@ -30,31 +30,32 @@ class LastVisitedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Container(
+    return Container(
       color: LUTheme.of(context).backgroundColor,
-      child: ListView(
-        physics: ClampingScrollPhysics(),
-        children: <Widget>[
-          LUTopBar(
-            title: 'Last Visited',
-            onNavigationButtonPressed: () => Navigator.of(context).pop(),
-            buttonBackgroundColor: LUTheme.of(context).primaryColor,
-            tint: LUTheme.of(context).backgroundColor,
-          ),
-          LUSection(
-            title: "Yesterday",
-            margin: EdgeInsets.only(
-              top: 40,
+      child: SafeArea(
+        child: ListView(
+          physics: ClampingScrollPhysics(),
+          children: <Widget>[
+            LUTopBar(
+              title: 'Last Visited',
+              onNavigationButtonPressed: () => Navigator.of(context).pop(),
+              buttonBackgroundColor: LUTheme.of(context).primaryColor,
+              tint: LUTheme.of(context).backgroundColor,
             ),
-            child: LUList(
-              nested: true,
-              space: 10,
-              items: _getOutletCards(context),
-            ),
-          )
-        ],
+            LUSection(
+              title: "Yesterday",
+              margin: EdgeInsets.only(
+                top: 40,
+              ),
+              child: LUList(
+                nested: true,
+                space: 10,
+                items: _getOutletCards(context),
+              ),
+            )
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
