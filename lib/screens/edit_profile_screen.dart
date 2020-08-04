@@ -33,6 +33,46 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
+  Widget buildAvatar() => Container(
+        width: profilePictureSize,
+        height: profilePictureSize,
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade300.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 8,
+                offset: Offset(0, 2), // changes position of shadow
+              )
+            ],
+            color: Colors.white,
+            borderRadius:
+                BorderRadius.all(Radius.circular(LUTheme.cardBorderRadius))),
+        child: Stack(
+          children: <Widget>[
+            Positioned.fill(
+              child: ClipRRect(
+                borderRadius:
+                    BorderRadius.circular(LUTheme.cardBorderRadius - 4),
+                child: FadeInImage.assetNetwork(
+                  placeholder: Images.verticalPlaceholder,
+                  image: 'https://picsum.photos/400/300?random=2',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Center(
+              child: Icon(
+                Icons.camera_alt,
+                size: 80,
+                color: LUColors.smoothGray.withOpacity(0.9),
+              ),
+            ),
+          ],
+        ),
+      );
+
   Widget buildEditProfileHeader(BuildContext context) => Container(
         height: MediaQuery.of(context).size.height * headerHeightFactor + 32,
         child: Stack(
@@ -81,47 +121,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        Container(
-                          width: profilePictureSize,
-                          height: profilePictureSize,
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.shade300.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 8,
-                                  offset: Offset(
-                                      0, 2), // changes position of shadow
-                                )
-                              ],
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(LUTheme.cardBorderRadius))),
-                          child: Stack(
-                            children: <Widget>[
-                              Positioned.fill(
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(
-                                      LUTheme.cardBorderRadius - 4),
-                                  child: FadeInImage.assetNetwork(
-                                    placeholder: Images.verticalPlaceholder,
-                                    image:
-                                        'https://picsum.photos/400/300?random=2',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                              Center(
-                                child: Icon(
-                                  Icons.camera_alt,
-                                  size: 80,
-                                  color: LUColors.smoothGray.withOpacity(0.9),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        buildAvatar(),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 24, top: 24),
                           child: Padding(
