@@ -7,8 +7,15 @@ import 'package:flutter/material.dart';
 class LUInputField extends StatelessWidget {
   final String fieldTitle;
   final String hintText;
+  final bool obscureText;
+  final TextInputType keyboardType;
 
-  const LUInputField({Key key, this.fieldTitle, this.hintText})
+  const LUInputField(
+      {Key key,
+      this.fieldTitle,
+      this.hintText,
+      this.obscureText = false,
+      this.keyboardType})
       : super(key: key);
 
   @override
@@ -28,7 +35,8 @@ class LUInputField extends StatelessWidget {
           ),
           TextFormField(
             autofocus: true,
-            keyboardType: TextInputType.number,
+            obscureText: obscureText,
+            keyboardType: keyboardType,
             style: Styles.formInputText,
             decoration: InputDecoration(
               contentPadding: EdgeInsets.all(8),

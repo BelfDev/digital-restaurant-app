@@ -2,6 +2,7 @@ import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/tile_option_card.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/configs/theme.dart';
+import 'package:dr_app/screens/edit_profile_screen.dart';
 import 'package:dr_app/screens/favorites_screen.dart';
 import 'package:dr_app/screens/last_visited_screen.dart';
 import 'package:dr_app/screens/wallet_screen.dart';
@@ -17,7 +18,7 @@ class ProfileScreen extends StatelessWidget {
   static const id = 'profile_screen';
 
   static const double profilePictureSize = 160;
-  static const double headerHeightFactor = 0.35;
+  static const double headerHeightFactor = 0.30;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,8 @@ class ProfileScreen extends StatelessWidget {
                 borderRadius:
                     BorderRadius.only(bottomLeft: Styles.roundBackgroundRadius),
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.35,
+                  height:
+                      MediaQuery.of(context).size.height * headerHeightFactor,
                   color: LUColors.yellow,
                   child: Stack(
                     children: <Widget>[
@@ -122,7 +124,8 @@ class ProfileScreen extends StatelessWidget {
                                 FlatButton(
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 0.0, horizontal: 4.0),
-                                  onPressed: () {},
+                                  onPressed: () => Navigator.of(context)
+                                      .pushNamed(EditProfileScreen.id),
                                   child: Text(
                                     'Edit Profile',
                                     style: Styles.profileButtonText,
