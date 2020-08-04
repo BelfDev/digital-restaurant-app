@@ -1,7 +1,11 @@
+import 'package:dr_app/components/buttons/solid_button.dart';
+import 'package:dr_app/components/input_field.dart';
+import 'package:dr_app/components/round_container.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
+import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 /// The PasswordRecoveryScreen displays a [LUInputField]
@@ -17,6 +21,7 @@ class PasswordRecoveryScreen extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           buildHeaderBackground(context),
+          buildBody(context),
           SafeArea(
             child: LUTopBar(
               title: 'Forgot Password',
@@ -55,4 +60,36 @@ class PasswordRecoveryScreen extends StatelessWidget {
       ),
     );
   }
+
+  // TODO: Validation, feedback, and state management
+  Widget buildBody(BuildContext context) => RoundContainer(
+        padding: EdgeInsets.all(32.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'We will send you an email to reset your password',
+              style: Styles.informativeText
+                  .copyWith(color: LUTheme.of(context).primaryColor),
+            ),
+            SizedBox(
+              height: 24,
+            ),
+            LUInputField(
+                fieldTitle: 'Email',
+                hintText: 'amanda@email.com',
+                keyboardType: TextInputType.emailAddress),
+            SizedBox(
+              height: 32,
+            ),
+            Center(
+              child: LUSolidButton(
+                title: 'Reset Password',
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ),
+          ],
+        ),
+      );
 }
