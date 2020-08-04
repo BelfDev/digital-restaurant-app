@@ -109,6 +109,8 @@ abstract class Styles {
       fontSize: 12, fontWeight: FontWeight.w600, color: LUColors.gray);
   static const formInputText = TextStyle(
       fontSize: 18, fontWeight: FontWeight.w400, color: LUColors.darkBlue);
+  static const loginFooterText = TextStyle(
+      fontSize: 17, fontWeight: FontWeight.w400, color: LUColors.navyBlue);
 
   /// Container Styles
   static const roundBackgroundRadius = Radius.circular(40.0);

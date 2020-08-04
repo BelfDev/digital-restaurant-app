@@ -6,6 +6,7 @@ import 'package:dr_app/screens/explore_screen.dart';
 import 'package:dr_app/screens/favorites_screen.dart';
 import 'package:dr_app/screens/home_screen.dart';
 import 'package:dr_app/screens/last_visited_screen.dart';
+import 'package:dr_app/screens/login_screen.dart';
 import 'package:dr_app/screens/more_screen.dart';
 import 'package:dr_app/screens/outlet_detail_screen.dart';
 import 'package:dr_app/screens/outlet_screen.dart';
@@ -31,7 +32,8 @@ final Map<String, WidgetBuilder> routes = {
   FavoritesScreen.id: (context) => FavoritesScreen(),
   LastVisitedScreen.id: (context) => LastVisitedScreen(),
   AddCreditCardScreen.id: (context) => AddCreditCardScreen(),
-  EditProfileScreen.id: (context) => EditProfileScreen()
+  EditProfileScreen.id: (context) => EditProfileScreen(),
+  LoginScreen.id: (context) => LoginScreen(),
 };
 
 final Set<String> fullScreenRoutes = {ScannerScreen.id};
