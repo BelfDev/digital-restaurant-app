@@ -18,7 +18,7 @@ class ProfileScreen extends StatelessWidget {
   static const id = 'profile_screen';
 
   static const double profilePictureSize = 160;
-  static const double headerHeightFactor = 0.35;
+  static const double headerHeightFactor = 0.30;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,8 @@ class ProfileScreen extends StatelessWidget {
                 borderRadius:
                     BorderRadius.only(bottomLeft: Styles.roundBackgroundRadius),
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.35,
+                  height:
+                      MediaQuery.of(context).size.height * headerHeightFactor,
                   color: LUColors.yellow,
                   child: Stack(
                     children: <Widget>[
