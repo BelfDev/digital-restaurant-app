@@ -5,6 +5,7 @@ import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/screens/edit_profile_screen.dart';
 import 'package:dr_app/screens/favorites_screen.dart';
 import 'package:dr_app/screens/last_visited_screen.dart';
+import 'package:dr_app/screens/login_screen.dart';
 import 'package:dr_app/screens/wallet_screen.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
@@ -177,7 +178,9 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
               LUSolidButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed(LoginScreen.id);
+                },
                 title: 'logout',
               )
             ],
