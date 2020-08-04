@@ -1,3 +1,4 @@
+import 'package:dr_app/components/round_avatar.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/colors.dart';
@@ -15,19 +16,38 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   static const headerHeightFactor = 0.28;
+  static const double profilePictureSize = 160;
 
   @override
   Widget build(BuildContext context) {
+    final header = <Widget>[
+      buildSignUpHeaderBackground(),
+      SafeArea(
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Padding(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height *
+                    (headerHeightFactor / 3)),
+            child: LURectangleAvatar(
+              editable: true,
+              profilePictureSize: profilePictureSize,
+            ),
+          ),
+        ),
+      ),
+      SafeArea(
+        child: LUTopBar(
+          title: 'Sign Up',
+          onNavigationButtonPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
+    ];
+
     return Container(
       color: LUTheme.of(context).backgroundColor,
       child: Stack(
-        children: <Widget>[
-          buildSignUpHeaderBackground(),
-          LUTopBar(
-            title: 'Sign Up',
-            onNavigationButtonPressed: () => Navigator.of(context).pop(),
-          ),
-        ],
+        children: <Widget>[...header],
       ),
     );
   }
