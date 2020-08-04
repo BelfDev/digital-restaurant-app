@@ -1,3 +1,4 @@
+import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
@@ -20,12 +21,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Container(
       color: LUTheme.of(context).backgroundColor,
       child: Stack(
-        children: <Widget>[buildHeaderBackground()],
+        children: <Widget>[
+          buildSignUpHeaderBackground(),
+          LUTopBar(
+            title: 'Sign Up',
+            onNavigationButtonPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
       ),
     );
   }
 
-  Widget buildHeaderBackground() {
+  Widget buildSignUpHeaderBackground() {
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
