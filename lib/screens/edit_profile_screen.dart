@@ -1,22 +1,21 @@
 import 'package:dr_app/components/buttons/solid_button.dart';
-import 'package:dr_app/components/cards/tile_option_card.dart';
-import 'package:dr_app/components/list.dart';
 import 'package:dr_app/configs/theme.dart';
-import 'package:dr_app/screens/edit_profile_screen.dart';
-import 'package:dr_app/screens/favorites_screen.dart';
-import 'package:dr_app/screens/last_visited_screen.dart';
-import 'package:dr_app/screens/wallet_screen.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-/// The profile screen displays personalized options to the authenticated user.
-/// Here the user can navigate to the payment methods,favorite restaurants, and
-/// last visited restaurants.
-class ProfileScreen extends StatelessWidget {
-  static const id = 'profile_screen';
+/// The EditProfileScreen makes it possible for the user
+/// to edit profile-related information such as fullname,
+/// email, and password.
+class EditProfileScreen extends StatefulWidget {
+  static const id = 'edit_profile_screen';
 
+  @override
+  _EditProfileScreenState createState() => _EditProfileScreenState();
+}
+
+class _EditProfileScreenState extends State<EditProfileScreen> {
   static const double profilePictureSize = 160;
   static const double headerHeightFactor = 0.35;
 
@@ -26,14 +25,14 @@ class ProfileScreen extends StatelessWidget {
       color: LUTheme.of(context).backgroundColor,
       child: Column(
         children: <Widget>[
-          buildProfileHeader(context),
-          buildProfileContent(context),
+          buildEditProfileHeader(context),
+          buildEditProfileContent(context),
         ],
       ),
     );
   }
 
-  Widget buildProfileHeader(BuildContext context) => Container(
+  Widget buildEditProfileHeader(BuildContext context) => Container(
         height: MediaQuery.of(context).size.height * headerHeightFactor + 32,
         child: Stack(
           children: <Widget>[
@@ -123,8 +122,7 @@ class ProfileScreen extends StatelessWidget {
                                 FlatButton(
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 0.0, horizontal: 4.0),
-                                  onPressed: () => Navigator.of(context)
-                                      .pushNamed(EditProfileScreen.id),
+                                  onPressed: () {},
                                   child: Text(
                                     'Edit Profile',
                                     style: Styles.profileButtonText,
@@ -144,40 +142,16 @@ class ProfileScreen extends StatelessWidget {
         ),
       );
 
-  Widget buildProfileContent(BuildContext context) => Expanded(
+  Widget buildEditProfileContent(BuildContext context) => Expanded(
         child: Container(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              LUList(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-                nested: true,
-                items: <Widget>[
-                  LUTileOptionCard(
-                    leadingIcon: Icons.credit_card,
-                    title: 'Wallet',
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(WalletScreen.id),
-                  ),
-                  LUTileOptionCard(
-                    leadingIcon: Icons.favorite_border,
-                    title: 'Favorite restaurants',
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(FavoritesScreen.id),
-                  ),
-                  LUTileOptionCard(
-                    leadingIcon: Icons.history,
-                    title: 'Visited restaurants',
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(LastVisitedScreen.id),
-                  ),
-                ],
-              ),
+              Text('Nice'),
               LUSolidButton(
                 onPressed: () {},
-                title: 'logout',
+                title: 'save',
               )
             ],
           ),

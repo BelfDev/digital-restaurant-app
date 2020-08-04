@@ -1,6 +1,7 @@
 import 'package:dr_app/screens/add_credit_card_screen.dart';
 import 'package:dr_app/screens/category_detail_screen.dart';
 import 'package:dr_app/screens/cuisine_screen.dart';
+import 'package:dr_app/screens/edit_profile_screen.dart';
 import 'package:dr_app/screens/explore_screen.dart';
 import 'package:dr_app/screens/favorites_screen.dart';
 import 'package:dr_app/screens/home_screen.dart';
@@ -30,6 +31,7 @@ final Map<String, WidgetBuilder> routes = {
   FavoritesScreen.id: (context) => FavoritesScreen(),
   LastVisitedScreen.id: (context) => LastVisitedScreen(),
   AddCreditCardScreen.id: (context) => AddCreditCardScreen(),
+  EditProfileScreen.id: (context) => EditProfileScreen()
 };
 
 final Set<String> fullScreenRoutes = {ScannerScreen.id};
