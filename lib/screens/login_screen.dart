@@ -16,6 +16,7 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
+// TODO: Implement state management and validation
 class _LoginScreenState extends State<LoginScreen> {
   static const headerHeightFactor = 0.28;
   static const footerHeightFactor = 0.28;
