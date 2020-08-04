@@ -2,6 +2,7 @@ import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/input_field.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
+import 'package:dr_app/screens/signup_screen.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
 import 'package:dr_app/utils/styles.dart';
@@ -58,7 +59,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   FlatButton(
                     padding: const EdgeInsets.symmetric(
                         vertical: 0.0, horizontal: 4.0),
-                    onPressed: () {},
+                    onPressed: () =>
+                        Navigator.of(context).pushNamed(SignUpScreen.id),
                     child: Text(
                       'Sign Up',
                       style: Styles.loginFooterText
