@@ -35,6 +35,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
+  // TODO: Implement camera logic
   Widget buildAvatar() => Container(
         width: profilePictureSize,
         height: profilePictureSize,
@@ -150,22 +151,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
       );
 
-//  Widget buildEditProfileContent(BuildContext context) => Expanded(
-//        child: Container(
-//          child: Column(
-//            mainAxisSize: MainAxisSize.min,
-//            mainAxisAlignment: MainAxisAlignment.start,
-//            children: <Widget>[
-//              Text('Nice'),
-//              LUSolidButton(
-//                onPressed: () {},
-//                title: 'save',
-//              )
-//            ],
-//          ),
-//        ),
-//      );
-
+  // TODO: Implement validation logic
   Widget buildEditProfileContent(BuildContext context) => Expanded(
         child: Container(
             child: LUList(
@@ -198,7 +184,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ),
             LUSolidButton(
               margin: EdgeInsets.symmetric(vertical: 32.0),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
               title: 'save',
             )
           ],
