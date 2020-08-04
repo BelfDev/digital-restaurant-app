@@ -1,6 +1,7 @@
 import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/tile_option_card.dart';
 import 'package:dr_app/components/list.dart';
+import 'package:dr_app/components/round_avatar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/screens/edit_profile_screen.dart';
 import 'package:dr_app/screens/favorites_screen.dart';
@@ -83,32 +84,8 @@ class ProfileScreen extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        Container(
-                          width: profilePictureSize,
-                          height: profilePictureSize,
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.shade300.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 8,
-                                  offset: Offset(
-                                      0, 2), // changes position of shadow
-                                )
-                              ],
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(LUTheme.cardBorderRadius))),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(
-                                LUTheme.cardBorderRadius - 4),
-                            child: FadeInImage.assetNetwork(
-                              placeholder: Images.verticalPlaceholder,
-                              image: 'https://picsum.photos/400/300?random=2',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                        LURectangleAvatar(
+                          profilePictureSize: profilePictureSize,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 24, top: 24),
