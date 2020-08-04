@@ -1,4 +1,8 @@
+import 'package:dr_app/components/buttons/solid_button.dart';
+import 'package:dr_app/components/input_field.dart';
+import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/round_avatar.dart';
+import 'package:dr_app/components/round_container.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/colors.dart';
@@ -14,40 +18,40 @@ class SignUpScreen extends StatefulWidget {
   _SignUpScreenState createState() => _SignUpScreenState();
 }
 
+//TODO: State management and validation
 class _SignUpScreenState extends State<SignUpScreen> {
   static const headerHeightFactor = 0.28;
   static const double profilePictureSize = 160;
 
   @override
   Widget build(BuildContext context) {
-    final header = <Widget>[
-      buildSignUpHeaderBackground(),
-      SafeArea(
-        child: Align(
-          alignment: Alignment.topCenter,
-          child: Padding(
-            padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height *
-                    (headerHeightFactor / 3)),
-            child: LURectangleAvatar(
-              editable: true,
-              profilePictureSize: profilePictureSize,
-            ),
-          ),
-        ),
-      ),
-      SafeArea(
-        child: LUTopBar(
-          title: 'Sign Up',
-          onNavigationButtonPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
-    ];
-
     return Container(
       color: LUTheme.of(context).backgroundColor,
       child: Stack(
-        children: <Widget>[...header],
+        children: <Widget>[
+          buildSignUpHeaderBackground(),
+          buildSignUpBody(context),
+          SafeArea(
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height *
+                        (headerHeightFactor / 3)),
+                child: LURectangleAvatar(
+                  editable: true,
+                  profilePictureSize: profilePictureSize,
+                ),
+              ),
+            ),
+          ),
+          SafeArea(
+            child: LUTopBar(
+              title: 'Sign Up',
+              onNavigationButtonPressed: () => Navigator.of(context).pop(),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -76,6 +80,47 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buildSignUpBody(BuildContext context) {
+    return RoundContainer(
+      child: LUList(
+        padding: EdgeInsets.only(
+            top: profilePictureSize / 2, left: 32.0, right: 32.0),
+        items: <Widget>[
+          Form(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  LUInputField(
+                    fieldTitle: 'Full Name',
+                    hintText: 'Amanda Baggins',
+                    keyboardType: TextInputType.text,
+                  ),
+                  LUInputField(
+                      fieldTitle: 'Email',
+                      hintText: 'amanda@email.com',
+                      keyboardType: TextInputType.emailAddress),
+                  LUInputField(
+                      obscureText: true,
+                      fieldTitle: 'Password',
+                      hintText: '123456',
+                      keyboardType: TextInputType.text),
+                  LUInputField(
+                      obscureText: true,
+                      fieldTitle: 'Repeat Password',
+                      hintText: '123456',
+                      keyboardType: TextInputType.text),
+                ]),
+          ),
+          LUSolidButton(
+            margin: EdgeInsets.only(top: 24.0),
+            title: 'Sign Up',
+            onPressed: () => Navigator.of(context).pop(),
+          )
+        ],
       ),
     );
   }
