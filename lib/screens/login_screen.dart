@@ -1,3 +1,5 @@
+import 'package:dr_app/components/buttons/solid_button.dart';
+import 'package:dr_app/components/input_field.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/colors.dart';
@@ -40,7 +42,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           SafeArea(
               child: LUTopBar(
-            title: 'Login',
             onNavigationButtonPressed: () => Navigator.of(context).pop(),
           )),
           SafeArea(
@@ -73,7 +74,47 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget buildLoginBody() {
-    return SizedBox();
+    final bodySize = (1 - headerHeightFactor - footerHeightFactor);
+
+    return Align(
+      alignment: Alignment.center,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 32.0),
+        height: MediaQuery.of(context).size.height * bodySize,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Login',
+              style: Styles.topBarTitle
+                  .copyWith(color: LUTheme.of(context).primaryColor),
+            ),
+            Form(
+              child: Column(
+                children: <Widget>[
+                  LUInputField(
+                      fieldTitle: 'Email',
+                      hintText: 'amanda@email.com',
+                      keyboardType: TextInputType.emailAddress),
+                  LUInputField(
+                      obscureText: true,
+                      fieldTitle: 'Password',
+                      hintText: '123456',
+                      keyboardType: TextInputType.text),
+                ],
+              ),
+            ),
+            Center(
+              child: LUSolidButton(
+                title: 'Login',
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 
