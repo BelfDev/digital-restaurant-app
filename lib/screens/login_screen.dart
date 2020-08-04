@@ -1,6 +1,8 @@
+import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
+import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 /// The LoginScreen displays an input form which
@@ -23,34 +25,55 @@ class _LoginScreenState extends State<LoginScreen> {
       color: LUTheme.of(context).backgroundColor,
       child: Stack(
         children: <Widget>[
-          buildLoginHeader(),
+          _LoginBackgroundShape(
+              shapeBorderRadius: shapeBorderRadius,
+              context: context,
+              headerHeightFactor: headerHeightFactor),
           buildLoginBody(),
-          buildLoginFooter()
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: _LoginBackgroundShape(
+                invert: true,
+                shapeBorderRadius: shapeBorderRadius,
+                context: context,
+                headerHeightFactor: footerHeightFactor),
+          ),
+          SafeArea(
+              child: LUTopBar(
+            title: 'Login',
+            onNavigationButtonPressed: () => Navigator.of(context).pop(),
+          )),
+          SafeArea(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "Don't have an account?",
+                    style: Styles.loginFooterText,
+                  ),
+                  FlatButton(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 0.0, horizontal: 4.0),
+                    onPressed: () {},
+                    child: Text(
+                      'Sign Up',
+                      style: Styles.loginFooterText
+                          .copyWith(fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
   }
 
-  Widget buildLoginHeader() {
-    return _LoginBackgroundShape(
-        shapeBorderRadius: shapeBorderRadius,
-        context: context,
-        headerHeightFactor: headerHeightFactor);
-  }
-
   Widget buildLoginBody() {
     return SizedBox();
-  }
-
-  Widget buildLoginFooter() {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: _LoginBackgroundShape(
-          invert: true,
-          shapeBorderRadius: shapeBorderRadius,
-          context: context,
-          headerHeightFactor: footerHeightFactor),
-    );
   }
 }
 
