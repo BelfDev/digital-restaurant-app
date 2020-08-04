@@ -1,4 +1,6 @@
 import 'package:dr_app/components/buttons/solid_button.dart';
+import 'package:dr_app/components/input_field.dart';
+import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/colors.dart';
@@ -148,19 +150,58 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
       );
 
+//  Widget buildEditProfileContent(BuildContext context) => Expanded(
+//        child: Container(
+//          child: Column(
+//            mainAxisSize: MainAxisSize.min,
+//            mainAxisAlignment: MainAxisAlignment.start,
+//            children: <Widget>[
+//              Text('Nice'),
+//              LUSolidButton(
+//                onPressed: () {},
+//                title: 'save',
+//              )
+//            ],
+//          ),
+//        ),
+//      );
+
   Widget buildEditProfileContent(BuildContext context) => Expanded(
         child: Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Text('Nice'),
-              LUSolidButton(
-                onPressed: () {},
-                title: 'save',
-              )
-            ],
-          ),
-        ),
+            child: LUList(
+          padding: EdgeInsets.symmetric(horizontal: 32.0),
+          items: <Widget>[
+            Form(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    LUInputField(
+                      fieldTitle: 'Full Name',
+                      hintText: 'Amanda Baggins',
+                      keyboardType: TextInputType.text,
+                    ),
+                    LUInputField(
+                        fieldTitle: 'Email',
+                        hintText: 'amanda@email.com',
+                        keyboardType: TextInputType.emailAddress),
+                    LUInputField(
+                        obscureText: true,
+                        fieldTitle: 'Password',
+                        hintText: '123456',
+                        keyboardType: TextInputType.text),
+                    LUInputField(
+                        obscureText: true,
+                        fieldTitle: 'Repeat Password',
+                        hintText: '123456',
+                        keyboardType: TextInputType.text),
+                  ]),
+            ),
+            LUSolidButton(
+              margin: EdgeInsets.symmetric(vertical: 32.0),
+              onPressed: () {},
+              title: 'save',
+            )
+          ],
+        )),
       );
 }
