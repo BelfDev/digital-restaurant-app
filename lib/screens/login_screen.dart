@@ -90,27 +90,39 @@ class _LoginScreenState extends State<LoginScreen> {
               style: Styles.topBarTitle
                   .copyWith(color: LUTheme.of(context).primaryColor),
             ),
-            Form(
-              child: Column(
-                children: <Widget>[
-                  LUInputField(
-                      fieldTitle: 'Email',
-                      hintText: 'amanda@email.com',
-                      keyboardType: TextInputType.emailAddress),
-                  LUInputField(
-                      obscureText: true,
-                      fieldTitle: 'Password',
-                      hintText: '123456',
-                      keyboardType: TextInputType.text),
-                ],
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: Form(
+                child: Column(
+                  children: <Widget>[
+                    LUInputField(
+                        fieldTitle: 'Email',
+                        hintText: 'amanda@email.com',
+                        keyboardType: TextInputType.emailAddress),
+                    LUInputField(
+                        obscureText: true,
+                        fieldTitle: 'Password',
+                        hintText: '123456',
+                        keyboardType: TextInputType.text),
+                  ],
+                ),
               ),
             ),
             Center(
-              child: LUSolidButton(
-                title: 'Login',
-                onPressed: () => Navigator.of(context).pop(),
+              child: Column(
+                children: <Widget>[
+                  LUSolidButton(
+                    title: 'Login',
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                  FlatButton(
+                    onPressed: () {},
+                    child:
+                        Text('Forgot password?', style: Styles.loginFooterText),
+                  ),
+                ],
               ),
-            )
+            ),
           ],
         ),
       ),
