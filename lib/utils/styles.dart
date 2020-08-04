@@ -111,6 +111,8 @@ abstract class Styles {
       fontSize: 18, fontWeight: FontWeight.w400, color: LUColors.darkBlue);
   static const loginFooterText = TextStyle(
       fontSize: 17, fontWeight: FontWeight.w400, color: LUColors.navyBlue);
+  static const informativeText =
+      TextStyle(fontSize: 17, fontWeight: FontWeight.w400);
 
   /// Container Styles
   static const roundBackgroundRadius = Radius.circular(40.0);

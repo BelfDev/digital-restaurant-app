@@ -10,6 +10,7 @@ import 'package:dr_app/screens/login_screen.dart';
 import 'package:dr_app/screens/more_screen.dart';
 import 'package:dr_app/screens/outlet_detail_screen.dart';
 import 'package:dr_app/screens/outlet_screen.dart';
+import 'package:dr_app/screens/password_recovery_screen.dart';
 import 'package:dr_app/screens/product_screen.dart';
 import 'package:dr_app/screens/profile_screen.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
@@ -35,7 +36,8 @@ final Map<String, WidgetBuilder> routes = {
   AddCreditCardScreen.id: (context) => AddCreditCardScreen(),
   EditProfileScreen.id: (context) => EditProfileScreen(),
   LoginScreen.id: (context) => LoginScreen(),
-  SignUpScreen.id: (context) => SignUpScreen()
+  SignUpScreen.id: (context) => SignUpScreen(),
+  PasswordRecoveryScreen.id: (context) => PasswordRecoveryScreen(),
 };
 
 final Set<String> fullScreenRoutes = {ScannerScreen.id};
