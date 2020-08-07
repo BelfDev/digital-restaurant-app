@@ -33,7 +33,7 @@ class MoreScreen extends StatelessWidget {
                   leadingIcon: FontAwesome5Solid.bell,
                   title: 'Notifications',
                   trailingChildren: <Widget>[
-                    Switch(
+                    Switch.adaptive(
                       value: false,
                       onChanged: (value) {},
                       activeColor: LUTheme.of(context).accentColor,
