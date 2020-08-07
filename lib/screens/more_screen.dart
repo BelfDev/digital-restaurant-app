@@ -5,6 +5,8 @@ import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
+import 'about_version_screen.dart';
+
 /// The More Screen allows the user to view additional
 /// information about the App and configure some of its settings.
 class MoreScreen extends StatelessWidget {
@@ -29,6 +31,7 @@ class MoreScreen extends StatelessWidget {
           title: 'General',
           child: Column(
             children: <Widget>[
+              // TODO: Set notifications
               LUTileOptionCard(
                   leadingIcon: FontAwesome5Solid.bell,
                   title: 'Notifications',
@@ -50,7 +53,8 @@ class MoreScreen extends StatelessWidget {
               LUTileOptionCard(
                   leadingIcon: FontAwesome5Solid.info_circle,
                   title: 'About this version',
-                  onPressed: () {}),
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed(AboutVersionScreen.id)),
             ],
           ),
         )

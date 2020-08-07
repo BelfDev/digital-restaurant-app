@@ -1,3 +1,4 @@
+import 'package:dr_app/screens/about_version_screen.dart';
 import 'package:dr_app/screens/add_credit_card_screen.dart';
 import 'package:dr_app/screens/category_detail_screen.dart';
 import 'package:dr_app/screens/cuisine_screen.dart';
@@ -38,6 +39,7 @@ final Map<String, WidgetBuilder> routes = {
   LoginScreen.id: (context) => LoginScreen(),
   SignUpScreen.id: (context) => SignUpScreen(),
   PasswordRecoveryScreen.id: (context) => PasswordRecoveryScreen(),
+  AboutVersionScreen.id: (context) => AboutVersionScreen()
 };
 
 final Set<String> fullScreenRoutes = {ScannerScreen.id};
