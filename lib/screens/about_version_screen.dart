@@ -11,6 +11,8 @@ class AboutVersionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final titlePadding = EdgeInsets.only(left: 4.0, bottom: 8.0);
+
     return Container(
         color: LUTheme.of(context).backgroundColor,
         child: SafeArea(
@@ -25,10 +27,33 @@ class AboutVersionScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: LUSection(
-                    title: 'Version',
-                    titlePadding: EdgeInsets.only(left: 4.0, bottom: 8.0),
-                    child: LUInformationTile(text: '0.0.1 | 32')),
+                child: Column(
+                  children: <Widget>[
+                    LUSection(
+                        title: 'Version',
+                        titlePadding: titlePadding,
+                        child: LUInformationTile(text: '0.0.1 | 32')),
+                    LUSection(
+                        title: 'Author',
+                        titlePadding: titlePadding,
+                        child: LUInformationTile(text: 'Pedro Belfort')),
+                    LUSection(
+                        title: 'Author',
+                        titlePadding: titlePadding,
+                        // TODO: Adjust spacing and border
+                        child: Column(
+                          children: <Widget>[
+                            LUInformationTile(text: 'Library 1'),
+                            LUInformationTile(text: 'Library 2'),
+                            LUInformationTile(text: 'Library 3'),
+                            LUInformationTile(text: 'Library 4'),
+                            LUInformationTile(text: 'Library 5'),
+                            LUInformationTile(text: 'Library 6'),
+                            LUInformationTile(text: 'Library 7'),
+                          ],
+                        )),
+                  ],
+                ),
               )
             ])));
   }
