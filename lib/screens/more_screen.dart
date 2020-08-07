@@ -5,6 +5,8 @@ import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
+/// The More Screen allows the user to view additional
+/// information about the App and configure some of its settings.
 class MoreScreen extends StatelessWidget {
   static const id = 'more_screen';
 
@@ -30,7 +32,13 @@ class MoreScreen extends StatelessWidget {
               LUTileOptionCard(
                   leadingIcon: FontAwesome5Solid.bell,
                   title: 'Notifications',
-                  onPressed: () {}),
+                  trailingChildren: <Widget>[
+                    Switch(
+                      value: false,
+                      onChanged: (value) {},
+                      activeColor: LUTheme.of(context).accentColor,
+                    ),
+                  ]),
               LUTileOptionCard(
                   leadingIcon: FontAwesome5Solid.user_shield,
                   title: 'Terms and conditions',
