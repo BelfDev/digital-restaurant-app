@@ -119,7 +119,9 @@ class IntroSlider extends StatelessWidget {
       },
       indicatorLayout: PageIndicatorLayout.SCALE,
       loop: false,
-      autoplay: false,
+      autoplay: true,
+      autoplayDelay: 2500,
+      physics: ClampingScrollPhysics(),
       itemCount: slides.length,
       outer: true,
       index: 0,
@@ -155,11 +157,12 @@ class Slide extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            SizedBox(height: 100),
+            Spacer(flex: 4),
             Image.asset(
               imgSrc,
               fit: BoxFit.cover,
             ),
+            Spacer(),
             Text(
               text,
               textAlign: TextAlign.center,
