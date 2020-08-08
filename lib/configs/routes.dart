@@ -9,6 +9,7 @@ import 'package:dr_app/screens/home_screen.dart';
 import 'package:dr_app/screens/last_visited_screen.dart';
 import 'package:dr_app/screens/login_screen.dart';
 import 'package:dr_app/screens/more_screen.dart';
+import 'package:dr_app/screens/onboarding_screen.dart';
 import 'package:dr_app/screens/outlet_detail_screen.dart';
 import 'package:dr_app/screens/outlet_screen.dart';
 import 'package:dr_app/screens/password_recovery_screen.dart';
@@ -39,7 +40,8 @@ final Map<String, WidgetBuilder> routes = {
   LoginScreen.id: (context) => LoginScreen(),
   SignUpScreen.id: (context) => SignUpScreen(),
   PasswordRecoveryScreen.id: (context) => PasswordRecoveryScreen(),
-  AboutVersionScreen.id: (context) => AboutVersionScreen()
+  AboutVersionScreen.id: (context) => AboutVersionScreen(),
+  OnboardingScreen.id: (context) => OnboardingScreen()
 };
 
-final Set<String> fullScreenRoutes = {ScannerScreen.id};
+final Set<String> fullScreenRoutes = {ScannerScreen.id, OnboardingScreen.id};
