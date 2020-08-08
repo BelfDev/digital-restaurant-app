@@ -35,6 +35,7 @@ class AboutVersionScreen extends StatelessWidget {
                 title: 'About version',
                 buttonBackgroundColor: LUTheme.of(context).primaryColor,
                 tint: LUTheme.of(context).backgroundColor,
+                onNavigationButtonPressed: () => Navigator.of(context).pop(),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
