@@ -53,6 +53,11 @@ abstract class Styles {
       EdgeInsets.only(left: 32, right: 32, bottom: 40);
 
   /// Text Styles
+  static const introText = TextStyle(
+      fontSize: 24,
+      fontFamily: 'Lora',
+      color: LUColors.navyBlue,
+      fontWeight: FontWeight.w400);
   static const sectionText = TextStyle(
       color: LUColors.darkBlue, fontSize: 17, fontWeight: FontWeight.w600);
   static const locationText = TextStyle(

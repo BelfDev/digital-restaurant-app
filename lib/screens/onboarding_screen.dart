@@ -1,11 +1,14 @@
 import 'package:dr_app/components/buttons/outline_button.dart';
 import 'package:dr_app/components/buttons/solid_button.dart';
-import 'package:dr_app/components/swiper.dart';
 import 'package:dr_app/configs/theme.dart';
-import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/navigation/root_container.dart';
 import 'package:dr_app/screens/login_screen.dart';
+import 'package:dr_app/utils/colors.dart';
+import 'package:dr_app/utils/images.dart';
+import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_page_indicator/flutter_page_indicator.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 /// The OnboardingScreen contains a set of slides
 /// showcasing what the App has to offer.
@@ -41,11 +44,12 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: LUTheme.of(context).backgroundColor,
-        child: Column(
+    return Scaffold(
+        backgroundColor: LUTheme.of(context).backgroundColor,
+        body: Column(
           children: <Widget>[
-            Expanded(flex: 7, child: LUSwiper(imgSrcList: dummySwiperImages)),
+//            Expanded(flex: 7, child: LUSwiper(imgSrcList: dummySwiperImages)),
+            Expanded(flex: 7, child: IntroSlider()),
             Expanded(flex: 3, child: buildButtons())
           ],
         ));
@@ -72,4 +76,59 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ],
         ),
       );
+}
+
+class IntroSlider extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Swiper(
+      itemBuilder: (BuildContext context, int index) {
+        return AnimatedContainer(
+          decoration: BoxDecoration(
+              color: LUColors.yellow,
+              borderRadius: BorderRadius.circular(32.0)),
+          duration: Duration(milliseconds: 240),
+          child: SafeArea(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+                  decoration: BoxDecoration(
+                      color: LUColors.darkYellow.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(16.0)),
+                  child: Image.asset(
+                    Images.appLogo,
+                    width: 227,
+                    height: 46,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Container(
+                  color: Colors.blue,
+                  height: 200,
+                ),
+                Text(
+                  "Find the perfect restaurant for your taste",
+                  style: Styles.introText,
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+      indicatorLayout: PageIndicatorLayout.SCALE,
+      loop: false,
+      autoplay: false,
+      itemCount: 1,
+      outer: true,
+      index: 0,
+      pagination: SwiperPagination(
+          margin: EdgeInsets.only(top: 16),
+          builder: DotSwiperPaginationBuilder(
+              space: 8.0,
+              color: LUTheme.of(context).unselectedWidgetColor,
+              activeColor: LUTheme.of(context).primaryColor)),
+    );
+  }
 }
