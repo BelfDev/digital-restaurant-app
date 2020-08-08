@@ -13,6 +13,17 @@ class AboutVersionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final titlePadding = EdgeInsets.only(left: 4.0, bottom: 8.0);
 
+    List<Widget> getLibraryTiles() {
+      return List.generate(
+          50,
+          (index) => Padding(
+                padding: const EdgeInsets.only(bottom: 4.0),
+                child: LUInformationTile(
+                  text: "Library $index",
+                ),
+              ));
+    }
+
     return Container(
         color: LUTheme.of(context).backgroundColor,
         child: SafeArea(
@@ -38,20 +49,10 @@ class AboutVersionScreen extends StatelessWidget {
                         titlePadding: titlePadding,
                         child: LUInformationTile(text: 'Pedro Belfort')),
                     LUSection(
-                        title: 'Author',
+                        title: 'Open Source Libraries',
                         titlePadding: titlePadding,
                         // TODO: Adjust spacing and border
-                        child: Column(
-                          children: <Widget>[
-                            LUInformationTile(text: 'Library 1'),
-                            LUInformationTile(text: 'Library 2'),
-                            LUInformationTile(text: 'Library 3'),
-                            LUInformationTile(text: 'Library 4'),
-                            LUInformationTile(text: 'Library 5'),
-                            LUInformationTile(text: 'Library 6'),
-                            LUInformationTile(text: 'Library 7'),
-                          ],
-                        )),
+                        child: Column(children: getLibraryTiles())),
                   ],
                 ),
               )
