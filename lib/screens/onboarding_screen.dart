@@ -20,37 +20,63 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  final List<Slide> slides = <Slide>[
-    Slide(
-      text: 'Find the perfect restaurant for your taste',
-      imgSrc: Images.introSlide1,
-      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(40.0)),
-    ),
-    Slide(
-      text: 'Place your orders from within the app',
-      imgSrc: Images.introSlide2,
-    ),
-    Slide(
-      text: 'Pay and leave whenever you please',
-      imgSrc: Images.introSlide3,
-      borderRadius: BorderRadius.only(bottomRight: Radius.circular(40.0)),
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: LUTheme.of(context).backgroundColor,
         body: Column(
           children: <Widget>[
-            Expanded(
-                flex: 3,
-                child: IntroSlider(
-                  slides: slides,
-                )),
+            Expanded(flex: 3, child: buildSlider()),
             Expanded(flex: 1, child: buildButtons())
           ],
         ));
+  }
+
+  Widget buildSlider() {
+    final List<Slide> slides = <Slide>[
+      Slide(
+        text: 'Find the perfect restaurant for your taste',
+        imgSrc: Images.introSlide1,
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(40.0)),
+      ),
+      Slide(
+        text: 'Place your orders from within the app',
+        imgSrc: Images.introSlide2,
+      ),
+      Slide(
+        text: 'Pay and leave whenever you please',
+        imgSrc: Images.introSlide3,
+        borderRadius: BorderRadius.only(bottomRight: Radius.circular(40.0)),
+      ),
+    ];
+
+    return Stack(
+      children: <Widget>[
+        IntroSlider(
+          slides: slides,
+        ),
+        Align(
+          alignment: Alignment.topCenter,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 40.0),
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+                decoration: BoxDecoration(
+                    color: LUColors.darkYellow.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(16.0)),
+                child: Image.asset(
+                  Images.appLogo,
+                  width: 227,
+                  height: 46,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
   Widget buildButtons() => SafeArea(
@@ -129,18 +155,7 @@ class Slide extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-              decoration: BoxDecoration(
-                  color: LUColors.darkYellow.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(16.0)),
-              child: Image.asset(
-                Images.appLogo,
-                width: 227,
-                height: 46,
-                fit: BoxFit.cover,
-              ),
-            ),
+            SizedBox(height: 100),
             Image.asset(
               imgSrc,
               fit: BoxFit.cover,
