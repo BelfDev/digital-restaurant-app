@@ -1,3 +1,4 @@
+import 'package:dr_app/configs/routes.dart';
 import 'package:dr_app/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: LUTheme.of(context),
       home: OnboardingScreen(),
+      routes: routes,
     );
   }
 }
