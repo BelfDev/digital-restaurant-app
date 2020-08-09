@@ -41,6 +41,10 @@ dependencies:
       url: https://github.com/BelfDev/qr_code_scanner.git
       ref: master
 
+  # State management
+  bloc: ^6.0.0
+  flutter_bloc: ^6.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
