@@ -12,8 +12,7 @@ class Cuisine {
 
   Cuisine(this.id, this.title, this.image);
 
-  factory Cuisine.fromJson(Map<String, dynamic> json) =>
-      _$CuisineFromJson(json);
+  static Cuisine fromJson(Map<String, dynamic> json) => _$CuisineFromJson(json);
 
   Map<String, dynamic> toJson() => _$CuisineToJson(this);
 }

@@ -8,13 +8,15 @@ import 'network_exception.dart';
 
 /// Base class that abstracts http operations shared among API services.
 abstract class BaseApiService {
-  final String _baseUrl = ApiConfig.BASE_URL;
+  static const _BASE_URL = ApiConfig.BASE_URL;
+
   final http.Client _client = http.Client();
 
   /// Abstracts GET http request boilerplate.
-  Future<dynamic> get(String path) async {
+  @protected
+  Future<String> getRequest(String path) async {
     try {
-      final url = _baseUrl + path;
+      final url = _BASE_URL + path;
       debugPrint('GET request to $url');
       final response = await _client.get(url);
       return _filterResponseBody(response);
@@ -30,7 +32,9 @@ abstract class BaseApiService {
     debugPrint('Response status: ${response.statusCode}');
     switch (response.statusCode) {
       case 200:
-        compute(_printDecodedJson, response.body);
+        if (!kReleaseMode) {
+          compute(_decodeAndPrintJson, response.body);
+        }
         return response.body;
       case 400:
         throw BadRequestException(response.body.toString());
@@ -45,10 +49,12 @@ abstract class BaseApiService {
             'Error occured while Communication with Server with StatusCode : ${response.statusCode}');
     }
   }
+}
 
-  /// Logs the json response in the console if running in development mode.
-  void _printDecodedJson(String responseBody) {
-    final jsonString = json.decode(responseBody.toString());
-    debugPrint('JSON response: $jsonString');
-  }
+/// Logs the json response in the console if running in development mode.
+void _decodeAndPrintJson(String responseBody) {
+  final jsonString = json.decode(responseBody.toString());
+  final encoder = JsonEncoder.withIndent("     ");
+  final prettyJson = encoder.convert(jsonString);
+  debugPrint('JSON response: $prettyJson');
 }
