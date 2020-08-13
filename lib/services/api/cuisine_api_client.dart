@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:dr_app/configs/api_config.dart';
 import 'package:dr_app/data/models/remote/cuisine.dart';
 import 'package:dr_app/data/models/remote/results.dart';
-import 'package:dr_app/services/api/base_api_service.dart';
+import 'package:dr_app/services/api/base_api_client.dart';
 import 'package:flutter/foundation.dart';
 
 /// Service layer for accessing the /cuisine API resource.
 /// Enables fetching all cuisines or a specific cuisine by id.
-class CuisineApiService extends BaseApiService {
+class CuisineApiClient extends BaseApiClient {
   static const _PATH = ApiConfig.CUISINES_RESOURCE;
 
   Future<Results<Cuisine>> getCuisines() async {

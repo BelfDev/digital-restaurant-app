@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'network_exception.dart';
 
 /// Base class that abstracts http operations shared among API services.
-abstract class BaseApiService {
+abstract class BaseApiClient {
   static const _BASE_URL = ApiConfig.BASE_URL;
 
   final http.Client _client = http.Client();

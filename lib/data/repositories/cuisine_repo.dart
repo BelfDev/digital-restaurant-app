@@ -1,11 +1,11 @@
 import 'package:dr_app/data/models/remote/cuisine.dart';
-import 'package:dr_app/services/api/cuisine_api_service.dart';
+import 'package:dr_app/services/api/cuisine_api_client.dart';
 
 /// This class is the only data source for the Cuisine entity.
 /// It should be seen as the single source of truth for fetching
 /// or storing data.
 class CuisineRepo {
-  final _cuisineApiService = CuisineApiService();
+  final _cuisineApiService = CuisineApiClient();
 
   /// Retrieves all stored Cuisine entities
   Future<List<Cuisine>> fetchAllCuisines() async {
