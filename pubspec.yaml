@@ -44,6 +44,7 @@ dependencies:
   # State management
   bloc: ^6.0.0
   flutter_bloc: ^6.0.0
+  meta: ^1.1.8
 
   # Networking
   json_annotation: ^3.0.1
