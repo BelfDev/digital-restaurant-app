@@ -10,6 +10,8 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
+  static const id = 'home_bloc';
+
   final CuisineRepository cuisineRepository;
 
   HomeBloc({@required this.cuisineRepository})
