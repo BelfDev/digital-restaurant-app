@@ -1,6 +1,7 @@
 import 'package:dr_app/components/bottom_app_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/navigation/navigator_container.dart';
+import 'package:dr_app/navigation/router.dart';
 import 'package:dr_app/navigation/tab_data.dart';
 import 'package:dr_app/navigation/tabs.dart';
 import 'package:dr_app/screens/cart_screen.dart';
@@ -21,6 +22,7 @@ class _RootContainerState extends State<RootContainer>
   List<AnimationController> _faders;
   AnimationController _hide;
   int _currentIndex = 0;
+  final _router = AppRouter();
 
   bool _handleScrollNotification(ScrollNotification notification) {
     if (notification.depth == 0) {
@@ -78,6 +80,7 @@ class _RootContainerState extends State<RootContainer>
               child: KeyedSubtree(
                 key: _destinationKeys[tabData.index],
                 child: NavigatorContainer(
+                  router: _router,
                   tabData: tabData,
                   onNavigation: () {
                     _hide.forward();
