@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:dr_app/blocs/bloc.dart';
 import 'package:dr_app/components/blur_filter.dart';
 import 'package:dr_app/components/buttons/icon_button.dart';
 import 'package:dr_app/components/buttons/solid_button.dart';
@@ -24,6 +25,7 @@ import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 import 'cuisine_screen.dart';
@@ -51,12 +53,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   _HomeMode mode;
+  HomeBloc _homeBloc;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     mode = _HomeMode.unchecked;
+    _homeBloc =
+        _homeBloc = BlocProvider.of<HomeBloc>(context)..add(CuisineRequested());
   }
 
   void _onTopBarButtonPressed() {
@@ -65,19 +69,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      bottom: false,
-      child: ListView(
-        physics: ClampingScrollPhysics(),
-        children: <Widget>[
-          _buildTopBar(),
-          Stack(
-            children: <Widget>[
-              _Header(mode: mode, outlet: dummyOutlets[0]),
-              _HomeContent(mode: mode)
-            ],
-          )
-        ],
+    // ignore: close_sinks
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (_, state) => SafeArea(
+        bottom: false,
+        child: ListView(
+          physics: ClampingScrollPhysics(),
+          children: <Widget>[
+            _buildTopBar(),
+            Stack(
+              children: <Widget>[
+                _Header(mode: mode, outlet: dummyOutlets[0]),
+                _HomeContent(
+                  mode: mode,
+                  state: state,
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -223,11 +233,16 @@ class _Header extends StatelessWidget {
 }
 
 class _HomeContent extends StatelessWidget {
+  final HomeState state;
   final _HomeMode mode;
   final Outlet outlet;
 
-  const _HomeContent({Key key, @required this.mode, this.outlet})
-      : super(key: key);
+  const _HomeContent({
+    Key key,
+    @required this.state,
+    @required this.mode,
+    this.outlet,
+  }) : super(key: key);
 
   List<Widget> _getCategoryCards(context) => dummyCuisines
       .map((cuisine) => LUCategoryCard(
@@ -240,6 +255,38 @@ class _HomeContent extends StatelessWidget {
             },
           ))
       .toList();
+
+  Widget buildCategoryCarousel(BuildContext context) {
+    switch (state.runtimeType) {
+      case HomeInitial:
+        return Center(child: Text('Please Select a Location'));
+      case HomeLoadInProgress:
+        return SizedBox(
+            height: Styles.categoryCarouselHeight,
+            child: Center(child: CircularProgressIndicator()));
+      case CuisineLoadSuccess:
+        final cuisineState = state as CuisineLoadSuccess;
+        return LUCarousel(
+            height: Styles.categoryCarouselHeight,
+            padding: Styles.sectionContentPadding,
+            items: cuisineState.cuisines
+                .map((cuisine) => LUCategoryCard(
+                      title: cuisine.title,
+                      imageSrc: cuisine.image.source,
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(CuisineScreen.id,
+                            arguments: ScreenArguments(
+                                title: cuisine.title,
+                                coverImgSrc: cuisine.image.source));
+                      },
+                    ))
+                .toList());
+      case HomeLoadFailure:
+        return Center(child: Text('Something went wrong'));
+      default:
+        return Center(child: Text('Default'));
+    }
+  }
 
   List<Widget> _getFeaturedCards(context) => dummyDishes
       .map((dish) => LUFeaturedCard(
@@ -307,12 +354,7 @@ class _HomeContent extends StatelessWidget {
                 height: _HomeStyles.featuredSectionHeight,
                 padding: Styles.sectionContentPadding,
                 items: _getFeaturedCards(context))),
-        LUSection(
-            title: 'Cuisines',
-            child: LUCarousel(
-                height: Styles.categoryCarouselHeight,
-                padding: Styles.sectionContentPadding,
-                items: _getCategoryCards(context))),
+        LUSection(title: 'Cuisines', child: buildCategoryCarousel(context)),
         LUSection(
           title: 'Nearby Restaurants',
           child: LUList(
