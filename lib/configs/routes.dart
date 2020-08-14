@@ -1,6 +1,5 @@
 import 'package:dr_app/screens/about_version_screen.dart';
 import 'package:dr_app/screens/add_credit_card_screen.dart';
-import 'package:dr_app/screens/category_detail_screen.dart';
 import 'package:dr_app/screens/cuisine_screen.dart';
 import 'package:dr_app/screens/edit_profile_screen.dart';
 import 'package:dr_app/screens/explore_screen.dart';
@@ -28,7 +27,6 @@ final Map<String, WidgetBuilder> routes = {
   MoreScreen.id: (context) => MoreScreen(),
   ScannerScreen.id: (context) => ScannerScreen(),
   OutletDetailScreen.id: (context) => OutletDetailScreen(),
-  CategoryDetailScreen.id: (context) => CategoryDetailScreen(),
   CuisineScreen.id: (context) => CuisineScreen(),
   ProductScreen.id: (context) => ProductScreen(),
   OutletScreen.id: (context) => OutletScreen(),
