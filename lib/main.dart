@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dr_app/blocs/app_bloc_observer.dart';
 import 'package:dr_app/blocs/bloc.dart';
 import 'package:dr_app/configs/routes.dart';
-import 'package:dr_app/data/repositories/cuisine_repo.dart';
+import 'package:dr_app/data/repositories/cuisine_repository.dart';
 import 'package:dr_app/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +12,7 @@ import 'configs/theme.dart';
 void main() {
   Bloc.observer = AppBlocObserver();
 
-  final CuisineRepo cuisineRepo = CuisineRepo();
+  final CuisineRepository cuisineRepo = CuisineRepository();
 
   // Injects all available repos
   runApp(MyApp(
@@ -21,7 +21,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final CuisineRepo cuisineRepo;
+  final CuisineRepository cuisineRepo;
 
   const MyApp({Key key, @required this.cuisineRepo}) : super(key: key);
 
