@@ -1,7 +1,7 @@
 import 'package:dr_app/components/buttons/outline_button.dart';
 import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/configs/theme.dart';
-import 'package:dr_app/navigation/root_container.dart';
+import 'package:dr_app/navigation/router.dart';
 import 'package:dr_app/screens/login_screen.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
@@ -94,12 +94,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 height: 16,
               ),
               LUOutlineButton(
-                title: "Skip",
-                onPressed: () => Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => RootContainer()),
-                    (_) => false),
-              )
+                  title: "Skip",
+                  onPressed: () => AppRouter.navigateToRoot(context))
             ],
           ),
         ),
