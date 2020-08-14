@@ -10,10 +10,10 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final CuisineRepository cuisineRepo;
+  final CuisineRepository cuisineRepository;
 
-  HomeBloc({@required this.cuisineRepo})
-      : assert(cuisineRepo != null),
+  HomeBloc({@required this.cuisineRepository})
+      : assert(cuisineRepository != null),
         super(HomeInitial());
 
   @override
@@ -28,7 +28,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> _mapCuisineRequestedToState() async* {
     yield HomeLoadInProgress();
     try {
-      final List<Cuisine> cuisines = await cuisineRepo.fetchAllCuisines();
+      final List<Cuisine> cuisines = await cuisineRepository.fetchAllCuisines();
       yield CuisineLoadSuccess(cuisines: cuisines);
     } catch (_) {
       yield HomeLoadFailure();

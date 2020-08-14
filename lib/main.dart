@@ -12,25 +12,25 @@ import 'configs/theme.dart';
 void main() {
   Bloc.observer = AppBlocObserver();
 
-  final CuisineRepository cuisineRepo = CuisineRepository();
+  final CuisineRepository cuisineRepository = CuisineRepository();
 
   // Injects all available repos
   runApp(MyApp(
-    cuisineRepo: cuisineRepo,
+    cuisineRepository: cuisineRepository,
   ));
 }
 
 class MyApp extends StatelessWidget {
-  final CuisineRepository cuisineRepo;
+  final CuisineRepository cuisineRepository;
 
-  const MyApp({Key key, @required this.cuisineRepo}) : super(key: key);
+  const MyApp({Key key, @required this.cuisineRepository}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: LUTheme.of(context),
       home: BlocProvider(
-        create: (context) => HomeBloc(cuisineRepo: cuisineRepo),
+        create: (context) => HomeBloc(cuisineRepository: cuisineRepository),
         child: OnboardingScreen(),
       ),
       routes: routes,
