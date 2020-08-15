@@ -1,22 +1,24 @@
 import 'package:dr_app/components/loading_placeholder.dart';
 import 'package:flutter/material.dart';
 
+typedef Widget ContentBuilder();
+
 class LULoadableContent extends StatelessWidget {
   final double height, width;
-  final bool isLoading, isError;
-  final Widget contentWidget;
+  final bool isSuccess, isLoading, isError;
+  final ContentBuilder contentBuilder;
 
   const LULoadableContent({
     Key key,
     @required this.height,
     this.width = double.infinity,
-    @required this.contentWidget,
+    @required this.contentBuilder,
+    @required this.isSuccess,
     @required this.isLoading,
     @required this.isError,
   })  : assert(height != null),
-        assert(contentWidget != null),
-        assert(isLoading != null && isError != null),
-        assert(isLoading != isError),
+        assert(contentBuilder != null),
+        assert(isSuccess != null && isLoading != null && isError != null),
         super(key: key);
 
   @override
@@ -33,8 +35,8 @@ class LULoadableContent extends StatelessWidget {
         height: height,
         width: width,
       );
-    } else if (!isLoading && !isError) {
-      return contentWidget;
+    } else if (isSuccess) {
+      return contentBuilder();
     } else if (isError) {
       return Text('Error');
     }

@@ -12,6 +12,7 @@ import 'package:dr_app/components/carousel.dart';
 import 'package:dr_app/components/chip_carousel.dart';
 import 'package:dr_app/components/decorated_title.dart';
 import 'package:dr_app/components/list.dart';
+import 'package:dr_app/components/loadable_content.dart';
 import 'package:dr_app/components/section.dart';
 import 'package:dr_app/components/star_rating.dart';
 import 'package:dr_app/components/top_bar.dart';
@@ -244,26 +245,12 @@ class _HomeContent extends StatelessWidget {
     this.outlet,
   }) : super(key: key);
 
-  List<Widget> _getCategoryCards(context) => dummyCuisines
-      .map((cuisine) => LUCategoryCard(
-            title: cuisine.name,
-            imageSrc: cuisine.imgSrc,
-            onPressed: () {
-              Navigator.of(context).pushNamed(CuisineScreen.id,
-                  arguments: ScreenArguments(
-                      title: cuisine.name, coverImgSrc: cuisine.imgSrc));
-            },
-          ))
-      .toList();
-
-  Widget buildCategoryCarousel(BuildContext context) {
-    switch (state.runtimeType) {
-      case HomeInitial:
-      case HomeLoadInProgress:
-        return SizedBox(
-            height: Styles.categoryCarouselHeight,
-            child: Center(child: CircularProgressIndicator()));
-      case CuisineLoadSuccess:
+  Widget buildCategoryCarousel(BuildContext context) => LULoadableContent(
+      height: Styles.categoryCarouselHeight,
+      isLoading: state is HomeInitial || state is HomeLoadInProgress,
+      isSuccess: state is CuisineLoadSuccess,
+      isError: state is HomeLoadFailure,
+      contentBuilder: () {
         final cuisineState = state as CuisineLoadSuccess;
         return LUCarousel(
             height: Styles.categoryCarouselHeight,
@@ -280,12 +267,7 @@ class _HomeContent extends StatelessWidget {
                       },
                     ))
                 .toList());
-      case HomeLoadFailure:
-        return Center(child: Text('Something went wrong'));
-      default:
-        return Center(child: Text('Default'));
-    }
-  }
+      });
 
   List<Widget> _getFeaturedCards(context) => dummyDishes
       .map((dish) => LUFeaturedCard(
