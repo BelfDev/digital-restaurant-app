@@ -259,7 +259,6 @@ class _HomeContent extends StatelessWidget {
   Widget buildCategoryCarousel(BuildContext context) {
     switch (state.runtimeType) {
       case HomeInitial:
-        return Center(child: Text('Please Select a Location'));
       case HomeLoadInProgress:
         return SizedBox(
             height: Styles.categoryCarouselHeight,
