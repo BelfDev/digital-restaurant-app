@@ -1,3 +1,4 @@
+import 'package:dr_app/components/error_placeholder.dart';
 import 'package:dr_app/components/loading_placeholder.dart';
 import 'package:flutter/material.dart';
 
@@ -35,10 +36,10 @@ class LULoadableContent extends StatelessWidget {
         height: height,
         width: width,
       );
+    } else if (isError) {
+      return LUErrorPlaceholder();
     } else if (isSuccess) {
       return contentBuilder();
-    } else if (isError) {
-      return Text('Error');
     }
     throw Exception('Loadable content must return some widget');
   }
