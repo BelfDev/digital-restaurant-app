@@ -10,7 +10,8 @@ abstract class HomeState extends Equatable {
 
 class HomeInitial extends HomeState {}
 
-class HomeLoadInProgress extends HomeState {}
+// Cuisine States
+class CuisineLoadInProgress extends HomeState {}
 
 class CuisineLoadSuccess extends HomeState {
   final List<Cuisine> cuisines;
@@ -22,4 +23,34 @@ class CuisineLoadSuccess extends HomeState {
   List<Object> get props => [cuisines];
 }
 
-class HomeLoadFailure extends HomeState {}
+class CuisineLoadFailure extends HomeState {}
+
+// Featured outlet states
+class FeaturedOutletLoadInProgress extends HomeState {}
+
+class FeaturedOutletLoadSuccess extends HomeState {
+  final List<Outlet> outlets;
+
+  const FeaturedOutletLoadSuccess({@required this.outlets})
+      : assert(outlets != null);
+
+  @override
+  List<Object> get props => [outlets];
+}
+
+class FeaturedOutletLoadFailure extends HomeState {}
+
+// Nearby outlet states
+class NearbyOutletLoadInProgress extends HomeState {}
+
+class NearbyOutletLoadSuccess extends HomeState {
+  final List<Outlet> outlets;
+
+  const NearbyOutletLoadSuccess({@required this.outlets})
+      : assert(outlets != null);
+
+  @override
+  List<Object> get props => [outlets];
+}
+
+class NearbyOutletLoadFailure extends HomeState {}
