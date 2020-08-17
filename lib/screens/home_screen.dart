@@ -63,9 +63,9 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     mode = _HomeMode.unchecked;
     _homeBloc = _homeBloc = BlocProvider.of<HomeBloc>(context)
-      ..add(FeaturedOutletsRequested(city: _CITY_REGION));
-//      ..add(CuisinesRequested())
-//      ..add(NearbyOutletsRequested(city: _CITY_REGION));
+      ..add(FeaturedOutletsRequested(city: _CITY_REGION))
+      ..add(CuisinesRequested())
+      ..add(NearbyOutletsRequested(city: _CITY_REGION));
   }
 
   void _onTopBarButtonPressed() {
@@ -75,24 +75,21 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-    return BlocBuilder<HomeBloc, HomeState>(
-      builder: (_, state) => SafeArea(
-        bottom: false,
-        child: ListView(
-          physics: ClampingScrollPhysics(),
-          children: <Widget>[
-            _buildTopBar(),
-            Stack(
-              children: <Widget>[
-                _Header(mode: mode, outlet: dummyOutlets[0]),
-                _HomeContent(
-                  mode: mode,
-                  state: state,
-                )
-              ],
-            )
-          ],
-        ),
+    return SafeArea(
+      bottom: false,
+      child: ListView(
+        physics: ClampingScrollPhysics(),
+        children: <Widget>[
+          _buildTopBar(),
+          Stack(
+            children: <Widget>[
+              _Header(mode: mode, outlet: dummyOutlets[0]),
+              _HomeContent(
+                mode: mode,
+              )
+            ],
+          )
+        ],
       ),
     );
   }
@@ -238,97 +235,117 @@ class _Header extends StatelessWidget {
 }
 
 class _HomeContent extends StatelessWidget {
-  final HomeState state;
   final _HomeMode mode;
   final Outlet outlet;
 
   const _HomeContent({
     Key key,
-    @required this.state,
     @required this.mode,
     this.outlet,
   }) : super(key: key);
 
   Widget buildFeaturedOutletsCarousel(BuildContext context) =>
-      LULoadableContent(
-          height: _HomeStyles.featuredSectionHeight,
-          isLoading:
-              state is HomeInitial || state is FeaturedOutletLoadInProgress,
-          isSuccess: state is FeaturedOutletLoadSuccess,
-          isError: state is FeaturedOutletLoadFailure,
-          contentBuilder: () {
-            final featuredOutletState = state as FeaturedOutletLoadSuccess;
-            return LUCarousel(
-                height: _HomeStyles.featuredSectionHeight,
-                padding: Styles.sectionContentPadding,
-                items: featuredOutletState.outlets
-                    .map((outlet) => LUFeaturedCard(
-                          imageSrc: outlet.images.isNotEmpty
-                              ? outlet.images.first.source
-                              : '',
-                          title: outlet.title,
-                          subtitle: outlet.cuisine.title,
-                          priceRange: outlet.priceLevel,
-                          rating: outlet.rating,
-                        ))
-                    .toList());
-          });
+      BlocBuilder<HomeBloc, HomeState>(
+        buildWhen: (previous, current) =>
+            current is FeaturedOutletLoadInProgress ||
+            current is FeaturedOutletLoadSuccess ||
+            current is FeaturedOutletLoadFailure,
+        builder: (_, state) => LULoadableContent(
+            height: _HomeStyles.featuredSectionHeight,
+            isLoading:
+                state is HomeInitial || state is FeaturedOutletLoadInProgress,
+            isSuccess: state is FeaturedOutletLoadSuccess,
+            isError: state is FeaturedOutletLoadFailure,
+            contentBuilder: () {
+              final featuredOutletState = state as FeaturedOutletLoadSuccess;
+              return LUCarousel(
+                  height: _HomeStyles.featuredSectionHeight,
+                  padding: Styles.sectionContentPadding,
+                  items: featuredOutletState.outlets
+                      .map((outlet) => LUFeaturedCard(
+                            imageSrc: outlet.images.isNotEmpty
+                                ? outlet.images.first.source
+                                : '',
+                            title: outlet.title,
+                            subtitle: outlet.cuisine.title,
+                            priceRange: outlet.priceLevel,
+                            rating: outlet.rating,
+                          ))
+                      .toList());
+            }),
+      );
 
-  Widget buildCategoryCarousel(BuildContext context) => LULoadableContent(
-      height: Styles.categoryCarouselHeight,
-      isLoading: state is HomeInitial || state is CuisineLoadInProgress,
-      isSuccess: state is CuisineLoadSuccess,
-      isError: state is CuisineLoadFailure,
-      contentBuilder: () {
-        final cuisineState = state as CuisineLoadSuccess;
-        return LUCarousel(
-            height: Styles.categoryCarouselHeight,
-            padding: Styles.sectionContentPadding,
-            items: cuisineState.cuisines
-                .map((cuisine) => LUCategoryCard(
-                      title: cuisine.title,
-                      imageSrc: cuisine.image.source,
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(CuisineScreen.id,
-                            arguments: ScreenArguments(
-                                title: cuisine.title,
-                                coverImgSrc: cuisine.image.source));
-                      },
-                    ))
-                .toList());
-      });
+  Widget buildCategoryCarousel(BuildContext context) =>
+      BlocBuilder<HomeBloc, HomeState>(
+          buildWhen: (previous, current) =>
+              current is CuisineLoadInProgress ||
+              current is CuisineLoadSuccess ||
+              current is CuisineLoadFailure,
+          builder: (_, state) => LULoadableContent(
+              height: Styles.categoryCarouselHeight,
+              isLoading: state is HomeInitial || state is CuisineLoadInProgress,
+              isSuccess: state is CuisineLoadSuccess,
+              isError: state is CuisineLoadFailure,
+              contentBuilder: () {
+                final cuisineState = state as CuisineLoadSuccess;
+                return LUCarousel(
+                    height: Styles.categoryCarouselHeight,
+                    padding: Styles.sectionContentPadding,
+                    items: cuisineState.cuisines
+                        .map((cuisine) => LUCategoryCard(
+                              title: cuisine.title,
+                              imageSrc: cuisine.image.source,
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(
+                                    CuisineScreen.id,
+                                    arguments: ScreenArguments(
+                                        title: cuisine.title,
+                                        coverImgSrc: cuisine.image.source));
+                              },
+                            ))
+                        .toList());
+              }));
 
-  //TODO: Add pagination
-  Widget buildNearbyOutletsList(BuildContext context) => LULoadableContent(
-      height: 200,
-      isLoading: state is HomeInitial || state is NearbyOutletLoadInProgress,
-      isSuccess: state is NearbyOutletLoadSuccess,
-      isError: state is NearbyOutletLoadFailure,
-      contentBuilder: () {
-        final nearbyOutletsState = state as NearbyOutletLoadSuccess;
-        return LUList(
-            nested: true,
-            space: 10,
-            items: nearbyOutletsState.outlets
-                .map((outlet) => LUOutletCard(
-                      imageSrc: outlet.images.isNotEmpty
-                          ? outlet.images.first.source
-                          : '',
-                      rating: outlet.rating,
-                      title: outlet.title,
-                      priceRange: outlet.priceLevel,
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(ProductScreen.id,
-                            arguments: ScreenArguments(
-                              title: outlet.title,
-                              coverImgSrc: outlet.images.isNotEmpty
+  // TODO: Add pagination
+  // TODO: Incorporate BlocBuilder inside LoadableContent widget
+  Widget buildNearbyOutletsList(BuildContext context) =>
+      BlocBuilder<HomeBloc, HomeState>(
+          buildWhen: (previous, current) =>
+              current is NearbyOutletLoadInProgress ||
+              current is NearbyOutletLoadSuccess ||
+              current is NearbyOutletLoadFailure,
+          builder: (_, state) => LULoadableContent(
+              height: 200,
+              isLoading:
+                  state is HomeInitial || state is NearbyOutletLoadInProgress,
+              isSuccess: state is NearbyOutletLoadSuccess,
+              isError: state is NearbyOutletLoadFailure,
+              contentBuilder: () {
+                final nearbyOutletsState = state as NearbyOutletLoadSuccess;
+                return LUList(
+                    nested: true,
+                    space: 10,
+                    items: nearbyOutletsState.outlets
+                        .map((outlet) => LUOutletCard(
+                              imageSrc: outlet.images.isNotEmpty
                                   ? outlet.images.first.source
                                   : '',
-                            ));
-                      },
-                    ))
-                .toList());
-      });
+                              rating: outlet.rating,
+                              title: outlet.title,
+                              priceRange: outlet.priceLevel,
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(ProductScreen.id,
+                                        arguments: ScreenArguments(
+                                          title: outlet.title,
+                                          coverImgSrc: outlet.images.isNotEmpty
+                                              ? outlet.images.first.source
+                                              : '',
+                                        ));
+                              },
+                            ))
+                        .toList());
+              }));
 
   List<Widget> _getFeaturedCards(context) => dummyDishes
       .map((dish) => LUFeaturedCard(
@@ -380,10 +397,10 @@ class _HomeContent extends StatelessWidget {
         LUSection(
             title: "Chef's choice - Glasgow",
             child: buildFeaturedOutletsCarousel(context)),
-//        LUSection(title: 'Cuisines', child: buildCategoryCarousel(context)),
-//        LUSection(
-//            title: 'Nearby Restaurants',
-//            child: buildNearbyOutletsList(context)),
+        LUSection(title: 'Cuisines', child: buildCategoryCarousel(context)),
+        LUSection(
+            title: 'Nearby Restaurants',
+            child: buildNearbyOutletsList(context)),
       ]);
 
   Widget buildCheckedContent(BuildContext context) => Column(children: <Widget>[
