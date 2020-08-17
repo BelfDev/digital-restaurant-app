@@ -8,17 +8,17 @@ import 'network_exception.dart';
 
 /// Base class that abstracts http operations shared among API services.
 abstract class BaseApiClient {
-  static const _BASE_URL = ApiConfig.BASE_URL;
+  static const _BASE_URL = ApiConfig.BASE_HOST;
 
   final http.Client _client = http.Client();
 
   /// Abstracts GET http request boilerplate.
   @protected
-  Future<String> getRequest(String path) async {
+  Future<String> getRequest(String path, [Object params]) async {
     try {
-      final url = _BASE_URL + path;
-      debugPrint('GET request to $url');
-      final response = await _client.get(url);
+      final uri = Uri.http(_BASE_URL, path, params);
+      debugPrint('GET request to ${_BASE_URL + path} with params $params');
+      final response = await _client.get(uri);
       return _filterResponseBody(response);
     } catch (e) {
       debugPrint(e);
