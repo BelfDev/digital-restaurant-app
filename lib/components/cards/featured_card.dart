@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 
 import '../gradient_filter.dart';
 
-/// A material [Card] used to display information featured [Outlet]s or dishes.
-///
+/// A material [Card] used to display information featured [Outlet]s or [Product]s.
+/// Note: if a price is given, the widget favors a [Product] format.
 class LUFeaturedCard extends StatelessWidget {
   final double width;
   final double height;
@@ -18,7 +18,8 @@ class LUFeaturedCard extends StatelessWidget {
   final double padding;
   final double rating;
   final String title;
-  final String priceRange;
+  final String subtitle;
+  final int priceRange;
   final String price;
 
   const LUFeaturedCard({
@@ -33,7 +34,8 @@ class LUFeaturedCard extends StatelessWidget {
     this.padding = 8.0,
     this.rating,
     this.price,
-  });
+    this.subtitle,
+  }) : assert(price != null || subtitle != null);
 
   @override
   Widget build(BuildContext context) {
@@ -64,13 +66,19 @@ class LUFeaturedCard extends StatelessWidget {
                 ? SizedBox()
                 : LUStarRating(
                     rating: rating ?? 0, margin: EdgeInsets.only(bottom: 2)),
+            price != null
+                ? SizedBox()
+                : Text(
+                    title,
+                    style: LUTheme.of(context).textTheme.headline5,
+                  ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 Expanded(
                   child: Text(
-                    title,
+                    price != null ? title : subtitle,
                     style: price != null
                         ? LUTheme.of(context).textTheme.headline5
                         : LUTheme.of(context).textTheme.headline6,
@@ -80,7 +88,7 @@ class LUFeaturedCard extends StatelessWidget {
                   width: 4,
                 ),
                 Text(
-                  price ?? priceRange,
+                  price ?? List.generate(priceRange, (index) => "\$").join(),
                   style: LUTheme.of(context).textTheme.bodyText1,
                 )
               ],
