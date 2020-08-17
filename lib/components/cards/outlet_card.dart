@@ -17,7 +17,7 @@ class LUOutletCard extends StatelessWidget {
   final double rating;
   final Color starColor;
   final String title;
-  final String priceRange;
+  final int priceRange;
   final String imageSrc;
 
   const LUOutletCard(
@@ -74,7 +74,7 @@ class LUOutletCard extends StatelessWidget {
               children: <Widget>[
                 Text(title, style: LUTheme.of(context).textTheme.headline5),
                 Text(
-                  priceRange,
+                  List.generate(priceRange, (index) => "\$").join(),
                   style: LUTheme.of(context).textTheme.bodyText1,
                 )
               ],
