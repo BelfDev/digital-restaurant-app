@@ -53,6 +53,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  static const _CITY_REGION = 'Glasgow';
+
   _HomeMode mode;
   HomeBloc _homeBloc;
 
@@ -60,8 +62,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     mode = _HomeMode.unchecked;
-    _homeBloc =
-        _homeBloc = BlocProvider.of<HomeBloc>(context)..add(CuisineRequested());
+    _homeBloc = _homeBloc = BlocProvider.of<HomeBloc>(context)
+      ..add(FeaturedOutletsRequested(city: _CITY_REGION));
+//      ..add(CuisinesRequested())
+//      ..add(NearbyOutletsRequested(city: _CITY_REGION));
   }
 
   void _onTopBarButtonPressed() {
@@ -245,11 +249,36 @@ class _HomeContent extends StatelessWidget {
     this.outlet,
   }) : super(key: key);
 
+  Widget buildFeaturedOutletsCarousel(BuildContext context) =>
+      LULoadableContent(
+          height: _HomeStyles.featuredSectionHeight,
+          isLoading:
+              state is HomeInitial || state is FeaturedOutletLoadInProgress,
+          isSuccess: state is FeaturedOutletLoadSuccess,
+          isError: state is FeaturedOutletLoadFailure,
+          contentBuilder: () {
+            final featuredOutletState = state as FeaturedOutletLoadSuccess;
+            return LUCarousel(
+                height: _HomeStyles.featuredSectionHeight,
+                padding: Styles.sectionContentPadding,
+                items: featuredOutletState.outlets
+                    .map((outlet) => LUFeaturedCard(
+                          imageSrc: outlet.images.isNotEmpty
+                              ? outlet.images.first.source
+                              : '',
+                          title: outlet.title,
+                          subtitle: outlet.cuisine.title,
+                          priceRange: outlet.priceLevel,
+                          rating: outlet.rating,
+                        ))
+                    .toList());
+          });
+
   Widget buildCategoryCarousel(BuildContext context) => LULoadableContent(
       height: Styles.categoryCarouselHeight,
-      isLoading: state is HomeInitial || state is HomeLoadInProgress,
+      isLoading: state is HomeInitial || state is CuisineLoadInProgress,
       isSuccess: state is CuisineLoadSuccess,
-      isError: state is HomeLoadFailure,
+      isError: state is CuisineLoadFailure,
       contentBuilder: () {
         final cuisineState = state as CuisineLoadSuccess;
         return LUCarousel(
@@ -269,6 +298,38 @@ class _HomeContent extends StatelessWidget {
                 .toList());
       });
 
+  //TODO: Add pagination
+  Widget buildNearbyOutletsList(BuildContext context) => LULoadableContent(
+      height: 200,
+      isLoading: state is HomeInitial || state is NearbyOutletLoadInProgress,
+      isSuccess: state is NearbyOutletLoadSuccess,
+      isError: state is NearbyOutletLoadFailure,
+      contentBuilder: () {
+        final nearbyOutletsState = state as NearbyOutletLoadSuccess;
+        return LUList(
+            nested: true,
+            space: 10,
+            items: nearbyOutletsState.outlets
+                .map((outlet) => LUOutletCard(
+                      imageSrc: outlet.images.isNotEmpty
+                          ? outlet.images.first.source
+                          : '',
+                      rating: outlet.rating,
+                      title: outlet.title,
+                      priceRange: outlet.priceLevel,
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(ProductScreen.id,
+                            arguments: ScreenArguments(
+                              title: outlet.title,
+                              coverImgSrc: outlet.images.isNotEmpty
+                                  ? outlet.images.first.source
+                                  : '',
+                            ));
+                      },
+                    ))
+                .toList());
+      });
+
   List<Widget> _getFeaturedCards(context) => dummyDishes
       .map((dish) => LUFeaturedCard(
             imageSrc: dish.imgSrc,
@@ -279,20 +340,6 @@ class _HomeContent extends StatelessWidget {
                       title: dish.title, coverImgSrc: dish.imgSrc));
             },
             price: dish.priceTag,
-          ))
-      .toList();
-
-  List<Widget> _getOutletCards(context) => dummyOutlets
-      .map((outlet) => LUOutletCard(
-            imageSrc: outlet.imgSrc,
-            rating: outlet.rating,
-            title: outlet.name,
-            priceRange: outlet.priceRange,
-            onPressed: () {
-              Navigator.of(context).pushNamed(ProductScreen.id,
-                  arguments: ScreenArguments(
-                      title: outlet.name, coverImgSrc: outlet.imgSrc));
-            },
           ))
       .toList();
 
@@ -319,6 +366,7 @@ class _HomeContent extends StatelessWidget {
             : buildUncheckedContent(context));
   }
 
+  // TODO: Fix multiple HomeBloc events interference
   Widget buildUncheckedContent(BuildContext context) =>
       Column(children: <Widget>[
         Padding(
@@ -331,19 +379,11 @@ class _HomeContent extends StatelessWidget {
         ),
         LUSection(
             title: "Chef's choice - Glasgow",
-            child: LUCarousel(
-                height: _HomeStyles.featuredSectionHeight,
-                padding: Styles.sectionContentPadding,
-                items: _getFeaturedCards(context))),
-        LUSection(title: 'Cuisines', child: buildCategoryCarousel(context)),
-        LUSection(
-          title: 'Nearby Restaurants',
-          child: LUList(
-            nested: true,
-            space: 10,
-            items: _getOutletCards(context),
-          ),
-        ),
+            child: buildFeaturedOutletsCarousel(context)),
+//        LUSection(title: 'Cuisines', child: buildCategoryCarousel(context)),
+//        LUSection(
+//            title: 'Nearby Restaurants',
+//            child: buildNearbyOutletsList(context)),
       ]);
 
   Widget buildCheckedContent(BuildContext context) => Column(children: <Widget>[
