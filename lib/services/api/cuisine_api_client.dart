@@ -6,7 +6,7 @@ import 'package:dr_app/data/models/remote/results.dart';
 import 'package:dr_app/services/api/base_api_client.dart';
 import 'package:flutter/foundation.dart';
 
-/// Service layer for accessing the /cuisine API resource.
+/// Service client layer for accessing the /cuisines API resource.
 /// Enables fetching all cuisines or a specific cuisine by id.
 class CuisineApiClient extends BaseApiClient {
   static const _PATH = ApiConfig.CUISINES_RESOURCE;
