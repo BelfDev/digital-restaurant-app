@@ -1,15 +1,19 @@
 import 'package:dr_app/blocs/bloc.dart';
 import 'package:dr_app/data/repositories/cuisine_repository.dart';
+import 'package:dr_app/data/repositories/outlet_respository.dart';
 import 'package:dr_app/navigation/root_container.dart';
 import 'package:dr_app/navigation/tab_data.dart';
 import 'package:dr_app/screens/explore_screen.dart';
 import 'package:dr_app/screens/home_screen.dart';
 import 'package:dr_app/screens/more_screen.dart';
 import 'package:dr_app/screens/onboarding_screen.dart';
+import 'package:dr_app/screens/product_screen.dart';
 import 'package:dr_app/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// The AppRouter registers routers based on their identifiers
+/// and screen widgets. This class also injects the necessary dependencies.
 class AppRouter {
   Map<String, Bloc> _blocs;
   Map<String, _ScreenSettings> _routes;
@@ -17,10 +21,13 @@ class AppRouter {
   AppRouter() {
     // Initialize repos
     final cuisineRepository = CuisineRepository();
+    final outletRepository = OutletRepository();
 
     // Register blocs
     this._blocs = {
-      HomeBloc.id: HomeBloc(cuisineRepository: cuisineRepository),
+      HomeBloc.id: HomeBloc(
+          cuisineRepository: cuisineRepository,
+          outletRepository: outletRepository),
     };
 
     // Register routes
@@ -34,14 +41,9 @@ class AppRouter {
           create: (_) => _blocs[HomeBloc.id],
         )
       ]),
+      ProductScreen.id: _ScreenSettings(widget: ProductScreen())
     };
   }
-
-  static void navigateToRoot(BuildContext context) =>
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => RootContainer()),
-          (_) => false);
 
   Route onGenerateRoute(RouteSettings settings, [TabData tabData]) {
     final rootId = tabData?.rootId ?? HomeScreen.id;
@@ -57,6 +59,12 @@ class AppRouter {
               )
             : screen.widget);
   }
+
+  static void navigateToRoot(BuildContext context) =>
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => RootContainer()),
+          (_) => false);
 }
 
 class _ScreenSettings {
