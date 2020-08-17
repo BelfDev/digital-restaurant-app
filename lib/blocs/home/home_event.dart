@@ -8,4 +8,22 @@ abstract class HomeEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class CuisineRequested extends HomeEvent {}
+class CuisinesRequested extends HomeEvent {}
+
+class FeaturedOutletsRequested extends HomeEvent {
+  final String city;
+
+  const FeaturedOutletsRequested({@required this.city}) : assert(city != null);
+
+  @override
+  List<Object> get props => [city];
+}
+
+class NearbyOutletsRequested extends HomeEvent {
+  final String city;
+
+  const NearbyOutletsRequested({@required this.city}) : assert(city != null);
+
+  @override
+  List<Object> get props => [city];
+}
