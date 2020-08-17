@@ -29,7 +29,7 @@ class _CuisineScreenState extends State<CuisineScreen> {
             imageSrc: outlet.imgSrc,
             rating: outlet.rating,
             title: outlet.name,
-            priceRange: outlet.priceRange,
+//            priceRange: outlet.priceRange,
             onPressed: () {},
           ))
       .toList();

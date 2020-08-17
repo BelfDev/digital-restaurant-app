@@ -18,7 +18,7 @@ class FavoritesScreen extends StatelessWidget {
             imageSrc: outlet.imgSrc,
             rating: outlet.rating,
             title: outlet.name,
-            priceRange: outlet.priceRange,
+//            priceRange: outlet.priceRange,
             onPressed: () {
               Navigator.of(context).pushNamed(OutletScreen.id,
                   arguments: ScreenArguments(
