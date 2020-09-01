@@ -1,4 +1,4 @@
-import 'package:dr_app/blocs/bloc.dart';
+import 'package:dr_app/blocs/blocs.dart';
 import 'package:dr_app/data/repositories/cuisine_repository.dart';
 import 'package:dr_app/data/repositories/outlet_respository.dart';
 import 'package:dr_app/navigation/root_container.dart';

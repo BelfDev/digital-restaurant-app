@@ -80,7 +80,7 @@ class _WalletScreenState extends State<WalletScreen> {
           margin: const EdgeInsets.only(top: 32.0, left: 16.0, right: 16.0),
           titlePadding: const EdgeInsets.only(left: 4.0, bottom: 16.0),
           title: 'Credit Cards',
-          child: LUList(
+          builder: (_) => LUList(
             nested: true,
             items: optionCards,
           ),

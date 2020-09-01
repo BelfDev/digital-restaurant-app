@@ -44,16 +44,17 @@ class AboutVersionScreen extends StatelessWidget {
                     LUSection(
                         title: 'Version',
                         titlePadding: titlePadding,
-                        child: LUInformationTile(text: '0.0.1 | 32')),
+                        builder: (_) => LUInformationTile(text: '0.0.1 | 32')),
                     LUSection(
                         title: 'Author',
                         titlePadding: titlePadding,
-                        child: LUInformationTile(text: 'Pedro Belfort')),
+                        builder: (_) =>
+                            LUInformationTile(text: 'Pedro Belfort')),
                     LUSection(
                         title: 'Open Source Libraries',
                         titlePadding: titlePadding,
                         // TODO: Adjust spacing and border
-                        child: Column(children: getLibraryTiles())),
+                        builder: (_) => Column(children: getLibraryTiles())),
                   ],
                 ),
               )

@@ -60,7 +60,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               LUSection(
                 title: 'Tip the service',
                 margin: EdgeInsets.only(top: 32.0),
-                child: LUTipToolbar(
+                builder: (_) => LUTipToolbar(
                   margin: EdgeInsets.symmetric(horizontal: 16.0),
                   tipOptions: [
                     Tip('😢', 0.0),

@@ -29,7 +29,7 @@ class MoreScreen extends StatelessWidget {
         LUSection(
           titlePadding: EdgeInsets.only(left: 4.0, bottom: 8.0),
           title: 'General',
-          child: Column(
+          builder: (_) => Column(
             children: <Widget>[
               // TODO: Set notifications
               LUTileOptionCard(

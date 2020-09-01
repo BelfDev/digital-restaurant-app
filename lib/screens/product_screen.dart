@@ -116,7 +116,7 @@ class _ProductScreenState extends State<ProductScreen> {
           ),
           LUSection(
             title: 'Dish Description',
-            child: Padding(
+            builder: (_) => Padding(
               padding: Styles.sectionContentPadding,
               child: Text(
                 'ASIAN GREENS WITH FRIED TOFU IN A CHILLI, GARLIC, SOY & BASIL SAUCE, SERVED WITH EGG NOODLES CASHEW NUTS & FRESH CHILLI.',
@@ -126,7 +126,7 @@ class _ProductScreenState extends State<ProductScreen> {
           ),
           LUSection(
               title: 'Ingredients',
-              child: LUCarousel(
+              builder: (_) => LUCarousel(
                   height: Styles.categoryCarouselHeight,
                   padding: Styles.sectionContentPadding,
                   items: _getCategoryCards(context))),

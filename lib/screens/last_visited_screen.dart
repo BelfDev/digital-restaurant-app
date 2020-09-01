@@ -47,7 +47,7 @@ class LastVisitedScreen extends StatelessWidget {
               margin: EdgeInsets.only(
                 top: 40,
               ),
-              child: LUList(
+              builder: (_) => LUList(
                 nested: true,
                 space: 10,
                 items: _getOutletCards(context),
