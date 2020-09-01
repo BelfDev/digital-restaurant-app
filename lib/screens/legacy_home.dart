@@ -484,7 +484,8 @@ class _HomeScreenState extends State<LegacyHomeScreen> {
         // SliverToBoxAdapter(child: _Header(mode: mode, outlet: dummyOutlets[0])),
         SliverToBoxAdapter(
           child: LUSection(
-              title: 'Cuisines', builder: buildCategoryCarousel(context)),
+              title: 'Cuisines',
+              builder: (_) => buildCategoryCarousel(context)),
         ),
 
         // SliverList(
@@ -836,11 +837,12 @@ class _HomeContent extends StatelessWidget {
         ),
         LUSection(
             title: "Chef's choice - Glasgow",
-            builder: buildFeaturedOutletsCarousel(context)),
-        LUSection(title: 'Cuisines', builder: buildCategoryCarousel(context)),
+            builder: (_) => buildFeaturedOutletsCarousel(context)),
+        LUSection(
+            title: 'Cuisines', builder: (_) => buildCategoryCarousel(context)),
         LUSection(
             title: 'Nearby Restaurants',
-            builder: buildNearbyOutletsList(context)),
+            builder: (_) => buildNearbyOutletsList(context)),
       ]);
 
   Widget buildCheckedContent(BuildContext context) => Column(children: <Widget>[
@@ -851,13 +853,13 @@ class _HomeContent extends StatelessWidget {
             )),
         LUSection(
             title: "Popular",
-            builder: LUCarousel(
+            builder: (_) => LUCarousel(
                 height: _HomeStyles.featuredSectionHeight,
                 padding: Styles.sectionContentPadding,
                 items: _getFeaturedCards(context))),
         LUSection(
           title: 'Categories',
-          builder: LUChipCarousel(
+          builder: (_) => LUChipCarousel(
             items: dummyChipItems,
             onSelected: (value) {
               print(value);
