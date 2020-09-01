@@ -247,85 +247,63 @@ class _HomeContent extends StatelessWidget {
   Widget buildFeaturedOutletsCarousel(BuildContext context) =>
       BlocBuilder<HomeBloc, HomeState>(
         buildWhen: (previous, current) =>
-            current is FeaturedOutletLoadInProgress ||
-            current is FeaturedOutletLoadSuccess ||
-            current is FeaturedOutletLoadFailure,
+            previous.featuredOutletsStatus != current.featuredOutletsStatus,
         builder: (_, state) => LULoadableContent(
             height: _HomeStyles.featuredSectionHeight,
-            isLoading:
-                state is HomeInitial || state is FeaturedOutletLoadInProgress,
-            isSuccess: state is FeaturedOutletLoadSuccess,
-            isError: state is FeaturedOutletLoadFailure,
-            contentBuilder: () {
-              final featuredOutletState = state as FeaturedOutletLoadSuccess;
-              return LUCarousel(
-                  height: _HomeStyles.featuredSectionHeight,
-                  padding: Styles.sectionContentPadding,
-                  items: featuredOutletState.outlets
-                      .map((outlet) => LUFeaturedCard(
-                            imageSrc: outlet.images.isNotEmpty
-                                ? outlet.images.first.source
-                                : '',
-                            title: outlet.title,
-                            subtitle: outlet.cuisine.title,
-                            priceRange: outlet.priceLevel,
-                            rating: outlet.rating,
-                          ))
-                      .toList());
-            }),
+            stateStatus: state.featuredOutletsStatus,
+            contentBuilder: () => LUCarousel(
+                height: _HomeStyles.featuredSectionHeight,
+                padding: Styles.sectionContentPadding,
+                items: state.featuredOutlets
+                    .map((outlet) => LUFeaturedCard(
+                          imageSrc: outlet.images.isNotEmpty
+                              ? outlet.images.first.source
+                              : '',
+                          title: outlet.title,
+                          subtitle: outlet.cuisine.title,
+                          priceRange: outlet.priceLevel,
+                          rating: outlet.rating,
+                        ))
+                    .toList())),
       );
 
   Widget buildCategoryCarousel(BuildContext context) =>
       BlocBuilder<HomeBloc, HomeState>(
           buildWhen: (previous, current) =>
-              current is CuisineLoadInProgress ||
-              current is CuisineLoadSuccess ||
-              current is CuisineLoadFailure,
+              previous.cuisineStatus != current.cuisineStatus,
           builder: (_, state) => LULoadableContent(
               height: Styles.categoryCarouselHeight,
-              isLoading: state is HomeInitial || state is CuisineLoadInProgress,
-              isSuccess: state is CuisineLoadSuccess,
-              isError: state is CuisineLoadFailure,
-              contentBuilder: () {
-                final cuisineState = state as CuisineLoadSuccess;
-                return LUCarousel(
-                    height: Styles.categoryCarouselHeight,
-                    padding: Styles.sectionContentPadding,
-                    items: cuisineState.cuisines
-                        .map((cuisine) => LUCategoryCard(
-                              title: cuisine.title,
-                              imageSrc: cuisine.image.source,
-                              onPressed: () {
-                                Navigator.of(context).pushNamed(
-                                    CuisineScreen.id,
-                                    arguments: ScreenArguments(
-                                        title: cuisine.title,
-                                        coverImgSrc: cuisine.image.source));
-                              },
-                            ))
-                        .toList());
-              }));
+              stateStatus: state.cuisineStatus,
+              contentBuilder: () => LUCarousel(
+                  height: Styles.categoryCarouselHeight,
+                  padding: Styles.sectionContentPadding,
+                  items: state.cuisines
+                      .map((cuisine) => LUCategoryCard(
+                            title: cuisine.title,
+                            imageSrc: cuisine.image.source,
+                            onPressed: () {
+                              Navigator.of(context).pushNamed(CuisineScreen.id,
+                                  arguments: ScreenArguments(
+                                      title: cuisine.title,
+                                      coverImgSrc: cuisine.image.source));
+                            },
+                          ))
+                      .toList())));
 
   // TODO: Add pagination
   // TODO: Incorporate BlocBuilder inside LoadableContent widget
   Widget buildNearbyOutletsList(BuildContext context) =>
       BlocBuilder<HomeBloc, HomeState>(
           buildWhen: (previous, current) =>
-              current is NearbyOutletLoadInProgress ||
-              current is NearbyOutletLoadSuccess ||
-              current is NearbyOutletLoadFailure,
+              previous.nearbyOutletsStatus != current.nearbyOutletsStatus,
           builder: (_, state) => LULoadableContent(
               height: 200,
-              isLoading:
-                  state is HomeInitial || state is NearbyOutletLoadInProgress,
-              isSuccess: state is NearbyOutletLoadSuccess,
-              isError: state is NearbyOutletLoadFailure,
+              stateStatus: state.nearbyOutletsStatus,
               contentBuilder: () {
-                final nearbyOutletsState = state as NearbyOutletLoadSuccess;
                 return LUList(
                     nested: true,
                     space: 10,
-                    items: nearbyOutletsState.outlets
+                    items: state.nearbyOutlets
                         .map((outlet) => LUOutletCard(
                               imageSrc: outlet.images.isNotEmpty
                                   ? outlet.images.first.source

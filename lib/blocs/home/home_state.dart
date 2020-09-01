@@ -1,56 +1,56 @@
 part of 'home_bloc.dart';
 
-@immutable
-abstract class HomeState extends Equatable {
-  const HomeState();
+class HomeState extends Equatable {
+  final ContentStateStatus cuisineStatus;
+  final ContentStateStatus featuredOutletsStatus;
+  final ContentStateStatus nearbyOutletsStatus;
 
-  @override
-  List<Object> get props => [];
-}
-
-class HomeInitial extends HomeState {}
-
-// Cuisine States
-class CuisineLoadInProgress extends HomeState {}
-
-class CuisineLoadSuccess extends HomeState {
   final List<Cuisine> cuisines;
+  final List<Outlet> featuredOutlets;
+  final List<Outlet> nearbyOutlets;
 
-  const CuisineLoadSuccess({@required this.cuisines})
-      : assert(cuisines != null);
+  const HomeState({
+    this.cuisineStatus = ContentStateStatus.initial,
+    this.featuredOutletsStatus = ContentStateStatus.initial,
+    this.nearbyOutletsStatus = ContentStateStatus.initial,
+    this.cuisines = const [],
+    this.featuredOutlets = const [],
+    this.nearbyOutlets = const [],
+  });
 
-  @override
-  List<Object> get props => [cuisines];
-}
+  factory HomeState.initial() => HomeState();
 
-class CuisineLoadFailure extends HomeState {}
-
-// Featured outlet states
-class FeaturedOutletLoadInProgress extends HomeState {}
-
-class FeaturedOutletLoadSuccess extends HomeState {
-  final List<Outlet> outlets;
-
-  const FeaturedOutletLoadSuccess({@required this.outlets})
-      : assert(outlets != null);
-
-  @override
-  List<Object> get props => [outlets];
-}
-
-class FeaturedOutletLoadFailure extends HomeState {}
-
-// Nearby outlet states
-class NearbyOutletLoadInProgress extends HomeState {}
-
-class NearbyOutletLoadSuccess extends HomeState {
-  final List<Outlet> outlets;
-
-  const NearbyOutletLoadSuccess({@required this.outlets})
-      : assert(outlets != null);
+  HomeState copyWith({
+    ContentStateStatus cuisineStatus,
+    ContentStateStatus featuredOutletsStatus,
+    ContentStateStatus nearbyOutletsStatus,
+    List<Cuisine> cuisines,
+    List<Outlet> featuredOutlets,
+    List<Outlet> nearbyOutlets,
+  }) =>
+      HomeState(
+          cuisineStatus: cuisineStatus ?? this.cuisineStatus,
+          featuredOutletsStatus:
+              featuredOutletsStatus ?? this.featuredOutletsStatus,
+          nearbyOutletsStatus: nearbyOutletsStatus ?? this.nearbyOutletsStatus,
+          cuisines: cuisines ?? this.cuisines,
+          featuredOutlets: featuredOutlets ?? this.featuredOutlets,
+          nearbyOutlets: nearbyOutlets ?? this.nearbyOutlets);
 
   @override
-  List<Object> get props => [outlets];
-}
+  List<Object> get props => [
+        cuisineStatus,
+        featuredOutletsStatus,
+        nearbyOutletsStatus,
+        cuisines,
+        featuredOutlets,
+        nearbyOutlets
+      ];
 
-class NearbyOutletLoadFailure extends HomeState {}
+  @override
+  String toString() {
+    return [cuisineStatus, featuredOutletsStatus, nearbyOutletsStatus]
+        .join('\n')
+        .toString();
+  }
+}

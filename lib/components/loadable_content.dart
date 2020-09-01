@@ -1,3 +1,4 @@
+import 'package:dr_app/blocs/content_state_status.dart';
 import 'package:dr_app/components/error_placeholder.dart';
 import 'package:dr_app/components/loading_placeholder.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,7 @@ typedef Widget ContentBuilder();
 
 class LULoadableContent extends StatelessWidget {
   final double height, width;
-  final bool isSuccess, isLoading, isError;
+  final ContentStateStatus stateStatus;
   final ContentBuilder contentBuilder;
 
   const LULoadableContent({
@@ -14,12 +15,10 @@ class LULoadableContent extends StatelessWidget {
     @required this.height,
     this.width = double.infinity,
     @required this.contentBuilder,
-    @required this.isSuccess,
-    @required this.isLoading,
-    @required this.isError,
+    @required this.stateStatus,
   })  : assert(height != null),
         assert(contentBuilder != null),
-        assert(isSuccess != null && isLoading != null && isError != null),
+        assert(stateStatus != null),
         super(key: key);
 
   @override
@@ -43,4 +42,12 @@ class LULoadableContent extends StatelessWidget {
     }
     throw Exception('Loadable content must return some widget');
   }
+
+  bool get isLoading =>
+      stateStatus == ContentStateStatus.loadInProgress ||
+      stateStatus == ContentStateStatus.initial;
+
+  bool get isError => stateStatus == ContentStateStatus.loadFailure;
+
+  bool get isSuccess => stateStatus == ContentStateStatus.loadSuccess;
 }

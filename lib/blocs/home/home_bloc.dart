@@ -6,7 +6,10 @@ import 'package:dr_app/data/models/remote/outlet.dart';
 import 'package:dr_app/data/repositories/cuisine_repository.dart';
 import 'package:dr_app/data/repositories/outlet_respository.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
+
+import '../content_state_status.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -21,7 +24,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeBloc({@required this.cuisineRepository, @required this.outletRepository})
       : assert(cuisineRepository != null),
-        super(HomeInitial());
+        super(HomeState.initial());
 
   @override
   Stream<HomeState> mapEventToState(
@@ -42,35 +45,43 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Stream<HomeState> _mapFeaturedOutletsRequestedToState(
       FeaturedOutletsRequested event) async* {
-    yield FeaturedOutletLoadInProgress();
+    yield state.copyWith(
+        featuredOutletsStatus: ContentStateStatus.loadInProgress);
     try {
       final List<Outlet> featuredOutlets =
           await outletRepository.fetchAllFeaturedOutlets(event?.city);
-      yield FeaturedOutletLoadSuccess(outlets: featuredOutlets);
+      yield state.copyWith(
+          featuredOutletsStatus: ContentStateStatus.loadSuccess,
+          featuredOutlets: featuredOutlets);
     } catch (error) {
-      yield FeaturedOutletLoadFailure();
+      yield state.copyWith(
+          featuredOutletsStatus: ContentStateStatus.loadFailure);
     }
   }
 
   Stream<HomeState> _mapCuisinesRequestedToState() async* {
-    yield CuisineLoadInProgress();
+    yield state.copyWith(cuisineStatus: ContentStateStatus.loadInProgress);
     try {
       final List<Cuisine> cuisines = await cuisineRepository.fetchAllCuisines();
-      yield CuisineLoadSuccess(cuisines: cuisines);
+      yield state.copyWith(
+          cuisineStatus: ContentStateStatus.loadSuccess, cuisines: cuisines);
     } catch (error) {
-      yield CuisineLoadFailure();
+      yield state.copyWith(cuisineStatus: ContentStateStatus.loadFailure);
     }
   }
 
   Stream<HomeState> _mapNearbyOutletsRequestedToState(
       NearbyOutletsRequested event) async* {
-    yield NearbyOutletLoadInProgress();
+    yield state.copyWith(
+        nearbyOutletsStatus: ContentStateStatus.loadInProgress);
     try {
       final List<Outlet> nearbyOutlets =
           await outletRepository.fetchAllOutlets(event?.city);
-      yield NearbyOutletLoadSuccess(outlets: nearbyOutlets);
+      yield state.copyWith(
+          nearbyOutletsStatus: ContentStateStatus.loadSuccess,
+          nearbyOutlets: nearbyOutlets);
     } catch (_) {
-      yield NearbyOutletLoadFailure();
+      yield state.copyWith(nearbyOutletsStatus: ContentStateStatus.loadFailure);
     }
   }
 }
