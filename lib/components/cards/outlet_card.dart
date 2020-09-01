@@ -11,7 +11,7 @@ import 'base_card.dart';
 class LUOutletCard extends StatelessWidget {
   final double width;
   final double height;
-  final Function onPressed;
+  final VoidCallback onPressed;
   final EdgeInsetsGeometry margin;
   final List<Color> filterColors;
   final double rating;
