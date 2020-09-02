@@ -118,6 +118,9 @@ abstract class Styles {
       fontSize: 17, fontWeight: FontWeight.w400, color: LUColors.navyBlue);
   static const informativeText =
       TextStyle(fontSize: 17, fontWeight: FontWeight.w400);
+  static const dialogTitle = TextStyle(
+      fontSize: 24, fontWeight: FontWeight.w600, color: LUColors.navyBlue);
+  static const dialogAction = TextStyle(fontSize: 20, color: LUColors.orange);
 
   /// Container Styles
   static const roundBackgroundRadius = Radius.circular(40.0);
