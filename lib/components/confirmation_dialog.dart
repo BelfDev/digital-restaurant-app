@@ -11,6 +11,7 @@ class ConfirmationDialog extends StatelessWidget {
     @required this.title,
     @required this.message,
     @required this.onConfirmPressed,
+    this.onCancelPressed,
     @required this.confirmActionTitle,
     this.cancelActionTitle = "Cancel",
   })  : assert(title != null),
@@ -23,6 +24,7 @@ class ConfirmationDialog extends StatelessWidget {
   final String confirmActionTitle;
   final String cancelActionTitle;
   final VoidCallback onConfirmPressed;
+  final VoidCallback onCancelPressed;
 
   bool get _hasConfirmAction => onConfirmPressed != null;
 
@@ -107,12 +109,12 @@ class ConfirmationDialog extends StatelessWidget {
                   color: CupertinoColors.destructiveRed,
                   fontWeight: FontWeight.w600),
             ),
-            onPressed: () => _onCancelPressed(context))
+            onPressed: onCancelPressed ?? () => _onCancelPressed(context))
         : FlatButton(
             child: Text(
               cancelActionTitle,
               style: Styles.dialogAction,
             ),
-            onPressed: () => _onCancelPressed(context));
+            onPressed: onCancelPressed ?? () => _onCancelPressed(context));
   }
 }
