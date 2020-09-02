@@ -7,6 +7,7 @@ export 'cards/cards.dart';
 export 'carousel.dart';
 export 'chip_carousel.dart';
 export 'compact_header.dart';
+export 'confirmation_dialog.dart';
 export 'counter.dart';
 export 'credit_card_stack.dart';
 export 'decorated_title.dart';
