@@ -9,6 +9,7 @@ import 'package:dr_app/screens/more_screen.dart';
 import 'package:dr_app/screens/onboarding_screen.dart';
 import 'package:dr_app/screens/product_screen.dart';
 import 'package:dr_app/screens/profile_screen.dart';
+import 'package:dr_app/screens/scanner_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,7 +42,8 @@ class AppRouter {
           create: (_) => _blocs[HomeBloc.id],
         )
       ]),
-      ProductScreen.id: _ScreenSettings(widget: ProductScreen())
+      ProductScreen.id: _ScreenSettings(widget: ProductScreen()),
+      ScannerScreen.id: _ScreenSettings(widget: ScannerScreen())
     };
   }
 

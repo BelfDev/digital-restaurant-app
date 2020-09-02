@@ -16,8 +16,15 @@ class Outlet {
   final Location location;
   final List<Image> images;
 
-  Outlet(this.id, this.title, this.rating, this.priceLevel, this.cuisine,
-      this.images, this.location);
+  Outlet(
+    this.id,
+    this.title,
+    this.rating,
+    this.priceLevel,
+    this.cuisine,
+    this.images,
+    this.location,
+  );
 
   static Outlet fromJson(Map<String, dynamic> json) => _$OutletFromJson(json);
 

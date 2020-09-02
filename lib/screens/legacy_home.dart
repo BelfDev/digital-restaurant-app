@@ -753,8 +753,6 @@ class _HomeContent extends StatelessWidget {
                           ))
                       .toList())));
 
-  // TODO: Add pagination
-  // TODO: Incorporate BlocBuilder inside LoadableContent widget
   Widget buildNearbyOutletsList(BuildContext context) =>
       BlocBuilder<HomeBloc, HomeState>(
           buildWhen: (previous, current) =>

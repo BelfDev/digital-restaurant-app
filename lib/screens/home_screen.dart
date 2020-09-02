@@ -2,6 +2,7 @@ import 'package:dr_app/blocs/blocs.dart';
 import 'package:dr_app/components/components.dart';
 import 'package:dr_app/components/sliver_app_bar.dart';
 import 'package:dr_app/configs/theme.dart';
+import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/models.dart' hide Image;
 import 'package:dr_app/screens/screens.dart';
 import 'package:dr_app/utils/colors.dart';
@@ -19,7 +20,7 @@ abstract class _HomeStyles {
   static const double featuredSectionHeight = 280;
 }
 
-typedef _SectionList = List<LUSection> Function(BuildContext context);
+typedef _SectionList = List<Widget> Function(BuildContext context);
 
 enum _HomeMode { unchecked, checked }
 
@@ -42,7 +43,11 @@ class _HomeScreenState extends State<HomeScreen> {
   HomeBloc _homeBloc;
 
   void _onScannerButtonPressed(BuildContext context) {
-    Navigator.of(context).pushNamed(ScannerScreen.id);
+    // Navigator.of(context).pushNamed(ScannerScreen.id);
+    setState(() {
+      mode =
+          mode == _HomeMode.checked ? _HomeMode.unchecked : _HomeMode.checked;
+    });
   }
 
   @override
@@ -84,12 +89,21 @@ class _HomeScreenState extends State<HomeScreen> {
       );
 
   Widget _buildHeader(BuildContext context) => _Header(
-        mode: _HomeMode.unchecked,
+        mode: mode,
         onButtonPressed: () {},
+        outlet: Outlet(
+          2,
+          'Nice',
+          2,
+          4,
+          Cuisine(1, 'Nice', null),
+          [],
+          Location('Glasgow'),
+        ),
       );
 
   Widget _buildBody(BuildContext context) => _Body(
-        mode: _HomeMode.unchecked,
+        mode: mode,
       );
 }
 
@@ -141,7 +155,8 @@ class _Header extends StatelessWidget {
           Positioned.fill(
               child: FadeInImage.assetNetwork(
             placeholder: Images.verticalPlaceholder,
-            image: outlet.images.first.source ?? '',
+            // image: outlet?.images?.first?.source ?? '',
+            image: '',
             fit: BoxFit.cover,
           )),
           Positioned.fill(
@@ -150,9 +165,12 @@ class _Header extends StatelessWidget {
             color: Colors.grey.shade600,
           )),
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              SizedBox(
+                height: 24,
+              ),
               Text(outlet.title, style: Styles.homeCheckedHeaderTitle),
               Text(outlet.cuisine.title,
                   style: Styles.homeCheckedHeaderSubtitle),
@@ -174,7 +192,8 @@ class _Header extends StatelessWidget {
                 ],
               )
             ],
-          )
+          ),
+          buildHeaderBottomDivider(context)
         ],
       );
 
@@ -211,26 +230,35 @@ class _Header extends StatelessWidget {
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: 88,
-              decoration: BoxDecoration(
-                  color: LUTheme.of(context).backgroundColor,
-                  borderRadius: BorderRadius.only(
-                      topLeft: const Radius.circular(40.0),
-                      topRight: const Radius.circular(40.0))),
-              child: LUSolidButton(
-                title: _buttonTitle,
-                width: double.infinity,
-                margin: const EdgeInsets.symmetric(
-                    horizontal: 32.0, vertical: 16.0),
-                onPressed: onButtonPressed,
-              ),
-            ),
-          ),
+          buildHeaderBottomDivider(context)
         ],
       );
+
+  Widget buildHeaderBottomDivider(BuildContext context) {
+    final child = mode == _HomeMode.checked
+        ? LUDecoratedTitle(
+            title: 'Menu',
+          )
+        : LUSolidButton(
+            title: _buttonTitle,
+            width: double.infinity,
+            margin:
+                const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
+            onPressed: onButtonPressed,
+          );
+
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+          height: 88,
+          decoration: BoxDecoration(
+              color: Theme.of(context).backgroundColor,
+              borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(40.0),
+                  topRight: const Radius.circular(40.0))),
+          child: child),
+    );
+  }
 }
 
 class _Body extends StatelessWidget {
@@ -259,11 +287,35 @@ class _Body extends StatelessWidget {
         ),
       ];
 
+  _SectionList get checkedSections => (BuildContext context) => [
+        LUSection(
+            title: "Popular",
+            builder: (_) => LUCarousel(
+                height: _HomeStyles.featuredSectionHeight,
+                padding: Styles.sectionContentPadding,
+                items: _getFeaturedCards(context))),
+        LUSection(
+          title: 'Categories',
+          builder: (_) => LUChipCarousel(
+            items: dummyChipItems,
+            onSelected: (value) {
+              print(value);
+            },
+          ),
+        ),
+        LUList(
+          padding: const EdgeInsets.only(top: 16.0, bottom: 120.0),
+          nested: true,
+          space: 10,
+          items: _getDishCards(),
+        ),
+      ];
+
   void onOutletCardPressed(BuildContext context, Outlet outlet) {
     Navigator.of(context).pushNamed(
       ProductScreen.id,
       arguments: ScreenArguments(
-        title: outlet.title,
+        title: outlet.title ?? '',
         coverImgSrc: outlet.images.isNotEmpty ? outlet.images.first.source : '',
       ),
     );
@@ -273,19 +325,45 @@ class _Body extends StatelessWidget {
     Navigator.of(context).pushNamed(
       CuisineScreen.id,
       arguments: ScreenArguments(
-          title: cuisine.title, coverImgSrc: cuisine.image.source),
+          title: cuisine.title ?? '', coverImgSrc: cuisine.image.source),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final sections = uncheckedSections(context);
+    final sections = mode == _HomeMode.checked
+        ? checkedSections(context)
+        : uncheckedSections(context);
     return SliverList(
       delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) => sections[index],
           childCount: sections.length),
     );
   }
+
+  List<Widget> _getFeaturedCards(context) => dummyDishes
+      .map((dish) => LUFeaturedCard(
+            imageSrc: dish.imgSrc,
+            title: dish.title,
+            priceRange: 4,
+            onPressed: () {
+              Navigator.of(context).pushNamed(ProductScreen.id,
+                  arguments: ScreenArguments(
+                      title: dish.title, coverImgSrc: dish.imgSrc));
+            },
+            price: dish.priceTag,
+          ))
+      .toList();
+
+  List<Widget> _getDishCards() => dummyDishes
+      .map((dish) => LUDishCard(
+            imageSrc: dish.imgSrc,
+            title: dish.title,
+            description: dish.description,
+            priceTag: dish.priceTag,
+            preparationTime: dish.preparationTime,
+          ))
+      .toList();
 
   Widget buildFeaturedOutletsCarousel(BuildContext context) =>
       BlocBuilder<HomeBloc, HomeState>(
