@@ -3,5 +3,9 @@ class Formatter {
     return List.generate(priceLevel, (_) => '\$').join();
   }
 
+  static String convertToMoney(double value) {
+    return '\$ $value';
+  }
+
   Formatter._();
 }
