@@ -1,7 +1,7 @@
 import 'package:dr_app/components/bottom_sheet_container.dart';
 import 'package:dr_app/components/bottom_sliver.dart';
 import 'package:dr_app/components/buttons/solid_button.dart';
-import 'package:dr_app/components/cards/dish_card.dart';
+import 'package:dr_app/components/cards/product_card.dart';
 import 'package:dr_app/components/compact_header.dart';
 import 'package:dr_app/components/counter.dart';
 import 'package:dr_app/components/list.dart';
@@ -50,7 +50,7 @@ class _CartScreenState extends State<CartScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Expanded(
-                  child: LUDishCard(
+                  child: LUProductCard(
                     margin: (segmentedControlGroupValue == 0)
                         ? EdgeInsets.only(right: 8.0)
                         : EdgeInsets.zero,

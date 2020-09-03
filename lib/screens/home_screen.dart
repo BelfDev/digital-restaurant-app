@@ -340,7 +340,7 @@ class __BodyState extends State<_Body> {
                       nested: true,
                       space: 10,
                       items: products
-                          .map((dish) => LUDishCard(
+                          .map((dish) => LUProductCard(
                                 imageSrc: dish.images.isEmpty
                                     ? ''
                                     : dish.images.first.source,

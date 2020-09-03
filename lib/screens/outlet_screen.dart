@@ -1,5 +1,5 @@
 import 'package:dr_app/components/buttons/slider_button.dart';
-import 'package:dr_app/components/cards/dish_card.dart';
+import 'package:dr_app/components/cards/product_card.dart';
 import 'package:dr_app/components/chip_carousel.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/star_rating.dart';
@@ -23,7 +23,7 @@ class _OutletScreenState extends State<OutletScreen> {
   void _onBackButtonPressed() => Navigator.of(context).pop();
 
   List<Widget> _getDishCards() => dummyDishes
-      .map((dish) => LUDishCard(
+      .map((dish) => LUProductCard(
             imageSrc: dish.imgSrc,
             title: dish.title,
             description: dish.description,

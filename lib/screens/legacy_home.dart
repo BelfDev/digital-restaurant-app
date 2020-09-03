@@ -5,9 +5,9 @@ import 'package:dr_app/components/blur_filter.dart';
 import 'package:dr_app/components/buttons/icon_button.dart';
 import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/category_card.dart';
-import 'package:dr_app/components/cards/dish_card.dart';
 import 'package:dr_app/components/cards/featured_card.dart';
 import 'package:dr_app/components/cards/outlet_card.dart';
+import 'package:dr_app/components/cards/product_card.dart';
 import 'package:dr_app/components/carousel.dart';
 import 'package:dr_app/components/chip_carousel.dart';
 import 'package:dr_app/components/decorated_title.dart';
@@ -800,7 +800,7 @@ class _HomeContent extends StatelessWidget {
       .toList();
 
   List<Widget> _getDishCards() => dummyDishes
-      .map((dish) => LUDishCard(
+      .map((dish) => LUProductCard(
             imageSrc: dish.imgSrc,
             title: dish.title,
             description: dish.description,

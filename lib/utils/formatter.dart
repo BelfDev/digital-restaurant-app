@@ -4,7 +4,7 @@ class Formatter {
   }
 
   static String convertToMoney(double value) {
-    return '\$ $value';
+    return '\£ $value';
   }
 
   Formatter._();

@@ -6,7 +6,7 @@ import 'package:dr_app/utils/images.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-class LUDishCard extends StatelessWidget {
+class LUProductCard extends StatelessWidget {
   final double width;
   final double height;
   final EdgeInsetsGeometry margin;
@@ -19,7 +19,7 @@ class LUDishCard extends StatelessWidget {
   final bool shrink;
   final bool showStatus;
 
-  const LUDishCard(
+  const LUProductCard(
       {Key key,
       this.width,
       this.height = 128,
