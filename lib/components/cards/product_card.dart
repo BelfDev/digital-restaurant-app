@@ -7,18 +7,6 @@ import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class LUProductCard extends StatelessWidget {
-  final double width;
-  final double height;
-  final EdgeInsetsGeometry margin;
-  final String imageSrc;
-  final String title;
-  final String description;
-  final String priceTag;
-  final int quantity;
-  final double preparationTime;
-  final bool shrink;
-  final bool showStatus;
-
   const LUProductCard(
       {Key key,
       this.width,
@@ -33,6 +21,18 @@ class LUProductCard extends StatelessWidget {
       this.shrink = false,
       this.showStatus = false})
       : super(key: key);
+
+  final double width;
+  final double height;
+  final EdgeInsetsGeometry margin;
+  final String imageSrc;
+  final String title;
+  final String description;
+  final String priceTag;
+  final int quantity;
+  final double preparationTime;
+  final bool shrink;
+  final bool showStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -54,16 +54,16 @@ class LUProductCard extends StatelessWidget {
                       children: <Widget>[
                         FadeInImage.assetNetwork(
                           height: double.infinity,
+                          width: double.infinity,
                           placeholder: Images.verticalPlaceholder,
                           image: imageSrc,
                           fit: BoxFit.cover,
                         ),
-                        showStatus
-                            ? Align(
-                                alignment: Alignment.bottomCenter,
-                                child: LUStatusLabel(text: 'preparing'),
-                              )
-                            : Container()
+                        if (showStatus)
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: LUStatusLabel(text: 'preparing'),
+                          )
                       ],
                     )),
               ),
@@ -88,9 +88,12 @@ class LUProductCard extends StatelessWidget {
                     Expanded(
                       child: Text(
                         description,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
                         style: Styles.dishCardDescription,
                       ),
                     ),
+                    SizedBox(height: 4),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
