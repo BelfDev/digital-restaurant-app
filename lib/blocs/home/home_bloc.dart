@@ -8,6 +8,7 @@ import 'package:dr_app/data/repositories/cuisine_repository.dart';
 import 'package:dr_app/data/repositories/outlet_respository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 import '../content_state_status.dart';
@@ -47,6 +48,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       case NearbyOutletsRequested:
         yield* _mapNearbyOutletsRequestedToState(event);
         break;
+      case OutletProductsRequested:
+        yield* _mapOutletProductsRequestedToState(event);
+        break;
+      case OutletFeaturedProductsRequested:
+        yield* _mapOutletFeaturedProductsRequestedToState(event);
+        break;
     }
   }
 
@@ -68,6 +75,54 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> _mapCheckOutRequestedToState(
       CheckOutRequested event) async* {
     yield state.copyWith(mode: HomeMode.checkedOut, homeOutlet: null);
+  }
+
+  Stream<HomeState> _mapOutletFeaturedProductsRequestedToState(
+      OutletFeaturedProductsRequested event) async* {
+    // Loading
+    yield state.copyWith(
+        featuredProductsStatus: ContentStateStatus.loadInProgress);
+    try {
+      // Success
+      final List<Product> featuredProducts =
+          await outletRepository.fetchAllOutletFeaturedProducts(event.outletId);
+      yield state.copyWith(
+          featuredProductsStatus: ContentStateStatus.loadSuccess,
+          featuredProducts: featuredProducts);
+    } catch (error) {
+      // Error
+      yield state.copyWith(
+          featuredProductsStatus: ContentStateStatus.loadFailure);
+    }
+  }
+
+  Stream<HomeState> _mapOutletProductsRequestedToState(
+      OutletProductsRequested event) async* {
+    yield state.copyWith(productsStatus: ContentStateStatus.loadInProgress);
+    try {
+      final List<Product> products =
+          await outletRepository.fetchAllOutletProducts(event.outletId);
+
+      // Generate categories map
+      final Map<Category, List<Product>> categoryMap =
+          Map<Category, List<Product>>();
+      products.forEach((product) {
+        final productCategories = product.categories;
+        productCategories.forEach((category) {
+          if (!categoryMap.containsKey(category)) {
+            categoryMap[category] = List<Product>();
+          }
+          categoryMap[category].add(product);
+        });
+      });
+
+      // Return categoryMap
+      yield state.copyWith(
+          productsStatus: ContentStateStatus.loadSuccess,
+          categories: categoryMap);
+    } catch (error) {
+      yield state.copyWith(productsStatus: ContentStateStatus.loadFailure);
+    }
   }
 
   Stream<HomeState> _mapFeaturedOutletsRequestedToState(

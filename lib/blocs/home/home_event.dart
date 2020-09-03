@@ -39,19 +39,20 @@ class CheckInRequested extends HomeEvent {
 
 class CheckOutRequested extends HomeEvent {}
 
-class PopularDishesRequested extends HomeEvent {
+class OutletProductsRequested extends HomeEvent {
   final int outletId;
 
-  const PopularDishesRequested(this.outletId) : assert(outletId != null);
+  const OutletProductsRequested(this.outletId) : assert(outletId != null);
 
   @override
   List<Object> get props => [outletId];
 }
 
-class MenuRequested extends HomeEvent {
+class OutletFeaturedProductsRequested extends HomeEvent {
   final int outletId;
 
-  const MenuRequested(this.outletId) : assert(outletId != null);
+  const OutletFeaturedProductsRequested(this.outletId)
+      : assert(outletId != null);
 
   @override
   List<Object> get props => [outletId];
