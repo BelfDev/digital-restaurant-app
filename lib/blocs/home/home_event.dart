@@ -27,3 +27,32 @@ class NearbyOutletsRequested extends HomeEvent {
   @override
   List<Object> get props => [city];
 }
+
+class CheckInRequested extends HomeEvent {
+  final int outletId;
+
+  const CheckInRequested(this.outletId) : assert(outletId != null);
+
+  @override
+  List<Object> get props => [outletId];
+}
+
+class CheckOutRequested extends HomeEvent {}
+
+class PopularDishesRequested extends HomeEvent {
+  final int outletId;
+
+  const PopularDishesRequested(this.outletId) : assert(outletId != null);
+
+  @override
+  List<Object> get props => [outletId];
+}
+
+class MenuRequested extends HomeEvent {
+  final int outletId;
+
+  const MenuRequested(this.outletId) : assert(outletId != null);
+
+  @override
+  List<Object> get props => [outletId];
+}

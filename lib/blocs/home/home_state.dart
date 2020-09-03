@@ -1,6 +1,11 @@
 part of 'home_bloc.dart';
 
+enum HomeMode { checkedIn, checkedOut }
+
 class HomeState extends Equatable {
+  final HomeMode mode;
+  final Outlet homeOutlet;
+
   final ContentStateStatus cuisineStatus;
   final ContentStateStatus featuredOutletsStatus;
   final ContentStateStatus nearbyOutletsStatus;
@@ -10,6 +15,8 @@ class HomeState extends Equatable {
   final List<Outlet> nearbyOutlets;
 
   const HomeState({
+    this.mode = HomeMode.checkedOut,
+    this.homeOutlet,
     this.cuisineStatus = ContentStateStatus.initial,
     this.featuredOutletsStatus = ContentStateStatus.initial,
     this.nearbyOutletsStatus = ContentStateStatus.initial,
@@ -21,6 +28,8 @@ class HomeState extends Equatable {
   factory HomeState.initial() => HomeState();
 
   HomeState copyWith({
+    HomeMode mode,
+    Outlet homeOutlet,
     ContentStateStatus cuisineStatus,
     ContentStateStatus featuredOutletsStatus,
     ContentStateStatus nearbyOutletsStatus,
@@ -29,6 +38,8 @@ class HomeState extends Equatable {
     List<Outlet> nearbyOutlets,
   }) =>
       HomeState(
+          mode: mode ?? this.mode,
+          homeOutlet: homeOutlet ?? this.homeOutlet,
           cuisineStatus: cuisineStatus ?? this.cuisineStatus,
           featuredOutletsStatus:
               featuredOutletsStatus ?? this.featuredOutletsStatus,
@@ -39,6 +50,7 @@ class HomeState extends Equatable {
 
   @override
   List<Object> get props => [
+        mode,
         cuisineStatus,
         featuredOutletsStatus,
         nearbyOutletsStatus,
@@ -49,7 +61,7 @@ class HomeState extends Equatable {
 
   @override
   String toString() {
-    return [cuisineStatus, featuredOutletsStatus, nearbyOutletsStatus]
+    return [mode, cuisineStatus, featuredOutletsStatus, nearbyOutletsStatus]
         .join('\n')
         .toString();
   }

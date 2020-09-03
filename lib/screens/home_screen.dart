@@ -22,8 +22,6 @@ abstract class _HomeStyles {
 
 typedef _SectionList = List<Widget> Function(BuildContext context);
 
-enum _HomeMode { unchecked, checked }
-
 /// The Home screen of the App. This screen has two main states: unchecked
 /// and checked-in. In the first state, the user can find restaurants via
 /// recommendations displayed on horizontal carousels or a list of nearby
@@ -39,22 +37,26 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   static const _CITY_REGION = 'Glasgow';
 
-  _HomeMode mode;
   HomeBloc _homeBloc;
 
-  void _onScannerButtonPressed(BuildContext context) {
-    // Navigator.of(context).pushNamed(ScannerScreen.id);
-    setState(() {
-      mode =
-          mode == _HomeMode.checked ? _HomeMode.unchecked : _HomeMode.checked;
-    });
+  void _onScannerButtonPressed(BuildContext context) async {
+    _homeBloc.add(CheckOutRequested());
+    // final result = await Navigator.of(context).pushNamed(ScannerScreen.id);
+    // if (result != null) {
+    //
+    // }
+    // _showDialog('Uh-oh', 'QR-Code not valid');
+
+    // setState(() {
+    //   mode =
+    //       mode == _HomeMode.checked ? _HomeMode.unchecked : _HomeMode.checked;
+    // });
   }
 
   @override
   void initState() {
     super.initState();
-    mode = _HomeMode.unchecked;
-    _homeBloc = _homeBloc = BlocProvider.of<HomeBloc>(context)
+    _homeBloc = BlocProvider.of<HomeBloc>(context)
       ..add(FeaturedOutletsRequested(city: _CITY_REGION))
       ..add(CuisinesRequested())
       ..add(NearbyOutletsRequested(city: _CITY_REGION));
@@ -88,22 +90,22 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       );
 
-  Widget _buildHeader(BuildContext context) => _Header(
-        mode: mode,
-        onButtonPressed: () {},
-        outlet: Outlet(
-          2,
-          'Nice',
-          2,
-          4,
-          Cuisine(1, 'Nice', null),
-          [],
-          Location('Glasgow'),
-        ),
+  Widget _buildHeader(BuildContext context) => BlocBuilder<HomeBloc, HomeState>(
+        buildWhen: (previous, current) => previous.mode != current.mode,
+        builder: (context, state) => _Header(
+            mode: state.mode,
+            onButtonPressed: () {
+              _homeBloc.add(CheckInRequested(1));
+            },
+            outlet: state.homeOutlet),
       );
 
-  Widget _buildBody(BuildContext context) => _Body(
-        mode: mode,
+  Widget _buildBody(BuildContext context) => BlocBuilder<HomeBloc, HomeState>(
+        buildWhen: (previous, current) => previous.mode != current.mode,
+        builder: (context, state) => _Body(
+          mode: state.mode,
+          outlet: state.homeOutlet,
+        ),
       );
 }
 
@@ -118,7 +120,7 @@ class _Header extends StatelessWidget {
   })  : assert(mode != null),
         super(key: key);
 
-  final _HomeMode mode;
+  final HomeMode mode;
   final Outlet outlet;
   final VoidCallback onButtonPressed;
 
@@ -143,14 +145,14 @@ class _Header extends StatelessWidget {
         ),
         child: ClipRRect(
             borderRadius: _HomeStyles.backgroundBorderRadius,
-            child: mode == _HomeMode.checked
-                ? buildCheckedHeader(context)
-                : buildUncheckedHeader(context)),
+            child: mode == HomeMode.checkedIn
+                ? buildCheckedInHeader(context)
+                : buildCheckedOutHeader(context)),
       ),
     );
   }
 
-  Widget buildCheckedHeader(BuildContext context) => Stack(
+  Widget buildCheckedInHeader(BuildContext context) => Stack(
         children: <Widget>[
           Positioned.fill(
               child: FadeInImage.assetNetwork(
@@ -197,7 +199,7 @@ class _Header extends StatelessWidget {
         ],
       );
 
-  Widget buildUncheckedHeader(BuildContext context) => Stack(
+  Widget buildCheckedOutHeader(BuildContext context) => Stack(
         children: <Widget>[
           Positioned.fill(
               child:
@@ -235,7 +237,7 @@ class _Header extends StatelessWidget {
       );
 
   Widget buildHeaderBottomDivider(BuildContext context) {
-    final child = mode == _HomeMode.checked
+    final child = mode == HomeMode.checkedIn
         ? LUDecoratedTitle(
             title: 'Menu',
           )
@@ -269,10 +271,10 @@ class _Body extends StatelessWidget {
   })  : assert(mode != null),
         super(key: key);
 
-  final _HomeMode mode;
+  final HomeMode mode;
   final Outlet outlet;
 
-  _SectionList get uncheckedSections => (BuildContext context) => [
+  _SectionList get checkedOutSections => (BuildContext context) => [
         LUSection(
           title: "Chef's choice - Glasgow",
           builder: buildFeaturedOutletsCarousel,
@@ -287,7 +289,7 @@ class _Body extends StatelessWidget {
         ),
       ];
 
-  _SectionList get checkedSections => (BuildContext context) => [
+  _SectionList get checkedInSections => (BuildContext context) => [
         LUSection(
             title: "Popular",
             builder: (_) => LUCarousel(
@@ -331,9 +333,9 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sections = mode == _HomeMode.checked
-        ? checkedSections(context)
-        : uncheckedSections(context);
+    final sections = mode == HomeMode.checkedIn
+        ? checkedInSections(context)
+        : checkedOutSections(context);
     return SliverList(
       delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) => sections[index],

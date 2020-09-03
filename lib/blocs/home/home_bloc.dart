@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:dr_app/data/models/models.dart';
 import 'package:dr_app/data/models/remote/cuisine.dart';
 import 'package:dr_app/data/models/remote/outlet.dart';
 import 'package:dr_app/data/repositories/cuisine_repository.dart';
@@ -31,6 +32,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     HomeEvent event,
   ) async* {
     switch (event.runtimeType) {
+      case CheckInRequested:
+        yield* _mapCheckInRequestedToState(event);
+        break;
+      case CheckOutRequested:
+        yield* _mapCheckOutRequestedToState(event);
+        break;
       case FeaturedOutletsRequested:
         yield* _mapFeaturedOutletsRequestedToState(event);
         break;
@@ -41,6 +48,26 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         yield* _mapNearbyOutletsRequestedToState(event);
         break;
     }
+  }
+
+  Stream<HomeState> _mapCheckInRequestedToState(CheckInRequested event) async* {
+    yield state.copyWith(
+      mode: HomeMode.checkedIn,
+      homeOutlet: Outlet(
+        2,
+        'Nice',
+        2,
+        4,
+        Cuisine(1, 'Nice', null),
+        [],
+        Location('Glasgow'),
+      ),
+    );
+  }
+
+  Stream<HomeState> _mapCheckOutRequestedToState(
+      CheckOutRequested event) async* {
+    yield state.copyWith(mode: HomeMode.checkedOut, homeOutlet: null);
   }
 
   Stream<HomeState> _mapFeaturedOutletsRequestedToState(
