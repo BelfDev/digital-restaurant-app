@@ -2,7 +2,6 @@ import 'package:dr_app/blocs/blocs.dart';
 import 'package:dr_app/components/components.dart';
 import 'package:dr_app/components/sliver_app_bar.dart';
 import 'package:dr_app/configs/theme.dart';
-import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/models.dart' hide Image;
 import 'package:dr_app/screens/screens.dart';
 import 'package:dr_app/utils/colors.dart';
@@ -95,7 +94,10 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, state) => _Header(
             mode: state.mode,
             onButtonPressed: () {
-              _homeBloc.add(CheckInRequested(1));
+              _homeBloc
+                ..add(CheckInRequested(1))
+                ..add(OutletFeaturedProductsRequested(1))
+                ..add(OutletProductsRequested(1));
             },
             outlet: state.homeOutlet),
       );
@@ -263,7 +265,7 @@ class _Header extends StatelessWidget {
   }
 }
 
-class _Body extends StatelessWidget {
+class _Body extends StatefulWidget {
   const _Body({
     Key key,
     @required this.mode,
@@ -273,6 +275,13 @@ class _Body extends StatelessWidget {
 
   final HomeMode mode;
   final Outlet outlet;
+
+  @override
+  __BodyState createState() => __BodyState();
+}
+
+class __BodyState extends State<_Body> {
+  int selectedCategoryIndex = 0;
 
   _SectionList get checkedOutSections => (BuildContext context) => [
         LUSection(
@@ -291,27 +300,61 @@ class _Body extends StatelessWidget {
 
   _SectionList get checkedInSections => (BuildContext context) => [
         LUSection(
-            title: "Popular",
-            builder: (_) => LUCarousel(
-                height: _HomeStyles.featuredSectionHeight,
-                padding: Styles.sectionContentPadding,
-                items: _getFeaturedCards(context))),
-        LUSection(
-          title: 'Categories',
-          builder: (_) => LUChipCarousel(
-            items: dummyChipItems,
-            onSelected: (value) {
-              print(value);
-            },
-          ),
+          title: "Popular",
+          builder: buildFeaturedProductsCarousel,
         ),
-        LUList(
-          padding: const EdgeInsets.only(top: 16.0, bottom: 120.0),
-          nested: true,
-          space: 10,
-          items: _getDishCards(),
-        ),
+        buildCategories(context),
       ];
+
+  Widget buildCategories(BuildContext context) =>
+      BlocBuilder<HomeBloc, HomeState>(
+        buildWhen: (previous, current) =>
+            previous.productsStatus != current.productsStatus,
+        builder: (_, state) => LULoadableContent(
+            height: _HomeStyles.featuredSectionHeight,
+            stateStatus: state.productsStatus,
+            contentBuilder: () {
+              // Retrieves categories and products
+              final categories = state.categories.keys.toSet().toList();
+              final selectedCategory = categories[selectedCategoryIndex];
+              final List<Product> products = state.categories[selectedCategory];
+
+              return Column(
+                children: [
+                  LUSection(
+                    title: 'Categories',
+                    builder: (_) => LUChipCarousel(
+                      items: List.generate(
+                          categories.length,
+                          (index) => ChipItem(
+                              text: categories[index].title, value: index)),
+                      onSelected: (index) {
+                        setState(() {
+                          selectedCategoryIndex = index;
+                        });
+                      },
+                    ),
+                  ),
+                  LUList(
+                      padding: const EdgeInsets.only(top: 16.0, bottom: 120.0),
+                      nested: true,
+                      space: 10,
+                      items: products
+                          .map((dish) => LUDishCard(
+                                imageSrc: dish.images.isEmpty
+                                    ? ''
+                                    : dish.images.first.source,
+                                title: dish.title,
+                                description: dish.description,
+                                priceTag:
+                                    Formatter.convertToMoney(dish.unitPrice),
+                                preparationTime: dish.preparationTime,
+                              ))
+                          .toList()),
+                ],
+              );
+            }),
+      );
 
   void onOutletCardPressed(BuildContext context, Outlet outlet) {
     Navigator.of(context).pushNamed(
@@ -331,9 +374,20 @@ class _Body extends StatelessWidget {
     );
   }
 
+  void onProductCardPressed(BuildContext context, Product product) {
+    Navigator.of(context).pushNamed(
+      ProductScreen.id,
+      arguments: ScreenArguments(
+        title: product.title ?? '',
+        coverImgSrc:
+            product.images.isNotEmpty ? product.images.first.source : '',
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final sections = mode == HomeMode.checkedIn
+    final sections = widget.mode == HomeMode.checkedIn
         ? checkedInSections(context)
         : checkedOutSections(context);
     return SliverList(
@@ -343,29 +397,56 @@ class _Body extends StatelessWidget {
     );
   }
 
-  List<Widget> _getFeaturedCards(context) => dummyDishes
-      .map((dish) => LUFeaturedCard(
-            imageSrc: dish.imgSrc,
-            title: dish.title,
-            priceRange: 4,
-            onPressed: () {
-              Navigator.of(context).pushNamed(ProductScreen.id,
-                  arguments: ScreenArguments(
-                      title: dish.title, coverImgSrc: dish.imgSrc));
-            },
-            price: dish.priceTag,
-          ))
-      .toList();
+  Widget buildFeaturedProductsCarousel(BuildContext context) =>
+      BlocBuilder<HomeBloc, HomeState>(
+        buildWhen: (previous, current) =>
+            previous.featuredProductsStatus != current.featuredProductsStatus,
+        builder: (_, state) => LULoadableContent(
+          height: _HomeStyles.featuredSectionHeight,
+          stateStatus: state.featuredProductsStatus,
+          contentBuilder: () => LUCarousel(
+            height: _HomeStyles.featuredSectionHeight,
+            padding: Styles.sectionContentPadding,
+            items: state.featuredProducts
+                .map(
+                  (product) => LUFeaturedCard(
+                    imageSrc: product.images.isNotEmpty
+                        ? product.images.first.source
+                        : '',
+                    title: product.title,
+                    price: Formatter.convertToMoney(product.unitPrice),
+                    onPressed: () => onProductCardPressed(context, product),
+                  ),
+                )
+                .toList(),
+          ),
+        ),
+      );
 
-  List<Widget> _getDishCards() => dummyDishes
-      .map((dish) => LUDishCard(
-            imageSrc: dish.imgSrc,
-            title: dish.title,
-            description: dish.description,
-            priceTag: dish.priceTag,
-            preparationTime: dish.preparationTime,
-          ))
-      .toList();
+  Widget buildProductsList(BuildContext context) =>
+      BlocBuilder<HomeBloc, HomeState>(
+        buildWhen: (previous, current) =>
+            previous.nearbyOutletsStatus != current.nearbyOutletsStatus,
+        builder: (_, state) => LULoadableContent(
+          height: 200,
+          stateStatus: state.nearbyOutletsStatus,
+          contentBuilder: () => LUList(
+            nested: true,
+            space: 10,
+            padding: const EdgeInsets.only(bottom: 120.0),
+            items: state.nearbyOutlets
+                .map((outlet) => LUOutletCard(
+                    imageSrc: outlet.images.isNotEmpty
+                        ? outlet.images.first.source
+                        : '',
+                    rating: outlet.rating,
+                    title: outlet.title,
+                    priceRange: outlet.priceLevel,
+                    onPressed: () => onOutletCardPressed(context, outlet)))
+                .toList(),
+          ),
+        ),
+      );
 
   Widget buildFeaturedOutletsCarousel(BuildContext context) =>
       BlocBuilder<HomeBloc, HomeState>(
