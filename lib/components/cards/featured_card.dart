@@ -24,7 +24,7 @@ class LUFeaturedCard extends StatelessWidget {
 
   const LUFeaturedCard({
     @required this.title,
-    @required this.priceRange,
+    this.priceRange,
     this.width = 202,
     this.height = 232,
     this.onPressed,
@@ -35,7 +35,8 @@ class LUFeaturedCard extends StatelessWidget {
     this.rating,
     this.price,
     this.subtitle,
-  }) : assert(price != null || subtitle != null);
+  })  : assert(price != null || subtitle != null),
+        assert(price != null || priceRange != null);
 
   @override
   Widget build(BuildContext context) {

@@ -15,7 +15,7 @@ class LUDishCard extends StatelessWidget {
   final String description;
   final String priceTag;
   final int quantity;
-  final String preparationTime;
+  final double preparationTime;
   final bool shrink;
   final bool showStatus;
 
@@ -104,7 +104,7 @@ class LUDishCard extends StatelessWidget {
                               width: 4,
                             ),
                             Text(
-                              preparationTime,
+                              '$preparationTime min',
                               style: Styles.dishCardPreparation,
                             )
                           ],

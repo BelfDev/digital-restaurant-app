@@ -2,7 +2,7 @@ class Dish {
   final String imgSrc;
   final String title;
   final String description;
-  final String preparationTime;
+  final double preparationTime;
   final String priceTag;
 
   const Dish(
