@@ -139,9 +139,9 @@ class _Header extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 4,
+              spreadRadius: 2,
               blurRadius: 12,
-              offset: Offset(0, -12), // changes position of shadow
+              offset: Offset(0, -14), // changes position of shadow
             )
           ],
         ),
