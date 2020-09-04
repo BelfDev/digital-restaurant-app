@@ -50,6 +50,10 @@ dependencies:
   # Networking
   json_annotation: ^3.0.1
   http: ^0.12.2
+  http_interceptor: ^0.3.2
+
+  # Persistence
+  shared_preferences: ^0.5.10
 
 dev_dependencies:
   flutter_test:

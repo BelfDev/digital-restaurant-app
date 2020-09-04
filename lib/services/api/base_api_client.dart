@@ -2,15 +2,20 @@ import 'dart:convert';
 
 import 'package:dr_app/configs/api_config.dart';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
+import 'package:http_interceptor/http_client_with_interceptor.dart';
 
+import 'interceptors/session_interceptor.dart';
 import 'network_exception.dart';
 
 /// Base class that abstracts http operations shared among API services.
 abstract class BaseApiClient {
   static const _BASE_URL = ApiConfig.BASE_HOST;
 
-  final http.Client _client = http.Client();
+  // final http.Client _client = http.Client();
+
+  final Client _client =
+      HttpClientWithInterceptor.build(interceptors: [SessionInterceptor()]);
 
   /// Abstracts GET http request boilerplate.
   @protected
@@ -28,7 +33,7 @@ abstract class BaseApiClient {
 
   /// Returns the response body if the request has been completed successfully.
   /// Otherwise, throws exceptions relevant to the http status code.
-  dynamic _filterResponseBody(http.Response response) {
+  dynamic _filterResponseBody(Response response) {
     debugPrint('Response status: ${response.statusCode}');
     switch (response.statusCode) {
       case 200:
