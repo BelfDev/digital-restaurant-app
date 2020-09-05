@@ -6,6 +6,8 @@ class HomeState extends Equatable {
   final HomeMode mode;
   final Outlet homeOutlet;
 
+  final ContentStateStatus homeOutletStatus;
+
   final ContentStateStatus cuisineStatus;
   final ContentStateStatus featuredOutletsStatus;
   final ContentStateStatus nearbyOutletsStatus;
@@ -23,6 +25,7 @@ class HomeState extends Equatable {
   const HomeState({
     this.mode = HomeMode.checkedOut,
     this.homeOutlet,
+    this.homeOutletStatus = ContentStateStatus.initial,
     this.cuisineStatus = ContentStateStatus.initial,
     this.featuredOutletsStatus = ContentStateStatus.initial,
     this.nearbyOutletsStatus = ContentStateStatus.initial,
@@ -40,6 +43,7 @@ class HomeState extends Equatable {
   HomeState copyWith({
     HomeMode mode,
     Outlet homeOutlet,
+    ContentStateStatus homeOutletStatus,
     ContentStateStatus cuisineStatus,
     ContentStateStatus featuredOutletsStatus,
     ContentStateStatus nearbyOutletsStatus,
@@ -54,6 +58,7 @@ class HomeState extends Equatable {
       HomeState(
         mode: mode ?? this.mode,
         homeOutlet: homeOutlet ?? this.homeOutlet,
+        homeOutletStatus: homeOutletStatus ?? this.homeOutletStatus,
         cuisineStatus: cuisineStatus ?? this.cuisineStatus,
         featuredOutletsStatus:
             featuredOutletsStatus ?? this.featuredOutletsStatus,
@@ -71,6 +76,8 @@ class HomeState extends Equatable {
   @override
   List<Object> get props => [
         mode,
+        homeOutlet,
+        homeOutletStatus,
         cuisineStatus,
         featuredOutletsStatus,
         nearbyOutletsStatus,
@@ -87,6 +94,7 @@ class HomeState extends Equatable {
   String toString() {
     return [
       mode,
+      homeOutletStatus,
       cuisineStatus,
       featuredOutletsStatus,
       nearbyOutletsStatus,

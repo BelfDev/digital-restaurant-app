@@ -1,4 +1,5 @@
 import 'package:dr_app/blocs/blocs.dart';
+import 'package:dr_app/blocs/content_state_status.dart';
 import 'package:dr_app/components/components.dart';
 import 'package:dr_app/components/sliver_app_bar.dart';
 import 'package:dr_app/configs/theme.dart';
@@ -40,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   HomeBloc _homeBloc;
 
   void _onScannerButtonPressed(BuildContext context) async {
-    _homeBloc.add(CheckOutRequested());
+    requestCheckOut();
     // final result = await Navigator.of(context).pushNamed(ScannerScreen.id);
     // if (result != null) {
     //
@@ -53,13 +54,37 @@ class _HomeScreenState extends State<HomeScreen> {
     // });
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _homeBloc = BlocProvider.of<HomeBloc>(context)
+  void onOutletCardPressed(BuildContext context, Outlet outlet) async {
+    final result = await Navigator.of(context).pushNamed(
+      OutletScreen.id,
+      arguments: outlet,
+    );
+    if (result != null) {
+      final outletId = result as int;
+      requestCheckIn(outletId);
+    }
+  }
+
+  void requestCheckIn(int outletId) {
+    _homeBloc
+      ..add(CheckInRequested(outletId))
+      ..add(OutletFeaturedProductsRequested(outletId))
+      ..add(OutletProductsRequested(outletId));
+  }
+
+  void requestCheckOut() {
+    _homeBloc
+      ..add(CheckOutRequested())
       ..add(FeaturedOutletsRequested(city: _CITY_REGION))
       ..add(CuisinesRequested())
       ..add(NearbyOutletsRequested(city: _CITY_REGION));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _homeBloc = BlocProvider.of<HomeBloc>(context);
+    requestCheckOut();
   }
 
   @override
@@ -88,16 +113,18 @@ class _HomeScreenState extends State<HomeScreen> {
       );
 
   Widget _buildHeader(BuildContext context) => BlocBuilder<HomeBloc, HomeState>(
-        buildWhen: (previous, current) => previous.mode != current.mode,
+        buildWhen: (previous, current) =>
+            (previous.homeOutletStatus != current.homeOutletStatus) ||
+            (previous.mode != current.mode),
         builder: (context, state) => _Header(
-            mode: state.mode,
-            onButtonPressed: () {
-              _homeBloc
-                ..add(CheckInRequested(1))
-                ..add(OutletFeaturedProductsRequested(1))
-                ..add(OutletProductsRequested(1));
-            },
-            outlet: state.homeOutlet),
+          mode: state.mode,
+          stateStatus: state.homeOutletStatus,
+          onButtonPressed: () {
+            // Demo find a restaurant
+            requestCheckIn(1);
+          },
+          outlet: state.homeOutlet,
+        ),
       );
 
   Widget _buildBody(BuildContext context) => BlocBuilder<HomeBloc, HomeState>(
@@ -105,6 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, state) => _Body(
           mode: state.mode,
           outlet: state.homeOutlet,
+          onOutletCardPressed: onOutletCardPressed,
         ),
       );
 }
@@ -117,12 +145,14 @@ class _Header extends StatelessWidget {
     @required this.mode,
     this.outlet,
     this.onButtonPressed,
+    this.stateStatus,
   })  : assert(mode != null),
         super(key: key);
 
   final HomeMode mode;
   final Outlet outlet;
   final VoidCallback onButtonPressed;
+  final ContentStateStatus stateStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -146,26 +176,40 @@ class _Header extends StatelessWidget {
         child: ClipRRect(
             borderRadius: _HomeStyles.backgroundBorderRadius,
             child: mode == HomeMode.checkedIn
-                ? buildCheckedInHeader(context)
+                ? buildCheckedInHeader(context, stateStatus)
                 : buildCheckedOutHeader(context)),
       ),
     );
   }
 
-  Widget buildCheckedInHeader(BuildContext context) => Stack(
-        children: <Widget>[
-          Positioned.fill(
-              child: FadeInImage.assetNetwork(
+  Widget buildCheckedInHeader(BuildContext context, ContentStateStatus status) {
+    final isLoading = status == ContentStateStatus.initial ||
+        status == ContentStateStatus.loadInProgress;
+    final hasError = status == ContentStateStatus.loadFailure;
+
+    return Stack(
+      children: <Widget>[
+        Positioned.fill(
+          child: FadeInImage.assetNetwork(
             placeholder: Images.verticalPlaceholder,
             // image: outlet?.images?.first?.source ?? '',
             image: '',
             fit: BoxFit.cover,
-          )),
-          Positioned.fill(
-              child: LUBlurFilter(
+          ),
+        ),
+        Positioned.fill(
+          child: LUBlurFilter(
             blurIntensity: 3.0,
             color: Colors.grey.shade600,
-          )),
+          ),
+        ),
+        if (isLoading)
+          Positioned.fill(
+            bottom: 64,
+            child: LULoadingPlaceholder(),
+          ),
+        if (hasError) LUErrorPlaceholder(),
+        if (!isLoading)
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -195,9 +239,10 @@ class _Header extends StatelessWidget {
               )
             ],
           ),
-          buildHeaderBottomDivider(context)
-        ],
-      );
+        buildHeaderBottomDivider(context)
+      ],
+    );
+  }
 
   Widget buildCheckedOutHeader(BuildContext context) => Stack(
         children: <Widget>[
@@ -263,16 +308,20 @@ class _Header extends StatelessWidget {
   }
 }
 
+typedef _OutletCardCallback = Function(BuildContext context, Outlet outlet);
+
 class _Body extends StatefulWidget {
   const _Body({
     Key key,
     @required this.mode,
     this.outlet,
+    this.onOutletCardPressed,
   })  : assert(mode != null),
         super(key: key);
 
   final HomeMode mode;
   final Outlet outlet;
+  final _OutletCardCallback onOutletCardPressed;
 
   @override
   __BodyState createState() => __BodyState();
@@ -354,13 +403,6 @@ class __BodyState extends State<_Body> {
             }),
       );
 
-  void onOutletCardPressed(BuildContext context, Outlet outlet) {
-    Navigator.of(context).pushNamed(
-      OutletScreen.id,
-      arguments: outlet,
-    );
-  }
-
   void onCategoryCardPressed(BuildContext context, Cuisine cuisine) {
     Navigator.of(context).pushNamed(
       CuisineScreen.id,
@@ -431,13 +473,14 @@ class __BodyState extends State<_Body> {
             padding: const EdgeInsets.only(bottom: 120.0),
             items: state.nearbyOutlets
                 .map((outlet) => LUOutletCard(
-                    imageSrc: outlet.images.isNotEmpty
-                        ? outlet.images.first.source
-                        : '',
-                    rating: outlet.rating,
-                    title: outlet.title,
-                    priceRange: outlet.priceLevel,
-                    onPressed: () => onOutletCardPressed(context, outlet)))
+                      imageSrc: outlet.images.isNotEmpty
+                          ? outlet.images.first.source
+                          : '',
+                      rating: outlet.rating,
+                      title: outlet.title,
+                      priceRange: outlet.priceLevel,
+                      onPressed: null,
+                    ))
                 .toList(),
           ),
         ),
@@ -463,7 +506,8 @@ class __BodyState extends State<_Body> {
                     subtitle: outlet.cuisine.title,
                     priceRange: outlet.priceLevel,
                     rating: outlet.rating,
-                    onPressed: () => onOutletCardPressed(context, outlet),
+                    onPressed: () =>
+                        widget.onOutletCardPressed(context, outlet),
                   ),
                 )
                 .toList(),
@@ -506,14 +550,18 @@ class __BodyState extends State<_Body> {
             space: 10,
             padding: const EdgeInsets.only(bottom: 120.0),
             items: state.nearbyOutlets
-                .map((outlet) => LUOutletCard(
+                .map(
+                  (outlet) => LUOutletCard(
                     imageSrc: outlet.images.isNotEmpty
                         ? outlet.images.first.source
                         : '',
                     rating: outlet.rating,
                     title: outlet.title,
                     priceRange: outlet.priceLevel,
-                    onPressed: () => onOutletCardPressed(context, outlet)))
+                    onPressed: () =>
+                        widget.onOutletCardPressed(context, outlet),
+                  ),
+                )
                 .toList(),
           ),
         ),

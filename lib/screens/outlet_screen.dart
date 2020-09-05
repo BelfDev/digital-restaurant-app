@@ -28,6 +28,14 @@ class _OutletScreenState extends State<OutletScreen> {
 
   void _onBackButtonPressed() => Navigator.of(context).pop();
 
+  void _onSliderButtonConfirmed() =>
+      _showDialog('${outlet.title}', 'Do you wish to check-in this restaurant?')
+          .then((userConfirmed) {
+        if (userConfirmed) {
+          Navigator.pop(context, outlet.id);
+        }
+      });
+
   OutletBloc get outletBloc => BlocProvider.of<OutletBloc>(this.context);
 
   Outlet get outlet => widget.outlet;
@@ -60,7 +68,7 @@ class _OutletScreenState extends State<OutletScreen> {
               margin: Styles.fixedButtonMargin,
               title: 'Check-in',
               onSlided: () {
-                print('ON SLIDED');
+                _onSliderButtonConfirmed();
               },
             ),
           )
@@ -180,4 +188,24 @@ class _OutletScreenState extends State<OutletScreen> {
               );
             }),
       );
+
+  Future<bool> _showDialog(String title, String message) async {
+    return showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return ConfirmationDialog(
+          title: title,
+          message: message,
+          confirmActionTitle: 'Check-in',
+          onConfirmPressed: () {
+            Navigator.pop(context, true);
+          },
+          onCancelPressed: () {
+            Navigator.pop(context, false);
+          },
+        );
+      },
+    );
+  }
 }

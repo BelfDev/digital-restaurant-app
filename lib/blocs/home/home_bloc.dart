@@ -60,23 +60,37 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Stream<HomeState> _mapCheckInRequestedToState(CheckInRequested event) async* {
+    // Loading
     yield state.copyWith(
       mode: HomeMode.checkedIn,
-      homeOutlet: Outlet(
-        2,
-        'Nice',
-        2,
-        4,
-        Cuisine(1, 'Nice', null),
-        [],
-        Location('Glasgow'),
-      ),
+      homeOutletStatus: ContentStateStatus.loadInProgress,
+      featuredOutlets: const [],
+      cuisines: const [],
+      nearbyOutlets: const [],
+      featuredOutletsStatus: ContentStateStatus.initial,
+      cuisineStatus: ContentStateStatus.initial,
+      nearbyOutletsStatus: ContentStateStatus.initial,
     );
+    try {
+      // Success
+      final outlet = await outletRepository.fetchOutlet(event.outletId);
+      yield state.copyWith(
+          homeOutletStatus: ContentStateStatus.loadSuccess, homeOutlet: outlet);
+    } catch (error) {
+      // Error
+      yield state.copyWith(homeOutletStatus: ContentStateStatus.loadFailure);
+    }
   }
 
   Stream<HomeState> _mapCheckOutRequestedToState(
       CheckOutRequested event) async* {
-    yield state.copyWith(mode: HomeMode.checkedOut, homeOutlet: null);
+    yield state.copyWith(
+      mode: HomeMode.checkedOut,
+      homeOutlet: null,
+      homeOutletStatus: ContentStateStatus.initial,
+      featuredProducts: const [],
+      categories: const {},
+    );
   }
 
   Stream<HomeState> _mapOutletFeaturedProductsRequestedToState(
