@@ -1,12 +1,17 @@
 import 'package:dr_app/blocs/blocs.dart';
+import 'package:dr_app/blocs/cart/cart_bloc.dart';
+import 'package:dr_app/blocs/outlet/outlet_bloc.dart';
+import 'package:dr_app/data/repositories/cart_repository.dart';
 import 'package:dr_app/data/repositories/cuisine_repository.dart';
 import 'package:dr_app/data/repositories/outlet_respository.dart';
 import 'package:dr_app/navigation/root_container.dart';
 import 'package:dr_app/navigation/tab_data.dart';
 import 'package:dr_app/screens/explore_screen.dart';
 import 'package:dr_app/screens/home_screen.dart';
+import 'package:dr_app/screens/login_screen.dart';
 import 'package:dr_app/screens/more_screen.dart';
 import 'package:dr_app/screens/onboarding_screen.dart';
+import 'package:dr_app/screens/outlet_screen.dart';
 import 'package:dr_app/screens/product_screen.dart';
 import 'package:dr_app/screens/profile_screen.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
@@ -23,27 +28,43 @@ class AppRouter {
     // Initialize repos
     final cuisineRepository = CuisineRepository();
     final outletRepository = OutletRepository();
+    final cartRepository = CartRepository();
 
     // Register blocs
     this._blocs = {
       HomeBloc.id: HomeBloc(
-          cuisineRepository: cuisineRepository,
-          outletRepository: outletRepository),
+        cuisineRepository: cuisineRepository,
+        outletRepository: outletRepository,
+      ),
+      CartBloc.id: CartBloc(cartRepository: cartRepository),
+      OutletBloc.id: OutletBloc(outletRepository: outletRepository),
     };
 
     // Register routes
     this._routes = {
-      OnboardingScreen.id: _ScreenSettings(widget: OnboardingScreen()),
-      ExploreScreen.id: _ScreenSettings(widget: ExploreScreen()),
-      ProfileScreen.id: _ScreenSettings(widget: ProfileScreen()),
-      MoreScreen.id: _ScreenSettings(widget: MoreScreen()),
-      HomeScreen.id: _ScreenSettings(widget: HomeScreen(), providers: [
-        BlocProvider<HomeBloc>(
-          create: (_) => _blocs[HomeBloc.id],
-        )
-      ]),
-      ProductScreen.id: _ScreenSettings(widget: ProductScreen()),
-      ScannerScreen.id: _ScreenSettings(widget: ScannerScreen())
+      OnboardingScreen.id: _ScreenSettings(builder: (_) => OnboardingScreen()),
+      ExploreScreen.id: _ScreenSettings(builder: (_) => ExploreScreen()),
+      ProfileScreen.id: _ScreenSettings(builder: (_) => ProfileScreen()),
+      MoreScreen.id: _ScreenSettings(builder: (_) => MoreScreen()),
+      HomeScreen.id: _ScreenSettings(
+        builder: (_) => HomeScreen(),
+        providers: [
+          BlocProvider<HomeBloc>(
+            create: (_) => _blocs[HomeBloc.id],
+          ),
+        ],
+      ),
+      ProductScreen.id: _ScreenSettings(builder: (_) => ProductScreen()),
+      ScannerScreen.id: _ScreenSettings(builder: (_) => ScannerScreen()),
+      OutletScreen.id: _ScreenSettings(
+        builder: (arguments) => OutletScreen(arguments),
+        providers: [
+          BlocProvider<OutletBloc>(
+            create: (_) => _blocs[OutletBloc.id],
+          ),
+        ],
+      ),
+      LoginScreen.id: _ScreenSettings(builder: (_) => LoginScreen())
     };
   }
 
@@ -51,15 +72,16 @@ class AppRouter {
     final rootId = tabData?.rootId ?? HomeScreen.id;
     final destinationId = settings.name == '/' ? rootId : settings.name;
     final screen = _routes[destinationId];
+    final arguments = settings.arguments;
 
     return MaterialPageRoute(
         settings: settings,
-        builder: (_) => screen.hasProviders
+        builder: (context) => screen.hasProviders
             ? MultiBlocProvider(
                 providers: screen.providers,
-                child: screen.widget,
+                child: screen.builder(arguments),
               )
-            : screen.widget);
+            : screen.builder(arguments));
   }
 
   static void navigateToRoot(BuildContext context) =>
@@ -69,15 +91,19 @@ class AppRouter {
           (_) => false);
 }
 
+typedef ArgumentBuilder = Widget Function(Object arguments);
+
 class _ScreenSettings {
-  final Widget widget;
+  final ArgumentBuilder builder;
   final List<BlocProvider> providers;
   final bool hasProviders;
 
-  _ScreenSettings({@required this.widget, this.providers})
-      : this.hasProviders = providers?.isNotEmpty ?? false,
-        assert(widget != null);
+  _ScreenSettings({
+    @required this.builder,
+    this.providers,
+  })  : this.hasProviders = providers?.isNotEmpty ?? false,
+        assert(builder != null);
 
   @override
-  String toString() => widget.toString();
+  String toString() => builder.toString();
 }

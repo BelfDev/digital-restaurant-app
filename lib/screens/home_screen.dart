@@ -3,6 +3,7 @@ import 'package:dr_app/components/components.dart';
 import 'package:dr_app/components/sliver_app_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/models/models.dart' hide Image;
+import 'package:dr_app/screens/outlet_screen.dart';
 import 'package:dr_app/screens/screens.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/formatter.dart';
@@ -72,14 +73,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildAppBar(BuildContext context) => LUSliverAppBar(
         children: [
-          GestureDetector(
-            onTap: () {},
-            child: Image.asset(
-              Images.appLogo,
-              width: 227,
-              height: 46,
-              fit: BoxFit.cover,
-            ),
+          Image.asset(
+            Images.appLogo,
+            width: 227,
+            height: 46,
+            fit: BoxFit.cover,
           ),
           LUIconButton(
             icon: MaterialCommunityIcons.qrcode_scan,
@@ -358,11 +356,8 @@ class __BodyState extends State<_Body> {
 
   void onOutletCardPressed(BuildContext context, Outlet outlet) {
     Navigator.of(context).pushNamed(
-      ProductScreen.id,
-      arguments: ScreenArguments(
-        title: outlet.title ?? '',
-        coverImgSrc: outlet.images.isNotEmpty ? outlet.images.first.source : '',
-      ),
+      OutletScreen.id,
+      arguments: outlet,
     );
   }
 

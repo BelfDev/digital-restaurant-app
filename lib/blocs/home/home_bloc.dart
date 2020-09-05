@@ -24,8 +24,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final CuisineRepository cuisineRepository;
   final OutletRepository outletRepository;
 
-  HomeBloc({@required this.cuisineRepository, @required this.outletRepository})
-      : assert(cuisineRepository != null),
+  HomeBloc({
+    @required this.cuisineRepository,
+    @required this.outletRepository,
+  })  : assert(cuisineRepository != null),
         super(HomeState.initial());
 
   @override
