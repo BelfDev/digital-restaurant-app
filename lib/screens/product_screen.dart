@@ -26,6 +26,8 @@ class _ProductScreenState extends State<ProductScreen> {
     Navigator.of(context).pop();
   }
 
+  int priceMultiplier = 1;
+
   // TODO: Migrate to LUScrollScaffold
   @override
   Widget build(BuildContext context) {
@@ -76,7 +78,8 @@ class _ProductScreenState extends State<ProductScreen> {
   Widget _buildContent(Product product) {
     final title = product.title;
     final subtitle = '${Formatter.convertToMoney(product.unitPrice)} each';
-    final unitPrice = Formatter.convertToMoney(product.unitPrice);
+    final totalPrice =
+        Formatter.convertToMoney(product.unitPrice * priceMultiplier);
     final description = product.description;
     final ingredients = product.ingredients;
 
@@ -107,11 +110,13 @@ class _ProductScreenState extends State<ProductScreen> {
                 children: <Widget>[
                   LUCounter(
                     onUpdate: (amount) {
-                      print(amount);
+                      setState(() {
+                        priceMultiplier = amount;
+                      });
                     },
                   ),
                   Text(
-                    unitPrice,
+                    totalPrice,
                     style: LUTheme.of(context)
                         .textTheme
                         .headline1
