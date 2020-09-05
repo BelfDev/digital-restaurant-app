@@ -19,7 +19,8 @@ class LUProductCard extends StatelessWidget {
       this.quantity,
       this.preparationTime,
       this.shrink = false,
-      this.showStatus = false})
+      this.showStatus = false,
+      this.onPressed})
       : super(key: key);
 
   final double width;
@@ -33,6 +34,7 @@ class LUProductCard extends StatelessWidget {
   final double preparationTime;
   final bool shrink;
   final bool showStatus;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class LUProductCard extends StatelessWidget {
       width: 100,
       height: height,
       margin: margin,
+      onPressed: onPressed,
       children: <Widget>[
         Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,

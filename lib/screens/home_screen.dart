@@ -65,6 +65,13 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  void onProductCardPressed(BuildContext context, Product product) {
+    Navigator.of(context).pushNamed(
+      ProductScreen.id,
+      arguments: ProductScreenArguments(product: product),
+    );
+  }
+
   void requestCheckIn(int outletId) {
     _homeBloc
       ..add(CheckInRequested(outletId))
@@ -133,6 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
           mode: state.mode,
           outlet: state.homeOutlet,
           onOutletCardPressed: onOutletCardPressed,
+          onProductCardPressed: onProductCardPressed,
         ),
       );
 }
@@ -309,6 +317,7 @@ class _Header extends StatelessWidget {
 }
 
 typedef _OutletCardCallback = Function(BuildContext context, Outlet outlet);
+typedef _ProductCardCallback = Function(BuildContext context, Product product);
 
 class _Body extends StatefulWidget {
   const _Body({
@@ -316,12 +325,14 @@ class _Body extends StatefulWidget {
     @required this.mode,
     this.outlet,
     this.onOutletCardPressed,
+    this.onProductCardPressed,
   })  : assert(mode != null),
         super(key: key);
 
   final HomeMode mode;
   final Outlet outlet;
   final _OutletCardCallback onOutletCardPressed;
+  final _ProductCardCallback onProductCardPressed;
 
   @override
   __BodyState createState() => __BodyState();
@@ -387,15 +398,17 @@ class __BodyState extends State<_Body> {
                       nested: true,
                       space: 10,
                       items: products
-                          .map((dish) => LUProductCard(
-                                imageSrc: dish.images.isEmpty
+                          .map((product) => LUProductCard(
+                                onPressed: () => widget.onProductCardPressed(
+                                    context, product),
+                                imageSrc: product.images.isEmpty
                                     ? ''
-                                    : dish.images.first.source,
-                                title: dish.title,
-                                description: dish.description,
+                                    : product.images.first.source,
+                                title: product.title,
+                                description: product.description,
                                 priceTag:
-                                    Formatter.convertToMoney(dish.unitPrice),
-                                preparationTime: dish.preparationTime,
+                                    Formatter.convertToMoney(product.unitPrice),
+                                preparationTime: product.preparationTime,
                               ))
                           .toList()),
                 ],
@@ -408,17 +421,6 @@ class __BodyState extends State<_Body> {
       CuisineScreen.id,
       arguments: ScreenArguments(
           title: cuisine.title ?? '', coverImgSrc: cuisine.image.source),
-    );
-  }
-
-  void onProductCardPressed(BuildContext context, Product product) {
-    Navigator.of(context).pushNamed(
-      ProductScreen.id,
-      arguments: ScreenArguments(
-        title: product.title ?? '',
-        coverImgSrc:
-            product.images.isNotEmpty ? product.images.first.source : '',
-      ),
     );
   }
 
@@ -452,35 +454,10 @@ class __BodyState extends State<_Body> {
                         : '',
                     title: product.title,
                     price: Formatter.convertToMoney(product.unitPrice),
-                    onPressed: () => onProductCardPressed(context, product),
+                    onPressed: () =>
+                        widget.onProductCardPressed(context, product),
                   ),
                 )
-                .toList(),
-          ),
-        ),
-      );
-
-  Widget buildProductsList(BuildContext context) =>
-      BlocBuilder<HomeBloc, HomeState>(
-        buildWhen: (previous, current) =>
-            previous.nearbyOutletsStatus != current.nearbyOutletsStatus,
-        builder: (_, state) => LULoadableContent(
-          height: 200,
-          stateStatus: state.nearbyOutletsStatus,
-          contentBuilder: () => LUList(
-            nested: true,
-            space: 10,
-            padding: const EdgeInsets.only(bottom: 120.0),
-            items: state.nearbyOutlets
-                .map((outlet) => LUOutletCard(
-                      imageSrc: outlet.images.isNotEmpty
-                          ? outlet.images.first.source
-                          : '',
-                      rating: outlet.rating,
-                      title: outlet.title,
-                      priceRange: outlet.priceLevel,
-                      onPressed: null,
-                    ))
                 .toList(),
           ),
         ),
