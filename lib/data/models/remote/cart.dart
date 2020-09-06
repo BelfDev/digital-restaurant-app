@@ -1,3 +1,4 @@
+import 'package:dr_app/data/models/models.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -15,8 +16,9 @@ class Cart extends Equatable {
   final int id;
   final double subtotal;
   final CartStatus status;
+  final List<Product> items;
 
-  const Cart(this.id, this.subtotal, this.status);
+  const Cart(this.id, this.subtotal, this.status, this.items);
 
   static Cart fromJson(Map<String, dynamic> json) => _$CartFromJson(json);
 

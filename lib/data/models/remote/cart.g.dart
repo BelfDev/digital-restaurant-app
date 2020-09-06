@@ -11,6 +11,10 @@ Cart _$CartFromJson(Map<String, dynamic> json) {
     json['id'] as int,
     (json['subtotal'] as num)?.toDouble(),
     _$enumDecodeNullable(_$CartStatusEnumMap, json['status']),
+    (json['items'] as List)
+        ?.map((e) =>
+            e == null ? null : Product.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
@@ -18,6 +22,7 @@ Map<String, dynamic> _$CartToJson(Cart instance) => <String, dynamic>{
       'id': instance.id,
       'subtotal': instance.subtotal,
       'status': _$CartStatusEnumMap[instance.status],
+      'items': instance.items,
     };
 
 T _$enumDecode<T>(
