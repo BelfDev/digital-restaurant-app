@@ -13,6 +13,7 @@ class Product extends Equatable {
   final String title;
   final double unitPrice;
   final String description;
+  final int quantity;
   final double preparationTime;
   final List<Image> images;
   final List<Ingredient> ingredients;
@@ -27,6 +28,7 @@ class Product extends Equatable {
     this.images,
     this.ingredients,
     this.categories,
+    this.quantity,
   );
 
   static Product fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
