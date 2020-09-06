@@ -30,13 +30,20 @@ class AppRouter {
     final outletRepository = OutletRepository();
     final cartRepository = CartRepository();
 
+    // ignore: close_sinks
+    final homeBloc = HomeBloc(
+      cuisineRepository: cuisineRepository,
+      outletRepository: outletRepository,
+    );
+
+    // ignore: close_sinks
+    final cartBloc =
+        CartBloc(cartRepository: cartRepository, homeBloc: homeBloc);
+
     // Register blocs
     this._blocs = {
-      HomeBloc.id: HomeBloc(
-        cuisineRepository: cuisineRepository,
-        outletRepository: outletRepository,
-      ),
-      CartBloc.id: CartBloc(cartRepository: cartRepository),
+      HomeBloc.id: homeBloc,
+      CartBloc.id: cartBloc,
       OutletBloc.id: OutletBloc(outletRepository: outletRepository),
     };
 
@@ -54,7 +61,14 @@ class AppRouter {
           ),
         ],
       ),
-      ProductScreen.id: _ScreenSettings(builder: (_) => ProductScreen()),
+      ProductScreen.id: _ScreenSettings(
+        builder: (arguments) => ProductScreen(arguments),
+        providers: [
+          BlocProvider<CartBloc>(
+            create: (_) => _blocs[CartBloc.id],
+          ),
+        ],
+      ),
       ScannerScreen.id: _ScreenSettings(builder: (_) => ScannerScreen()),
       OutletScreen.id: _ScreenSettings(
         builder: (arguments) => OutletScreen(arguments),
