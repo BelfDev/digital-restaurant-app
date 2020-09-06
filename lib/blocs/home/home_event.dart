@@ -57,3 +57,13 @@ class OutletFeaturedProductsRequested extends HomeEvent {
   @override
   List<Object> get props => [outletId];
 }
+
+class HomeModeChanged extends HomeEvent {
+  final HomeMode mode;
+  final int outletId;
+
+  const HomeModeChanged(this.mode, this.outletId);
+
+  @override
+  List<Object> get props => [mode, outletId];
+}

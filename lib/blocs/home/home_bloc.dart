@@ -30,6 +30,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   })  : assert(cuisineRepository != null),
         super(HomeState.initial());
 
+  final _modeStreamController = StreamController<HomeModeChanged>.broadcast();
+
   @override
   Stream<HomeState> mapEventToState(
     HomeEvent event,
@@ -71,6 +73,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       cuisineStatus: ContentStateStatus.initial,
       nearbyOutletsStatus: ContentStateStatus.initial,
     );
+    _modeStreamController
+        .add(HomeModeChanged(HomeMode.checkedIn, event.outletId));
     try {
       // Success
       final outlet = await outletRepository.fetchOutlet(event.outletId);
@@ -91,6 +95,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       featuredProducts: const [],
       categories: const {},
     );
+    _modeStreamController.add(HomeModeChanged(HomeMode.checkedOut, null));
   }
 
   Stream<HomeState> _mapOutletFeaturedProductsRequestedToState(
@@ -181,5 +186,29 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } catch (_) {
       yield state.copyWith(nearbyOutletsStatus: ContentStateStatus.loadFailure);
     }
+  }
+
+  /// Adds a subscription to the `Stream<HomeMode>`.
+  /// Returns a [StreamSubscription] which handles events from
+  /// the `Stream<State>` using the provided [onData], [onError] and [onDone]
+  /// handlers.
+  StreamSubscription<HomeModeChanged> listenHomeMode(
+    void Function(HomeModeChanged) onData, {
+    Function onError,
+    void Function() onDone,
+    bool cancelOnError,
+  }) {
+    return _modeStreamController.stream.listen(
+      onData,
+      onError: onError,
+      onDone: onDone,
+      cancelOnError: cancelOnError,
+    );
+  }
+
+  @override
+  Future<void> close() async {
+    await _modeStreamController.close();
+    return super.close();
   }
 }
