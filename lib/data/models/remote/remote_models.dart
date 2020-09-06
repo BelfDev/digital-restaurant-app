@@ -1,3 +1,4 @@
+export 'cart.dart';
 export 'category.dart';
 export 'cuisine.dart';
 export 'image.dart';
