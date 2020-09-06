@@ -1,3 +1,4 @@
+import 'package:dr_app/blocs/cart/cart_bloc.dart';
 import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/category_card.dart';
 import 'package:dr_app/components/carousel.dart';
@@ -10,6 +11,7 @@ import 'package:dr_app/data/models/models.dart';
 import 'package:dr_app/utils/formatter.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// The Product Screen displays information about a given product.
 /// The user can choose the desired quantity and add the product
@@ -17,24 +19,41 @@ import 'package:flutter/material.dart';
 class ProductScreen extends StatefulWidget {
   static const id = 'product_screen';
 
+  final Product product;
+
+  const ProductScreen(this.product, {Key key}) : super(key: key);
+
   @override
   _ProductScreenState createState() => _ProductScreenState();
 }
 
 class _ProductScreenState extends State<ProductScreen> {
+  static const _addToBasketActionTitle = 'add to tab';
+
+  // ignore: close_sinks
+  CartBloc cartBloc;
+
   void _onBackButtonPressed() {
     Navigator.of(context).pop();
   }
 
-  int priceMultiplier = 1;
+  void _onAddToCartPressed(int productId) {
+    cartBloc.add(AddToCartRequested(productId, quantity));
+  }
+
+  int quantity;
+
+  @override
+  void initState() {
+    super.initState();
+    cartBloc = BlocProvider.of<CartBloc>(context);
+    quantity = _initQuantity();
+  }
 
   // TODO: Migrate to LUScrollScaffold
   @override
   Widget build(BuildContext context) {
-    final ProductScreenArguments args =
-        ModalRoute.of(context).settings.arguments;
-    final product = args.product;
-
+    final product = widget.product;
     return Container(
       color: LUTheme.of(context).backgroundColor,
       child: Stack(
@@ -49,9 +68,9 @@ class _ProductScreenState extends State<ProductScreen> {
           Align(
             alignment: Alignment.bottomCenter,
             child: LUSolidButton(
-              title: 'ADD TO BASKET',
+              title: _addToBasketActionTitle,
               margin: Styles.fixedButtonMargin,
-              onPressed: () {},
+              onPressed: () => _onAddToCartPressed(product.id),
             ),
           )
         ],
@@ -78,8 +97,7 @@ class _ProductScreenState extends State<ProductScreen> {
   Widget _buildContent(Product product) {
     final title = product.title;
     final subtitle = '${Formatter.convertToMoney(product.unitPrice)} each';
-    final totalPrice =
-        Formatter.convertToMoney(product.unitPrice * priceMultiplier);
+    final totalPrice = Formatter.convertToMoney(product.unitPrice * quantity);
     final description = product.description;
     final ingredients = product.ingredients;
 
@@ -109,9 +127,10 @@ class _ProductScreenState extends State<ProductScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   LUCounter(
+                    initialValue: quantity,
                     onUpdate: (amount) {
                       setState(() {
-                        priceMultiplier = amount;
+                        quantity = amount;
                       });
                     },
                   ),
@@ -153,12 +172,14 @@ class _ProductScreenState extends State<ProductScreen> {
       ],
     );
   }
-}
 
-class ProductScreenArguments {
-  final Product product;
-
-  const ProductScreenArguments({
-    @required this.product,
-  }) : assert(product != null);
+  int _initQuantity() {
+    final cart = cartBloc.state.cart;
+    if (cart != null) {
+      final cartProduct =
+          cart?.items?.firstWhere((item) => item.id == widget.product.id);
+      return cartProduct != null ? cartProduct.quantity : 1;
+    }
+    return 1;
+  }
 }
