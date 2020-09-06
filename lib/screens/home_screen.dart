@@ -66,10 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void onProductCardPressed(BuildContext context, Product product) {
-    Navigator.of(context).pushNamed(
-      ProductScreen.id,
-      arguments: ProductScreenArguments(product: product),
-    );
+    Navigator.of(context).pushNamed(ProductScreen.id, arguments: product);
   }
 
   void requestCheckIn(int outletId) {
