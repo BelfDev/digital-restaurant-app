@@ -68,10 +68,12 @@ class CartRepository {
   /// Delete a cart item from an existing cart
   /// [id] must be an integer referring to the cart id
   /// [productId] must be an integer
-  Future<bool> removeCartItem(
-    int id, {
+  Future<bool> removeCartItem({
     @required int productId,
   }) async {
+    final id = await _getCartId();
+    if (id == null) throw FetchDataException('Not cart id was found');
+
     return await _cartApiClient.deleteCartItem(
       id,
       productId: productId,
