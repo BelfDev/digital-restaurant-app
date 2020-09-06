@@ -1,4 +1,5 @@
 import 'package:dr_app/blocs/cart/cart_bloc.dart';
+import 'package:dr_app/blocs/content_state_status.dart';
 import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/cards/category_card.dart';
 import 'package:dr_app/components/carousel.dart';
@@ -8,6 +9,7 @@ import 'package:dr_app/components/swiper.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/models/models.dart';
+import 'package:dr_app/utils/dialogs.dart';
 import 'package:dr_app/utils/formatter.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +32,9 @@ class ProductScreen extends StatefulWidget {
 class _ProductScreenState extends State<ProductScreen> {
   static const _addToBasketActionTitle = 'add to tab';
 
+  final GlobalKey<State<ProductScreen>> _keyLoader =
+      new GlobalKey<State<ProductScreen>>();
+
   // ignore: close_sinks
   CartBloc cartBloc;
 
@@ -39,6 +44,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
   void _onAddToCartPressed(int productId) {
     cartBloc.add(AddToCartRequested(productId, quantity));
+    Dialogs.showLoadingDialog(context, _keyLoader);
   }
 
   int quantity;
@@ -67,10 +73,22 @@ class _ProductScreenState extends State<ProductScreen> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: LUSolidButton(
-              title: _addToBasketActionTitle,
-              margin: Styles.fixedButtonMargin,
-              onPressed: () => _onAddToCartPressed(product.id),
+            child: BlocListener<CartBloc, CartState>(
+              listenWhen: (previous, current) =>
+                  previous.status != current.status,
+              listener: (context, state) {
+                if (state.status == ContentStateStatus.loadSuccess &&
+                    _keyLoader != null) {
+                  // TODO: Fix nav exception
+                  Navigator.of(_keyLoader.currentContext, rootNavigator: true)
+                      .pop(); //close the dialoge
+                }
+              },
+              child: LUSolidButton(
+                title: _addToBasketActionTitle,
+                margin: Styles.fixedButtonMargin,
+                onPressed: () => _onAddToCartPressed(product.id),
+              ),
             ),
           )
         ],
@@ -176,8 +194,9 @@ class _ProductScreenState extends State<ProductScreen> {
   int _initQuantity() {
     final cart = cartBloc.state.cart;
     if (cart != null) {
-      final cartProduct =
-          cart?.items?.firstWhere((item) => item.id == widget.product.id);
+      final cartProduct = cart?.items?.firstWhere(
+          (item) => item.id == widget.product.id,
+          orElse: () => null);
       return cartProduct != null ? cartProduct.quantity : 1;
     }
     return 1;
