@@ -4,7 +4,6 @@ import 'package:dr_app/navigation/navigator_container.dart';
 import 'package:dr_app/navigation/router.dart';
 import 'package:dr_app/navigation/tab_data.dart';
 import 'package:dr_app/navigation/tabs.dart';
-import 'package:dr_app/screens/cart_screen.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -21,6 +20,9 @@ class _RootContainerState extends State<RootContainer>
   List<Key> _destinationKeys;
   List<AnimationController> _faders;
   AnimationController _hide;
+
+  bool hideFloatingActionButton = false;
+  bool hideBottomBar = false;
   int _currentIndex = 0;
   final _router = AppRouter();
 
@@ -30,9 +32,15 @@ class _RootContainerState extends State<RootContainer>
         final UserScrollNotification userScroll = notification;
         switch (userScroll.direction) {
           case ScrollDirection.forward:
+            setState(() {
+              hideFloatingActionButton = false;
+            });
             _hide.forward();
             break;
           case ScrollDirection.reverse:
+            setState(() {
+              hideFloatingActionButton = true;
+            });
             _hide.reverse();
             break;
           case ScrollDirection.idle:
@@ -115,20 +123,12 @@ class _RootContainerState extends State<RootContainer>
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Visibility(
-          visible: true,
+        floatingActionButton: AnimatedOpacity(
+          opacity: hideFloatingActionButton ? 0.0 : 1.0,
+          duration: Duration(milliseconds: 120),
           child: FloatingActionButton(
             onPressed: () {
-              // TODO: Enhance navigation
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    fullscreenDialog: true,
-                    builder: (context) => CartScreen(
-                          coverImgSrc:
-                              'https://picsum.photos/seed/picsum/200/300',
-                        )),
-              );
+              _router.navigateToCart(context);
             },
             tooltip: 'Tab',
             child: Icon(
