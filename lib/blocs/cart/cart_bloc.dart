@@ -47,6 +47,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       case AddToCartRequested:
         yield* _mapAddToCartRequestedToState(event);
         break;
+      case CartRequested:
+        yield* _mapCartRequestedToState(event);
+        break;
+      case RemoveCartItemRequested:
+        yield* _mapRemoveCartItemRequestedToState(event);
+        break;
     }
   }
 
@@ -76,6 +82,53 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       // Success
       final cart = await cartRepository.addCartItem(
           productId: event.productId, quantity: event.quantity);
+      yield initializedState.copyWith(
+        status: ContentStateStatus.loadSuccess,
+        cart: cart,
+      );
+    } catch (error) {
+      // Error
+      yield initializedState.copyWith(
+        status: ContentStateStatus.loadFailure,
+      );
+    }
+  }
+
+  Stream<CartState> _mapCartRequestedToState(
+    CartRequested event,
+  ) async* {
+    final initializedState = await _initCartIfNeeded(state);
+    // Loading
+    yield initializedState.copyWith(
+      status: ContentStateStatus.loadInProgress,
+    );
+    try {
+      // Success
+      final cart = await cartRepository.fetchCart();
+      yield initializedState.copyWith(
+        status: ContentStateStatus.loadSuccess,
+        cart: cart,
+      );
+    } catch (error) {
+      // Error
+      yield initializedState.copyWith(
+        status: ContentStateStatus.loadFailure,
+      );
+    }
+  }
+
+  Stream<CartState> _mapRemoveCartItemRequestedToState(
+    RemoveCartItemRequested event,
+  ) async* {
+    final initializedState = await _initCartIfNeeded(state);
+    // Loading
+    yield initializedState.copyWith(
+      status: ContentStateStatus.loadInProgress,
+    );
+    try {
+      // Success
+      await cartRepository.removeCartItem(productId: event.productId);
+      final cart = await cartRepository.fetchCart();
       yield initializedState.copyWith(
         status: ContentStateStatus.loadSuccess,
         cart: cart,
