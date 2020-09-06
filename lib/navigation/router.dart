@@ -6,6 +6,7 @@ import 'package:dr_app/data/repositories/cuisine_repository.dart';
 import 'package:dr_app/data/repositories/outlet_respository.dart';
 import 'package:dr_app/navigation/root_container.dart';
 import 'package:dr_app/navigation/tab_data.dart';
+import 'package:dr_app/screens/cart_screen.dart';
 import 'package:dr_app/screens/explore_screen.dart';
 import 'package:dr_app/screens/home_screen.dart';
 import 'package:dr_app/screens/login_screen.dart';
@@ -78,6 +79,14 @@ class AppRouter {
           ),
         ],
       ),
+      CartScreen.id: _ScreenSettings(
+        builder: (_) => CartScreen(),
+        providers: [
+          BlocProvider<CartBloc>(
+            create: (_) => _blocs[CartBloc.id],
+          ),
+        ],
+      ),
       LoginScreen.id: _ScreenSettings(builder: (_) => LoginScreen())
     };
   }
@@ -103,6 +112,18 @@ class AppRouter {
           context,
           MaterialPageRoute(builder: (context) => RootContainer()),
           (_) => false);
+
+  void navigateToCart(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          fullscreenDialog: true,
+          builder: (context) => BlocProvider<CartBloc>(
+                create: (_) => _blocs[CartBloc.id],
+                child: CartScreen(),
+              )),
+    );
+  }
 }
 
 typedef ArgumentBuilder = Widget Function(Object arguments);
