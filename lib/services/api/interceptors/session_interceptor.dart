@@ -7,7 +7,11 @@ class SessionInterceptor implements InterceptorContract {
   @override
   Future<RequestData> interceptRequest({RequestData data}) async {
     try {
-      data.headers[SessionManager.sessionKey] = await _sessionManager.sessionId;
+      final sessionId = await _sessionManager.sessionId;
+      if (sessionId != null) {
+        data.headers[SessionManager.sessionKey] =
+            await _sessionManager.sessionId;
+      }
     } catch (e) {
       print(e);
     }
