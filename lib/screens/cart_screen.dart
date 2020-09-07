@@ -55,8 +55,13 @@ class _CartScreenState extends State<CartScreen> {
   void initState() {
     super.initState();
     segmentedControlGroupValue = 0;
-    cartBloc = BlocProvider.of<CartBloc>(context)..add(CartRequested());
-    items = cartBloc.state.cart.items;
+
+    cartBloc = BlocProvider.of<CartBloc>(context);
+
+    if (cartBloc.state.cart != null) {
+      cartBloc.add(CartRequested());
+      items = cartBloc.state.cart.items;
+    }
   }
 
   void onBackButtonPressed() {
@@ -110,6 +115,8 @@ class _CartScreenState extends State<CartScreen> {
               builder: (context, state) {
                 final cart = state.cart;
 
+                if (cart == null) return Container();
+
                 final totalValue = cart.subtotal ?? 0;
 
                 return LUBottomSliver(
@@ -157,63 +164,72 @@ class _CartScreenState extends State<CartScreen> {
 
   Widget getItemList() => BlocBuilder<CartBloc, CartState>(
         buildWhen: (previous, current) => previous.status != current.status,
-        builder: (_, state) => LULoadableContent(
-            height: 400,
-            stateStatus: state.status,
-            contentBuilder: () {
-              final items = state.cart.items;
+        builder: (_, state) {
+          if (state.cart == null) {
+            return LUEmptyContentPlaceholder(
+              height: 400,
+              message: 'Please check-in a restaurant first',
+            );
+          }
 
-              if (state.status == ContentStateStatus.loadSuccess &&
-                  items.isEmpty) {
-                return LUEmptyContentPlaceholder(
-                  height: 400,
-                  message: 'Your tab is empty',
-                );
-              }
+          return LULoadableContent(
+              height: 400,
+              stateStatus: state.status,
+              contentBuilder: () {
+                final items = state.cart.items;
 
-              return LUList(
-                padding: EdgeInsets.only(top: 24, bottom: 56),
-                nested: true,
-                space: 10,
-                items: List.generate(
-                  items.length,
-                  (index) {
-                    final item = items[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Expanded(
-                            child: LUProductCard(
-                              margin: (segmentedControlGroupValue == 0)
-                                  ? EdgeInsets.only(right: 8.0)
-                                  : EdgeInsets.zero,
-                              shrink: segmentedControlGroupValue == 0,
-                              showStatus: segmentedControlGroupValue != 0,
-                              imageSrc: item?.images?.first?.source ?? '',
-                              title: item.title,
-                              description: item.description,
-                              priceTag:
-                                  Formatter.convertToMoney(item.unitPrice),
-                              preparationTime: item.preparationTime,
-                              quantity: item.quantity,
+                if (state.status == ContentStateStatus.loadSuccess &&
+                    items.isEmpty) {
+                  return LUEmptyContentPlaceholder(
+                    height: 400,
+                    message: 'Your tab is empty',
+                  );
+                }
+
+                return LUList(
+                  padding: EdgeInsets.only(top: 24, bottom: 56),
+                  nested: true,
+                  space: 10,
+                  items: List.generate(
+                    items.length,
+                    (index) {
+                      final item = items[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Expanded(
+                              child: LUProductCard(
+                                margin: (segmentedControlGroupValue == 0)
+                                    ? EdgeInsets.only(right: 8.0)
+                                    : EdgeInsets.zero,
+                                shrink: segmentedControlGroupValue == 0,
+                                showStatus: segmentedControlGroupValue != 0,
+                                imageSrc: item?.images?.first?.source ?? '',
+                                title: item.title,
+                                description: item.description,
+                                priceTag:
+                                    Formatter.convertToMoney(item.unitPrice),
+                                preparationTime: item.preparationTime,
+                                quantity: item.quantity,
+                              ),
                             ),
-                          ),
-                          if (segmentedControlGroupValue == 0)
-                            LUCounter(
-                                initialValue: item.quantity,
-                                minValue: 0,
-                                vertical: true,
-                                onUpdate: (quantity) =>
-                                    onEditCartItem(item.id, quantity)),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              );
-            }),
+                            if (segmentedControlGroupValue == 0)
+                              LUCounter(
+                                  initialValue: item.quantity,
+                                  minValue: 0,
+                                  vertical: true,
+                                  onUpdate: (quantity) =>
+                                      onEditCartItem(item.id, quantity)),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                );
+              });
+        },
       );
 
   void activateBottomSheet(BuildContext context) {
