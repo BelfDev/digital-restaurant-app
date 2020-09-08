@@ -33,7 +33,7 @@ class _ProductScreenState extends State<ProductScreen> {
   static const _addToBasketActionTitle = 'add to tab';
 
   final GlobalKey<State<ProductScreen>> _keyLoader =
-      new GlobalKey<State<ProductScreen>>();
+      GlobalKey<State<ProductScreen>>();
 
   // ignore: close_sinks
   CartBloc cartBloc;

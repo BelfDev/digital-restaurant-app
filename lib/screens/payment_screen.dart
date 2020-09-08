@@ -1,4 +1,7 @@
 import 'package:credit_card_slider/credit_card_slider.dart';
+import 'package:dr_app/blocs/blocs.dart';
+import 'package:dr_app/blocs/checkout/checkout_bloc.dart';
+import 'package:dr_app/blocs/content_state_status.dart';
 import 'package:dr_app/components/bottom_sliver.dart';
 import 'package:dr_app/components/section.dart';
 import 'package:dr_app/components/tip_toolbar.dart';
@@ -6,7 +9,9 @@ import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/tip.dart';
+import 'package:dr_app/utils/dialogs.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// The Payment screen is the last step of the check-out flow.
 /// Here the user is able to select which card he/she wants to
@@ -19,12 +24,27 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
+  static const _CITY_REGION = 'Glasgow';
+  final GlobalKey<State<PaymentScreen>> _keyLoader =
+      GlobalKey<State<PaymentScreen>>();
+
+  HomeBloc homeBloc;
+  CheckOutBloc checkOutBloc;
+
   double tipIncluded;
+
+  void onPayPressed() {
+    final order = checkOutBloc.state.order;
+    this.checkOutBloc.add(MakePaymentRequested(order.id, 1));
+    Dialogs.showLoadingDialog(context, _keyLoader);
+  }
 
   @override
   void initState() {
     super.initState();
     tipIncluded = 0.0;
+    checkOutBloc = BlocProvider.of<CheckOutBloc>(context);
+    homeBloc = BlocProvider.of<HomeBloc>(context);
   }
 
   @override
@@ -80,10 +100,23 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: LUBottomSliver(
-              buttonTitle: 'pay',
-              tip: tipIncluded,
-              onButtonPressed: () => Navigator.of(context).pop(),
+            child: BlocListener<CheckOutBloc, CheckOutState>(
+              listener: (context, state) {
+                if (state.status == ContentStateStatus.loadSuccess) {
+                  homeBloc
+                    ..add(CheckOutRequested())
+                    ..add(FeaturedOutletsRequested(city: _CITY_REGION))
+                    ..add(CuisinesRequested())
+                    ..add(NearbyOutletsRequested(city: _CITY_REGION));
+
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                }
+              },
+              child: LUBottomSliver(
+                buttonTitle: 'pay',
+                tip: tipIncluded,
+                onButtonPressed: onPayPressed,
+              ),
             ),
           ),
         ],

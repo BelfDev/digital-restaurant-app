@@ -396,20 +396,16 @@ class _CartScreenState extends State<CartScreen> {
                 title: 'Pay with Pay',
                 uppercase: false,
                 color: Colors.black,
-                onPressed: () {},
+                // onPressed: () {},
               ),
               LUSolidButton(
-                margin: EdgeInsets.symmetric(vertical: 16.0),
-                title: 'Pay with credit card',
-                uppercase: false,
-                color: LUTheme.of(context).primaryColor,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PaymentScreen()),
-                  );
-                },
-              ),
+                  margin: EdgeInsets.symmetric(vertical: 16.0),
+                  title: 'Pay with credit card',
+                  uppercase: false,
+                  color: LUTheme.of(context).primaryColor,
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(PaymentScreen.id);
+                  }),
             ],
           );
         });

@@ -11,7 +11,6 @@ import 'package:dr_app/screens/more_screen.dart';
 import 'package:dr_app/screens/onboarding_screen.dart';
 import 'package:dr_app/screens/outlet_detail_screen.dart';
 import 'package:dr_app/screens/password_recovery_screen.dart';
-import 'package:dr_app/screens/product_screen.dart';
 import 'package:dr_app/screens/profile_screen.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
 import 'package:dr_app/screens/signup_screen.dart';
@@ -27,7 +26,7 @@ final Map<String, WidgetBuilder> routes = {
   ScannerScreen.id: (context) => ScannerScreen(),
   OutletDetailScreen.id: (context) => OutletDetailScreen(),
   CuisineScreen.id: (context) => CuisineScreen(),
-  ProductScreen.id: (context) => ProductScreen(),
+  // ProductScreen.id: (context) => ProductScreen(),
   // OutletScreen.id: (context) => OutletScreen(),
   WalletScreen.id: (context) => WalletScreen(),
   FavoritesScreen.id: (context) => FavoritesScreen(),

@@ -11,6 +11,12 @@ import 'package:flutter/rendering.dart';
 /// This class represents the application UI shell. It initiates the [BottomNavigationBar]
 /// with a set of [BottomNavigationBarItem] and manages the navigation between tabs.
 class RootContainer extends StatefulWidget {
+  final AppRouter router;
+
+  const RootContainer({Key key, @required this.router})
+      : assert(router != null),
+        super(key: key);
+
   @override
   _RootContainerState createState() => _RootContainerState();
 }
@@ -24,7 +30,6 @@ class _RootContainerState extends State<RootContainer>
   bool hideFloatingActionButton = false;
   bool hideBottomBar = false;
   int _currentIndex = 0;
-  final _router = AppRouter();
 
   bool _handleScrollNotification(ScrollNotification notification) {
     if (notification.depth == 0) {
@@ -88,7 +93,7 @@ class _RootContainerState extends State<RootContainer>
               child: KeyedSubtree(
                 key: _destinationKeys[tabData.index],
                 child: NavigatorContainer(
-                  router: _router,
+                  router: widget.router,
                   tabData: tabData,
                   onNavigation: () {
                     _hide.forward();
@@ -128,7 +133,7 @@ class _RootContainerState extends State<RootContainer>
           duration: Duration(milliseconds: 120),
           child: FloatingActionButton(
             onPressed: () {
-              _router.navigateToCart(context);
+              widget.router.navigateToCart(context);
             },
             tooltip: 'Tab',
             child: Icon(

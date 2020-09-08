@@ -19,6 +19,7 @@ import 'package:dr_app/screens/outlet_screen.dart';
 import 'package:dr_app/screens/product_screen.dart';
 import 'package:dr_app/screens/profile_screen.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
+import 'package:dr_app/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -100,6 +101,15 @@ class AppRouter {
           ),
         ],
       ),
+      PaymentScreen.id:
+          _ScreenSettings(builder: (_) => PaymentScreen(), providers: [
+        BlocProvider<CheckOutBloc>(
+          create: (_) => _blocs[CheckOutBloc.id],
+        ),
+        BlocProvider<HomeBloc>(
+          create: (_) => _blocs[HomeBloc.id],
+        )
+      ]),
       LoginScreen.id: _ScreenSettings(builder: (_) => LoginScreen())
     };
   }
