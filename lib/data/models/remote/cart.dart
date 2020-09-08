@@ -11,6 +11,7 @@ enum CartStatus {
   ORDERED
 }
 
+/// A representation of the Cart entity.
 @JsonSerializable()
 class Cart extends Equatable {
   final int id;
