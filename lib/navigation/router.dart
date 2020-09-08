@@ -1,9 +1,12 @@
 import 'package:dr_app/blocs/blocs.dart';
 import 'package:dr_app/blocs/cart/cart_bloc.dart';
+import 'package:dr_app/blocs/checkout/checkout_bloc.dart';
 import 'package:dr_app/blocs/outlet/outlet_bloc.dart';
 import 'package:dr_app/data/repositories/cart_repository.dart';
 import 'package:dr_app/data/repositories/cuisine_repository.dart';
+import 'package:dr_app/data/repositories/order_repository.dart';
 import 'package:dr_app/data/repositories/outlet_respository.dart';
+import 'package:dr_app/data/repositories/payment_repository.dart';
 import 'package:dr_app/navigation/root_container.dart';
 import 'package:dr_app/navigation/tab_data.dart';
 import 'package:dr_app/screens/cart_screen.dart';
@@ -30,6 +33,8 @@ class AppRouter {
     final cuisineRepository = CuisineRepository();
     final outletRepository = OutletRepository();
     final cartRepository = CartRepository();
+    final orderRepository = OrderRepository();
+    final paymentRepository = PaymentRepository();
 
     // ignore: close_sinks
     final homeBloc = HomeBloc(
@@ -46,6 +51,9 @@ class AppRouter {
       HomeBloc.id: homeBloc,
       CartBloc.id: cartBloc,
       OutletBloc.id: OutletBloc(outletRepository: outletRepository),
+      CheckOutBloc.id: CheckOutBloc(
+          orderRepository: orderRepository,
+          paymentRepository: paymentRepository),
     };
 
     // Register routes
@@ -118,8 +126,15 @@ class AppRouter {
       context,
       MaterialPageRoute(
           fullscreenDialog: true,
-          builder: (context) => BlocProvider<CartBloc>(
-                create: (_) => _blocs[CartBloc.id],
+          builder: (context) => MultiBlocProvider(
+                providers: [
+                  BlocProvider<CartBloc>(
+                    create: (_) => _blocs[CartBloc.id],
+                  ),
+                  BlocProvider<CheckOutBloc>(
+                    create: (_) => _blocs[CheckOutBloc.id],
+                  )
+                ],
                 child: CartScreen(),
               )),
     );
