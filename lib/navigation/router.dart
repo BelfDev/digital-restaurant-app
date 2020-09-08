@@ -43,17 +43,22 @@ class AppRouter {
     );
 
     // ignore: close_sinks
-    final cartBloc =
-        CartBloc(cartRepository: cartRepository, homeBloc: homeBloc);
+    final checkOutBloc = CheckOutBloc(
+      orderRepository: orderRepository,
+      paymentRepository: paymentRepository,
+    );
+    // ignore: close_sinks
+    final cartBloc = CartBloc(
+        cartRepository: cartRepository,
+        homeBloc: homeBloc,
+        checkOutBloc: checkOutBloc);
 
     // Register blocs
     this._blocs = {
       HomeBloc.id: homeBloc,
       CartBloc.id: cartBloc,
       OutletBloc.id: OutletBloc(outletRepository: outletRepository),
-      CheckOutBloc.id: CheckOutBloc(
-          orderRepository: orderRepository,
-          paymentRepository: paymentRepository),
+      CheckOutBloc.id: checkOutBloc,
     };
 
     // Register routes

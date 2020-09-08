@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dr_app/blocs/blocs.dart';
+import 'package:dr_app/blocs/checkout/checkout_bloc.dart';
 import 'package:dr_app/blocs/content_state_status.dart';
 import 'package:dr_app/data/models/models.dart';
 import 'package:dr_app/data/repositories/cart_repository.dart';
@@ -16,11 +17,18 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
   final HomeBloc homeBloc;
   final CartRepository cartRepository;
+  final CheckOutBloc checkOutBloc;
+
+  StreamSubscription _homeModeSubscription;
+  StreamSubscription _checkOutSubscription;
 
   CartBloc({
     @required this.homeBloc,
     @required this.cartRepository,
-  })  : assert(cartRepository != null),
+    @required this.checkOutBloc,
+  })  : assert(homeBloc != null),
+        assert(cartRepository != null),
+        assert(checkOutBloc != null),
         super(CartState.initial()) {
     _homeModeSubscription = homeBloc.listenHomeMode((event) {
       if (event.mode == HomeMode.checkedIn) {
@@ -29,9 +37,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         add(ClearCartRequested());
       }
     });
-  }
 
-  StreamSubscription _homeModeSubscription;
+    _checkOutSubscription = checkOutBloc.listen((checkOutState) {
+      final order = checkOutState.order;
+      if (checkOutState.status == ContentStateStatus.loadSuccess &&
+          order.carts.contains(this.state.cart)) {
+        final outletId = this.state.outletId;
+        this.add(NewCartRequested(outletId));
+      }
+    });
+  }
 
   @override
   Stream<CartState> mapEventToState(
@@ -59,6 +74,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   Stream<CartState> _mapNewCartRequestedToState(
     NewCartRequested event,
   ) async* {
+    await cartRepository.clearCart();
     final cart = await cartRepository.createCart(outletId: event.outletId);
     yield state.copyWith(cart: cart, outletId: event.outletId);
   }
@@ -154,6 +170,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   // TODO: Evaluate best moment to cancel subscriptions
   @override
   Future<void> close() {
+    // _checkOutSubscription?.cancel();
     // _homeModeSubscription?.cancel();
     // return super.close();
   }

@@ -9,6 +9,9 @@ class CheckOutState extends Equatable {
     @required this.order,
   }) : assert(status != null);
 
+  List<Product> get items =>
+      order?.carts?.map((cart) => cart.items)?.expand((list) => list)?.toList();
+
   factory CheckOutState.initial(Order order) => CheckOutState(
         status: ContentStateStatus.initial,
         order: order,

@@ -26,5 +26,5 @@ class Cart extends Equatable {
   Map<String, dynamic> toJson() => _$CartToJson(this);
 
   @override
-  List<Object> get props => [id, subtotal, status];
+  List<Object> get props => [id];
 }

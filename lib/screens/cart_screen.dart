@@ -1,4 +1,5 @@
 import 'package:dr_app/blocs/blocs.dart';
+import 'package:dr_app/blocs/checkout/checkout_bloc.dart';
 import 'package:dr_app/blocs/content_state_status.dart';
 import 'package:dr_app/components/bottom_sheet_container.dart';
 import 'package:dr_app/components/bottom_sliver.dart';
@@ -46,10 +47,15 @@ class _CartScreenState extends State<CartScreen> {
 
   // ignore: close_sinks
   CartBloc cartBloc;
+  CheckOutBloc checkoutBloc;
 
   List<Product> items;
 
   int segmentedControlGroupValue = 0;
+
+  void onOrderPressed(Cart cart) {
+    checkoutBloc.add(AddCartToOrderRequested(cart.id));
+  }
 
   @override
   void initState() {
@@ -57,6 +63,7 @@ class _CartScreenState extends State<CartScreen> {
     segmentedControlGroupValue = 0;
 
     cartBloc = BlocProvider.of<CartBloc>(context);
+    checkoutBloc = BlocProvider.of<CheckOutBloc>(context);
 
     if (cartBloc.state.cart != null) {
       cartBloc.add(CartRequested());
@@ -94,14 +101,24 @@ class _CartScreenState extends State<CartScreen> {
                           'https://barn2.co.uk/wp-content/uploads/2019/10/574657_FeaturedImage_ShoppingCart_Op2_103119-1.jpg',
                       icon: Icons.close,
                       onTopButtonPressed: onBackButtonPressed),
-                  buildCartContent(),
+                  buildContent(),
                 ],
               )
             ],
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: BlocConsumer<CartBloc, CartState>(
+          buildFooter()
+        ],
+      ),
+    );
+  }
+
+  Widget buildFooter() {
+    final isActiveTab = segmentedControlGroupValue == 0;
+
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: isActiveTab
+          ? BlocConsumer<CartBloc, CartState>(
               buildWhen: (previous, current) =>
                   previous.status != current.status,
               listener: (context, state) {
@@ -115,36 +132,58 @@ class _CartScreenState extends State<CartScreen> {
               builder: (context, state) {
                 final cart = state.cart;
 
-                if (cart == null) return Container();
+                if (cart?.items == null || cart.items.isEmpty)
+                  return Container();
 
                 final totalValue = cart.subtotal ?? 0;
 
-                return LUBottomSliver(
-                  buttonTitle:
-                      segmentedControlGroupValue == 0 ? 'order' : 'check-out',
-                  subtotal: totalValue,
-                  buttonType: segmentedControlGroupValue == 0
-                      ? BottomSliverButton.SOLID
-                      : BottomSliverButton.SLIDER,
-                  onButtonPressed: () {
-                    if (segmentedControlGroupValue == 0) {
-                      setState(() {
+                return buildBottomSliver(
+                  totalValue,
+                  () {
+                    setState(
+                      () {
                         segmentedControlGroupValue = 1;
-                      });
-                    } else {
-                      activateBottomSheet(context);
-                    }
+                        onOrderPressed(cart);
+                      },
+                    );
                   },
                 );
               },
+            )
+          : BlocBuilder<CheckOutBloc, CheckOutState>(
+              buildWhen: (previous, current) =>
+                  previous.status != current.status,
+              builder: (context, state) {
+                final order = state.order;
+
+                if (order == null) return Container();
+
+                final totalValue = order?.subtotal ?? 0;
+
+                return buildBottomSliver(totalValue, () {
+                  setState(
+                    () {
+                      activateBottomSheet(context);
+                    },
+                  );
+                });
+              },
             ),
-          )
-        ],
-      ),
     );
   }
 
-  Widget buildCartContent() {
+  Widget buildBottomSliver(double totalValue, VoidCallback onButtonPressed) {
+    return LUBottomSliver(
+      buttonTitle: segmentedControlGroupValue == 0 ? 'order' : 'check-out',
+      subtotal: totalValue,
+      buttonType: segmentedControlGroupValue == 0
+          ? BottomSliverButton.SOLID
+          : BottomSliverButton.SLIDER,
+      onButtonPressed: onButtonPressed,
+    );
+  }
+
+  Widget buildContent() {
     return RoundContainer(
       child: Column(
         children: <Widget>[
@@ -156,8 +195,118 @@ class _CartScreenState extends State<CartScreen> {
                   segmentedControlGroupValue = i;
                 });
               }),
-          getItemList()
+          segmentedControlGroupValue == 0
+              ? getActiveTabList()
+              : getOrderSummaryList(),
         ],
+      ),
+    );
+  }
+
+  Widget getActiveTabList() {
+    return BlocBuilder<CartBloc, CartState>(
+      buildWhen: (previous, current) => previous.status != current.status,
+      builder: (_, state) {
+        if (state.cart == null) {
+          return LUEmptyContentPlaceholder(
+            height: 400,
+            message: 'Please check-in a restaurant first',
+          );
+        }
+
+        return LULoadableContent(
+            height: 400,
+            stateStatus: state.status,
+            contentBuilder: () {
+              final items = state.cart.items;
+
+              if (state.status == ContentStateStatus.loadSuccess &&
+                  (items == null || items.isEmpty)) {
+                return LUEmptyContentPlaceholder(
+                  height: 400,
+                  message: 'Your tab is empty',
+                );
+              }
+
+              return getCartItemList(items);
+            });
+      },
+    );
+  }
+
+  Widget getOrderSummaryList() {
+    return BlocConsumer<CheckOutBloc, CheckOutState>(
+      listener: (BuildContext context, CheckOutState state) {},
+      buildWhen: (previous, current) => previous.status != current.status,
+      builder: (BuildContext context, CheckOutState state) {
+        final orderCartItems = state.items;
+
+        if (state.status != ContentStateStatus.loadInProgress &&
+            orderCartItems == null) {
+          return LUEmptyContentPlaceholder(
+            height: 400,
+            message: 'Place orders first',
+          );
+        }
+
+        return LULoadableContent(
+            height: 400,
+            stateStatus: state.status,
+            contentBuilder: () {
+              if (state.status == ContentStateStatus.loadSuccess &&
+                  orderCartItems.isEmpty) {
+                return LUEmptyContentPlaceholder(
+                  height: 400,
+                  message: 'Your tab is empty',
+                );
+              }
+
+              return getCartItemList(orderCartItems);
+            });
+      },
+    );
+  }
+
+  Widget getCartItemList(List<Product> items) {
+    return LUList(
+      padding: EdgeInsets.only(top: 24, bottom: 200),
+      nested: true,
+      space: 10,
+      items: List.generate(
+        items.length,
+        (index) {
+          final item = items[index];
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Expanded(
+                  child: LUProductCard(
+                    margin: (segmentedControlGroupValue == 0)
+                        ? EdgeInsets.only(right: 8.0)
+                        : EdgeInsets.zero,
+                    shrink: segmentedControlGroupValue == 0,
+                    showStatus: segmentedControlGroupValue != 0,
+                    imageSrc: item?.images?.first?.source ?? '',
+                    title: item.title,
+                    description: item.description,
+                    priceTag: Formatter.convertToMoney(item.unitPrice),
+                    preparationTime: item.preparationTime,
+                    quantity: item.quantity,
+                  ),
+                ),
+                if (segmentedControlGroupValue == 0)
+                  LUCounter(
+                      initialValue: item.quantity,
+                      minValue: 0,
+                      vertical: true,
+                      onUpdate: (quantity) =>
+                          onEditCartItem(item.id, quantity)),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

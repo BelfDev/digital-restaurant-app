@@ -88,4 +88,9 @@ class CheckOutBloc extends Bloc<CheckOutEvent, CheckOutState> {
       yield CheckOutState.error(state.order);
     }
   }
+
+  @override
+  Future<void> close() {
+    // return super.close();
+  }
 }
