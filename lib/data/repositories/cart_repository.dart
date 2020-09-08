@@ -36,7 +36,7 @@ class CartRepository {
     return false;
   }
 
-  /// Creates a cart associated with thee given [outletId]
+  /// Creates a cart associated with the given [outletId]
   Future<Cart> createCart({@required int outletId}) async {
     final body = await _cartApiClient.createCart(outletId: outletId);
     final result = body.results.length > 0 ? body.results[0] : null;
