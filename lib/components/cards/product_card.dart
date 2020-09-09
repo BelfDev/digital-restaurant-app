@@ -1,10 +1,11 @@
 import 'package:dr_app/components/cards/base_card.dart';
-import 'package:dr_app/components/status_label.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
+
+import '../status_label.dart';
 
 class LUProductCard extends StatelessWidget {
   const LUProductCard(
