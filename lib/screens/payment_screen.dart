@@ -99,26 +99,29 @@ class _PaymentScreenState extends State<PaymentScreen> {
             ],
           ),
           Align(
-            alignment: Alignment.bottomCenter,
-            child: BlocListener<CheckOutBloc, CheckOutState>(
-              listener: (context, state) {
-                if (state.status == ContentStateStatus.loadSuccess) {
-                  homeBloc
-                    ..add(CheckOutRequested())
-                    ..add(FeaturedOutletsRequested(city: _CITY_REGION))
-                    ..add(CuisinesRequested())
-                    ..add(NearbyOutletsRequested(city: _CITY_REGION));
+              alignment: Alignment.bottomCenter,
+              child: BlocConsumer<CheckOutBloc, CheckOutState>(
+                listener: (context, state) {
+                  if (state.status == ContentStateStatus.loadSuccess) {
+                    homeBloc
+                      ..add(CheckOutRequested())
+                      ..add(FeaturedOutletsRequested(city: _CITY_REGION))
+                      ..add(CuisinesRequested())
+                      ..add(NearbyOutletsRequested(city: _CITY_REGION));
 
-                  Navigator.of(context).popUntil((route) => route.isFirst);
-                }
-              },
-              child: LUBottomSliver(
-                buttonTitle: 'pay',
-                tip: tipIncluded,
-                onButtonPressed: onPayPressed,
-              ),
-            ),
-          ),
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+                  }
+                },
+                builder: (context, state) {
+                  final order = state.order;
+                  return LUBottomSliver(
+                    buttonTitle: 'pay',
+                    tip: tipIncluded,
+                    subtotal: order.subtotal ?? 0.0,
+                    onButtonPressed: onPayPressed,
+                  );
+                },
+              )),
         ],
       ),
     );

@@ -26,53 +26,55 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: LUTheme.of(context).backgroundColor,
-      child: Stack(
-        children: <Widget>[
-          _LoginBackgroundShape(
-              shapeBorderRadius: shapeBorderRadius,
-              context: context,
-              headerHeightFactor: headerHeightFactor),
-          buildLoginBody(),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: _LoginBackgroundShape(
-                invert: true,
+    return Scaffold(
+      body: Container(
+        color: LUTheme.of(context).backgroundColor,
+        child: Stack(
+          children: <Widget>[
+            _LoginBackgroundShape(
                 shapeBorderRadius: shapeBorderRadius,
                 context: context,
-                headerHeightFactor: footerHeightFactor),
-          ),
-          SafeArea(
-              child: LUTopBar(
-            onNavigationButtonPressed: () => Navigator.of(context).pop(),
-          )),
-          SafeArea(
-            child: Align(
+                headerHeightFactor: headerHeightFactor),
+            buildLoginBody(),
+            Align(
               alignment: Alignment.bottomCenter,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "Don't have an account?",
-                    style: Styles.loginFooterText,
-                  ),
-                  FlatButton(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 0.0, horizontal: 4.0),
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(SignUpScreen.id),
-                    child: Text(
-                      'Sign Up',
-                      style: Styles.loginFooterText
-                          .copyWith(fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ],
-              ),
+              child: _LoginBackgroundShape(
+                  invert: true,
+                  shapeBorderRadius: shapeBorderRadius,
+                  context: context,
+                  headerHeightFactor: footerHeightFactor),
             ),
-          )
-        ],
+            SafeArea(
+                child: LUTopBar(
+              onNavigationButtonPressed: () => Navigator.of(context).pop(),
+            )),
+            SafeArea(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "Don't have an account?",
+                      style: Styles.loginFooterText,
+                    ),
+                    FlatButton(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0.0, horizontal: 4.0),
+                      onPressed: () =>
+                          Navigator.of(context).pushNamed(SignUpScreen.id),
+                      child: Text(
+                        'Sign Up',
+                        style: Styles.loginFooterText
+                            .copyWith(fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -117,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: <Widget>[
                   LUSolidButton(
                     title: 'Login',
-                    onPressed: () => Navigator.of(context).pop(),
+                    // onPressed: () => Navigator.of(context).pop(),
                   ),
                   FlatButton(
                     onPressed: () => Navigator.of(context)

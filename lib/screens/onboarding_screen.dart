@@ -15,6 +15,12 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 class OnboardingScreen extends StatefulWidget {
   static const id = "onboarding_screen";
 
+  final AppRouter router;
+
+  const OnboardingScreen({Key key, @required this.router})
+      : assert(router != null),
+        super(key: key);
+
   @override
   _OnboardingScreenState createState() => _OnboardingScreenState();
 }
@@ -27,7 +33,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         body: Column(
           children: <Widget>[
             Expanded(flex: 3, child: buildSlider()),
-            Expanded(flex: 1, child: buildButtons())
+            Expanded(flex: 1, child: buildButtons(context))
           ],
         ));
   }
@@ -79,7 +85,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  Widget buildButtons() => SafeArea(
+  Widget buildButtons(BuildContext context) => SafeArea(
         top: false,
         child: Container(
           child: Column(
@@ -95,7 +101,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
               LUOutlineButton(
                   title: "Skip",
-                  onPressed: () => AppRouter.navigateToRoot(context))
+                  onPressed: () =>
+                      AppRouter.navigateToRoot(context, widget.router))
             ],
           ),
         ),

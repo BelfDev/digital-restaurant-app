@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dr_app/blocs/app_bloc_observer.dart';
-import 'package:dr_app/navigation/root_container.dart';
 import 'package:dr_app/navigation/router.dart';
+import 'package:dr_app/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,10 +25,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: LUTheme.of(context),
       onGenerateRoute: router.onGenerateRoute,
-      home: RootContainer(
+      // home: RootContainer(
+      //   router: router,
+      // ),
+      home: OnboardingScreen(
         router: router,
       ),
-      // home: OnboardingScreen(),
     );
   }
 }

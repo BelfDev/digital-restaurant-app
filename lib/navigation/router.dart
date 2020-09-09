@@ -130,10 +130,11 @@ class AppRouter {
             : screen.builder(arguments));
   }
 
-  static void navigateToRoot(BuildContext context) =>
+  static void navigateToRoot(BuildContext context, AppRouter router) =>
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => RootContainer()),
+          MaterialPageRoute(
+              builder: (context) => RootContainer(router: router)),
           (_) => false);
 
   void navigateToCart(BuildContext context) {
