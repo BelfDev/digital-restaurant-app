@@ -59,7 +59,7 @@ class LUProductCard extends StatelessWidget {
                           height: double.infinity,
                           width: double.infinity,
                           placeholder: Images.verticalPlaceholder,
-                          image: imageSrc,
+                          image: imageSrc ?? '',
                           fit: BoxFit.cover,
                         ),
                         if (showStatus)
@@ -82,6 +82,8 @@ class LUProductCard extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       title,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                       style: LUTheme.of(context)
                           .textTheme
                           .headline5

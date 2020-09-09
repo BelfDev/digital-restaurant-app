@@ -28,7 +28,6 @@ class _RootContainerState extends State<RootContainer>
   AnimationController _hide;
 
   bool hideFloatingActionButton = false;
-  bool hideBottomBar = false;
   int _currentIndex = 0;
 
   bool _handleScrollNotification(ScrollNotification notification) {
@@ -62,7 +61,7 @@ class _RootContainerState extends State<RootContainer>
 
     _faders = tabs.map<AnimationController>((TabData destination) {
       return AnimationController(
-          vsync: this, duration: Duration(milliseconds: 200));
+          vsync: this, duration: Duration(milliseconds: 120));
     }).toList();
     _faders[_currentIndex].value = 1.0;
     _destinationKeys =
@@ -96,7 +95,7 @@ class _RootContainerState extends State<RootContainer>
                   router: widget.router,
                   tabData: tabData,
                   onNavigation: () {
-                    _hide.forward();
+                    _hide.reverse();
                   },
                 ),
               ),

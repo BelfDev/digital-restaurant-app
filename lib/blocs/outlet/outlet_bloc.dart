@@ -57,4 +57,9 @@ class OutletBloc extends Bloc<OutletEvent, OutletState> {
       yield OutletState.error();
     }
   }
+
+  @override
+  Future<void> close() {
+    // return super.close();
+  }
 }

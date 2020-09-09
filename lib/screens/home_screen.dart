@@ -174,7 +174,7 @@ class _Header extends StatelessWidget {
               color: Colors.grey.withOpacity(0.1),
               spreadRadius: 2,
               blurRadius: 12,
-              offset: Offset(0, -14), // changes position of shadow
+              offset: Offset(0, -16), // changes position of shadow
             )
           ],
         ),
@@ -197,8 +197,7 @@ class _Header extends StatelessWidget {
         Positioned.fill(
           child: FadeInImage.assetNetwork(
             placeholder: Images.verticalPlaceholder,
-            // image: outlet?.images?.first?.source ?? '',
-            image: '',
+            image: outlet?.images?.first?.source ?? '',
             fit: BoxFit.cover,
           ),
         ),
@@ -222,7 +221,15 @@ class _Header extends StatelessWidget {
               SizedBox(
                 height: 24,
               ),
-              Text(outlet.title, style: Styles.homeCheckedHeaderTitle),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  outlet.title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Styles.homeCheckedHeaderTitle,
+                ),
+              ),
               Text(outlet.cuisine.title,
                   style: Styles.homeCheckedHeaderSubtitle),
               SizedBox(
@@ -504,7 +511,7 @@ class __BodyState extends State<_Body> {
                   (cuisine) => LUCategoryCard(
                     title: cuisine.title,
                     imageSrc: cuisine.image.source,
-                    onPressed: () => onCategoryCardPressed(context, cuisine),
+                    // onPressed: () => onCategoryCardPressed(context, cuisine),
                   ),
                 )
                 .toList(),
