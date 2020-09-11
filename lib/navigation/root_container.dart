@@ -80,22 +80,22 @@ class _RootContainerState extends State<RootContainer>
                   } else {
                     // Reveal the bottom bar for root routes
                     _hide.reverse();
-                    // setState(
-                    //   () {
-                    //     hideFloatingActionButton = true;
-                    //   },
-                    // );
+                    setState(
+                      () {
+                        hideFloatingActionButton = true;
+                      },
+                    );
                   }
                 },
                 onPop: (_, previousRoute) {
                   if (previousRoute.settings.name == '/') {
                     // Reveal the bottom bar for root routes
                     _hide.forward();
-                    // setState(
-                    //   () {
-                    //     hideFloatingActionButton = false;
-                    //   },
-                    // );
+                    setState(
+                      () {
+                        hideFloatingActionButton = false;
+                      },
+                    );
                   }
                 },
               ),
