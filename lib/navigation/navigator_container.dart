@@ -4,14 +4,19 @@ import 'package:dr_app/navigation/tab_data.dart';
 import 'package:flutter/material.dart';
 
 /// A top-level composition of [Navigator] that enables
-/// dedicated nested routing for each [BottomNavigationBarItem]
+/// dedicated nested routing for each [BottomNavigationBarItem].
 class NavigatorContainer extends StatefulWidget {
-  const NavigatorContainer(
-      {Key key, this.tabData, this.onNavigation, this.router})
-      : super(key: key);
+  const NavigatorContainer({
+    Key key,
+    @required this.tabData,
+    @required this.router,
+    this.onPop,
+    @required this.onPush,
+  }) : super(key: key);
 
   final TabData tabData;
-  final VoidCallback onNavigation;
+  final NavigationCallback onPop;
+  final NavigationCallback onPush;
   final AppRouter router;
 
   @override
@@ -23,10 +28,12 @@ class _NavigatorContainerState extends State<NavigatorContainer> {
   Widget build(BuildContext context) {
     return Navigator(
       observers: <NavigatorObserver>[
-        ViewNavigatorObserver(widget.onNavigation),
+        ViewNavigatorObserver(onPush: widget.onPush, onPop: widget.onPop),
       ],
-      onGenerateRoute: (settings) =>
-          widget.router.onGenerateRoute(settings, widget.tabData),
+      onGenerateRoute: (settings) => widget.router.onGenerateRoute(
+        settings,
+        widget.tabData,
+      ),
     );
   }
 }

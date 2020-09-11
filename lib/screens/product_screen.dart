@@ -30,7 +30,7 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  static const _addToBasketActionTitle = 'add to tab';
+  static const _addToBasketActionTitle = 'add to basket';
 
   final GlobalKey<State<ProductScreen>> _keyLoader =
       GlobalKey<State<ProductScreen>>();

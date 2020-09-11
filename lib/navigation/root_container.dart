@@ -7,9 +7,12 @@ import 'package:dr_app/navigation/tabs.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
-/// This class represents the application UI shell. It initiates the [BottomNavigationBar]
-/// with a set of [BottomNavigationBarItem] and manages the navigation between tabs.
+/// This class represents the application UI shell.
+/// It initiates the [BottomNavigationBar] with a
+/// set of [BottomNavigationBarItem] and manages
+/// the navigation between tabs.
 class RootContainer extends StatefulWidget {
   final AppRouter router;
 
@@ -26,39 +29,15 @@ class _RootContainerState extends State<RootContainer>
   List<Key> _destinationKeys;
   List<AnimationController> _faders;
   AnimationController _hide;
-
-  bool hideFloatingActionButton = false;
-  int _currentIndex = 0;
-
-  bool _handleScrollNotification(ScrollNotification notification) {
-    if (notification.depth == 0) {
-      if (notification is UserScrollNotification) {
-        final UserScrollNotification userScroll = notification;
-        switch (userScroll.direction) {
-          case ScrollDirection.forward:
-            setState(() {
-              hideFloatingActionButton = false;
-            });
-            _hide.forward();
-            break;
-          case ScrollDirection.reverse:
-            setState(() {
-              hideFloatingActionButton = true;
-            });
-            _hide.reverse();
-            break;
-          case ScrollDirection.idle:
-            break;
-        }
-      }
-    }
-    return false;
-  }
+  bool hideFloatingActionButton;
+  int _currentIndex;
 
   @override
   void initState() {
     super.initState();
 
+    _currentIndex = 0;
+    hideFloatingActionButton = false;
     _faders = tabs.map<AnimationController>((TabData destination) {
       return AnimationController(
           vsync: this, duration: Duration(milliseconds: 120));
@@ -78,70 +57,86 @@ class _RootContainerState extends State<RootContainer>
 
   @override
   Widget build(BuildContext context) {
-    return NotificationListener<ScrollNotification>(
-      onNotification: _handleScrollNotification,
-      child: Scaffold(
-        backgroundColor: LUColors.smoothWhite,
-        extendBody: true,
-        body: Stack(
-          fit: StackFit.expand,
-          children: tabs.map((TabData tabData) {
-            final Widget view = FadeTransition(
-              opacity: _faders[tabData.index]
-                  .drive(CurveTween(curve: Curves.fastOutSlowIn)),
-              child: KeyedSubtree(
-                key: _destinationKeys[tabData.index],
-                child: NavigatorContainer(
-                  router: widget.router,
-                  tabData: tabData,
-                  onNavigation: () {
+    return Scaffold(
+      backgroundColor: LUColors.smoothWhite,
+      extendBody: true,
+      body: Stack(
+        fit: StackFit.expand,
+        children: tabs.map((TabData tabData) {
+          final Widget view = FadeTransition(
+            opacity: _faders[tabData.index]
+                .drive(CurveTween(curve: Curves.fastOutSlowIn)),
+            child: KeyedSubtree(
+              key: _destinationKeys[tabData.index],
+              child: NavigatorContainer(
+                router: widget.router,
+                tabData: tabData,
+                onPush: (route, _) {
+                  if (route.settings.name == '/') {
+                    // Hide the bottom bar on push
+                    _hide.forward();
+                  } else {
+                    // Reveal the bottom bar for root routes
                     _hide.reverse();
-                  },
-                ),
+                    setState(() {
+                      hideFloatingActionButton = true;
+                    });
+                  }
+                },
+                onPop: (_, previousRoute) {
+                  if (previousRoute.settings.name == '/') {
+                    // Reveal the bottom bar for root routes
+                    _hide.forward();
+                    setState(() {
+                      hideFloatingActionButton = false;
+                    });
+                  }
+                },
               ),
-            );
-            if (tabData.index == _currentIndex) {
-              _faders[tabData.index].forward();
-              return view;
-            } else {
-              _faders[tabData.index].reverse();
-              if (_faders[tabData.index].isAnimating) {
-                return IgnorePointer(child: view);
-              }
-              return Offstage(child: view);
-            }
-          }).toList(),
-        ),
-        bottomNavigationBar: SizeTransition(
-          sizeFactor: _hide,
-          axisAlignment: -1.0,
-          child: LUBottomAppBar(
-            height: 64,
-            iconSize: 28,
-            tabs: tabs,
-            onTabSelected: (int index) {
-              setState(() {
-                _currentIndex = index;
-                if (index == 2) {
-                  widget.router.navigateToAuthentication(context);
-                }
-              });
-            },
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: AnimatedOpacity(
-          opacity: hideFloatingActionButton ? 0.0 : 1.0,
-          duration: Duration(milliseconds: 120),
-          child: FloatingActionButton(
-            onPressed: () {
-              widget.router.navigateToCart(context);
-            },
-            tooltip: 'Tab',
-            child: Icon(
-              Icons.receipt,
-              color: LUTheme.of(context).primaryIconTheme.color,
             ),
+          );
+          if (tabData.index == _currentIndex) {
+            _faders[tabData.index].forward();
+            return view;
+          } else {
+            _faders[tabData.index].reverse();
+            if (_faders[tabData.index].isAnimating) {
+              return IgnorePointer(child: view);
+            }
+            return Offstage(child: view);
+          }
+        }).toList(),
+      ),
+      bottomNavigationBar: SizeTransition(
+        sizeFactor: _hide,
+        axisAlignment: -1.0,
+        child: LUBottomAppBar(
+          height: 64,
+          iconSize: 28,
+          tabs: tabs,
+          unselectedColor: Colors.grey.shade400,
+          onTabSelected: (int index) {
+            setState(() {
+              _currentIndex = index;
+              if (index == 2) {
+                widget.router.navigateToAuthentication(context);
+              }
+            });
+          },
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: AnimatedOpacity(
+        opacity: hideFloatingActionButton ? 0.0 : 1.0,
+        duration: Duration(milliseconds: 120),
+        child: FloatingActionButton(
+          onPressed: () {
+            widget.router.navigateToCart(context);
+          },
+          tooltip: 'Basket',
+          child: Icon(
+            Entypo.shopping_basket,
+            color: LUTheme.of(context).primaryIconTheme.color,
           ),
         ),
       ),
