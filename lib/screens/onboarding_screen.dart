@@ -15,6 +15,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// The OnboardingScreen contains a set of slides
 /// showcasing what the App has to offer.
+///
+/// From here, users can choose to press on a "login" button
+/// and continue with the authentication flow or press on the
+/// "skip" button to access the app's main content as a guest
 class OnboardingScreen extends StatefulWidget {
   static const id = "onboarding_screen";
 
@@ -44,17 +48,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget buildSlider() {
-    final List<Slide> slides = <Slide>[
-      Slide(
+    final List<_Slide> slides = <_Slide>[
+      _Slide(
         text: 'Find the perfect restaurant for your taste',
         imgSrc: Images.introSlide1,
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(40.0)),
       ),
-      Slide(
+      _Slide(
         text: 'Place your orders from within the app',
         imgSrc: Images.introSlide2,
       ),
-      Slide(
+      _Slide(
         text: 'Pay and leave whenever you please',
         imgSrc: Images.introSlide3,
         borderRadius: BorderRadius.only(bottomRight: Radius.circular(40.0)),
@@ -118,7 +122,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 }
 
 class IntroSlider extends StatelessWidget {
-  final List<Slide> slides;
+  final List<_Slide> slides;
 
   const IntroSlider({Key key, @required this.slides}) : super(key: key);
 
@@ -146,12 +150,12 @@ class IntroSlider extends StatelessWidget {
   }
 }
 
-class Slide extends StatelessWidget {
+class _Slide extends StatelessWidget {
   final String text;
   final String imgSrc;
   final BorderRadiusGeometry borderRadius;
 
-  const Slide({
+  const _Slide({
     Key key,
     @required this.text,
     @required this.imgSrc,
