@@ -16,8 +16,10 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 class RootContainer extends StatefulWidget {
   final AppRouter router;
 
-  const RootContainer({Key key, @required this.router})
-      : assert(router != null),
+  const RootContainer({
+    Key key,
+    @required this.router,
+  })  : assert(router != null),
         super(key: key);
 
   @override
