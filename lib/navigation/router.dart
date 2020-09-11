@@ -24,7 +24,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// The AppRouter registers routers based on their identifiers
-/// and screen widgets. This class also injects the necessary dependencies.
+/// and screen widgets. This class also injects any necessary dependencies.
 class AppRouter {
   Map<String, Bloc> _blocs;
   Map<String, _ScreenSettings> _routes;
@@ -119,6 +119,7 @@ class AppRouter {
     };
   }
 
+  /// Supplies [Route]s to [Navigator]s.
   Route onGenerateRoute(RouteSettings settings, [TabData tabData]) {
     final rootId = tabData?.rootId ?? HomeScreen.id;
     final destinationId = settings.name == '/' ? rootId : settings.name;
@@ -135,6 +136,7 @@ class AppRouter {
             : screen.builder(arguments));
   }
 
+  /// Pops all routes and sets the [RootContainer] as the root.
   static void navigateToRoot(BuildContext context, AppRouter router) =>
       Navigator.pushAndRemoveUntil(
           context,
@@ -142,6 +144,7 @@ class AppRouter {
               builder: (context) => RootContainer(router: router)),
           (_) => false);
 
+  /// Shows the [CartScreen] with a modal presentation.
   void navigateToCart(BuildContext context) {
     Navigator.push(
       context,
@@ -161,6 +164,7 @@ class AppRouter {
     );
   }
 
+  /// Shows the [LoginScreen] with a modal presentation.
   void navigateToAuthentication(BuildContext context) {
     Navigator.push(
       context,
