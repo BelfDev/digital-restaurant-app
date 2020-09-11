@@ -49,7 +49,7 @@ class LUFeaturedCard extends StatelessWidget {
             child: FadeInImage.assetNetwork(
           placeholder: Images.verticalPlaceholder,
           image: imageSrc,
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
         )),
         Positioned.fill(child: LUGradientFilter(filterColors: filterColors)),
         Positioned.fill(child: _buildCardContent(context)),
