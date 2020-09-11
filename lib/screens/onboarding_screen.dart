@@ -109,7 +109,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   onPressed: () async {
                     AppRouter.navigateToRoot(context, widget.router);
                     final prefs = await SharedPreferences.getInstance();
-                    prefs.setBool(MyApp.isFirstLaunchKey, true);
+                    prefs.setBool(AppContainer.isFirstLaunchKey, true);
                   })
             ],
           ),
