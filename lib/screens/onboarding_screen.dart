@@ -1,6 +1,8 @@
 import 'package:dr_app/components/buttons/outline_button.dart';
 import 'package:dr_app/components/buttons/solid_button.dart';
+import 'package:dr_app/components/fade_in_container.dart';
 import 'package:dr_app/configs/theme.dart';
+import 'package:dr_app/main.dart';
 import 'package:dr_app/navigation/router.dart';
 import 'package:dr_app/screens/login_screen.dart';
 import 'package:dr_app/utils/colors.dart';
@@ -9,6 +11,7 @@ import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// The OnboardingScreen contains a set of slides
 /// showcasing what the App has to offer.
@@ -30,11 +33,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: LUTheme.of(context).backgroundColor,
-        body: Column(
-          children: <Widget>[
-            Expanded(flex: 3, child: buildSlider()),
-            Expanded(flex: 1, child: buildButtons(context))
-          ],
+        body: FadeInContainer(
+          child: Column(
+            children: <Widget>[
+              Expanded(flex: 3, child: buildSlider()),
+              Expanded(flex: 1, child: buildButtons(context))
+            ],
+          ),
         ));
   }
 
@@ -101,8 +106,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
               LUOutlineButton(
                   title: "Skip",
-                  onPressed: () =>
-                      AppRouter.navigateToRoot(context, widget.router))
+                  onPressed: () async {
+                    AppRouter.navigateToRoot(context, widget.router);
+                    final prefs = await SharedPreferences.getInstance();
+                    prefs.setBool(MyApp.isFirstLaunchKey, true);
+                  })
             ],
           ),
         ),

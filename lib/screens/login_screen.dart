@@ -2,7 +2,6 @@ import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/input_field.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
-import 'package:dr_app/screens/password_recovery_screen.dart';
 import 'package:dr_app/screens/signup_screen.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
@@ -121,12 +120,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     title: 'Login',
                     // onPressed: () => Navigator.of(context).pop(),
                   ),
-                  FlatButton(
-                    onPressed: () => Navigator.of(context)
-                        .pushNamed(PasswordRecoveryScreen.id),
-                    child:
-                        Text('Forgot password?', style: Styles.loginFooterText),
-                  ),
+                  // FlatButton(
+                  //   onPressed: () => Navigator.of(context)
+                  //       .pushNamed(PasswordRecoveryScreen.id),
+                  //   child:
+                  //       Text('Forgot password?', style: Styles.loginFooterText),
+                  // ),
                 ],
               ),
             ),

@@ -110,7 +110,12 @@ class AppRouter {
           create: (_) => _blocs[HomeBloc.id],
         )
       ]),
-      LoginScreen.id: _ScreenSettings(builder: (_) => LoginScreen())
+      LoginScreen.id: _ScreenSettings(
+        builder: (_) => LoginScreen(),
+      ),
+      SignUpScreen.id: _ScreenSettings(
+        builder: (_) => SignUpScreen(),
+      )
     };
   }
 
@@ -153,6 +158,16 @@ class AppRouter {
                 ],
                 child: CartScreen(),
               )),
+    );
+  }
+
+  void navigateToAuthentication(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        fullscreenDialog: true,
+        builder: (context) => LoginScreen(),
+      ),
     );
   }
 }

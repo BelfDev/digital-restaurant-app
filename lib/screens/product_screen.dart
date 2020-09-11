@@ -82,6 +82,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   // TODO: Fix nav exception
                   Navigator.of(_keyLoader.currentContext, rootNavigator: true)
                       .pop(); //close the dialoge
+                  Navigator.of(context).pop();
                 }
               },
               child: LUSolidButton(

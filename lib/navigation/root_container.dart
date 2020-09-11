@@ -122,6 +122,9 @@ class _RootContainerState extends State<RootContainer>
             onTabSelected: (int index) {
               setState(() {
                 _currentIndex = index;
+                if (index == 2) {
+                  widget.router.navigateToAuthentication(context);
+                }
               });
             },
           ),
