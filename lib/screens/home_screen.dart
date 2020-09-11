@@ -94,6 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      bottom: false,
       child: LUScrollScaffold(
         appBar: _buildAppBar,
         header: _buildHeader,
