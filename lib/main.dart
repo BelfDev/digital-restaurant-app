@@ -1,13 +1,12 @@
 import 'package:bloc/bloc.dart';
-import 'package:dr_app/blocs/app_bloc_observer.dart';
-import 'package:dr_app/navigation/router.dart';
-import 'package:dr_app/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'blocs/app_bloc_observer.dart';
 import 'configs/theme.dart';
 import 'navigation/root_container.dart';
+import 'navigation/router.dart';
+import 'screens/screens.dart';
 
 /// The App's entry-point. Runs the [AppContainer] widget defined below.
 void main() {
