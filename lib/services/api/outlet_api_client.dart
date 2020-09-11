@@ -13,14 +13,14 @@ class OutletApiClient extends BaseApiClient {
   static const _PATH = ApiConfig.OUTLETS_RESOURCE;
   static const _FEATURED_OUTLETS_PATH = '/featured';
 
-  Future<Results<Outlet>> getOutlets([String city, String cuisine]) async {
-    Object params = _generateQueryParams(city, cuisine);
+  Future<Results<Outlet>> getOutlets({String city, String cuisine}) async {
+    Object params = _generateQueryParams(city: city, cuisine: cuisine);
     final responseBody = await getRequest(_PATH, params);
     return compute(_parseOutletResults, responseBody);
   }
 
   Future<Results<Outlet>> getFeaturedOutlets([String city]) async {
-    Object params = _generateQueryParams(city);
+    Object params = _generateQueryParams(city: city);
     final responseBody =
         await getRequest(_PATH + _FEATURED_OUTLETS_PATH, params);
     return compute(_parseOutletResults, responseBody);
@@ -44,13 +44,12 @@ class OutletApiClient extends BaseApiClient {
     return compute(_parseProductResults, responseBody);
   }
 
-  Object _generateQueryParams([String city, String cuisine]) {
-    return city != null
-        ? {
-            'city': city,
-            'cuisine': cuisine,
-          }
-        : {};
+  Object _generateQueryParams({String city, String cuisine}) {
+    Map<String, String> params = {};
+    if (city != null) params['city'] = city;
+    if (cuisine != null) params['cuisine'] = cuisine;
+
+    return params;
   }
 }
 

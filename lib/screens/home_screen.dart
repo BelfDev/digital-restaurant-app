@@ -59,21 +59,27 @@ class _HomeScreenState extends State<HomeScreen> {
       OutletScreen.id,
       arguments: outlet,
     );
-    if (result != null) {
-      final outletId = result as int;
-      requestCheckIn(outletId);
-    }
+    requestCheckIn(result);
+  }
+
+  void onCategoryCardPressed(BuildContext context, Cuisine cuisine) async {
+    final result = await Navigator.of(context)
+        .pushNamed(CuisineScreen.id, arguments: cuisine);
+    requestCheckIn(result);
   }
 
   void onProductCardPressed(BuildContext context, Product product) {
     Navigator.of(context).pushNamed(ProductScreen.id, arguments: product);
   }
 
-  void requestCheckIn(int outletId) {
-    _homeBloc
-      ..add(CheckInRequested(outletId))
-      ..add(OutletFeaturedProductsRequested(outletId))
-      ..add(OutletProductsRequested(outletId));
+  void requestCheckIn(dynamic result) {
+    if (result != null) {
+      final outletId = result as int;
+      _homeBloc
+        ..add(CheckInRequested(outletId))
+        ..add(OutletFeaturedProductsRequested(outletId))
+        ..add(OutletProductsRequested(outletId));
+    }
   }
 
   void requestCheckOut() {
@@ -141,6 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
           outlet: state.homeOutlet,
           onOutletCardPressed: onOutletCardPressed,
           onProductCardPressed: onProductCardPressed,
+          onCategoryCardPressed: onCategoryCardPressed,
         ),
       );
 }
@@ -325,21 +332,24 @@ class _Header extends StatelessWidget {
 
 typedef _OutletCardCallback = Function(BuildContext context, Outlet outlet);
 typedef _ProductCardCallback = Function(BuildContext context, Product product);
+typedef _CategoryCardCallback = Function(BuildContext context, Cuisine cuisine);
 
 class _Body extends StatefulWidget {
-  const _Body({
-    Key key,
-    @required this.mode,
-    this.outlet,
-    this.onOutletCardPressed,
-    this.onProductCardPressed,
-  })  : assert(mode != null),
+  const _Body(
+      {Key key,
+      @required this.mode,
+      this.outlet,
+      this.onOutletCardPressed,
+      this.onProductCardPressed,
+      this.onCategoryCardPressed})
+      : assert(mode != null),
         super(key: key);
 
   final HomeMode mode;
   final Outlet outlet;
   final _OutletCardCallback onOutletCardPressed;
   final _ProductCardCallback onProductCardPressed;
+  final _CategoryCardCallback onCategoryCardPressed;
 
   @override
   __BodyState createState() => __BodyState();
@@ -422,10 +432,6 @@ class __BodyState extends State<_Body> {
               );
             }),
       );
-
-  void onCategoryCardPressed(BuildContext context, Cuisine cuisine) {
-    Navigator.of(context).pushNamed(CuisineScreen.id, arguments: cuisine);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -510,7 +516,8 @@ class __BodyState extends State<_Body> {
                   (cuisine) => LUCategoryCard(
                     title: cuisine.title,
                     imageSrc: cuisine.image.source,
-                    onPressed: () => onCategoryCardPressed(context, cuisine),
+                    onPressed: () =>
+                        widget.onCategoryCardPressed(context, cuisine),
                   ),
                 )
                 .toList(),

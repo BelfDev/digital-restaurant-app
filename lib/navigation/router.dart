@@ -163,7 +163,7 @@ class AppRouter {
                   ),
                   BlocProvider<CheckOutBloc>(
                     create: (_) => _blocs[CheckOutBloc.id],
-                  )
+                  ),
                 ],
                 child: CartScreen(),
               )),

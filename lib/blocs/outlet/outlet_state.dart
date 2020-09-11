@@ -9,8 +9,7 @@ class OutletState extends Equatable {
     @required this.status,
     this.categoryMap = const {},
     this.outlets = const [],
-  })  : assert(status != null),
-        assert(categoryMap != null);
+  }) : assert(status != null);
 
   Set<Category> get categories => categoryMap?.keys?.toSet() ?? Set<Category>();
 

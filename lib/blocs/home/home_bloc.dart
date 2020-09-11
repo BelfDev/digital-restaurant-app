@@ -179,7 +179,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         nearbyOutletsStatus: ContentStateStatus.loadInProgress);
     try {
       final List<Outlet> nearbyOutlets =
-          await outletRepository.fetchAllOutlets(event?.city);
+          await outletRepository.fetchAllOutlets(city: event?.city);
       yield state.copyWith(
           nearbyOutletsStatus: ContentStateStatus.loadSuccess,
           nearbyOutlets: nearbyOutlets);

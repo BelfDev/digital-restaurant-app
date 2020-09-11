@@ -66,7 +66,7 @@ class OutletBloc extends Bloc<OutletEvent, OutletState> {
     yield OutletState.loading();
     try {
       final List<Outlet> outlets =
-          await outletRepository.fetchAllOutlets(event.cuisine);
+          await outletRepository.fetchAllOutlets(cuisine: event.cuisine);
 
       yield OutletState.success(null, outlets);
     } catch (error) {
