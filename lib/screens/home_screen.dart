@@ -355,7 +355,7 @@ class __BodyState extends State<_Body> {
         ),
         LUSection(
           title: 'Cuisines',
-          builder: buildCategoryCarousel,
+          builder: buildCuisineCarousel,
         ),
         LUSection(
           title: 'Nearby Restaurants',
@@ -499,22 +499,22 @@ class __BodyState extends State<_Body> {
         ),
       );
 
-  Widget buildCategoryCarousel(BuildContext context) =>
+  Widget buildCuisineCarousel(BuildContext context) =>
       BlocBuilder<HomeBloc, HomeState>(
         buildWhen: (previous, current) =>
             previous.cuisineStatus != current.cuisineStatus,
         builder: (_, state) => LULoadableContent(
-          height: Styles.categoryCarouselHeight,
+          height: Styles.cuisineCarouselHeight,
           stateStatus: state.cuisineStatus,
           contentBuilder: () => LUCarousel(
-            height: Styles.categoryCarouselHeight,
+            height: Styles.cuisineCarouselHeight,
             padding: Styles.sectionContentPadding,
             items: state.cuisines
                 .map(
                   (cuisine) => LUCategoryCard(
                     title: cuisine.title,
                     imageSrc: cuisine.image.source,
-                    // onPressed: () => onCategoryCardPressed(context, cuisine),
+                    onPressed: () => onCategoryCardPressed(context, cuisine),
                   ),
                 )
                 .toList(),

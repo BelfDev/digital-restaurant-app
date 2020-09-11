@@ -133,6 +133,6 @@ abstract class Styles {
   /// List Styles
   static const sectionContentPadding =
       const EdgeInsets.only(left: 16, right: 16, bottom: 8);
-  static const double categoryCarouselHeight = 160;
+  static const double cuisineCarouselHeight = 160;
   static const double chipCarouselHeight = 56;
 }

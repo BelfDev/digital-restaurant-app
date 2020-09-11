@@ -178,7 +178,7 @@ class _ProductScreenState extends State<ProductScreen> {
         LUSection(
           title: 'Ingredients',
           builder: (_) => LUCarousel(
-            height: Styles.categoryCarouselHeight,
+            height: Styles.cuisineCarouselHeight,
             padding: Styles.sectionContentPadding,
             items: ingredients
                 .map((ingredient) => LUCategoryCard(

@@ -14,7 +14,6 @@ import 'package:dr_app/screens/explore_screen.dart';
 import 'package:dr_app/screens/home_screen.dart';
 import 'package:dr_app/screens/login_screen.dart';
 import 'package:dr_app/screens/more_screen.dart';
-import 'package:dr_app/screens/onboarding_screen.dart';
 import 'package:dr_app/screens/outlet_screen.dart';
 import 'package:dr_app/screens/product_screen.dart';
 import 'package:dr_app/screens/profile_screen.dart';
@@ -64,7 +63,6 @@ class AppRouter {
 
     // Register routes
     this._routes = {
-      OnboardingScreen.id: _ScreenSettings(builder: (_) => OnboardingScreen()),
       ExploreScreen.id: _ScreenSettings(builder: (_) => ExploreScreen()),
       ProfileScreen.id: _ScreenSettings(builder: (_) => ProfileScreen()),
       MoreScreen.id: _ScreenSettings(builder: (_) => MoreScreen()),

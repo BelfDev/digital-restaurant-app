@@ -90,6 +90,7 @@ class CheckOutBloc extends Bloc<CheckOutEvent, CheckOutState> {
   }
 
   @override
+  // ignore: must_call_super, missing_return
   Future<void> close() {
     // return super.close();
   }

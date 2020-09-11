@@ -169,6 +169,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
   // TODO: Evaluate best moment to cancel subscriptions
   @override
+  // ignore: must_call_super, missing_return
   Future<void> close() {
     // _checkOutSubscription?.cancel();
     // _homeModeSubscription?.cancel();
