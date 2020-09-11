@@ -9,8 +9,8 @@ class OutletRepository {
   final _outletApiService = OutletApiClient();
 
   /// Retrieves all stored Outlet entities
-  Future<List<Outlet>> fetchAllOutlets([String city]) async {
-    final body = await _outletApiService.getOutlets(city);
+  Future<List<Outlet>> fetchAllOutlets([String city, String cuisine]) async {
+    final body = await _outletApiService.getOutlets(city, cuisine);
     return body.results;
   }
 

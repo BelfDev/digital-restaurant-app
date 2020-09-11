@@ -113,7 +113,15 @@ class AppRouter {
       ),
       SignUpScreen.id: _ScreenSettings(
         builder: (_) => SignUpScreen(),
-      )
+      ),
+      CuisineScreen.id: _ScreenSettings(
+        builder: (arguments) => CuisineScreen(arguments),
+        providers: [
+          BlocProvider<OutletBloc>(
+            create: (_) => _blocs[OutletBloc.id],
+          ),
+        ],
+      ),
     };
   }
 

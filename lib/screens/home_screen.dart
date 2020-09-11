@@ -424,11 +424,7 @@ class __BodyState extends State<_Body> {
       );
 
   void onCategoryCardPressed(BuildContext context, Cuisine cuisine) {
-    Navigator.of(context).pushNamed(
-      CuisineScreen.id,
-      arguments: ScreenArguments(
-          title: cuisine.title ?? '', coverImgSrc: cuisine.image.source),
-    );
+    Navigator.of(context).pushNamed(CuisineScreen.id, arguments: cuisine);
   }
 
   @override

@@ -3,10 +3,12 @@ part of 'outlet_bloc.dart';
 class OutletState extends Equatable {
   final ContentStateStatus status;
   final Map<Category, List<Product>> categoryMap;
+  final List<Outlet> outlets;
 
   const OutletState({
     @required this.status,
     this.categoryMap = const {},
+    this.outlets = const [],
   })  : assert(status != null),
         assert(categoryMap != null);
 
@@ -20,11 +22,12 @@ class OutletState extends Equatable {
         status: ContentStateStatus.loadInProgress,
       );
 
-  factory OutletState.success(Map<Category, List<Product>> categoryMap) =>
+  factory OutletState.success(
+          Map<Category, List<Product>> categoryMap, List<Outlet> outlets) =>
       OutletState(
-        status: ContentStateStatus.loadSuccess,
-        categoryMap: categoryMap,
-      );
+          status: ContentStateStatus.loadSuccess,
+          categoryMap: categoryMap,
+          outlets: outlets);
 
   factory OutletState.error() => OutletState(
         status: ContentStateStatus.loadFailure,

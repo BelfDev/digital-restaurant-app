@@ -18,3 +18,12 @@ class OutletProductsRequested extends OutletEvent {
   @override
   List<Object> get props => [outletId];
 }
+
+class OutletsRequested extends OutletEvent {
+  final String cuisine;
+
+  const OutletsRequested({this.cuisine});
+
+  @override
+  List<Object> get props => [cuisine];
+}

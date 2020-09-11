@@ -28,6 +28,9 @@ class OutletBloc extends Bloc<OutletEvent, OutletState> {
       case OutletProductsRequested:
         yield* _mapOutletProductsRequestedToState(event);
         break;
+      case OutletsRequested:
+        yield* _mapOutletsRequestedToState(event);
+        break;
     }
   }
 
@@ -52,7 +55,20 @@ class OutletBloc extends Bloc<OutletEvent, OutletState> {
       });
 
       // Return categoryMap
-      yield OutletState.success(categoryMap);
+      yield OutletState.success(categoryMap, null);
+    } catch (error) {
+      yield OutletState.error();
+    }
+  }
+
+  Stream<OutletState> _mapOutletsRequestedToState(
+      OutletsRequested event) async* {
+    yield OutletState.loading();
+    try {
+      final List<Outlet> outlets =
+          await outletRepository.fetchAllOutlets(event.cuisine);
+
+      yield OutletState.success(null, outlets);
     } catch (error) {
       yield OutletState.error();
     }

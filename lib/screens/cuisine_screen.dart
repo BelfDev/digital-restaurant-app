@@ -1,64 +1,73 @@
+import 'package:dr_app/blocs/content_state_status.dart';
+import 'package:dr_app/blocs/outlet/outlet_bloc.dart';
 import 'package:dr_app/components/cards/outlet_card.dart';
 import 'package:dr_app/components/compact_header.dart';
 import 'package:dr_app/components/decorated_title.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/round_container.dart';
 import 'package:dr_app/data/dummy/dummy_data.dart';
-import 'package:dr_app/data/models/screen_arguments.dart';
+import 'package:dr_app/data/models/models.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 /// The Cuisine screen displays a list of cards representing
 /// outlets which belong to the selected cuisine category.
-class CuisineScreen extends StatefulWidget {
+class CuisineScreen extends StatelessWidget {
   static const id = 'cuisine_screen';
 
-  @override
-  _CuisineScreenState createState() => _CuisineScreenState();
-}
+  final Cuisine cuisine;
 
-class _CuisineScreenState extends State<CuisineScreen> {
-  void _onBackButtonPressed() {
-    Navigator.of(context).pop();
-  }
+  const CuisineScreen(this.cuisine, {Key key}) : super(key: key);
 
   List<Widget> _getOutletCards() => dummyOutlets
       .map((outlet) => LUOutletCard(
             imageSrc: outlet.imgSrc,
             rating: outlet.rating,
             title: outlet.name,
-//            priceRange: outlet.priceRange,
+            priceRange: outlet.priceRange ?? 0,
             onPressed: () {},
           ))
       .toList();
 
   @override
   Widget build(BuildContext context) {
-    final ScreenArguments args = ModalRoute.of(context).settings.arguments;
-    return ListView(
-      padding: EdgeInsets.zero,
-      physics: ClampingScrollPhysics(),
-      children: <Widget>[
-        Stack(
+    return BlocConsumer<OutletBloc, OutletState>(
+      listener: (context, state) {
+        if (state.status == ContentStateStatus.initial) {
+          BlocProvider.of<OutletBloc>(context).add(OutletsRequested());
+        }
+      },
+      builder: (context, state) {
+        final outlets = state.outlets;
+
+        return ListView(
+          padding: EdgeInsets.zero,
+          physics: ClampingScrollPhysics(),
           children: <Widget>[
-            LUCompactHeader(
-                imgSrc: args.coverImgSrc,
-                icon: Icons.arrow_back_ios,
-                onTopButtonPressed: _onBackButtonPressed),
-            _buildContent(args),
+            Stack(
+              children: <Widget>[
+                LUCompactHeader(
+                  imgSrc: cuisine.image.source ?? '',
+                  icon: Icons.arrow_back_ios,
+                  onTopButtonPressed: () => Navigator.of(context).pop(),
+                ),
+                _buildContent(cuisine.title),
+              ],
+            )
           ],
-        )
-      ],
+        );
+      },
     );
   }
 
-  Widget _buildContent(ScreenArguments args) => RoundContainer(
+  Widget _buildContent(String title) => RoundContainer(
         child: Column(
           children: <Widget>[
             LUDecoratedTitle(
-              title: args.title,
+              title: title,
             ),
             SizedBox(
               height: 16,
