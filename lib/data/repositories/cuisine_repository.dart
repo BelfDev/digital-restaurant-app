@@ -5,17 +5,17 @@ import 'package:dr_app/services/api/cuisine_api_client.dart';
 /// It should be seen as the single source of truth for fetching
 /// or storing data.
 class CuisineRepository {
-  final _cuisineApiService = CuisineApiClient();
+  final _cuisineApiClient = CuisineApiClient();
 
   /// Retrieves all stored Cuisine entities
   Future<List<Cuisine>> fetchAllCuisines() async {
-    final body = await _cuisineApiService.getCuisines();
+    final body = await _cuisineApiClient.getCuisines();
     return body.results;
   }
 
   /// Retrieves a single Cuisine entity by the given identifier
   Future<Cuisine> fetchCuisine(int id) async {
-    final body = await _cuisineApiService.getCuisineById(id);
+    final body = await _cuisineApiClient.getCuisineById(id);
     return body.results.length > 0 ? body.results[0] : null;
   }
 }
