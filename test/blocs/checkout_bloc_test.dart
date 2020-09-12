@@ -9,16 +9,10 @@ import 'package:test/test.dart';
 
 // Mock objects
 final Category _mockCategory = Category('TestCategory', null);
-final Cuisine _mockCuisine = Cuisine(1, 'Italian', null);
-final Location _mockLocation = Location('Glasgow');
-final Product _mockProduct = Product(
-    10, 'Test', 10, 'Description', 10, null, const [], [_mockCategory], 10);
 final List<Product> _mockProductList = List.generate(
     3,
     (index) => Product(index, 'Test', 10, 'Description', 10, null, const [],
         [_mockCategory], 10));
-final Outlet _mockOutlet =
-    Outlet(1, 'Outlet 1', 4, 4, _mockCuisine, null, _mockLocation);
 final Cart _mockCart = Cart(1, 200, CartStatus.NOT_ORDERED, _mockProductList);
 final Order _mockOrder = Order(1, 200, OrderStatus.OPEN, [_mockCart]);
 
