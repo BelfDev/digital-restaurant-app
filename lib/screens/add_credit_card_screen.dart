@@ -41,7 +41,6 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
                 backgroundColor: theme.primaryColor,
                 tint: theme.backgroundColor,
                 icon: Icons.crop_free,
-                onPressed: () {},
               ),
             ),
             SizedBox(

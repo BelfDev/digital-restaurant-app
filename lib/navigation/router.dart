@@ -124,7 +124,13 @@ class AppRouter {
       ),
       AboutVersionScreen.id: _ScreenSettings(
         builder: (_) => AboutVersionScreen(),
-      )
+      ),
+      WalletScreen.id: _ScreenSettings(
+        builder: (_) => WalletScreen(),
+      ),
+      AddCreditCardScreen.id: _ScreenSettings(
+        builder: (_) => AddCreditCardScreen(),
+      ),
     };
   }
 
