@@ -5,7 +5,6 @@ import 'package:dr_app/components/components.dart';
 import 'package:dr_app/components/decorated_title.dart';
 import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/round_container.dart';
-import 'package:dr_app/data/dummy/dummy_data.dart';
 import 'package:dr_app/data/models/models.dart';
 import 'package:dr_app/screens/outlet_screen.dart';
 import 'package:dr_app/utils/colors.dart';
@@ -30,16 +29,6 @@ class CuisineScreen extends StatefulWidget {
 class _CuisineScreenState extends State<CuisineScreen> {
   OutletBloc outletBloc;
   List<Outlet> outlets;
-
-  List<Widget> _getOutletCards() => dummyOutlets
-      .map((outlet) => LUOutletCard(
-            imageSrc: outlet.imgSrc,
-            rating: outlet.rating,
-            title: outlet.name,
-            priceRange: 0,
-            onPressed: () {},
-          ))
-      .toList();
 
   @override
   void initState() {
