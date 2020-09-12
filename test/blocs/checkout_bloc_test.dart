@@ -26,6 +26,7 @@ class MockOrderRepository extends Mock implements OrderRepository {}
 
 class MockPaymentRepository extends Mock implements PaymentRepository {}
 
+/// Unit-tests for the CheckOutBloc
 void main() {
   group('CheckOutBloc', () {
     OrderRepository orderRepository;

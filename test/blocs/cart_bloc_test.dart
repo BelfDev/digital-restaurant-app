@@ -28,6 +28,7 @@ class MockHomeBloc extends MockBloc implements HomeBloc {}
 
 class MockCheckOutBloc extends MockBloc implements CheckOutBloc {}
 
+/// Unit-tests for the CartBloc
 void main() {
   group('CartBloc', () {
     CartRepository cartRepository;

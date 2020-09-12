@@ -31,6 +31,7 @@ class MockCuisineRepository extends Mock implements CuisineRepository {}
 
 class MockOutletRepository extends Mock implements OutletRepository {}
 
+/// Unit-tests for the HomeBloc
 void main() {
   group('HomeBloc', () {
     CuisineRepository cuisineRepository;
