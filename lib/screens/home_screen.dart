@@ -41,17 +41,10 @@ class _HomeScreenState extends State<HomeScreen> {
   HomeBloc _homeBloc;
 
   void _onScannerButtonPressed(BuildContext context) async {
-    requestCheckOut();
-    // final result = await Navigator.of(context).pushNamed(ScannerScreen.id);
-    // if (result != null) {
-    //
-    // }
-    // _showDialog('Uh-oh', 'QR-Code not valid');
-
-    // setState(() {
-    //   mode =
-    //       mode == _HomeMode.checked ? _HomeMode.unchecked : _HomeMode.checked;
-    // });
+    // Uncomment the line below to force checkout
+    // requestCheckOut();
+    final result = await Navigator.of(context).pushNamed(ScannerScreen.id);
+    requestCheckIn(result);
   }
 
   void onOutletCardPressed(BuildContext context, Outlet outlet) async {
