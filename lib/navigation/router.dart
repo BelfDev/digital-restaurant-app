@@ -122,6 +122,9 @@ class AppRouter {
           ),
         ],
       ),
+      AboutVersionScreen.id: _ScreenSettings(
+        builder: (_) => AboutVersionScreen(),
+      )
     };
   }
 
