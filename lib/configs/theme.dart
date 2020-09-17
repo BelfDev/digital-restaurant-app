@@ -17,6 +17,9 @@ class LUTheme {
         primaryColor: LUColors.navyBlue,
         accentColor: LUColors.orange,
         unselectedWidgetColor: LUColors.smoothGray,
+        appBarTheme: AppBarTheme(
+          color: LUColors.smoothWhite,
+        ),
         bottomAppBarTheme: BottomAppBarTheme(
             color: LUColors.white,
             shape: CircularNotchedRectangle(),

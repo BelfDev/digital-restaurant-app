@@ -18,6 +18,7 @@ class LUStatusLabel extends StatelessWidget {
       child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
           child: LUBlurFilter(
+            blurIntensity: 10.0,
             child: Center(
                 child: Text(
               text.toUpperCase(),

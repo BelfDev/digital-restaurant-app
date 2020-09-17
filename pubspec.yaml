@@ -41,9 +41,29 @@ dependencies:
       url: https://github.com/BelfDev/qr_code_scanner.git
       ref: master
 
+  # State management
+  bloc: ^6.0.0
+  flutter_bloc: ^6.0.0
+  meta: ^1.1.8
+  equatable: ^1.2.3
+
+  # Networking
+  json_annotation: ^3.0.1
+  http: ^0.12.2
+  http_interceptor: ^0.3.2
+
+  # Persistence
+  shared_preferences: ^0.5.10
+
 dev_dependencies:
+  test: 1.15.2
+  mockito: ^4.1.1
+  bloc_test: ^7.0.4
   flutter_test:
     sdk: flutter
+
+  build_runner: ^1.10.1
+  json_serializable: ^3.3.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

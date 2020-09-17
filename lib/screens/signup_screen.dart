@@ -25,33 +25,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: LUTheme.of(context).backgroundColor,
-      child: Stack(
-        children: <Widget>[
-          buildSignUpHeaderBackground(),
-          buildSignUpBody(context),
-          SafeArea(
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height *
-                        (headerHeightFactor / 3)),
-                child: LURectangleAvatar(
-                  editable: true,
-                  profilePictureSize: profilePictureSize,
+    return Scaffold(
+      body: Container(
+        color: LUTheme.of(context).backgroundColor,
+        child: Stack(
+          children: <Widget>[
+            buildSignUpHeaderBackground(),
+            buildSignUpBody(context),
+            SafeArea(
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height *
+                          (headerHeightFactor / 3)),
+                  child: LURectangleAvatar(
+                    editable: true,
+                    profilePictureSize: profilePictureSize,
+                  ),
                 ),
               ),
             ),
-          ),
-          SafeArea(
-            child: LUTopBar(
-              title: 'Sign Up',
-              onNavigationButtonPressed: () => Navigator.of(context).pop(),
-            ),
-          )
-        ],
+            SafeArea(
+              child: LUTopBar(
+                title: 'Sign Up',
+                onNavigationButtonPressed: () => Navigator.of(context).pop(),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

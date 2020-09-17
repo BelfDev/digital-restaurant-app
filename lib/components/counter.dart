@@ -2,18 +2,31 @@ import 'package:dr_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class LUCounter extends StatefulWidget {
+  const LUCounter({
+    Key key,
+    @required this.onUpdate,
+    this.vertical = false,
+    this.initialValue = 1,
+    this.minValue = 1,
+  }) : super(key: key);
+
   final ValueChanged<int> onUpdate;
   final bool vertical;
-
-  const LUCounter({Key key, @required this.onUpdate, this.vertical = false})
-      : super(key: key);
+  final int initialValue;
+  final int minValue;
 
   @override
   _LUCounterState createState() => _LUCounterState();
 }
 
 class _LUCounterState extends State<LUCounter> {
-  int _counter = 0;
+  int _counter;
+
+  @override
+  void initState() {
+    super.initState();
+    _counter = widget.initialValue;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +77,7 @@ class _LUCounterState extends State<LUCounter> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             _buildCounterButton(Icons.remove, () {
-              if (_counter - 1 >= 0) {
+              if (_counter - 1 >= widget.minValue) {
                 setState(() => _counter--);
                 widget.onUpdate(_counter);
               }

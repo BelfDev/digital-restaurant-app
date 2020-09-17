@@ -40,6 +40,7 @@ class LUSolidButton extends StatelessWidget {
         margin: margin,
         child: RaisedButton(
             onPressed: onPressed,
+            disabledColor: Colors.grey.shade500.withOpacity(0.35),
             color: color,
             child: Text(
               uppercase ? title.toUpperCase() : title,

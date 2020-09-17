@@ -29,9 +29,13 @@ class MoreScreen extends StatelessWidget {
         LUSection(
           titlePadding: EdgeInsets.only(left: 4.0, bottom: 8.0),
           title: 'General',
-          child: Column(
+          builder: (_) => Column(
             children: <Widget>[
-              // TODO: Set notifications
+              LUTileOptionCard(
+                  leadingIcon: FontAwesome5Solid.info_circle,
+                  title: 'About this version',
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed(AboutVersionScreen.id)),
               LUTileOptionCard(
                   leadingIcon: FontAwesome5Solid.bell,
                   title: 'Notifications',
@@ -43,18 +47,15 @@ class MoreScreen extends StatelessWidget {
                     ),
                   ]),
               LUTileOptionCard(
-                  leadingIcon: FontAwesome5Solid.user_shield,
-                  title: 'Terms and conditions',
-                  onPressed: () {}),
+                leadingIcon: FontAwesome5Solid.user_shield,
+                title: 'Terms and conditions',
+                // onPressed: () {}
+              ),
               LUTileOptionCard(
-                  leadingIcon: FontAwesome5Solid.star,
-                  title: 'Rate the app',
-                  onPressed: () {}),
-              LUTileOptionCard(
-                  leadingIcon: FontAwesome5Solid.info_circle,
-                  title: 'About this version',
-                  onPressed: () =>
-                      Navigator.of(context).pushNamed(AboutVersionScreen.id)),
+                leadingIcon: FontAwesome5Solid.star,
+                title: 'Rate the app',
+                // onPressed: () {}
+              ),
             ],
           ),
         )

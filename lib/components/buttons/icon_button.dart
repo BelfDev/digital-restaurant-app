@@ -10,7 +10,7 @@ import 'base_button.dart';
 class LUIconButton extends StatelessWidget {
   final IconData icon;
   final double iconSize;
-  final Function onPressed;
+  final VoidCallback onPressed;
   final Color tint;
   final Color backgroundColor;
   final EdgeInsetsGeometry padding;

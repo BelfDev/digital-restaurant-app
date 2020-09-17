@@ -4,9 +4,6 @@ import 'package:dr_app/components/list.dart';
 import 'package:dr_app/components/round_avatar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/screens/edit_profile_screen.dart';
-import 'package:dr_app/screens/favorites_screen.dart';
-import 'package:dr_app/screens/last_visited_screen.dart';
-import 'package:dr_app/screens/login_screen.dart';
 import 'package:dr_app/screens/wallet_screen.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
@@ -143,21 +140,14 @@ class ProfileScreen extends StatelessWidget {
                   LUTileOptionCard(
                     leadingIcon: Icons.favorite_border,
                     title: 'Favorite restaurants',
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(FavoritesScreen.id),
                   ),
                   LUTileOptionCard(
                     leadingIcon: Icons.history,
                     title: 'Visited restaurants',
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(LastVisitedScreen.id),
                   ),
                 ],
               ),
               LUSolidButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(LoginScreen.id);
-                },
                 title: 'logout',
               )
             ],

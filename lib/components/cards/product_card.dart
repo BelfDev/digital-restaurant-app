@@ -1,25 +1,14 @@
 import 'package:dr_app/components/cards/base_card.dart';
-import 'package:dr_app/components/status_label.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/utils/colors.dart';
 import 'package:dr_app/utils/images.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-class LUDishCard extends StatelessWidget {
-  final double width;
-  final double height;
-  final EdgeInsetsGeometry margin;
-  final String imageSrc;
-  final String title;
-  final String description;
-  final String priceTag;
-  final int quantity;
-  final String preparationTime;
-  final bool shrink;
-  final bool showStatus;
+import '../status_label.dart';
 
-  const LUDishCard(
+class LUProductCard extends StatelessWidget {
+  const LUProductCard(
       {Key key,
       this.width,
       this.height = 128,
@@ -31,8 +20,22 @@ class LUDishCard extends StatelessWidget {
       this.quantity,
       this.preparationTime,
       this.shrink = false,
-      this.showStatus = false})
+      this.showStatus = false,
+      this.onPressed})
       : super(key: key);
+
+  final double width;
+  final double height;
+  final EdgeInsetsGeometry margin;
+  final String imageSrc;
+  final String title;
+  final String description;
+  final String priceTag;
+  final int quantity;
+  final double preparationTime;
+  final bool shrink;
+  final bool showStatus;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +43,7 @@ class LUDishCard extends StatelessWidget {
       width: 100,
       height: height,
       margin: margin,
+      onPressed: onPressed,
       children: <Widget>[
         Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -54,16 +58,16 @@ class LUDishCard extends StatelessWidget {
                       children: <Widget>[
                         FadeInImage.assetNetwork(
                           height: double.infinity,
+                          width: double.infinity,
                           placeholder: Images.verticalPlaceholder,
-                          image: imageSrc,
+                          image: imageSrc ?? '',
                           fit: BoxFit.cover,
                         ),
-                        showStatus
-                            ? Align(
-                                alignment: Alignment.bottomCenter,
-                                child: LUStatusLabel(text: 'preparing'),
-                              )
-                            : Container()
+                        if (showStatus)
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: LUStatusLabel(text: 'preparing'),
+                          )
                       ],
                     )),
               ),
@@ -79,6 +83,8 @@ class LUDishCard extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       title,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                       style: LUTheme.of(context)
                           .textTheme
                           .headline5
@@ -88,9 +94,12 @@ class LUDishCard extends StatelessWidget {
                     Expanded(
                       child: Text(
                         description,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
                         style: Styles.dishCardDescription,
                       ),
                     ),
+                    SizedBox(height: 4),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -104,7 +113,7 @@ class LUDishCard extends StatelessWidget {
                               width: 4,
                             ),
                             Text(
-                              preparationTime,
+                              '$preparationTime min',
                               style: Styles.dishCardPreparation,
                             )
                           ],

@@ -48,7 +48,7 @@ class LUCategoryCard extends StatelessWidget {
                   height: height / 1.5,
                   placeholder: Images.verticalPlaceholder,
                   image: imageSrc,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                 )),
           ],
         )
