@@ -1,9 +1,14 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:convert';
+
+import 'package:dr_app/data/models/models.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// This class encapsulates Session data and operations
+/// This class encapsulates local operations that
+/// involve [Session] or [User].
 class SessionManager {
   static const String sessionKey = 'session-id';
+  static const String userKey = 'user';
 
   // Singleton pattern
   static final SessionManager _singleton = SessionManager._internal();
@@ -16,9 +21,10 @@ class SessionManager {
   Future<SharedPreferences> get _prefs async =>
       await SharedPreferences.getInstance();
 
-  // Session id
-
   String _sessionId;
+  User _authenticatedUser;
+
+  // Session id
 
   Future<String> get sessionId async => _getSessionId();
 
@@ -34,6 +40,7 @@ class SessionManager {
     return _sessionId;
   }
 
+  /// Adds session to shared preferences
   Future<bool> setSessionId(String id) async {
     if (id != _sessionId) {
       final prefs = await _prefs;
@@ -43,6 +50,51 @@ class SessionManager {
       }
       debugPrint('Refreshed session id: $_sessionId');
       return isSuccessful;
+    }
+    return false;
+  }
+
+  // User
+
+  bool get isAuthenticated => _authenticatedUser != null;
+
+  Future<String> get authToken async => (await _getUser()).token ?? null;
+
+  // Retrieves user from memory cache or shared preferences
+  Future<User> _getUser() async {
+    if (_authenticatedUser == null) {
+      final prefs = await _prefs;
+      if (prefs.containsKey(userKey)) {
+        final encodedUser = prefs.getString(userKey);
+        final decodedUser = json.decode(encodedUser);
+        _authenticatedUser = User.fromJson(decodedUser);
+      }
+    }
+    debugPrint('Retrieved authenticated user:: $_authenticatedUser');
+    return _authenticatedUser;
+  }
+
+  /// Adds user to shared preferences
+  Future<bool> setAuthenticatedUser(User user) async {
+    if (user != _authenticatedUser) {
+      final prefs = await _prefs;
+      final encodedUser = json.encode(user.toJson());
+      final isSuccessful = await prefs.setString(userKey, encodedUser);
+      if (isSuccessful) {
+        _authenticatedUser = user;
+      }
+      debugPrint('Refreshed authenticated user: $_authenticatedUser');
+      return isSuccessful;
+    }
+    return false;
+  }
+
+  /// Removes current authenticated user from shared preferences
+  Future<bool> clearAuthenticatedUser() async {
+    final user = await _getUser();
+    if (user != null) {
+      final prefs = await _prefs;
+      return prefs.remove(userKey);
     }
     return false;
   }

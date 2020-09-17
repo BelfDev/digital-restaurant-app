@@ -32,6 +32,12 @@ class AccountApiClient extends BaseApiClient {
     );
     return compute(_parseResults, responseBody);
   }
+
+  /// Logs the current user out
+  Future<bool> logout() async {
+    final result = await getRequest(_PATH + '/logout');
+    return result != null;
+  }
 }
 
 /// Top-level function to transform a response body into [Results].
