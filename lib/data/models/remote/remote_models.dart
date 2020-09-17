@@ -11,3 +11,4 @@ export 'product.dart';
 export 'qr_code.dart';
 export 'response.dart';
 export 'results.dart';
+export 'user.dart';

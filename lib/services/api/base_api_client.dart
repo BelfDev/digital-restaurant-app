@@ -63,6 +63,7 @@ abstract class BaseApiClient {
   dynamic _filterResponseBody(Response response) {
     debugPrint('Response status: ${response.statusCode}');
     switch (response.statusCode) {
+      case 201:
       case 200:
         if (!kReleaseMode) {
           compute(_decodeAndPrintJson, response.body);

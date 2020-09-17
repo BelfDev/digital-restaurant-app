@@ -5,4 +5,5 @@ abstract class ApiConfig {
   static const CARTS_RESOURCE = '/carts';
   static const ORDERS_RESOURCE = '/orders';
   static const PAYMENTS_RESOURCE = '/payments';
+  static const ACCOUNT_RESOURCE = '/account';
 }
