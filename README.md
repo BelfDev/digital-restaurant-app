@@ -34,17 +34,19 @@ Read the instructions below carefully to run the project on your local machine. 
 
 ### Step-by-step
 
-Once you have installed all the pre-requisite technologies, follow the steps below to run the frontend mobile application. You will need to issue a number of commands via your system's Terminal.
+Once you have installed all the pre-requisites, please follow the steps below to run the frontend mobile application. You will need to issue a number of commands via your system's Terminal window.
 
 1. Clone the current repository to a local directory in your machine.
-    \> *Copying the repository URL*
-    <img width="200" src=".github/loclone_githubo.png">
-    \> *Navigating to the root directory*
-    ```cd ~```
-    \> *Cloning this repository into the root directory*
-    ```git clone https://github.com/BelfDev/digital-restaurant-app.git```
-    \> *Stepping into the project's directory*
+<br>
+    \> *Copying the repository URL*<br>
+    <img width="200" src=".github/clone_githubo.png"><br>
+    \> *Navigating to the root directory*<br>
+    ```cd ~```<br>
+    \> *Cloning this repository into the root directory*<br>
+    ```git clone https://github.com/BelfDev/digital-restaurant-app.git```<br>
+    \> *Stepping into the project's directory*<br>
     ```cd digital-restaurant-app```
+<br>
 
 1. Open an Android or iOS simulator
 2. Clone this repo to somewhere in your machine (Let's say... `myProjectFolder`)
