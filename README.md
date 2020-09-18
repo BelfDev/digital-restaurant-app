@@ -52,7 +52,7 @@ Once you have installed all the pre-requisites, please follow the steps below to
 
 2. **Open your favorite IDE (e.g. Android Studio).**
 3. **Open the project using your favorite IDE.**
-     - *Opening a the project using Android Studio*<br>
+     - *Opening the project using Android Studio*<br>
      ```File > Open > ~/digital-restaurant-app```
 4. **Install all project dependencies.** -- *go back to your Terminal window.*
      - *Installing dependencies declared in `pubspec.yaml`*<br>
