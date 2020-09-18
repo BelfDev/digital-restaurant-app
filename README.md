@@ -84,4 +84,5 @@ Once you have installed all the pre-requisites, please follow the steps below to
 - Payment is not integrated with with any payment gate such as [Adyen](https://www.adyen.com/) or [Stripe](https://stripe.com/).
 - No credit cards are saved.
 - Evaluation survey results suggested that potential users find "Le Serveur" useful and easy to use.
+- The app's original design can be accessed via this [link](https://xd.adobe.com/view/96ae6c3c-4155-48aa-6d06-a77ccec9d0d6-e09f/). Ask the author for the password.
 - Elapsed time: **2 months**.
