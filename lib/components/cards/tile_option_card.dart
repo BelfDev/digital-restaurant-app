@@ -15,6 +15,9 @@ class LUTileOptionCard extends StatelessWidget {
   final VoidCallback onPressed;
   final List<Widget> trailingChildren;
   final bool selected;
+  final Color backgroundColor;
+  final double elevation;
+  final Color tint;
 
   const LUTileOptionCard({
     Key key,
@@ -26,12 +29,17 @@ class LUTileOptionCard extends StatelessWidget {
     this.subtitle,
     this.trailingChildren,
     this.selected = false,
+    this.backgroundColor,
+    this.elevation,
+    this.tint,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return LUBaseCard(
       width: width,
+      elevation: elevation,
+      backgroundColor: backgroundColor,
       shape: selected
           ? new RoundedRectangleBorder(
               side: new BorderSide(
@@ -47,12 +55,12 @@ class LUTileOptionCard extends StatelessWidget {
           leading: Icon(
             leadingIcon,
             size: 32,
-            color: LUTheme.of(context).primaryColor,
+            color: tint ?? LUTheme.of(context).primaryColor,
           ),
           title: Text(
             title,
             style: Styles.optionTitleText
-                .copyWith(color: LUTheme.of(context).primaryColor),
+                .copyWith(color: tint ?? LUTheme.of(context).primaryColor),
           ),
           subtitle: subtitle != null
               ? Text(
@@ -69,7 +77,7 @@ class LUTileOptionCard extends StatelessWidget {
               : Icon(
                   Icons.arrow_forward_ios,
                   size: 18,
-                  color: LUTheme.of(context).primaryColor,
+                  color: tint ?? LUTheme.of(context).primaryColor,
                 ),
         ),
       ),

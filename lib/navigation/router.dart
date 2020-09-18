@@ -1,7 +1,9 @@
+import 'package:dr_app/blocs/auth/auth_bloc.dart';
 import 'package:dr_app/blocs/blocs.dart';
 import 'package:dr_app/blocs/cart/cart_bloc.dart';
 import 'package:dr_app/blocs/checkout/checkout_bloc.dart';
 import 'package:dr_app/blocs/outlet/outlet_bloc.dart';
+import 'package:dr_app/data/repositories/account_repository.dart';
 import 'package:dr_app/data/repositories/cart_repository.dart';
 import 'package:dr_app/data/repositories/cuisine_repository.dart';
 import 'package:dr_app/data/repositories/order_repository.dart';
@@ -19,6 +21,7 @@ import 'package:dr_app/screens/product_screen.dart';
 import 'package:dr_app/screens/profile_screen.dart';
 import 'package:dr_app/screens/scanner_screen.dart';
 import 'package:dr_app/screens/screens.dart';
+import 'package:dr_app/services/session_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,6 +38,7 @@ class AppRouter {
     final cartRepository = CartRepository();
     final orderRepository = OrderRepository();
     final paymentRepository = PaymentRepository();
+    final accountRepository = AccountRepository();
 
     // ignore: close_sinks
     final homeBloc = HomeBloc(
@@ -64,7 +68,16 @@ class AppRouter {
     // Register routes
     this._routes = {
       ExploreScreen.id: _ScreenSettings(builder: (_) => ExploreScreen()),
-      ProfileScreen.id: _ScreenSettings(builder: (_) => ProfileScreen()),
+      ProfileScreen.id: _ScreenSettings(
+        builder: (_) => BlocProvider<AuthBloc>(
+          create: (_) => AuthBloc(
+            accountRepository: accountRepository,
+          ),
+          child: ProfileScreen(
+            router: this,
+          ),
+        ),
+      ),
       MoreScreen.id: _ScreenSettings(builder: (_) => MoreScreen()),
       HomeScreen.id: _ScreenSettings(
         builder: (_) => HomeScreen(),
@@ -110,9 +123,23 @@ class AppRouter {
       ]),
       LoginScreen.id: _ScreenSettings(
         builder: (_) => LoginScreen(),
+        providers: [
+          BlocProvider<AuthBloc>(
+            create: (_) => AuthBloc(
+              accountRepository: accountRepository,
+            ),
+          ),
+        ],
       ),
       SignUpScreen.id: _ScreenSettings(
         builder: (_) => SignUpScreen(),
+        providers: [
+          BlocProvider<AuthBloc>(
+            create: (_) => AuthBloc(
+              accountRepository: accountRepository,
+            ),
+          ),
+        ],
       ),
       CuisineScreen.id: _ScreenSettings(
         builder: (arguments) => CuisineScreen(arguments),
@@ -181,13 +208,21 @@ class AppRouter {
 
   /// Shows the [LoginScreen] with a modal presentation.
   void navigateToAuthentication(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        fullscreenDialog: true,
-        builder: (context) => LoginScreen(),
-      ),
-    );
+    final sessionManager = SessionManager();
+    if (!sessionManager.isAuthenticated) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          fullscreenDialog: true,
+          builder: (context) => BlocProvider<AuthBloc>(
+            create: (_) => AuthBloc(
+              accountRepository: AccountRepository(),
+            ),
+            child: LoginScreen(),
+          ),
+        ),
+      );
+    }
   }
 }
 

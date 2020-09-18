@@ -13,8 +13,8 @@ typedef _ChildBuilder = Widget Function(
 /// This bar is typically positioned at the top of a screen to
 /// facilitate navigation and indicate its title.
 class LUSliverAppBar extends StatelessWidget {
-  static const double _expandedHeight = 150.0;
-  static const double _collapsedHeight = 120.0;
+  static const double _expandedHeight = 112.0;
+  static const double _collapsedHeight = 72.0;
   static const int _animationMiliDuration = 120;
 
   const LUSliverAppBar({

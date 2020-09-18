@@ -8,9 +8,14 @@ class SessionInterceptor implements InterceptorContract {
   Future<RequestData> interceptRequest({RequestData data}) async {
     try {
       final sessionId = await _sessionManager.sessionId;
+      final authToken = await _sessionManager.authToken;
+
       if (sessionId != null) {
-        data.headers[SessionManager.sessionKey] =
-            await _sessionManager.sessionId;
+        data.headers[SessionManager.sessionKey] = sessionId;
+      }
+
+      if (authToken != null) {
+        data.headers['authorization'] = 'Bearer $authToken';
       }
     } catch (e) {
       print(e);

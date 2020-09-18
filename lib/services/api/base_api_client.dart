@@ -1,6 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
 
-import 'package:dr_app/configs/api_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:http_interceptor/http_client_with_interceptor.dart';
@@ -11,9 +11,9 @@ import 'network_exception.dart';
 
 /// Base class that abstracts http operations shared among API services.
 abstract class BaseApiClient {
-  static const _BASE_URL = ApiConfig.BASE_HOST;
-
-  // final http.Client _client = http.Client();
+  // static const _BASE_URL = ApiConfig.BASE_HOST;
+  // ignore: non_constant_identifier_names
+  final _BASE_URL = Platform.isIOS ? '127.0.0.1:5000' : '10.0.2.2:5000';
 
   final Client _client =
       HttpClientWithInterceptor.build(interceptors: [SessionInterceptor()]);
@@ -63,6 +63,7 @@ abstract class BaseApiClient {
   dynamic _filterResponseBody(Response response) {
     debugPrint('Response status: ${response.statusCode}');
     switch (response.statusCode) {
+      case 201:
       case 200:
         if (!kReleaseMode) {
           compute(_decodeAndPrintJson, response.body);

@@ -9,6 +9,7 @@ class LULoadableContent extends StatelessWidget {
   final double height, width;
   final ContentStateStatus stateStatus;
   final ContentBuilder contentBuilder;
+  final bool byPassInitial;
 
   const LULoadableContent({
     Key key,
@@ -16,6 +17,7 @@ class LULoadableContent extends StatelessWidget {
     this.width = double.infinity,
     @required this.contentBuilder,
     @required this.stateStatus,
+    this.byPassInitial = false,
   })  : assert(height != null),
         assert(contentBuilder != null),
         assert(stateStatus != null),
@@ -37,7 +39,8 @@ class LULoadableContent extends StatelessWidget {
       );
     } else if (isError) {
       return LUErrorPlaceholder();
-    } else if (isSuccess) {
+    } else if (isSuccess ||
+        (stateStatus == ContentStateStatus.initial && byPassInitial)) {
       return contentBuilder();
     }
     throw Exception('Loadable content must return some widget');
@@ -45,7 +48,7 @@ class LULoadableContent extends StatelessWidget {
 
   bool get isLoading =>
       stateStatus == ContentStateStatus.loadInProgress ||
-      stateStatus == ContentStateStatus.initial;
+      (stateStatus == ContentStateStatus.initial && !byPassInitial);
 
   bool get isError => stateStatus == ContentStateStatus.loadFailure;
 
