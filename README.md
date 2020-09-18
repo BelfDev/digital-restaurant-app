@@ -35,8 +35,9 @@ Read the instructions below carefully to run the project on your local machine. 
 ### Step-by-step
 
 Once you have installed all the pre-requisites, please follow the steps below to run the frontend mobile application. You will need to issue a number of commands via your system's Terminal window.
+<img width="200" src=".github/terminal.png"><br>
 
-1. Clone the current repository to a local directory in your machine.
+1. **Clone the current repository to a local directory in your machine.**
      - *Copying the repository URL*<br>
     <img width="200" src=".github/clone_github.png"><br>
      - *Navigating to the root directory*<br>
