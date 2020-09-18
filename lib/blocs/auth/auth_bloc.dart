@@ -11,6 +11,8 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
+  static const id = 'auth_bloc';
+
   final AccountRepository _accountRepository;
 
   AuthBloc({
@@ -23,7 +25,7 @@ class AuthBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   Stream<AuthenticationState> mapEventToState(
     AuthenticationEvent event,
   ) async* {
-    if (event is SigUpRequested) {
+    if (event is SignUpRequested) {
       yield* _mapSigUpRequestedToState(event);
     } else if (event is LogInRequested) {
       yield* _mapLogInRequestedToState(event);
@@ -33,7 +35,7 @@ class AuthBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   }
 
   Stream<AuthenticationState> _mapSigUpRequestedToState(
-    SigUpRequested event,
+    SignUpRequested event,
   ) async* {
     yield AuthenticationState.loading();
     try {

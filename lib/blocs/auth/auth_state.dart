@@ -31,7 +31,7 @@ class AuthenticationState extends Equatable {
   const AuthenticationState.unauthenticated()
       : this._(
           status: AuthenticationStatus.unauthenticated,
-          operationStatus: ContentStateStatus.loadInProgress,
+          operationStatus: ContentStateStatus.loadSuccess,
         );
 
   const AuthenticationState.error()
