@@ -69,8 +69,10 @@ Once you have installed all the pre-requisites, please follow the steps below to
 7. **Run the app.**
      - *Running the app in DEBUG MODE (Android Studio)*<br>
      ```Run > Debug 'main.dart'```
+     
      <p align="left">
         <img width="500" src=".github/running_frontend.png">
      </p>
+     
      - *Or... running the app via the integrated terminal (Android Studio)*<br>
      ```flutter run```
