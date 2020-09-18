@@ -57,20 +57,16 @@ Once you have installed all the pre-requisites, please follow the steps below to
 4. **Install all project dependencies.** -- *go back to your Terminal window.*
      - *Installing dependencies declared in `pubspec.yaml`*<br>
      ```flutter packages get```
-5. **Open the Android or iOS Simulator.**
+5. **Open the Android or iOS simulator.**
      - *You cannot open the iOS simulator if you are not using a MacOS machine*<br>
      - *Opening the iOS simulator via Android Studio*<br>
      <img width="500" src=".github/opening_simulator.png"><br>
-
-
-2. Clone this repo to somewhere in your machine (Let's say... `myProjectFolder`)
-3. Go to you `myProjectFolder`, then go to the challenge's folder
-```bash
-cd digital-restaurant-app
-````
-4. Run the project!
-```bash
-flutter run
-```
-
-(README WIP)
+6. **Make sure you are running the backend app.**
+     - *[Click here](https://github.com/BelfDev/digital-restaurant-api/blob/master/README.md) to learn how to run the API project locally.*<br>
+     <img width="500" src=".github/running_backend.png"><br>
+7. **Run the app.**
+     - *Running the app in DEBUG MODE (Android Studio)*<br>
+     ```Run > Debug 'main.dart'```
+     <img width="500" src=".github/running_frontend.png"><br>
+     - *Or... running the app via the integrated terminal (Android Studio)*<br>
+     ```flutter run```
