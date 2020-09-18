@@ -18,13 +18,17 @@ The purpose of this research project was to devise a cross-platform mobile appli
 ## Running the project
 
 Read the instructions below carefully to run the project on your local machine. Please keep in mind that the "Le Serveur" system also encompasses a [backend application](https://github.com/BelfDev/digital-restaurant-api), which must be running locally for the product to work as expected.
-  
-### Pre-requisites  
-  
+
+### Pre-requisites
+
 | Technology | Minimum Version | Instalation Guide |
 |----------------|-----------------|-----------------------------|
 |**Flutter** |`v.1.20.3` |[Flutter Official Docs](https://flutter.dev/docs/get-started/install) |
 |**Dart** |`v.2.9.2`| *Installed automatically with Flutter* |
+
+> Flutter relies on a full installation of Android Studio to supply its Android platform dependencies. However, you can write your Flutter apps in a number of editors.
+
+[Flutter Official Docs](https://flutter.dev/docs/get-started/install) will guide you through setting up your preferred IDE or code editor. For this project, the author recommends [Android Studio](https://developer.android.com/studio).
 
 ### Step-by-step
 
