@@ -69,10 +69,19 @@ Once you have installed all the pre-requisites, please follow the steps below to
 7. **Run the app.**
      - *Running the app in DEBUG MODE (Android Studio)*<br>
      ```Run > Debug 'main.dart'```
-     
+
      <p align="left">
         <img width="500" src=".github/running_frontend.png">
      </p>
-     
+
      - *Or... running the app via the integrated terminal (Android Studio)*<br>
      ```flutter run```
+
+## Final Notes
+
+     - This product was built for research purposes (proof-of-concept); therefore, it should not be launched into production as is.
+     - All data displayed in the App are fake -- restaurants and dishes were populated in the database for demonstration purposes.
+     - Payment is not integrated with with any payment platforms such as [Adyen](https://www.adyen.com/) or [Stripe](https://stripe.com/).
+     - No credit cards are saved.
+     - User evaluation results suggested that users find "Le Serveur" useful and easy to use.
+     - Elapsed time: 2 months.
