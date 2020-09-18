@@ -17,6 +17,19 @@ The purpose of this research project was to devise a cross-platform mobile appli
 
 ## Running the project
 
+Read the instructions below carefully to run the project on your local machine. Please keep in mind that the "Le Serveur" system also encompasses a [backend application](https://github.com/BelfDev/digital-restaurant-api), which must be running locally for the product to work as expected.
+  
+### Pre-requisites  
+  
+| Technology | Minimum Version | Instalation Guide |
+|----------------|-----------------|-----------------------------|
+|**Flutter** |`v.1.20.3` |[Flutter Official Docs](https://flutter.dev/docs/get-started/install) |
+|**Dart** |`v.2.9.2`| *Installed automatically with Flutter* |
+
+### Step-by-step
+
+
+
 This project requires flutter to be installed in your machine. If you don't already have it, please follow this amazing official [guide](https://flutter.dev/docs/get-started/install). Once you have flutter, all you need to do is:
 1. Open an Android or iOS simulator
 2. Clone this repo to somewhere in your machine (Let's say... `myProjectFolder`)
