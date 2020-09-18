@@ -37,7 +37,8 @@ class AuthBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   Stream<AuthenticationState> _mapSigUpRequestedToState(
     SignUpRequested event,
   ) async* {
-    yield AuthenticationState.loading();
+    yield AuthenticationState.loading(
+        status: AuthenticationStatus.unauthenticated);
     try {
       final user = await _accountRepository.signup(event.email, event.password);
       yield AuthenticationState.authenticated(user);
@@ -49,7 +50,8 @@ class AuthBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   Stream<AuthenticationState> _mapLogInRequestedToState(
     LogInRequested event,
   ) async* {
-    yield AuthenticationState.loading();
+    yield AuthenticationState.loading(
+        status: AuthenticationStatus.unauthenticated);
     try {
       final user = await _accountRepository.login(event.email, event.password);
       yield AuthenticationState.authenticated(user);
@@ -59,7 +61,8 @@ class AuthBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   }
 
   Stream<AuthenticationState> _mapLogOutRequestedToState() async* {
-    yield AuthenticationState.loading();
+    yield AuthenticationState.loading(
+        status: AuthenticationStatus.authenticated);
     try {
       final result = await _accountRepository.logout();
       if (result) {

@@ -1,10 +1,12 @@
 import 'package:dr_app/blocs/auth/auth_bloc.dart';
+import 'package:dr_app/blocs/content_state_status.dart';
 import 'package:dr_app/components/buttons/solid_button.dart';
 import 'package:dr_app/components/input_field.dart';
 import 'package:dr_app/components/top_bar.dart';
 import 'package:dr_app/configs/theme.dart';
 import 'package:dr_app/screens/signup_screen.dart';
 import 'package:dr_app/utils/colors.dart';
+import 'package:dr_app/utils/dialogs.dart';
 import 'package:dr_app/utils/images.dart';
 import 'package:dr_app/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       _authBloc.add(LogInRequested(formData['email'], formData['password']));
+      Dialogs.showLoadingDialog(context, _keyLoader);
     }
   }
 
@@ -74,28 +77,31 @@ class _LoginScreenState extends State<LoginScreen> {
               onNavigationButtonPressed: () => Navigator.of(context).pop(),
             )),
             buildLoginBody(),
-            SafeArea(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "Don't have an account?",
-                      style: Styles.loginFooterText,
-                    ),
-                    FlatButton(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 0.0, horizontal: 4.0),
-                      onPressed: () =>
-                          Navigator.of(context).pushNamed(SignUpScreen.id),
-                      child: Text(
-                        'Sign Up',
-                        style: Styles.loginFooterText
-                            .copyWith(fontWeight: FontWeight.w600),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 32),
+              child: SafeArea(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Don't have an account?",
+                        style: Styles.loginFooterText,
                       ),
-                    ),
-                  ],
+                      FlatButton(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 0.0, horizontal: 4.0),
+                        onPressed: () =>
+                            Navigator.of(context).pushNamed(SignUpScreen.id),
+                        child: Text(
+                          'Sign Up',
+                          style: Styles.loginFooterText
+                              .copyWith(fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             )
@@ -160,7 +166,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     listenWhen: (previous, current) =>
                         previous.operationStatus != current.operationStatus,
                     listener: (context, state) {
-                      if (state.status == AuthenticationStatus.authenticated) {
+                      if (state.operationStatus ==
+                              ContentStateStatus.loadSuccess &&
+                          state.status == AuthenticationStatus.authenticated) {
+                        Navigator.of(_keyLoader.currentContext,
+                                rootNavigator: true)
+                            .pop();
                         Navigator.of(context).pop();
                       }
                     },

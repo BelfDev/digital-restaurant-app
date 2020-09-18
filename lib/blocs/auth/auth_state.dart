@@ -15,9 +15,9 @@ class AuthenticationState extends Equatable {
 
   const AuthenticationState.unknown() : this._();
 
-  const AuthenticationState.loading()
+  const AuthenticationState.loading({@required AuthenticationStatus status})
       : this._(
-          status: AuthenticationStatus.unauthenticated,
+          status: status,
           operationStatus: ContentStateStatus.loadInProgress,
         );
 

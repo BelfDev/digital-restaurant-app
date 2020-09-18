@@ -33,15 +33,14 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final GlobalKey<State<ProfileScreen>> _keyLoader =
-      new GlobalKey<State<ProfileScreen>>();
+  final GlobalKey<State> _keyLoader = GlobalKey<State>();
 
   final _sessionManager = SessionManager();
   AuthBloc authBloc;
 
-  void onLogoutPressed() {
-    authBloc.add(LogOutRequested());
+  void onLogoutPressed(BuildContext context) {
     Dialogs.showLoadingDialog(context, _keyLoader);
+    authBloc.add(LogOutRequested());
   }
 
   @override
@@ -52,14 +51,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isAuthenticated = _sessionManager.isAuthenticated;
     return Container(
       color: LUTheme.of(context).backgroundColor,
-      child: Column(
-        children: <Widget>[
-          buildProfileHeader(context),
-          buildProfileContent(context),
-        ],
-      ),
+      child: isAuthenticated
+          ? Column(
+              children: <Widget>[
+                buildProfileHeader(context),
+                buildProfileContent(context),
+              ],
+            )
+          : Container(
+              child: Center(
+                  child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: Text('Please Login first by tapping on the Profile tab'),
+            ))),
     );
   }
 
@@ -126,7 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  'Amanda \n\nBaggins',
+                                  _sessionManager.authEmail ?? 'Full Name',
                                   style: Styles.sloganTitle,
                                 ),
                                 // FlatButton(
@@ -157,11 +164,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           previous.operationStatus != current.operationStatus,
       listener: (context, state) {
         if (state.operationStatus == ContentStateStatus.loadSuccess &&
-            _keyLoader != null) {
+            state.status == AuthenticationStatus.unauthenticated) {
           Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
-        }
-
-        if (state.status == AuthenticationStatus.unauthenticated) {
           widget.router.navigateToAuthentication(context);
         }
       },
@@ -186,17 +190,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     LUTileOptionCard(
                       leadingIcon: Icons.favorite_border,
                       title: 'Favorite restaurants',
+                      backgroundColor: Colors.grey.shade200,
+                      tint: Colors.grey.shade500,
+                      elevation: 0,
                     ),
                     LUTileOptionCard(
                       leadingIcon: Icons.history,
                       title: 'Visited restaurants',
+                      backgroundColor: Colors.grey.shade200,
+                      tint: Colors.grey.shade500,
+                      elevation: 0,
                     ),
                   ],
                 ),
                 LUSolidButton(
                   title: 'logout',
                   onPressed: _sessionManager.isAuthenticated
-                      ? () => onLogoutPressed()
+                      ? () => onLogoutPressed(context)
                       : null,
                 )
               ],
