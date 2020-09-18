@@ -58,7 +58,7 @@ class SessionManager {
 
   bool get isAuthenticated => _authenticatedUser != null;
 
-  Future<String> get authToken async => (await _getUser()).token ?? null;
+  Future<String> get authToken async => (await _getUser())?.token ?? null;
 
   // Retrieves user from memory cache or shared preferences
   Future<User> _getUser() async {
@@ -70,7 +70,7 @@ class SessionManager {
         _authenticatedUser = User.fromJson(decodedUser);
       }
     }
-    debugPrint('Retrieved authenticated user:: $_authenticatedUser');
+    debugPrint('Retrieved authenticated user: $_authenticatedUser');
     return _authenticatedUser;
   }
 
@@ -94,7 +94,12 @@ class SessionManager {
     final user = await _getUser();
     if (user != null) {
       final prefs = await _prefs;
-      return prefs.remove(userKey);
+      final result = await prefs.remove(userKey);
+      _authenticatedUser = null;
+      if (result) {
+        _authenticatedUser = null;
+        return true;
+      }
     }
     return false;
   }
