@@ -39,7 +39,6 @@ Once you have installed all the pre-requisites, please follow the steps below to
 <p align="middle">
 <img height="200" src=".github/terminal.png">
 </p>
-<br>
 
 1. **Clone the current repository to a local directory in your machine.**
      - *Copying the repository URL*<br>
@@ -51,7 +50,15 @@ Once you have installed all the pre-requisites, please follow the steps below to
      - *Stepping into the project's directory*<br>
     ```cd digital-restaurant-app```
 
-1. Open an Android or iOS simulator
+2. **Open your favorite IDE (e.g. Android Studio).**
+3. **Open the project using your favorite IDE.**
+     - *Opening a the project using Android Studio*<br>
+     ```File > Open > ~/digital-restaurant-app```
+4. **Install all project dependencies.** -- *go back to your Terminal window.*
+     - *Installing dependencies declared in `pubspec.yaml`*<br>
+     ```flutter packages get```
+
+
 2. Clone this repo to somewhere in your machine (Let's say... `myProjectFolder`)
 3. Go to you `myProjectFolder`, then go to the challenge's folder
 ```bash
