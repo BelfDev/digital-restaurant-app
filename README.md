@@ -57,6 +57,10 @@ Once you have installed all the pre-requisites, please follow the steps below to
 4. **Install all project dependencies.** -- *go back to your Terminal window.*
      - *Installing dependencies declared in `pubspec.yaml`*<br>
      ```flutter packages get```
+5. **Open the Android or iOS Simulator.**
+     - *You cannot open the iOS simulator if you are not using a MacOS machine*<br>
+     - *Opening the iOS simulator via Android Studio*<br>
+     <img width="200" src=".github/opening_simulator.png"><br>
 
 
 2. Clone this repo to somewhere in your machine (Let's say... `myProjectFolder`)
