@@ -9,13 +9,17 @@ class LUInputField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
   final TextInputType keyboardType;
+  final FormFieldSetter<String> onSaved;
+  final FormFieldValidator<String> validator;
 
   const LUInputField(
       {Key key,
       this.fieldTitle,
       this.hintText,
       this.obscureText = false,
-      this.keyboardType})
+      this.keyboardType,
+      this.onSaved,
+      this.validator})
       : super(key: key);
 
   @override
@@ -48,12 +52,14 @@ class LUInputField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12.0),
               ),
             ),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
+            onSaved: onSaved,
+            validator: validator ??
+                (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
           ),
         ],
       ),
