@@ -35,6 +35,7 @@ class AppContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: LUTheme.of(context),
+      debugShowCheckedModeBanner: false,
       onGenerateRoute: router.onGenerateRoute,
       home: FutureBuilder<bool>(
           future: _isFirstLaunch,
