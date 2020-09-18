@@ -25,10 +25,10 @@ Read the instructions below carefully to run the project on your local machine. 
 |----------------|-----------------|-----------------------------|
 |**Flutter** |`v.1.20.3` |[Flutter Official Docs](https://flutter.dev/docs/get-started/install) |
 |**Dart** |`v.2.9.2`| *Installed automatically with Flutter* |
-
+<br>
 > Flutter relies on a full installation of Android Studio to supply its Android platform dependencies. However, you can write your Flutter apps in a number of editors.
 
-[Flutter Official Docs](https://flutter.dev/docs/get-started/install) will guide you through setting up your preferred IDE or code editor. For this project, the author recommends [Android Studio](https://developer.android.com/studio).
+[Flutter Official Docs](https://flutter.dev/docs/get-started/install) will guide you through configuring your preferred IDE or Code Editor. For this project, the author recommends [Android Studio](https://developer.android.com/studio).
 
 ### Step-by-step
 
