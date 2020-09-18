@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img width="200" src=".github/logo.png">
+  <img width="200" src=".github/logo.jpg">
   <br>
   <br>
   [COVID-19] Digital Restaurant
@@ -7,8 +7,8 @@
 </h1>
 
 <p align="middle">
-  <img src=".github/ios_app_preview.png" width="200" hspace="24" />
-  <img src=".github/android_app_preview.png" width="200" />
+  <img src=".github/ios_app_preview.jpg" width="200" hspace="24" />
+  <img src=".github/android_app_preview.jpg" width="200" />
 </p>
 
 ## Summary
