@@ -38,13 +38,13 @@ Once you have installed all the pre-requisites, please follow the steps below to
 
 1. Clone the current repository to a local directory in your machine.
 <br>
-    \> *Copying the repository URL*<br>
+    - *Copying the repository URL*<br>
     <img width="200" src=".github/clone_githubo.png"><br>
-    \> *Navigating to the root directory*<br>
+    - *Navigating to the root directory*<br>
     ```cd ~```<br>
-    \> *Cloning this repository into the root directory*<br>
+    - *Cloning this repository into the root directory*<br>
     ```git clone https://github.com/BelfDev/digital-restaurant-app.git```<br>
-    \> *Stepping into the project's directory*<br>
+    - *Stepping into the project's directory*<br>
     ```cd digital-restaurant-app```
 <br>
 
