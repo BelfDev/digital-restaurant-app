@@ -65,12 +65,12 @@ Once you have installed all the pre-requisites, please follow the steps below to
      </p>
 6. **Make sure you are running the backend app.**
      - *[Click here](https://github.com/BelfDev/digital-restaurant-api/blob/master/README.md) to learn how to run the API project locally.*<br>
-     <img width="400" src=".github/running_backend.png"><br>
+     <img width="500" src=".github/running_backend.png"><br>
 7. **Run the app.**
      - *Running the app in DEBUG MODE (Android Studio)*<br>
      ```Run > Debug 'main.dart'```
      <p align="left">
-        <img width="400" src=".github/running_frontend.png">
+        <img width="500" src=".github/running_frontend.png">
      </p>
-     - *Or... running the app via the integrated terminal (Android Studio) *<br>
+     - *Or... running the app via the integrated terminal (Android Studio)*<br>
      ```flutter run```
