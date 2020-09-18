@@ -23,8 +23,8 @@ Read the instructions below carefully to run the project on your local machine. 
 
 | Technology | Minimum Version | Instalation Guide |
 |----------------|-----------------|-----------------------------|
-|**Flutter** |`v.1.20.3` |[Flutter Official Docs](https://flutter.dev/docs/get-started/install) |
-|**Dart** |`v.2.9.2`| *Installed automatically with Flutter* |
+|**Flutter** |`v1.20.3` |[Flutter Official Docs](https://flutter.dev/docs/get-started/install) |
+|**Dart** |`v2.9.2`| *Installed automatically with Flutter* |
 |**Git** |`v2.0.0`| [Git Docs](https://git-scm.com/downloads) |
 <br>
 
