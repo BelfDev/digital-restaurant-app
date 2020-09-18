@@ -79,9 +79,9 @@ Once you have installed all the pre-requisites, please follow the steps below to
 
 ## Final Notes
 
-- This product was built for research purposes (proof-of-concept); therefore, it should not be launched into production as is.
+- This product was built for **research purposes** (proof-of-concept); therefore, it *should not be launched into production as is*.
 - All data displayed in the App are fake -- restaurants and dishes were populated in the database for demonstration purposes.
-- Payment is not integrated with with any payment platforms such as [Adyen](https://www.adyen.com/) or [Stripe](https://stripe.com/).
+- Payment is not integrated with with any payment gate such as [Adyen](https://www.adyen.com/) or [Stripe](https://stripe.com/).
 - No credit cards are saved.
-- User evaluation results suggested that users find "Le Serveur" useful and easy to use.
-- Elapsed time: 2 months.
+- Evaluation survey results suggested that potential users find "Le Serveur" useful and easy to use.
+- Elapsed time: **2 months**.
