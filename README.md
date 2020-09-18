@@ -7,8 +7,8 @@
 </h1>
 
 <p align="middle">
-  <img src=".github/ios_app_preview.jpg" width="200" hspace="24" />
-  <img src=".github/android_app_preview.jpg" width="200" />
+  <img src=".github/ios_app_preview.jpg" height="560" hspace="24" />
+  <img src=".github/android_app_preview.jpg" height="560" />
 </p>
 
 ## Summary
