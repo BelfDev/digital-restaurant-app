@@ -59,6 +59,7 @@ class SessionManager {
   bool get isAuthenticated => _authenticatedUser != null;
 
   Future<String> get authToken async => (await _getUser())?.token ?? null;
+
   String get authEmail => _authenticatedUser.email ?? null;
 
   // Retrieves user from memory cache or shared preferences

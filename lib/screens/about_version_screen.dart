@@ -18,6 +18,8 @@ class AboutVersionScreen extends StatelessWidget {
     'flutter_page_indicator: ^0.0.3',
     'slide_to_confirm: ^0.0.6',
     'credit_card_slider: ^1.0.1',
+    'qr_code_scanner',
+    'validators: ^2.0.0+1',
     'bloc: ^6.0.0',
     'flutter_bloc: ^6.0.0',
     'meta: ^1.1.8',
@@ -26,6 +28,9 @@ class AboutVersionScreen extends StatelessWidget {
     'http: ^0.12.2',
     'http_interceptor: ^0.3.2',
     'shared_preferences: ^0.5.10',
+    'test: 1.15.2',
+    'mockito: ^4.1.1',
+    'bloc_test: ^7.0.4',
     'build_runner: ^1.10.1',
     'json_serializable: ^3.3.0',
   ];

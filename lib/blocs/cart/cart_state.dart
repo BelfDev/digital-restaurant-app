@@ -1,5 +1,6 @@
 part of 'cart_bloc.dart';
 
+/// States related to the Cart
 class CartState extends Equatable {
   final ContentStateStatus status;
   final Cart cart;

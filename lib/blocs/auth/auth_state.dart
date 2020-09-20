@@ -2,6 +2,7 @@ part of 'auth_bloc.dart';
 
 enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 
+/// States related to Authentication
 class AuthenticationState extends Equatable {
   final AuthenticationStatus status;
   final ContentStateStatus operationStatus;

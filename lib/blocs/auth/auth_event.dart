@@ -1,5 +1,6 @@
 part of 'auth_bloc.dart';
 
+/// Events related to Authentication
 abstract class AuthenticationEvent extends Equatable {
   const AuthenticationEvent();
 

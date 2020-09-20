@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// A container for Lutick buttons composition.
-///
+/// A container for custom buttons composition.
 class LUBaseButton extends StatelessWidget {
   final double width;
   final double height;
