@@ -11,6 +11,8 @@ import 'package:meta/meta.dart';
 part 'checkout_event.dart';
 part 'checkout_state.dart';
 
+/// Business logic component for the Checkout
+/// This class maps incoming [CheckOutEvent] events into [CheckOutState] streams.
 class CheckOutBloc extends Bloc<CheckOutEvent, CheckOutState> {
   static const id = 'checkout_bloc';
 

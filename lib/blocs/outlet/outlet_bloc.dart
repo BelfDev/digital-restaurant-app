@@ -10,6 +10,8 @@ import 'package:meta/meta.dart';
 part 'outlet_event.dart';
 part 'outlet_state.dart';
 
+/// Business logic component for the Outlet
+/// This class maps incoming [OutletEvent] events into [OutletState] streams.
 class OutletBloc extends Bloc<OutletEvent, OutletState> {
   static const id = 'outlet_bloc';
 

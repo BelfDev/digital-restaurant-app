@@ -1,5 +1,6 @@
 part of 'outlet_bloc.dart';
 
+/// States related to the Outlet
 class OutletState extends Equatable {
   final ContentStateStatus status;
   final Map<Category, List<Product>> categoryMap;

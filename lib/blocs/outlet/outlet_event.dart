@@ -1,6 +1,6 @@
 part of 'outlet_bloc.dart';
 
-@immutable
+/// Events related to the Outlet
 abstract class OutletEvent extends Equatable {
   const OutletEvent();
 

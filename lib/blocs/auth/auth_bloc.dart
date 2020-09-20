@@ -10,6 +10,8 @@ import 'package:meta/meta.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
+/// Business logic component for Authentication
+/// This class maps incoming [AuthenticationEvent] events into [AuthenticationState] streams.
 class AuthBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   static const id = 'auth_bloc';
 

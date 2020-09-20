@@ -12,6 +12,8 @@ import 'package:meta/meta.dart';
 part 'cart_event.dart';
 part 'cart_state.dart';
 
+/// Business logic component for the Cart
+/// This class maps incoming [CartEvent] events into [CartState] streams.
 class CartBloc extends Bloc<CartEvent, CartState> {
   static const id = 'cart_bloc';
 
@@ -167,7 +169,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     return state;
   }
 
-  // TODO: Evaluate best moment to cancel subscriptions
   @override
   // ignore: must_call_super, missing_return
   Future<void> close() {

@@ -1,6 +1,6 @@
 part of 'checkout_bloc.dart';
 
-@immutable
+/// Events related to Checkout
 abstract class CheckOutEvent extends Equatable {
   const CheckOutEvent();
 

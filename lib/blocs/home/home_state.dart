@@ -2,6 +2,7 @@ part of 'home_bloc.dart';
 
 enum HomeMode { checkedIn, checkedOut }
 
+/// States related to the Home screen
 class HomeState extends Equatable {
   final HomeMode mode;
   final Outlet homeOutlet;

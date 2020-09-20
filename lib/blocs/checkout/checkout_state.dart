@@ -1,5 +1,6 @@
 part of 'checkout_bloc.dart';
 
+/// States related to the Checkout
 class CheckOutState extends Equatable {
   final ContentStateStatus status;
   final Order order;
